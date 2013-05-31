@@ -1,5 +1,8 @@
 package com.thoughtworks.pacman.core;
 
+import com.thoughtworks.pacman.core.tiles.Dot;
+import com.thoughtworks.pacman.core.tiles.EmptyTile;
+import com.thoughtworks.pacman.core.tiles.Wall;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -19,9 +22,9 @@ public class MazeTest {
     @Test
     public void shouldLoadMazeFromFile() throws Exception {
         final Maze maze = new Maze();
-        assertThat(maze.tileAt(0, 3), instanceOf(Wall.class));
-        assertThat(maze.tileAt(1, 4), instanceOf(Dot.class));
-        assertThat(maze.tileAt(3, 6), nullValue());
+        assertThat(maze.tileAt(new Position(0, 3)), instanceOf(Wall.class));
+        assertThat(maze.tileAt(new Position(1, 4)), instanceOf(Dot.class));
+        assertThat(maze.tileAt(new Position(3, 6)), instanceOf(EmptyTile.class));
     }
 
     @Test

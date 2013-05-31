@@ -1,7 +1,10 @@
 package com.thoughtworks.pacman.core;
 
+import com.thoughtworks.pacman.core.tiles.Dot;
+import com.thoughtworks.pacman.core.tiles.EmptyTile;
+import com.thoughtworks.pacman.core.tiles.Wall;
+
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -13,6 +16,7 @@ public class Maze {
         put('-', Wall.class);
         put('.', Dot.class);
         put('*', Dot.class);
+        put(' ', EmptyTile.class);
     }};
 
     private Tile[][] tiles;
@@ -36,13 +40,16 @@ public class Maze {
                 final String line = scanner.nextLine();
                 for (int i = 0; i < width; i++) {
                     final char mazeTileCharacter = line.charAt(i);
-                    if (mazeParser.containsKey(mazeTileCharacter))
-                        tiles[i][j] = mazeParser.get(mazeTileCharacter).getConstructor().newInstance();
+                    tiles[i][j] = mazeParser.get(mazeTileCharacter).getConstructor().newInstance();
                 }
             }
         } finally {
             scanner.close();
         }
+    }
+
+    public boolean canMove(Position position) {
+        return tileAt(position).isMovable();
     }
 
     public int getWidth() {
@@ -53,8 +60,8 @@ public class Maze {
         return height;
     }
 
-    public Tile tileAt(int x, int y) {
-        return this.tiles[x][y];
+    public Tile tileAt(Position position) {
+        return this.tiles[position.x][position.y];
     }
 
     @Override
@@ -63,15 +70,11 @@ public class Maze {
 
         for (int j = 0; j < height; j++) {
             for (int i = 0; i < width; i++) {
-                if (tiles[i][j] instanceof Wall)
-                    result.append("+");
-                else if (tiles[i][j] instanceof Dot)
-                    result.append(".");
-                else
-                    result.append(" ");
+                result.append(tiles[i][j]);
             }
             result.append("\n");
         }
+
         return result.toString();
     }
 }
