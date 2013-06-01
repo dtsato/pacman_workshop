@@ -1,27 +1,24 @@
 package com.thoughtworks.pacman.ui;
 
 import com.thoughtworks.pacman.core.Game;
-import com.thoughtworks.pacman.core.Maze;
-import com.thoughtworks.pacman.ui.presenters.MazePresenter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
 public class GameCanvas extends Canvas {
-    private MazePresenter mazePresenter;
+    private final GamePresenter gamePresenter;
 
     public GameCanvas(Game game) {
-        Maze maze = game.getMaze();
-        mazePresenter = new MazePresenter(maze);
+        gamePresenter = new GamePresenter(game);
     }
 
     public Dimension getDimension() {
-        return mazePresenter.getDimension();
+        return gamePresenter.getDimension();
     }
 
     public void initialize(JPanel panel) {
-        setBounds(new Rectangle(getDimension()));
+        setBounds(new Rectangle(gamePresenter.getDimension()));
         panel.add(this);
         setIgnoreRepaint(true);
         createBufferStrategy(2);
@@ -29,12 +26,14 @@ public class GameCanvas extends Canvas {
 
     public void draw() {
         BufferStrategy strategy = getBufferStrategy();
-        Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
+        Graphics2D graphics = (Graphics2D) strategy.getDrawGraphics();
 
-        g.setColor(Color.black);
-        g.fill(new Rectangle(getDimension()));
+        graphics.setColor(Color.black);
+        graphics.fill(new Rectangle(gamePresenter.getDimension()));
 
-        g.dispose();
+        gamePresenter.draw(graphics);
+
+        graphics.dispose();
         strategy.show();
     }
 }
