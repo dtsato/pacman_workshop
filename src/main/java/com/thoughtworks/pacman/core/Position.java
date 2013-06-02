@@ -15,6 +15,14 @@ public class Position {
         return new Position(x + position.x, y + position.y);
     }
 
+    public Position times(int scale) {
+        return new Position(x * scale, y * scale);
+    }
+
+    public Point toPoint() {
+        return new Point(x, y);
+    }
+
     @Override
     public String toString() {
         return String.format("[%2d,%2d]", x, y);
@@ -38,13 +46,5 @@ public class Position {
         int result = x;
         result = 31 * result + y;
         return result;
-    }
-
-    public Position times(int scale) {
-        return new Position(x * scale, y * scale);
-    }
-
-    public Point toPoint() {
-        return new Point(x, y);
     }
 }

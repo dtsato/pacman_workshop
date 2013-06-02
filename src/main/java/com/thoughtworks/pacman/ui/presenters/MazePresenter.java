@@ -3,10 +3,7 @@ package com.thoughtworks.pacman.ui.presenters;
 import com.thoughtworks.pacman.core.Maze;
 import com.thoughtworks.pacman.core.Position;
 import com.thoughtworks.pacman.core.Tile;
-import com.thoughtworks.pacman.core.tiles.Dot;
-import com.thoughtworks.pacman.core.tiles.Wall;
 import com.thoughtworks.pacman.ui.Presenter;
-import com.thoughtworks.pacman.ui.TileToPresenterFactory;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
