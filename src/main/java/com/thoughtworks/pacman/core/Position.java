@@ -1,5 +1,7 @@
 package com.thoughtworks.pacman.core;
 
+import java.awt.Point;
+
 public class Position {
     final int x;
     final int y;
@@ -36,5 +38,13 @@ public class Position {
         int result = x;
         result = 31 * result + y;
         return result;
+    }
+
+    public Position times(int scale) {
+        return new Position(x * scale, y * scale);
+    }
+
+    public Point toPoint() {
+        return new Point(x, y);
     }
 }

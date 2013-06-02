@@ -2,6 +2,8 @@ package com.thoughtworks.pacman.core;
 
 import org.junit.Test;
 
+import java.awt.Point;
+
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertFalse;
@@ -13,6 +15,18 @@ public class PositionTest {
     public void add_shouldSumCoordinates() {
         final Position position = new Position(1, 1);
         assertThat(position.add(position), equalTo(new Position(2, 2)));
+    }
+
+    @Test
+    public void times_shouldMultipleCoordinates() {
+        final Position position = new Position(2, 4);
+        assertThat(position.times(3), equalTo(new Position(6, 12)));
+    }
+
+    @Test
+    public void toPoint_shouldConvertToPoint() {
+        final Position position = new Position(2, 4);
+        assertThat(position.toPoint(), equalTo(new Point(2, 4)));
     }
 
     @Test
