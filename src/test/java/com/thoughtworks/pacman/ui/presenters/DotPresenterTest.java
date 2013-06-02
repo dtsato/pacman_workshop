@@ -12,6 +12,6 @@ public class DotPresenterTest {
     @Test
     public void shouldCalculateDotBoundsInPixels() throws Exception {
         DotPresenter presenter = new DotPresenter(null, new Position(2, 3));
-        assertThat(presenter.getBounds(), equalTo(new Rectangle(36, 52, 8, 8)));
+        assertThat(presenter.getBounds(), equalTo(new Rectangle(38, 54, 4, 4)));
     }
 }
