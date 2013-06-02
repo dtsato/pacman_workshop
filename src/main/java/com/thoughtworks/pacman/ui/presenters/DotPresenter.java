@@ -11,6 +11,7 @@ import java.awt.Rectangle;
 
 public class DotPresenter implements Presenter {
     private static final int DIAMETER = 4;
+
     private final Position position;
 
     public DotPresenter(Dot dot, Position position) {
