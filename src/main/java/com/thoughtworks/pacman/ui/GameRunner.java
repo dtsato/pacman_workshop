@@ -1,11 +1,9 @@
 package com.thoughtworks.pacman.ui;
 
 import com.thoughtworks.pacman.core.Game;
-import com.thoughtworks.pacman.core.Maze;
-import com.thoughtworks.pacman.ui.presenters.MazePresenter;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 

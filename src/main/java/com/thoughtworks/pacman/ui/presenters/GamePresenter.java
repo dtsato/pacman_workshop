@@ -1,6 +1,7 @@
-package com.thoughtworks.pacman.ui;
+package com.thoughtworks.pacman.ui.presenters;
 
 import com.thoughtworks.pacman.core.Game;
+import com.thoughtworks.pacman.ui.Presenter;
 import com.thoughtworks.pacman.ui.presenters.MazePresenter;
 
 import java.awt.*;

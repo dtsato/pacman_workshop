@@ -1,6 +1,7 @@
 package com.thoughtworks.pacman.ui;
 
 import com.thoughtworks.pacman.core.Game;
+import com.thoughtworks.pacman.ui.presenters.GamePresenter;
 
 import javax.swing.*;
 import java.awt.*;
