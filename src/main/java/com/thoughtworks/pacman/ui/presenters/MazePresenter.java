@@ -29,7 +29,7 @@ public class MazePresenter implements Presenter {
     }
 
     public Dimension getDimension() {
-        return new Dimension(maze.getWidth() * TILE_SIZE, maze.getHeight() * TILE_SIZE);
+        return new Dimension(maze.getWidth() * Tile.SIZE, maze.getHeight() * Tile.SIZE);
     }
 
     @Override

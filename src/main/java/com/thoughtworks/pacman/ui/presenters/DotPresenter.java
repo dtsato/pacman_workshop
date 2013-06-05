@@ -1,6 +1,7 @@
 package com.thoughtworks.pacman.ui.presenters;
 
 import com.thoughtworks.pacman.core.Position;
+import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.ui.Presenter;
 
@@ -8,7 +9,6 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.geom.RoundRectangle2D;
 
 public class DotPresenter implements Presenter {
     private static final int DIAMETER = 4;
@@ -26,8 +26,8 @@ public class DotPresenter implements Presenter {
     }
 
     public Rectangle getBounds() {
-        int delta = (TILE_SIZE - DIAMETER) / 2;
-        Point point = position.times(TILE_SIZE).add(new Position(delta, delta)).toPoint();
+        int delta = (Tile.SIZE - DIAMETER) / 2;
+        Point point = position.times(Tile.SIZE).add(new Position(delta, delta)).toPoint();
         return new Rectangle(point.x, point.y, DIAMETER, DIAMETER);
     }
 }

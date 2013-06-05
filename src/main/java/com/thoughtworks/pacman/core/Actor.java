@@ -2,13 +2,13 @@ package com.thoughtworks.pacman.core;
 
 public class Actor {
     private final Maze maze;
-    private Position position;
+    private Position centerCoordinate;
     private Direction currentDirection;
     private Direction nextDirection;
 
-    public Actor(Maze maze, Position position, Direction direction) {
+    public Actor(Maze maze, Position centerCoordinate, Direction direction) {
         this.maze = maze;
-        this.position = position;
+        this.centerCoordinate = centerCoordinate;
         this.currentDirection = direction;
         this.nextDirection = direction;
     }
@@ -19,21 +19,21 @@ public class Actor {
     }
 
     private void attemptToChangeDirection() {
-        Position nextPosition = position.add(nextDirection.delta());
+        Position nextPosition = centerCoordinate.add(nextDirection.delta());
         if (maze.canMove(nextPosition)) {
             this.currentDirection = nextDirection;
         }
     }
 
     private void attemptToChangePosition() {
-        Position nextPosition = position.add(currentDirection.delta());
+        Position nextPosition = centerCoordinate.add(currentDirection.delta());
         if (maze.canMove(nextPosition)) {
-            this.position = nextPosition;
+            this.centerCoordinate = nextPosition;
         }
     }
 
-    public Position getPosition() {
-        return position;
+    public Position getCenterCoordinate() {
+        return centerCoordinate;
     }
 
     public Direction getDirection() {

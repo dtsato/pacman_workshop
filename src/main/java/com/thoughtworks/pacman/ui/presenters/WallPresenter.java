@@ -1,6 +1,7 @@
 package com.thoughtworks.pacman.ui.presenters;
 
 import com.thoughtworks.pacman.core.Position;
+import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.tiles.Wall;
 import com.thoughtworks.pacman.ui.Presenter;
 
@@ -20,10 +21,10 @@ public class WallPresenter implements Presenter {
     }
 
     public Point getPosition() {
-        return position.times(TILE_SIZE).toPoint();
+        return position.times(Tile.SIZE).toPoint();
     }
 
     public Dimension getDimension() {
-        return new Dimension(TILE_SIZE, TILE_SIZE);
+        return new Dimension(Tile.SIZE, Tile.SIZE);
     }
 }

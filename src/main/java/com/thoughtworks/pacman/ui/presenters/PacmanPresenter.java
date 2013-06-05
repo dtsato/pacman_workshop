@@ -1,6 +1,7 @@
 package com.thoughtworks.pacman.ui.presenters;
 
 import com.thoughtworks.pacman.core.Position;
+import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.ui.Presenter;
 
@@ -24,7 +25,8 @@ public class PacmanPresenter implements Presenter {
     }
 
     public Rectangle getBounds() {
-        final Position position = pacman.getPosition().times(TILE_SIZE);
-        return new Rectangle(position.toPoint(), new Dimension(TILE_SIZE, TILE_SIZE));
+        int radius = Tile.SIZE / 2;
+        Position position = pacman.getCenterCoordinate().add(new Position(-radius, -radius));
+        return new Rectangle(position.toPoint(), new Dimension(Tile.SIZE, Tile.SIZE));
     }
 }

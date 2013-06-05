@@ -11,6 +11,6 @@ public class PacmanTest {
     @Test
     public void shouldBeginInStartingPositionFacingLeft() throws Exception {
         final Pacman pacman = new Pacman(new Maze());
-        assertThat(pacman.getPosition(), equalTo(new Position(13, 26)));
+        assertThat(pacman.getCenterCoordinate(), equalTo(new Position(14 * 16, 26 * 16 + 8)));
     }
 }
