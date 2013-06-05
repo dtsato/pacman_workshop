@@ -2,19 +2,19 @@ package com.thoughtworks.pacman.core;
 
 public class Actor {
     private final Maze maze;
-    private SpacialCoordinate centerCoordinate;
+    private SpacialCoordinate center;
     private Direction currentDirection;
     private Direction nextDirection;
 
-    public Actor(Maze maze, SpacialCoordinate centerCoordinate, Direction direction) {
+    public Actor(Maze maze, SpacialCoordinate center, Direction direction) {
         this.maze = maze;
-        this.centerCoordinate = centerCoordinate;
+        this.center = center;
         this.currentDirection = direction;
         this.nextDirection = direction;
     }
 
-    public SpacialCoordinate getCenterCoordinate() {
-        return centerCoordinate;
+    public SpacialCoordinate getCenter() {
+        return center;
     }
 
     public Direction getDirection() {

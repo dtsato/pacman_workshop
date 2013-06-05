@@ -26,7 +26,7 @@ public class PacmanPresenter implements Presenter {
 
     public Rectangle getBounds() {
         int radius = Tile.SIZE / 2;
-        SpacialCoordinate upperLeft = pacman.getCenterCoordinate().add(new SpacialCoordinate(-radius, -radius));
+        SpacialCoordinate upperLeft = pacman.getCenter().add(new SpacialCoordinate(-radius, -radius));
         return new Rectangle(upperLeft.toPoint(), new Dimension(Tile.SIZE, Tile.SIZE));
     }
 }
