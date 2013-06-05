@@ -1,7 +1,5 @@
 package com.thoughtworks.pacman.core;
 
-import java.awt.Point;
-
 public class TileCoordinate {
     final int x;
     final int y;
@@ -11,16 +9,12 @@ public class TileCoordinate {
         this.y = y;
     }
 
-    public TileCoordinate add(TileCoordinate tileCoordinate) {
-        return new TileCoordinate(x + tileCoordinate.x, y + tileCoordinate.y);
+    public SpacialCoordinate toSpacialCoordinate() {
+        return new SpacialCoordinate(transformToCenter(x), transformToCenter(y));
     }
 
-    public TileCoordinate times(int scale) {
-        return new TileCoordinate(x * scale, y * scale);
-    }
-
-    public Point toPoint() {
-        return new Point(x, y);
+    private int transformToCenter(int dimension) {
+        return dimension * Tile.SIZE + Tile.SIZE / 2;
     }
 
     @Override

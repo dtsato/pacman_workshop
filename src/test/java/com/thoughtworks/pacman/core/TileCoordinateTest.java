@@ -2,8 +2,6 @@ package com.thoughtworks.pacman.core;
 
 import org.junit.Test;
 
-import java.awt.Point;
-
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertFalse;
@@ -12,21 +10,9 @@ import static org.junit.Assert.assertTrue;
 
 public class TileCoordinateTest {
     @Test
-    public void add_shouldSumCoordinates() {
-        final TileCoordinate tileCoordinate = new TileCoordinate(1, 1);
-        assertThat(tileCoordinate.add(tileCoordinate), equalTo(new TileCoordinate(2, 2)));
-    }
-
-    @Test
-    public void times_shouldMultipleCoordinates() {
-        final TileCoordinate tileCoordinate = new TileCoordinate(2, 4);
-        assertThat(tileCoordinate.times(3), equalTo(new TileCoordinate(6, 12)));
-    }
-
-    @Test
-    public void toPoint_shouldConvertToPoint() {
-        final TileCoordinate tileCoordinate = new TileCoordinate(2, 4);
-        assertThat(tileCoordinate.toPoint(), equalTo(new Point(2, 4)));
+    public void shouldConvertToSpacialCoordinateOfTileCenter() throws Exception {
+        TileCoordinate coordinate = new TileCoordinate(1, 2);
+        assertThat(coordinate.toSpacialCoordinate(), equalTo(new SpacialCoordinate(24, 40)));
     }
 
     @Test
@@ -48,14 +34,14 @@ public class TileCoordinateTest {
 
     @Test
     public void equals_shouldBeTrue_whenInstanceIsTheSame() {
-        final TileCoordinate tileCoordinate = new TileCoordinate(1, 1);
-        assertTrue(tileCoordinate.equals(tileCoordinate));
+        final TileCoordinate coordinate = new TileCoordinate(1, 1);
+        assertTrue(coordinate.equals(coordinate));
     }
 
     @Test
     public void equals_shouldBeFalse_whenComparedToAnotherClass() {
-        final TileCoordinate tileCoordinate = new TileCoordinate(1, 1);
-        assertFalse(tileCoordinate.equals("Blah"));
+        final TileCoordinate coordinate = new TileCoordinate(1, 1);
+        assertFalse(coordinate.equals("Blah"));
     }
 
     @Test
@@ -65,17 +51,17 @@ public class TileCoordinateTest {
 
     @Test
     public void hashCode_shouldBeSame_whenPositionsAreEqual() {
-        final TileCoordinate tileCoordinate = new TileCoordinate(1, 1);
-        final TileCoordinate sameTileCoordinate = new TileCoordinate(1, 1);
+        final TileCoordinate coordinate = new TileCoordinate(1, 1);
+        final TileCoordinate sameCoordinate = new TileCoordinate(1, 1);
 
-        assertThat(tileCoordinate.hashCode(), equalTo(sameTileCoordinate.hashCode()));
+        assertThat(coordinate.hashCode(), equalTo(sameCoordinate.hashCode()));
     }
 
     @Test
     public void hashCode_shouldBeDifferent_whenPositionsAreDifferent() {
-        final TileCoordinate tileCoordinate = new TileCoordinate(1, 1);
-        final TileCoordinate differentTileCoordinate = new TileCoordinate(1, 2);
+        final TileCoordinate coordinate = new TileCoordinate(1, 1);
+        final TileCoordinate differentCoordinate = new TileCoordinate(1, 2);
 
-        assertThat(tileCoordinate.hashCode(), not(equalTo(differentTileCoordinate.hashCode())));
+        assertThat(coordinate.hashCode(), not(equalTo(differentCoordinate.hashCode())));
     }
 }

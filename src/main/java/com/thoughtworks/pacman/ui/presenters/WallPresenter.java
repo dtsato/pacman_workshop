@@ -1,9 +1,11 @@
 package com.thoughtworks.pacman.ui.presenters;
 
+import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.tiles.Wall;
 import com.thoughtworks.pacman.ui.Presenter;
+import sun.jvm.hotspot.memory.SpaceClosure;
 
 import java.awt.*;
 
@@ -21,7 +23,8 @@ public class WallPresenter implements Presenter {
     }
 
     public Point getTileCoordinate() {
-        return tileCoordinate.times(Tile.SIZE).toPoint();
+        int delta = Tile.SIZE / 2;
+        return tileCoordinate.toSpacialCoordinate().add(new SpacialCoordinate(-delta, -delta)).toPoint();
     }
 
     public Dimension getDimension() {
