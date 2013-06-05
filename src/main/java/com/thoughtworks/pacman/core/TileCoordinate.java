@@ -2,21 +2,21 @@ package com.thoughtworks.pacman.core;
 
 import java.awt.Point;
 
-public class Position {
+public class TileCoordinate {
     final int x;
     final int y;
 
-    public Position(int x, int y) {
+    public TileCoordinate(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public Position add(Position position) {
-        return new Position(x + position.x, y + position.y);
+    public TileCoordinate add(TileCoordinate tileCoordinate) {
+        return new TileCoordinate(x + tileCoordinate.x, y + tileCoordinate.y);
     }
 
-    public Position times(int scale) {
-        return new Position(x * scale, y * scale);
+    public TileCoordinate times(int scale) {
+        return new TileCoordinate(x * scale, y * scale);
     }
 
     public Point toPoint() {
@@ -33,10 +33,10 @@ public class Position {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Position position = (Position) o;
+        TileCoordinate tileCoordinate = (TileCoordinate) o;
 
-        if (x != position.x) return false;
-        if (y != position.y) return false;
+        if (x != tileCoordinate.x) return false;
+        if (y != tileCoordinate.y) return false;
 
         return true;
     }

@@ -22,9 +22,9 @@ public class MazeTest {
     @Test
     public void shouldLoadMazeFromFile() throws Exception {
         final Maze maze = new Maze();
-        assertThat(maze.tileAt(new Position(0, 3)), instanceOf(Wall.class));
-        assertThat(maze.tileAt(new Position(1, 4)), instanceOf(Dot.class));
-        assertThat(maze.tileAt(new Position(3, 6)), instanceOf(EmptyTile.class));
+        assertThat(maze.tileAt(new TileCoordinate(0, 3)), instanceOf(Wall.class));
+        assertThat(maze.tileAt(new TileCoordinate(1, 4)), instanceOf(Dot.class));
+        assertThat(maze.tileAt(new TileCoordinate(3, 6)), instanceOf(EmptyTile.class));
     }
 
     @Test

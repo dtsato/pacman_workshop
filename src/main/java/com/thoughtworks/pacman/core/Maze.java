@@ -48,8 +48,8 @@ public class Maze {
         }
     }
 
-    public boolean canMove(Position position) {
-        return tileAt(position).isMovable();
+    public boolean canMove(TileCoordinate tileCoordinate) {
+        return tileAt(tileCoordinate).isMovable();
     }
 
     public int getWidth() {
@@ -60,8 +60,8 @@ public class Maze {
         return height;
     }
 
-    public Tile tileAt(Position position) {
-        return this.tiles[position.x][position.y];
+    public Tile tileAt(TileCoordinate tileCoordinate) {
+        return this.tiles[tileCoordinate.x][tileCoordinate.y];
     }
 
     @Override
