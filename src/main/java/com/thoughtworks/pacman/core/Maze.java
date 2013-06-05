@@ -5,6 +5,7 @@ import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
 
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -19,7 +20,7 @@ public class Maze {
         put(' ', EmptyTile.class);
     }};
 
-    private Tile[][] tiles;
+    private Map<TileCoordinate, Tile> tiles;
     private final int width;
     private final int height;
 
@@ -34,13 +35,14 @@ public class Maze {
         try {
             width = scanner.nextInt();
             height = scanner.nextInt();
-            tiles = new Tile[width][height];
+            tiles = new HashMap(width * height);
             scanner.nextLine();
-            for (int j = 0; j < height; j++) {
+            for (int y = 0; y < height; y++) {
                 final String line = scanner.nextLine();
-                for (int i = 0; i < width; i++) {
-                    final char mazeTileCharacter = line.charAt(i);
-                    tiles[i][j] = mazeParser.get(mazeTileCharacter).getConstructor().newInstance();
+                for (int x = 0; x < width; x++) {
+                    final char mazeTileCharacter = line.charAt(x);
+                    final TileCoordinate coordinate = new TileCoordinate(x, y);
+                    tiles.put(coordinate, mazeParser.get(mazeTileCharacter).getConstructor(TileCoordinate.class).newInstance(coordinate));
                 }
             }
         } finally {
@@ -61,16 +63,20 @@ public class Maze {
     }
 
     public Tile tileAt(TileCoordinate tileCoordinate) {
-        return this.tiles[tileCoordinate.x][tileCoordinate.y];
+        return this.tiles.get(tileCoordinate);
+    }
+
+    public Collection<Tile> getTiles() {
+        return tiles.values();
     }
 
     @Override
     public String toString() {
         final StringBuilder result = new StringBuilder();
 
-        for (int j = 0; j < height; j++) {
-            for (int i = 0; i < width; i++) {
-                result.append(tiles[i][j]);
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                result.append(tiles.get(new TileCoordinate(x, y)));
             }
             result.append("\n");
         }

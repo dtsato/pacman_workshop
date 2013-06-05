@@ -1,9 +1,19 @@
 package com.thoughtworks.pacman.core;
 
-public interface Tile {
-    int SIZE = 16;
+public abstract class Tile {
+    public static int SIZE = 16;
 
-    boolean isMovable();
+    private final TileCoordinate coordinate;
 
-    <T> T visit(TileVisitor<T> visitor);
+    public Tile(TileCoordinate coordinate) {
+        this.coordinate = coordinate;
+    }
+
+    public SpacialCoordinate getCenter() {
+        return coordinate.toSpacialCoordinate();
+    }
+
+    public abstract boolean isMovable();
+
+    public abstract <T> T visit(TileVisitor<T> visitor);
 }

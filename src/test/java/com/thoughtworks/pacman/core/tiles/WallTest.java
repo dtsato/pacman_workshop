@@ -10,11 +10,11 @@ public class WallTest {
 
     @Test
     public void shouldNotBeMovable() {
-        assertFalse(new Wall().isMovable());
+        assertFalse(new Wall(null).isMovable());
     }
 
     @Test
     public void toString_shouldReturnPlus() {
-        assertThat(new Wall().toString(), equalTo("+"));
+        assertThat(new Wall(null).toString(), equalTo("+"));
     }
 }

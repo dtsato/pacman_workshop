@@ -1,8 +1,8 @@
 package com.thoughtworks.pacman.core;
 
 public class TileCoordinate {
-    final int x;
-    final int y;
+    private final int x;
+    private final int y;
 
     public TileCoordinate(int x, int y) {
         this.x = x;

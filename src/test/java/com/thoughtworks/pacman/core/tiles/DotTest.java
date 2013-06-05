@@ -10,11 +10,11 @@ public class DotTest {
 
     @Test
     public void shouldBeMovable() {
-        assertTrue(new Dot().isMovable());
+        assertTrue(new Dot(null).isMovable());
     }
 
     @Test
     public void toString_shouldReturnDot() {
-        assertThat(new Dot().toString(), equalTo("."));
+        assertThat(new Dot(null).toString(), equalTo("."));
     }
 }

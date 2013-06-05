@@ -10,11 +10,11 @@ public class EmptyTileTest {
 
     @Test
     public void shouldNotBeMovable() {
-        assertFalse(new EmptyTile().isMovable());
+        assertFalse(new EmptyTile(null).isMovable());
     }
 
     @Test
     public void toString_shouldReturnSpace() {
-        assertThat(new EmptyTile().toString(), equalTo(" "));
+        assertThat(new EmptyTile(null).toString(), equalTo(" "));
     }
 }

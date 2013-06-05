@@ -10,10 +10,10 @@ import sun.jvm.hotspot.memory.SpaceClosure;
 import java.awt.*;
 
 public class WallPresenter implements Presenter {
-    private final TileCoordinate tileCoordinate;
+    private final Wall wall;
 
-    public WallPresenter(Wall wall, TileCoordinate tileCoordinate) {
-        this.tileCoordinate = tileCoordinate;
+    public WallPresenter(Wall wall) {
+        this.wall = wall;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class WallPresenter implements Presenter {
 
     public Point getTileCoordinate() {
         int delta = Tile.SIZE / 2;
-        return tileCoordinate.toSpacialCoordinate().add(new SpacialCoordinate(-delta, -delta)).toPoint();
+        return wall.getCenter().add(new SpacialCoordinate(-delta, -delta)).toPoint();
     }
 
     public Dimension getDimension() {

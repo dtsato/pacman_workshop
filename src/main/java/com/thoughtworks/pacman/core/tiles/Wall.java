@@ -1,9 +1,14 @@
 package com.thoughtworks.pacman.core.tiles;
 
 import com.thoughtworks.pacman.core.Tile;
+import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.TileVisitor;
 
-public class Wall implements Tile {
+public class Wall extends Tile {
+
+    public Wall(TileCoordinate coordinate) {
+        super(coordinate);
+    }
 
     @Override
     public boolean isMovable() {

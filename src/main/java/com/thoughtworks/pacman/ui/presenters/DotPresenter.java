@@ -1,7 +1,6 @@
 package com.thoughtworks.pacman.ui.presenters;
 
 import com.thoughtworks.pacman.core.SpacialCoordinate;
-import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.ui.Presenter;
 
@@ -12,11 +11,10 @@ import java.awt.Rectangle;
 
 public class DotPresenter implements Presenter {
     private static final int SIDE = 4;
+    private final Dot dot;
 
-    private final TileCoordinate tileCoordinate;
-
-    public DotPresenter(Dot dot, TileCoordinate tileCoordinate) {
-        this.tileCoordinate = tileCoordinate;
+    public DotPresenter(Dot dot) {
+        this.dot = dot;
     }
 
     @Override
@@ -27,7 +25,7 @@ public class DotPresenter implements Presenter {
 
     public Rectangle getBounds() {
         int delta = SIDE / 2;
-        Point upperLeft = tileCoordinate.toSpacialCoordinate().add(new SpacialCoordinate(-delta, -delta)).toPoint();
+        Point upperLeft = dot.getCenter().add(new SpacialCoordinate(-delta, -delta)).toPoint();
         return new Rectangle(upperLeft.x, upperLeft.y, SIDE, SIDE);
     }
 }
