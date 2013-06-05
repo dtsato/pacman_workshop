@@ -2,6 +2,7 @@ package com.thoughtworks.pacman.core.actors;
 
 import com.thoughtworks.pacman.core.Maze;
 import com.thoughtworks.pacman.core.Position;
+import com.thoughtworks.pacman.core.SpacialCoordinate;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -11,6 +12,6 @@ public class PacmanTest {
     @Test
     public void shouldBeginInStartingPositionFacingLeft() throws Exception {
         final Pacman pacman = new Pacman(new Maze());
-        assertThat(pacman.getCenterCoordinate(), equalTo(new Position(14 * 16, 26 * 16 + 8)));
+        assertThat(pacman.getCenterCoordinate(), equalTo(new SpacialCoordinate(14 * 16, 26 * 16 + 8)));
     }
 }

@@ -15,42 +15,4 @@ public class ActorTest {
         maze = new Maze();
     }
 
-    @Test
-    public void move_shouldUpdatePosition_whenNextTileIsValid() {
-        final Actor actor = new Actor(maze, new Position(1, 4), Direction.RIGHT);
-        actor.move();
-        assertThat(actor.getCenterCoordinate(), equalTo(new Position(2, 4)));
-    }
-
-    @Test
-    public void move_shouldUpdatePositionBasedOnCurrentDirection_whenNextTileIsValid() {
-        final Actor actor = new Actor(maze, new Position(1, 4), Direction.DOWN);
-        actor.move();
-        assertThat(actor.getCenterCoordinate(), equalTo(new Position(1, 5)));
-    }
-
-    @Test
-    public void move_shouldNotUpdatePosition_whenNextTileIsInvalid() {
-        final Actor actor = new Actor(maze, new Position(1, 4), Direction.LEFT);
-        actor.move();
-        assertThat(actor.getCenterCoordinate(), equalTo(new Position(1, 4)));
-    }
-
-    @Test
-    public void move_shouldChangeToNextDirection_whenAllowed() {
-        final Actor actor = new Actor(maze, new Position(1, 4), Direction.LEFT);
-        actor.setNextDirection(Direction.DOWN);
-        actor.move();
-        assertThat(actor.getDirection(), equalTo(Direction.DOWN));
-        assertThat(actor.getCenterCoordinate(), equalTo(new Position(1, 5)));
-    }
-
-    @Test
-    public void move_shouldContinueInCurrentDirection_whenNextDirectionMoveIsNotAllowed() {
-        final Actor actor = new Actor(maze, new Position(1, 4), Direction.RIGHT);
-        actor.setNextDirection(Direction.UP);
-        actor.move();
-        assertThat(actor.getDirection(), equalTo(Direction.RIGHT));
-        assertThat(actor.getCenterCoordinate(), equalTo(new Position(2, 4)));
-    }
 }
