@@ -1,13 +1,15 @@
 package com.thoughtworks.pacman.ui.presenters;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Rectangle;
+
 import com.thoughtworks.pacman.core.SpacialCoordinate;
-import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.tiles.Wall;
 import com.thoughtworks.pacman.ui.Presenter;
-import sun.jvm.hotspot.memory.SpaceClosure;
-
-import java.awt.*;
 
 public class WallPresenter implements Presenter {
     private final Wall wall;

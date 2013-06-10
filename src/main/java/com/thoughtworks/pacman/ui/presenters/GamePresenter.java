@@ -1,11 +1,10 @@
 package com.thoughtworks.pacman.ui.presenters;
 
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.Presenter;
-import com.thoughtworks.pacman.ui.presenters.MazePresenter;
-
-import java.awt.*;
-import java.io.Serializable;
 
 public class GamePresenter implements Presenter {
     private final MazePresenter mazePresenter;

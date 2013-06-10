@@ -1,11 +1,16 @@
 package com.thoughtworks.pacman.ui;
 
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.image.BufferStrategy;
+
+import javax.swing.JPanel;
+
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.presenters.GamePresenter;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferStrategy;
 
 public class GameCanvas extends Canvas {
     private final GamePresenter gamePresenter;

@@ -3,7 +3,6 @@ package com.thoughtworks.pacman.core.actors;
 import com.thoughtworks.pacman.core.Actor;
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Maze;
-import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.Tile;
 
