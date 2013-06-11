@@ -28,7 +28,20 @@ public class Actor {
     }
 
     public void advance(long timeDeltaInMillis) {
+        TileCoordinate currentTile = center.toTileCoordinate();
+        TileCoordinate nextTile = currentTile.add(currentDirection.tileDelta());
+
+        if (maze.canMove(nextTile)) {
+            center = nextCenter(timeDeltaInMillis);
+        } else {
+            SpacialCoordinate nextCenter = nextCenter(timeDeltaInMillis);
+            SpacialCoordinate tileCenter = currentTile.toSpacialCoordinate();
+            center = nextCenter.limitOnDirection(tileCenter, currentDirection);
+        }
+    }
+
+    private SpacialCoordinate nextCenter(long timeDeltaInMillis) {
         int distance = (int) (SPEED * timeDeltaInMillis / 1000);
-        center = center.add(currentDirection.delta().times(distance));
+        return center.add(currentDirection.delta().times(distance));
     }
 }

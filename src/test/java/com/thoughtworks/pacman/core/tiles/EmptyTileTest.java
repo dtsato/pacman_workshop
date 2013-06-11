@@ -1,16 +1,16 @@
 package com.thoughtworks.pacman.core.tiles;
 
-import org.junit.Test;
-
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 
 public class EmptyTileTest {
 
     @Test
-    public void shouldNotBeMovable() {
-        assertFalse(new EmptyTile(null).isMovable());
+    public void shouldBeMovable() {
+        assertTrue(new EmptyTile(null).isMovable());
     }
 
     @Test

@@ -26,4 +26,28 @@ public class ActorTest {
 
         assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(initialX - 100, initialY)));
     }
+
+    @Test
+    public void advanceShouldStayPutWhenFacingWall() throws Exception {
+        int initialX = 14 * Tile.SIZE;
+        int initialY = 26 * Tile.SIZE + Tile.SIZE / 2;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Actor actor = new Actor(maze, center, Direction.UP);
+
+        actor.advance(1000);
+
+        assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(initialX, initialY)));
+    }
+
+    @Test
+    public void advanceShouldMoveWhenGoingTowardsWall() throws Exception {
+        int initialX = 7 * Tile.SIZE - 1;
+        int initialY = 26 * Tile.SIZE + Tile.SIZE / 2;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Actor actor = new Actor(maze, center, Direction.LEFT);
+
+        actor.advance(90);
+
+        assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(initialX - 7, initialY)));
+    }
 }

@@ -1,30 +1,21 @@
 package com.thoughtworks.pacman.core;
 
 public enum Direction {
-    UP {
-        @Override
-        public SpacialCoordinate delta() {
-            return new SpacialCoordinate(0, -1);
-        }
-    },
-    DOWN {
-        @Override
-        public SpacialCoordinate delta() {
-            return new SpacialCoordinate(0, 1);
-        }
-    },
-    LEFT {
-        @Override
-        public SpacialCoordinate delta() {
-            return new SpacialCoordinate(-1, 0);
-        }
-    },
-    RIGHT {
-        @Override
-        public SpacialCoordinate delta() {
-            return new SpacialCoordinate(1, 0);
-        }
-    };
+    UP(0, -1), DOWN(0, 1), LEFT(-1, 0), RIGHT(1, 0);
 
-    public abstract SpacialCoordinate delta();
+    private final int x;
+    private final int y;
+
+    private Direction(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public SpacialCoordinate delta() {
+        return new SpacialCoordinate(x, y);
+    }
+
+    public TileCoordinate tileDelta() {
+        return new TileCoordinate(x, y);
+    }
 }

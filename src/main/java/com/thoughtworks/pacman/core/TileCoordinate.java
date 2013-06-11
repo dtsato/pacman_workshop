@@ -17,6 +17,10 @@ public class TileCoordinate {
         return dimension * Tile.SIZE + Tile.SIZE / 2;
     }
 
+    public TileCoordinate add(TileCoordinate delta) {
+        return new TileCoordinate(x + delta.x, y + delta.y);
+    }
+
     @Override
     public String toString() {
         return String.format("[%2d,%2d]", x, y);

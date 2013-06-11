@@ -19,8 +19,20 @@ public class SpacialCoordinate {
         return new SpacialCoordinate(x * scale, y * scale);
     }
 
+    public SpacialCoordinate limitOnDirection(SpacialCoordinate limit, Direction direction) {
+        SpacialCoordinate delta = direction.delta();
+        int newX = delta.x * (this.x - limit.x) <= 0 ? this.x : limit.x;
+        int newY = delta.y * (this.y - limit.y) <= 0 ? this.y : limit.y;
+
+        return new SpacialCoordinate(newX, newY);
+    }
+
     public Point toPoint() {
         return new Point(x, y);
+    }
+
+    public TileCoordinate toTileCoordinate() {
+        return new TileCoordinate(x / Tile.SIZE, y / Tile.SIZE);
     }
 
     @Override
@@ -30,13 +42,17 @@ public class SpacialCoordinate {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         SpacialCoordinate spacialCoordinate = (SpacialCoordinate) o;
 
-        if (x != spacialCoordinate.x) return false;
-        if (y != spacialCoordinate.y) return false;
+        if (x != spacialCoordinate.x)
+            return false;
+        if (y != spacialCoordinate.y)
+            return false;
 
         return true;
     }
