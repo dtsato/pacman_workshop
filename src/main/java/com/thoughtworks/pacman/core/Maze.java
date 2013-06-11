@@ -12,7 +12,8 @@ import java.util.Scanner;
 
 public class Maze {
     private static final String MAZE_MAP_FILENAME = "maze.map";
-    private static final Map<Character, Class<? extends Tile>> mazeParser = new HashMap<Character, Class<? extends Tile>>() {{
+    @SuppressWarnings("serial")
+	private static final Map<Character, Class<? extends Tile>> mazeParser = new HashMap<Character, Class<? extends Tile>>() {{
         put('+', Wall.class);
         put('-', Wall.class);
         put('.', Dot.class);
@@ -35,7 +36,7 @@ public class Maze {
         try {
             width = scanner.nextInt();
             height = scanner.nextInt();
-            tiles = new HashMap(width * height);
+            tiles = new HashMap<TileCoordinate, Tile>(width * height);
             scanner.nextLine();
             for (int y = 0; y < height; y++) {
                 final String line = scanner.nextLine();

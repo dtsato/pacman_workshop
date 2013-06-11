@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JPanel;
@@ -12,6 +13,7 @@ import javax.swing.JPanel;
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.presenters.GamePresenter;
 
+@SuppressWarnings("serial")
 public class GameCanvas extends Canvas {
     private final GamePresenter gamePresenter;
 
