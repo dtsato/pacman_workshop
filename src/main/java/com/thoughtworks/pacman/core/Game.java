@@ -18,4 +18,8 @@ public class Game {
     public Pacman getPacman() {
         return pacman;
     }
+
+	public void advance(long timeDeltaInMillis) {
+		pacman.advance(timeDeltaInMillis);
+	}
 }

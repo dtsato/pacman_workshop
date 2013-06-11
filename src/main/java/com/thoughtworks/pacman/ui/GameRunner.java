@@ -8,6 +8,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class GameRunner {
+    private static final int FRAME_INTERVAL = 30;
+
     public static void main(String[] args) throws Exception {
         GameRunner runner = new GameRunner();
         runner.initialize();
@@ -16,9 +18,10 @@ public class GameRunner {
 
     private boolean open;
     private GameCanvas canvas;
+    private Game game;
 
     private void initialize() throws Exception {
-        Game game = new Game();
+        game = new Game();
         canvas = new GameCanvas(game);
 
         JFrame container = new JFrame();
@@ -43,8 +46,21 @@ public class GameRunner {
     }
 
     private void run() {
+        long lastFrameAt = System.currentTimeMillis();
+
         while (open) {
+            long currentFrameAt = System.currentTimeMillis();
+            long timeDelta = currentFrameAt - lastFrameAt;
+
+            game.advance(timeDelta);
             canvas.draw();
+
+            lastFrameAt = currentFrameAt;
+
+            try {
+                Thread.sleep(FRAME_INTERVAL);
+            } catch (InterruptedException e) {
+            }
         }
     }
 }

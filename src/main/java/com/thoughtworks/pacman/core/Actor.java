@@ -1,6 +1,8 @@
 package com.thoughtworks.pacman.core;
 
 public class Actor {
+    private static final int SPEED = 100;
+
     private final Maze maze;
     private SpacialCoordinate center;
     private Direction currentDirection;
@@ -23,5 +25,10 @@ public class Actor {
 
     public void setNextDirection(Direction direction) {
         this.nextDirection = direction;
+    }
+
+    public void advance(long timeDeltaInMillis) {
+        int distance = (int) (SPEED * timeDeltaInMillis / 1000);
+        center = center.add(currentDirection.delta().times(distance));
     }
 }
