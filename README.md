@@ -24,15 +24,15 @@ Uma explicação completa e detalhada do jogo original pode ser encontrada em in
 
 ## Funcionalidades
 
-* Novo Jogo (transição da tela de introdução)
-* Desenhar o mapa
-* Movimentação do Pacman
-* Movimentação dos fantasmas
-* Comer dots / contagem de pontos
-* Detectar colisões
-* Teleporte
-* Detectar vitória ou derrota (transição)
-* Gerenciar vidas
+* Novo Jogo (transição da tela de introdução) (1)
+* ~~Desenhar o mapa~~
+* Movimentação do Pacman (4)
+* Movimentação dos fantasmas (4)
+* Comer dots / contagem de pontos (2)
+* Detectar colisões (2)
+* Teleporte (1)
+* Detectar vitória ou derrota (transição) (1)
+* Gerenciar vidas (1)
 * Sons
 * "Cornering": escolher a direção antes de chegar no ponto de decisão
 * Modo demo (computador joga sozinho)
@@ -40,3 +40,4 @@ Uma explicação completa e detalhada do jogo original pode ser encontrada em in
 * Gerenciar high-score
 * Energizer dots ("frigthening mode")
 * Inteligência dos fantasmas
+
