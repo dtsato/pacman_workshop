@@ -1,9 +1,12 @@
 package com.thoughtworks.pacman.ui;
 
+import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Game;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -23,6 +26,7 @@ public class GameRunner {
     private void initialize() throws Exception {
         game = new Game();
         canvas = new GameCanvas(game);
+        GameController controller = new GameController(game);
 
         JFrame container = new JFrame();
 
@@ -43,6 +47,7 @@ public class GameRunner {
         });
 
         canvas.initialize(panel);
+        controller.initialize(canvas);
     }
 
     private void run() {
