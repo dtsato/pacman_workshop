@@ -50,4 +50,18 @@ public class ActorTest {
 
         assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(initialX - 7, initialY)));
     }
+
+    @Test
+    public void advanceShouldChangeToNextDirectionWhenPossibleBeforeMoving() throws Exception {
+        int initialX = 7 * Tile.SIZE - Tile.SIZE / 2;
+        int initialY = 26 * Tile.SIZE + Tile.SIZE / 2;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Actor actor = new Actor(maze, center, Direction.LEFT);
+
+        actor.setNextDirection(Direction.UP);
+        actor.advance(1000);
+
+        assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(initialX, initialY - 100)));
+        assertThat(actor.getDirection(), equalTo(Direction.UP));
+    }
 }

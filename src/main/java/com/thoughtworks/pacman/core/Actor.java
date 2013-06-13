@@ -29,6 +29,11 @@ public class Actor {
 
     public void advance(long timeDeltaInMillis) {
         TileCoordinate currentTile = center.toTileCoordinate();
+        TileCoordinate turnTile = currentTile.add(nextDirection.tileDelta());
+        if (maze.canMove(turnTile)) {
+            currentDirection = nextDirection;
+        }
+
         TileCoordinate nextTile = currentTile.add(currentDirection.tileDelta());
 
         if (maze.canMove(nextTile)) {
