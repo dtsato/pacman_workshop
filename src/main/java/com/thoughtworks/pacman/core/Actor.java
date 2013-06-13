@@ -30,18 +30,30 @@ public class Actor {
     public void advance(long timeDeltaInMillis) {
         TileCoordinate currentTile = center.toTileCoordinate();
         TileCoordinate turnTile = currentTile.add(nextDirection.tileDelta());
-        if (maze.canMove(turnTile)) {
-            currentDirection = nextDirection;
-        }
-
-        TileCoordinate nextTile = currentTile.add(currentDirection.tileDelta());
-
-        if (maze.canMove(nextTile)) {
-            center = nextCenter(timeDeltaInMillis);
-        } else {
+        if (currentDirection != nextDirection && maze.canMove(turnTile)) {
             SpacialCoordinate nextCenter = nextCenter(timeDeltaInMillis);
             SpacialCoordinate tileCenter = currentTile.toSpacialCoordinate();
-            center = nextCenter.limitOnDirection(tileCenter, currentDirection);
+            SpacialCoordinate limit = nextCenter.limitOnDirection(tileCenter, currentDirection);
+            if (limit.equals(tileCenter)) {
+                int distance = (int) (SPEED * timeDeltaInMillis / 1000);
+                int distanceLeft = distance - limit.subtract(center).modulo();
+                currentDirection = nextDirection;
+                center = tileCenter.add(currentDirection.delta().times(distanceLeft));
+            }
+            else {
+                center = limit;
+            }
+        }
+        else {
+            TileCoordinate nextTile = currentTile.add(currentDirection.tileDelta());
+
+            if (maze.canMove(nextTile)) {
+                center = nextCenter(timeDeltaInMillis);
+            } else {
+                SpacialCoordinate nextCenter = nextCenter(timeDeltaInMillis);
+                SpacialCoordinate tileCenter = currentTile.toSpacialCoordinate();
+                center = nextCenter.limitOnDirection(tileCenter, currentDirection);
+            }
         }
     }
 

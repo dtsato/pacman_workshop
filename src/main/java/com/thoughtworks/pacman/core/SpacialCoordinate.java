@@ -15,8 +15,16 @@ public class SpacialCoordinate {
         return new SpacialCoordinate(x + spacialCoordinate.x, y + spacialCoordinate.y);
     }
 
+    public SpacialCoordinate subtract(SpacialCoordinate spacialCoordinate) {
+        return new SpacialCoordinate(x - spacialCoordinate.x, y - spacialCoordinate.y);
+    }
+
     public SpacialCoordinate times(int scale) {
         return new SpacialCoordinate(x * scale, y * scale);
+    }
+
+    public int modulo() {
+        return (int) Math.sqrt(x*x + y*y);
     }
 
     public SpacialCoordinate limitOnDirection(SpacialCoordinate limit, Direction direction) {
