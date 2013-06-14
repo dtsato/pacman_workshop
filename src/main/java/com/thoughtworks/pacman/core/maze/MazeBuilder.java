@@ -28,6 +28,15 @@ public class MazeBuilder {
         InputStream fileInputStream = MazeBuilder.class.getResourceAsStream(MAZE_MAP_FILENAME);
         Scanner scanner = new Scanner(fileInputStream);
 
+        return buildMaze(scanner);
+    }
+
+    public static Maze buildMaze(String mazeDescription) throws Exception {
+        Scanner scanner = new Scanner(mazeDescription);
+        return buildMaze(scanner);
+    }
+
+    private static Maze buildMaze(Scanner scanner) throws Exception {
         MazeBuilder builder = new MazeBuilder();
         while (scanner.hasNextLine()) {
             builder.process(scanner.nextLine());

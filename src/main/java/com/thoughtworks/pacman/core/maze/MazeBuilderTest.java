@@ -2,7 +2,7 @@ package com.thoughtworks.pacman.core.maze;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.Test;
 
@@ -92,4 +92,31 @@ public class MazeBuilderTest {
 
         assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(EmptyTile.class));
     }
+
+    @Test
+    public void defaultMazeShouldBeA28x36Grid() throws Exception {
+        Maze maze = MazeBuilder.buildDefaultMaze();
+        assertThat(maze.getWidth(), equalTo(28));
+        assertThat(maze.getHeight(), equalTo(36));
+    }
+
+    @Test
+    public void defaultMazeShouldBeLoadedFromFile() throws Exception {
+        Maze maze = MazeBuilder.buildDefaultMaze();
+        assertThat(maze.tileAt(new TileCoordinate(0, 3)), instanceOf(Wall.class));
+        assertThat(maze.tileAt(new TileCoordinate(1, 4)), instanceOf(Dot.class));
+        assertThat(maze.tileAt(new TileCoordinate(3, 6)), instanceOf(EmptyTile.class));
+    }
+
+    @Test
+    public void shouldBuildMazeFromString() throws Exception {
+        Maze maze = MazeBuilder.buildMaze(
+                "+++\n" +
+                "+.+\n" +
+                "+ +\n" +
+                "+++\n");
+        assertThat(maze.getWidth(), equalTo(3));
+        assertThat(maze.getHeight(), equalTo(4));
+    }
+
 }
