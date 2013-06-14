@@ -7,6 +7,8 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 import com.thoughtworks.pacman.core.TileCoordinate;
+import com.thoughtworks.pacman.core.tiles.Dot;
+import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
 
 public class MazeBuilderTest {
@@ -53,5 +55,23 @@ public class MazeBuilderTest {
         assertThat(maze.getHeight(), equalTo(2));
         assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(Wall.class));
         assertThat(maze.tileAt(new TileCoordinate(0, 1)), instanceOf(Wall.class));
+    }
+
+    @Test
+    public void shouldBuildMazeWithOneDot() throws Exception {
+        MazeBuilder builder = new MazeBuilder();
+        builder.process(".");
+        Maze maze = builder.build();
+
+        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(Dot.class));
+    }
+
+    @Test
+    public void shouldBuildMazeWithOneEmptyTile() throws Exception {
+        MazeBuilder builder = new MazeBuilder();
+        builder.process(" ");
+        Maze maze = builder.build();
+
+        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(EmptyTile.class));
     }
 }
