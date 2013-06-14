@@ -16,14 +16,14 @@ public class MazeTest {
 
     @Test
     public void shouldBeA28x36Grid() throws Exception {
-        final Maze maze = new Maze();
+        final Maze maze = MazeBuilder.buildDefaultMaze();
         assertThat(maze.getWidth(), equalTo(28));
         assertThat(maze.getHeight(), equalTo(36));
     }
 
     @Test
     public void shouldLoadMazeFromFile() throws Exception {
-        final Maze maze = new Maze();
+        final Maze maze = MazeBuilder.buildDefaultMaze();
         assertThat(maze.tileAt(new TileCoordinate(0, 3)), instanceOf(Wall.class));
         assertThat(maze.tileAt(new TileCoordinate(1, 4)), instanceOf(Dot.class));
         assertThat(maze.tileAt(new TileCoordinate(3, 6)), instanceOf(EmptyTile.class));

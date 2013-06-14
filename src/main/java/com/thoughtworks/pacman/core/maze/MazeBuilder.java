@@ -1,7 +1,9 @@
 package com.thoughtworks.pacman.core.maze;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileCoordinate;
@@ -10,14 +12,28 @@ import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
 
 public class MazeBuilder {
+    private static final String MAZE_MAP_FILENAME = "maze.map";
     @SuppressWarnings("serial")
     private static final Map<Character, Class<? extends Tile>> mazeParser = new HashMap<Character, Class<? extends Tile>>() {
         {
             put('+', Wall.class);
+            put('-', Wall.class);
+            put('*', Dot.class);
             put('.', Dot.class);
             put(' ', EmptyTile.class);
         }
     };
+
+    public static Maze buildDefaultMaze() throws Exception {
+        InputStream fileInputStream = MazeBuilder.class.getResourceAsStream(MAZE_MAP_FILENAME);
+        Scanner scanner = new Scanner(fileInputStream);
+
+        MazeBuilder builder = new MazeBuilder();
+        while (scanner.hasNextLine()) {
+            builder.process(scanner.nextLine());
+        }
+        return builder.build();
+    }
 
     private int width = 0;
     private int height = 0;

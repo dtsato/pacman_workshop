@@ -3,6 +3,7 @@ package com.thoughtworks.pacman.core;
 import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.Maze;
+import com.thoughtworks.pacman.core.maze.MazeBuilder;
 
 public class Game {
     private final Maze maze;
@@ -10,7 +11,7 @@ public class Game {
     private final Ghost blinky, pinky, inky, clyde;
 
     public Game() throws Exception {
-        this.maze = new Maze();
+        this.maze = MazeBuilder.buildDefaultMaze();
         this.pacman = new Pacman(maze);
         this.blinky = new Ghost(maze, new SpacialCoordinate(14 * Tile.SIZE, 14 * Tile.SIZE + Tile.SIZE / 2));
         this.pinky = new Ghost(maze, new SpacialCoordinate(14 * Tile.SIZE, 17 * Tile.SIZE + Tile.SIZE / 2));

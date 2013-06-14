@@ -67,6 +67,24 @@ public class MazeBuilderTest {
     }
 
     @Test
+    public void shouldBuildMazeWithOneStar() throws Exception {
+        MazeBuilder builder = new MazeBuilder();
+        builder.process("*");
+        Maze maze = builder.build();
+
+        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(Dot.class));
+    }
+
+    @Test
+    public void shouldBuildMazeWithOneDash() throws Exception {
+        MazeBuilder builder = new MazeBuilder();
+        builder.process("-");
+        Maze maze = builder.build();
+
+        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(Wall.class));
+    }
+
+    @Test
     public void shouldBuildMazeWithOneEmptyTile() throws Exception {
         MazeBuilder builder = new MazeBuilder();
         builder.process(" ");
