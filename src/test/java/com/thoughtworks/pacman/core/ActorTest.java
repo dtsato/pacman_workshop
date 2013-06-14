@@ -92,4 +92,18 @@ public class ActorTest {
         assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(initialX + 7, initialY + 3)));
         assertThat(actor.getDirection(), equalTo(Direction.RIGHT));
     }
+
+    @Test
+    public void advanceShouldNotTurnAfterTheCenterOfTheTile() throws Exception {
+        int initialX = 16 * Tile.SIZE - 3;
+        int initialY = 32 * Tile.SIZE + Tile.SIZE / 2;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Actor actor = new Actor(maze, center, Direction.RIGHT);
+
+        actor.setNextDirection(Direction.UP);
+        actor.advance(100);
+
+        assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(initialX + 10, initialY)));
+        assertThat(actor.getDirection(), equalTo(Direction.RIGHT));
+    }
 }

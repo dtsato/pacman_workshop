@@ -24,7 +24,7 @@ public class SpacialCoordinate {
     }
 
     public int modulo() {
-        return (int) Math.sqrt(x*x + y*y);
+        return (int) Math.sqrt(x * x + y * y);
     }
 
     public SpacialCoordinate limitOnDirection(SpacialCoordinate limit, Direction direction) {
@@ -33,6 +33,19 @@ public class SpacialCoordinate {
         int newY = delta.y * (this.y - limit.y) <= 0 ? this.y : limit.y;
 
         return new SpacialCoordinate(newX, newY);
+    }
+
+    public boolean between(SpacialCoordinate c1, SpacialCoordinate c2) {
+        if (c1.x <= x && x <= c2.x && c1.y == y && c2.y == y)
+            return true;
+        if (c2.x <= x && x <= c1.x && c1.y == y && c2.y == y)
+            return true;
+        else if (c1.y <= y && y <= c2.y && c1.x == x && c2.x == x)
+            return true;
+        else if (c2.y <= y && y <= c1.y && c1.x == x && c2.x == x)
+            return true;
+        else
+            return false;
     }
 
     public Point toPoint() {
