@@ -2,6 +2,7 @@ package com.thoughtworks.pacman.core;
 
 import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.core.actors.Pacman;
+import com.thoughtworks.pacman.core.maze.Maze;
 
 public class Game {
     private final Maze maze;

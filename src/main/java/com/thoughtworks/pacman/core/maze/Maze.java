@@ -1,5 +1,7 @@
-package com.thoughtworks.pacman.core;
+package com.thoughtworks.pacman.core.maze;
 
+import com.thoughtworks.pacman.core.Tile;
+import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
@@ -49,6 +51,11 @@ public class Maze {
         } finally {
             scanner.close();
         }
+    }
+
+    public Maze(int width, int height) {
+        this.width = width;
+        this.height = height;
     }
 
     public boolean canMove(TileCoordinate tileCoordinate) {

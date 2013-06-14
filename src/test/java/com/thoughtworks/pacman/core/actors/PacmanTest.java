@@ -1,7 +1,8 @@
 package com.thoughtworks.pacman.core.actors;
 
-import com.thoughtworks.pacman.core.Maze;
 import com.thoughtworks.pacman.core.SpacialCoordinate;
+import com.thoughtworks.pacman.core.maze.Maze;
+
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;

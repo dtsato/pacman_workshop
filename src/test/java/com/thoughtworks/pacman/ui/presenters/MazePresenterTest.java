@@ -7,7 +7,7 @@ import java.awt.Dimension;
 
 import org.junit.Test;
 
-import com.thoughtworks.pacman.core.Maze;
+import com.thoughtworks.pacman.core.maze.Maze;
 
 public class MazePresenterTest {
     @Test

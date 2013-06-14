@@ -1,4 +1,4 @@
-package com.thoughtworks.pacman.core;
+package com.thoughtworks.pacman.core.maze;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -6,6 +6,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.Test;
 
+import com.thoughtworks.pacman.core.TileCoordinate;
+import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;

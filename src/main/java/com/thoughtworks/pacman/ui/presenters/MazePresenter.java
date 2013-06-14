@@ -1,7 +1,7 @@
 package com.thoughtworks.pacman.ui.presenters;
 
-import com.thoughtworks.pacman.core.Maze;
 import com.thoughtworks.pacman.core.Tile;
+import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.ui.Presenter;
 
 import java.awt.Dimension;
