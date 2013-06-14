@@ -53,9 +53,10 @@ public class Maze {
         }
     }
 
-    public Maze(int width, int height) {
+    public Maze(int width, int height, Map<TileCoordinate, Tile> tiles) {
         this.width = width;
         this.height = height;
+        this.tiles = tiles;
     }
 
     public boolean canMove(TileCoordinate tileCoordinate) {
