@@ -26,7 +26,7 @@ Uma explicação completa e detalhada do jogo original pode ser encontrada em in
 
 * Novo Jogo (transição da tela de introdução) (1)
 * ~~Desenhar o mapa~~
-* Movimentação do Pacman (4)
+* ~~Movimentação do Pacman~~
 * Movimentação dos fantasmas (4)
 * Comer dots / contagem de pontos (2)
 * Detectar colisões (2)
