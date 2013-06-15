@@ -1,14 +1,16 @@
 package com.thoughtworks.pacman.core;
 
 public enum Direction {
-    UP(0, -1), DOWN(0, 1), LEFT(-1, 0), RIGHT(1, 0);
+    UP(0, -1, 130), DOWN(0, 1, 310), LEFT(-1, 0, 220), RIGHT(1, 0, 40);
 
     private final int x;
     private final int y;
+    private final int startAngle;
 
-    private Direction(int x, int y) {
+    private Direction(int x, int y, int startAngle) {
         this.x = x;
         this.y = y;
+        this.startAngle = startAngle;
     }
 
     public SpacialCoordinate delta() {
@@ -17,5 +19,9 @@ public enum Direction {
 
     public TileCoordinate tileDelta() {
         return new TileCoordinate(x, y);
+    }
+
+    public int getStartAngle() {
+        return startAngle;
     }
 }

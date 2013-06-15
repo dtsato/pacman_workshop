@@ -12,16 +12,22 @@ import java.awt.Rectangle;
 
 public class PacmanPresenter implements Presenter {
     private final Pacman pacman;
+    private long lastFrame;
 
     public PacmanPresenter(Pacman pacman) {
         this.pacman = pacman;
+        this.lastFrame = 0;
     }
 
     @Override
     public void draw(Graphics2D graphics) {
         graphics.setColor(Color.yellow);
         Rectangle bounds = getBounds();
-        graphics.fillArc(bounds.x, bounds.y, bounds.width, bounds.height, 220, 280);
+        graphics.fillArc(bounds.x, bounds.y, bounds.width, bounds.height, pacman.getDirection().getStartAngle(), getArcAngle());
+    }
+
+    public int getArcAngle() {
+        return lastFrame++ % 10 < 5 ? 360 : 280;
     }
 
     public Rectangle getBounds() {

@@ -30,7 +30,7 @@ public class Actor {
     public void advance(long timeDeltaInMillis) {
         TileCoordinate currentTile = center.toTileCoordinate();
         TileCoordinate turnTile = currentTile.add(nextDirection.tileDelta());
-        if (currentDirection != nextDirection && maze.canMove(turnTile)) {
+        if (maze.canMove(turnTile)) {
             SpacialCoordinate nextCenter = nextCenter(timeDeltaInMillis);
             SpacialCoordinate tileCenter = currentTile.toSpacialCoordinate();
             if (tileCenter.between(center, nextCenter)) {
