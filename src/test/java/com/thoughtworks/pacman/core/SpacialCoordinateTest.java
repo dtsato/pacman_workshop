@@ -18,9 +18,67 @@ public class SpacialCoordinateTest {
     }
 
     @Test
+    public void subtract_shouldSubtractCoordinates() {
+        final SpacialCoordinate coordinate = new SpacialCoordinate(1, 1);
+        assertThat(coordinate.subtract(coordinate), equalTo(new SpacialCoordinate(0, 0)));
+    }
+
+    @Test
     public void times_shouldMultipleCoordinates() {
         final SpacialCoordinate coordinate = new SpacialCoordinate(2, 4);
         assertThat(coordinate.times(3), equalTo(new SpacialCoordinate(6, 12)));
+    }
+
+    @Test
+    public void modulo_shouldCalculateLengthOfVector() {
+        assertThat(new SpacialCoordinate(0, 1).modulo(), equalTo(1));
+        assertThat(new SpacialCoordinate(1, 0).modulo(), equalTo(1));
+        assertThat(new SpacialCoordinate(3, 4).modulo(), equalTo(5));
+    }
+
+    @Test
+    public void between_shouldBeTrueWhenXIsBetweenAndYIsSame() {
+        SpacialCoordinate c1 = new SpacialCoordinate(0, 1);
+        SpacialCoordinate c2 = new SpacialCoordinate(1, 1);
+        SpacialCoordinate c3 = new SpacialCoordinate(2, 1);
+        assertTrue(c2.between(c1, c3));
+        assertTrue(c2.between(c3, c1));
+
+        assertTrue(c2.between(c1, c2));
+        assertTrue(c2.between(c2, c1));
+
+        assertTrue(c2.between(c2, c3));
+        assertTrue(c2.between(c3, c2));
+    }
+
+    @Test
+    public void between_shouldBeTrueWhenYIsBetweenAndXIsSame() {
+        SpacialCoordinate c1 = new SpacialCoordinate(1, 0);
+        SpacialCoordinate c2 = new SpacialCoordinate(1, 1);
+        SpacialCoordinate c3 = new SpacialCoordinate(1, 2);
+        assertTrue(c2.between(c1, c3));
+        assertTrue(c2.between(c3, c1));
+
+        assertTrue(c2.between(c1, c2));
+        assertTrue(c2.between(c2, c1));
+
+        assertTrue(c2.between(c2, c3));
+        assertTrue(c2.between(c3, c2));
+    }
+
+    @Test
+    public void between_shouldBeFalseWhenNotInBetween() {
+        SpacialCoordinate c1 = new SpacialCoordinate(0, 0);
+        SpacialCoordinate c2 = new SpacialCoordinate(1, 1);
+        SpacialCoordinate c3 = new SpacialCoordinate(2, 2);
+        assertFalse(c3.between(c1, c2));
+        assertFalse(c3.between(c2, c1));
+
+        assertTrue(c2.between(c1, c3));
+        assertTrue(c2.between(c3, c1));
+
+        assertFalse(c1.between(c2, c3));
+        assertFalse(c1.between(c3, c2));
     }
 
     @Test

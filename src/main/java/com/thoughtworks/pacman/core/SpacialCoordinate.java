@@ -36,16 +36,11 @@ public class SpacialCoordinate {
     }
 
     public boolean between(SpacialCoordinate c1, SpacialCoordinate c2) {
-        if (c1.x <= x && x <= c2.x && c1.y == y && c2.y == y)
-            return true;
-        if (c2.x <= x && x <= c1.x && c1.y == y && c2.y == y)
-            return true;
-        else if (c1.y <= y && y <= c2.y && c1.x == x && c2.x == x)
-            return true;
-        else if (c2.y <= y && y <= c1.y && c1.x == x && c2.x == x)
-            return true;
-        else
-            return false;
+        return isBetween(x, c1.x, c2.x) && isBetween(y, c1.y, c2.y);
+    }
+
+    private boolean isBetween(int target, int bound1, int bound2) {
+        return (bound1 <= target && target <= bound2) || (bound2 <= target && target <= bound1);
     }
 
     public Point toPoint() {
