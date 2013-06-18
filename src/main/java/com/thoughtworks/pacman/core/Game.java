@@ -1,14 +1,20 @@
 package com.thoughtworks.pacman.core;
 
+import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.core.actors.Pacman;
 
 public class Game {
     private final Maze maze;
     private final Pacman pacman;
+    private final Ghost blinky, pinky, inky, clyde;
 
     public Game() throws Exception {
         this.maze = new Maze();
         this.pacman = new Pacman(maze);
+        this.blinky = new Ghost(maze, new SpacialCoordinate(14 * Tile.SIZE, 14 * Tile.SIZE + Tile.SIZE / 2));
+        this.pinky = new Ghost(maze, new SpacialCoordinate(14 * Tile.SIZE, 17 * Tile.SIZE + Tile.SIZE / 2));
+        this.inky = new Ghost(maze, new SpacialCoordinate(12 * Tile.SIZE, 17 * Tile.SIZE + Tile.SIZE / 2));
+        this.clyde = new Ghost(maze, new SpacialCoordinate(16 * Tile.SIZE, 17 * Tile.SIZE + Tile.SIZE / 2));
     }
 
     public Maze getMaze() {
@@ -19,7 +25,27 @@ public class Game {
         return pacman;
     }
 
+    public Ghost getBlinky() {
+        return blinky;
+    }
+
+    public Ghost getPinky() {
+        return pinky;
+    }
+
+    public Ghost getInky() {
+        return inky;
+    }
+
+    public Ghost getClyde() {
+        return clyde;
+    }
+
 	public void advance(long timeDeltaInMillis) {
 		pacman.advance(timeDeltaInMillis);
+        blinky.advance(timeDeltaInMillis);
+        pinky.advance(timeDeltaInMillis);
+        inky.advance(timeDeltaInMillis);
+        clyde.advance(timeDeltaInMillis);
 	}
 }

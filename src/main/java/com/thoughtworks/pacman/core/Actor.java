@@ -27,6 +27,10 @@ public class Actor {
         this.nextDirection = direction;
     }
 
+    public boolean collidesWith(Actor other) {
+        return center.toTileCoordinate().equals(other.center.toTileCoordinate());
+    }
+
     public void advance(long timeDeltaInMillis) {
         TileCoordinate currentTile = center.toTileCoordinate();
         TileCoordinate turnTile = currentTile.add(nextDirection.tileDelta());
@@ -55,5 +59,4 @@ public class Actor {
             }
         }
     }
-
 }
