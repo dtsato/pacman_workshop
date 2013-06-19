@@ -1,6 +1,7 @@
 package com.thoughtworks.pacman.core;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
@@ -129,8 +130,8 @@ public class ActorTest {
         Actor actor1 = new Actor(maze, new SpacialCoordinate(15, 15), Direction.LEFT);
         Actor actor2 = new Actor(maze, new SpacialCoordinate(10, 10), Direction.RIGHT);
 
-        assertTrue(actor1.collidesWith(actor2));
-        assertTrue(actor2.collidesWith(actor1));
+        assertThat(actor1.collidesWith(actor2), is(true));
+        assertThat(actor2.collidesWith(actor1), is(true));
     }
 
     @Test
@@ -138,7 +139,7 @@ public class ActorTest {
         Actor actor1 = new Actor(maze, new SpacialCoordinate(15, 15), Direction.LEFT);
         Actor actor2 = new Actor(maze, new SpacialCoordinate(17, 17), Direction.RIGHT);
 
-        assertFalse(actor1.collidesWith(actor2));
-        assertFalse(actor2.collidesWith(actor1));
+        assertThat(actor1.collidesWith(actor2), is(false));
+        assertThat(actor2.collidesWith(actor1), is(false));
     }
 }
