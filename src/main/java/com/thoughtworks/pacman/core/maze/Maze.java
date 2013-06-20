@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileCoordinate;
+import com.thoughtworks.pacman.core.tiles.EmptyTile;
+import com.thoughtworks.pacman.core.tiles.Wall;
 
 public class Maze {
     private Map<TileCoordinate, Tile> tiles;
@@ -30,7 +32,10 @@ public class Maze {
     }
 
     public Tile tileAt(TileCoordinate tileCoordinate) {
-        return this.tiles.get(tileCoordinate);
+        if (tiles.containsKey(tileCoordinate))
+            return this.tiles.get(tileCoordinate);
+        else
+            return new Wall(tileCoordinate);
     }
 
     public Collection<Tile> getTiles() {
