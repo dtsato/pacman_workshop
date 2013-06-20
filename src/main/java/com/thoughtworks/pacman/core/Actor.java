@@ -33,30 +33,29 @@ public class Actor {
 
     public void advance(long timeDeltaInMillis) {
         TileCoordinate currentTile = center.toTileCoordinate();
-        TileCoordinate turnTile = currentTile.add(nextDirection.tileDelta());
+        SpacialCoordinate tileCenter = currentTile.toSpacialCoordinate();
         int distance = (int) (SPEED * timeDeltaInMillis / 1000);
 
-        SpacialCoordinate nextCenter = center.add(currentDirection.delta().times(distance));
-        if (maze.canMove(turnTile)) {
-            SpacialCoordinate tileCenter = currentTile.toSpacialCoordinate();
-            if (tileCenter.between(center, nextCenter)) {
-                int distanceLeft = distance - tileCenter.subtract(center).modulo();
-                currentDirection = nextDirection;
-                center = tileCenter.add(currentDirection.delta().times(distanceLeft));
-            }
-            else {
-                center = nextCenter;
-            }
+        if (canTurnWithin(distance)) {
+            distance -= tileCenter.subtract(center).modulo();
+            currentDirection = nextDirection;
+            center = tileCenter;
         }
-        else {
-            TileCoordinate nextTile = currentTile.add(currentDirection.tileDelta());
 
-            if (maze.canMove(nextTile)) {
-                center = nextCenter;
-            } else {
-                SpacialCoordinate tileCenter = currentTile.toSpacialCoordinate();
-                center = nextCenter.limitOnDirection(tileCenter, currentDirection);
-            }
+        TileCoordinate nextTile = currentTile.add(currentDirection.tileDelta());
+        SpacialCoordinate nextCenter = center.add(currentDirection.delta().times(distance));
+        if (maze.canMove(nextTile)) {
+            center = nextCenter;
+        } else {
+            center = nextCenter.limitOnDirection(tileCenter, currentDirection);
         }
+    }
+
+    private boolean canTurnWithin(int distance) {
+        TileCoordinate currentTile = center.toTileCoordinate();
+        TileCoordinate turnTile = currentTile.add(nextDirection.tileDelta());
+        SpacialCoordinate tileCenter = currentTile.toSpacialCoordinate();
+        SpacialCoordinate nextCenter = center.add(currentDirection.delta().times(distance));
+        return maze.canMove(turnTile) && tileCenter.between(center, nextCenter);
     }
 }
