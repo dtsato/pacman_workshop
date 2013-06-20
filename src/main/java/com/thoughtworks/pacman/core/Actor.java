@@ -1,5 +1,7 @@
 package com.thoughtworks.pacman.core;
 
+import com.thoughtworks.pacman.core.maze.Maze;
+
 public class Actor {
     private static final int SPEED = 100;
 

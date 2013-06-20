@@ -8,13 +8,16 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.thoughtworks.pacman.core.maze.Maze;
+import com.thoughtworks.pacman.core.maze.MazeBuilder;
+
 public class ActorTest {
 
     private Maze maze;
 
     @Before
     public void setUp() throws Exception {
-        maze = new Maze();
+        maze = MazeBuilder.buildDefaultMaze();
     }
 
     @Test

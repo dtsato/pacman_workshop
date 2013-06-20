@@ -7,12 +7,13 @@ import java.awt.Dimension;
 
 import org.junit.Test;
 
-import com.thoughtworks.pacman.core.Maze;
+import com.thoughtworks.pacman.core.maze.Maze;
+import com.thoughtworks.pacman.core.maze.MazeBuilder;
 
 public class MazePresenterTest {
     @Test
     public void shouldCalculateDimensionInPixels() throws Exception {
-        Maze maze = new Maze();
+        Maze maze = MazeBuilder.buildDefaultMaze();
         MazePresenter presenter = new MazePresenter(maze);
 
         assertThat(presenter.getDimension(), equalTo(new Dimension(28 * 16, 36 * 16)));
