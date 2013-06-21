@@ -25,7 +25,7 @@ public class GameRunner {
         canvas = new GameCanvas(game);
         GameController controller = new GameController(game);
 
-        JFrame container = new JFrame();
+        JFrame container = new JFrame("Pacman");
 
         JPanel panel = (JPanel) container.getContentPane();
         panel.setPreferredSize(canvas.getDimension());
