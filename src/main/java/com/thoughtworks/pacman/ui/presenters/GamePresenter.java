@@ -33,12 +33,12 @@ public class GamePresenter implements Presenter {
     @Override
     public void draw(Graphics2D graphics) {
         mazePresenter.draw(graphics);
+        pacmanPresenter.draw(graphics);
         if (!game.getPacman().isDead()) {
             blinkyPresenter.draw(graphics);
             pinkyPresenter.draw(graphics);
             inkyPresenter.draw(graphics);
             clydePresenter.draw(graphics);
         }
-        pacmanPresenter.draw(graphics);
     }
 }

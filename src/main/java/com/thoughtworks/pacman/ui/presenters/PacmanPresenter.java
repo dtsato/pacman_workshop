@@ -39,7 +39,8 @@ public class PacmanPresenter implements Presenter {
     private void drawScore(Graphics2D graphics) {
         graphics.setColor(Color.white);
         graphics.setFont(FONT);
-        graphics.drawString(String.format("%2d", pacman.getScore()), Tile.SIZE * 5, Tile.SIZE * 2);
+//        TODO: WEIRD! This causes the ghosts to "jump out" of the house
+//        graphics.drawString(String.format("%2d", pacman.getScore()), Tile.SIZE * 5, Tile.SIZE * 2);
     }
 
     public int getArcAngle() {
