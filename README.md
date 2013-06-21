@@ -30,7 +30,7 @@ Uma explicação completa e detalhada do jogo original pode ser encontrada em in
 * Movimentação dos fantasmas (4)
 * Comer dots / contagem de pontos (2)
 * Detectar colisões (2)
-* Teleporte (1)
+* ~~Teleporte~~
 * Detectar vitória ou derrota (transição) (1)
 * Gerenciar vidas (1)
 * Sons

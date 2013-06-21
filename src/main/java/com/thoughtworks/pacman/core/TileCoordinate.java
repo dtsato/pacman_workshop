@@ -21,6 +21,14 @@ public class TileCoordinate {
         return new TileCoordinate(x + delta.x, y + delta.y);
     }
 
+    public TileCoordinate subtract(TileCoordinate delta) {
+        return new TileCoordinate(x - delta.x, y - delta.y);
+    }
+
+    public TileCoordinate times(int scale) {
+        return new TileCoordinate(x * scale, y * scale);
+    }
+
     @Override
     public String toString() {
         return String.format("[%2d,%2d]", x, y);

@@ -3,6 +3,7 @@ package com.thoughtworks.pacman.core.maze;
 import java.util.Collection;
 import java.util.Map;
 
+import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
@@ -31,15 +32,24 @@ public class Maze {
         return height;
     }
 
+    public Collection<Tile> getTiles() {
+        return tiles.values();
+    }
+
     public Tile tileAt(TileCoordinate tileCoordinate) {
         if (tiles.containsKey(tileCoordinate))
             return this.tiles.get(tileCoordinate);
         else
-            return new Wall(tileCoordinate);
+            return new EmptyTile(tileCoordinate);
     }
 
-    public Collection<Tile> getTiles() {
-        return tiles.values();
+    public boolean canTeleport(TileCoordinate tileCoordinate, Direction direction) {
+        return !tiles.containsKey(tileCoordinate) && tileAt(teleportedCoordinate(tileCoordinate, direction)).isMovable();
+    }
+
+    public TileCoordinate teleportedCoordinate(TileCoordinate tileCoordinate, Direction direction) {
+        int oppositeSide = (direction == Direction.UP || direction == Direction.DOWN) ? height : width;
+        return tileCoordinate.subtract(direction.tileDelta().times(oppositeSide));
     }
 
     @Override

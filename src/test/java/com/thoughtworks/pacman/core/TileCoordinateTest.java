@@ -9,8 +9,27 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class TileCoordinateTest {
+
     @Test
-    public void shouldConvertToSpacialCoordinateOfTileCenter() throws Exception {
+    public void add_shouldSumCoordinates() {
+        final TileCoordinate coordinate = new TileCoordinate(1, 1);
+        assertThat(coordinate.add(coordinate), equalTo(new TileCoordinate(2, 2)));
+    }
+
+    @Test
+    public void subtract_shouldSubtractCoordinates() {
+        final TileCoordinate coordinate = new TileCoordinate(1, 1);
+        assertThat(coordinate.subtract(coordinate), equalTo(new TileCoordinate(0, 0)));
+    }
+
+    @Test
+    public void times_shouldMultipleCoordinates() {
+        final TileCoordinate coordinate = new TileCoordinate(2, 4);
+        assertThat(coordinate.times(3), equalTo(new TileCoordinate(6, 12)));
+    }
+
+    @Test
+    public void toSpacialCoordinate_shouldConvertToSpacialCoordinateOfTileCenter() throws Exception {
         TileCoordinate coordinate = new TileCoordinate(1, 2);
         assertThat(coordinate.toSpacialCoordinate(), equalTo(new SpacialCoordinate(24, 40)));
     }

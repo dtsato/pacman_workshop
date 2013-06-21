@@ -44,6 +44,11 @@ public class Actor {
             center = tileCenter;
         }
 
+        if (maze.canTeleport(currentTile, currentDirection)) {
+            center = maze.teleportedCoordinate(currentTile, currentDirection).toSpacialCoordinate();
+            return;
+        }
+
         TileCoordinate nextTile = currentTile.add(currentDirection.tileDelta());
         SpacialCoordinate nextCenter = center.add(currentDirection.delta().times(distance));
         if (maze.canMove(nextTile)) {

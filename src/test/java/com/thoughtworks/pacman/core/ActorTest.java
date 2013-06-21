@@ -113,6 +113,18 @@ public class ActorTest {
     }
 
     @Test
+    public void advance_shouldTeleport_whenPossible() throws Exception {
+        int initialX = -Tile.SIZE;
+        int initialY = 17 * Tile.SIZE + Tile.SIZE / 2;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Actor actor = new Actor(maze, center, Direction.LEFT);
+
+        actor.advance(100);
+
+        assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(Tile.SIZE * maze.getWidth() - Tile.SIZE / 2, initialY)));
+    }
+
+    @Test
     public void collidesWith_shouldBeTrueIfOtherActorIsInSameTile() throws Exception {
         Actor actor1 = new Actor(maze, new SpacialCoordinate(15, 15), Direction.LEFT);
         Actor actor2 = new Actor(maze, new SpacialCoordinate(10, 10), Direction.RIGHT);
