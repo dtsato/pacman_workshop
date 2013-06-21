@@ -6,9 +6,9 @@ import com.thoughtworks.pacman.core.tiles.Dot;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertTrue;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class PacmanTileVisitorTest {
 

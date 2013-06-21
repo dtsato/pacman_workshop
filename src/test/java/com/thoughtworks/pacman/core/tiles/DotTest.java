@@ -1,8 +1,5 @@
 package com.thoughtworks.pacman.core.tiles;
 
-import com.thoughtworks.pacman.core.actors.Pacman;
-import com.thoughtworks.pacman.core.maze.MazeBuilder;
-import junit.framework.Assert;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
