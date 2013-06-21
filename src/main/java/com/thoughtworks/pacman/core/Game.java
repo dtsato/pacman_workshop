@@ -44,10 +44,18 @@ public class Game {
     }
 
 	public void advance(long timeDeltaInMillis) {
-		pacman.advance(timeDeltaInMillis);
+        if (pacman.isDead()) {
+            return;
+        }
+
+        pacman.advance(timeDeltaInMillis);
         blinky.advance(timeDeltaInMillis);
         pinky.advance(timeDeltaInMillis);
         inky.advance(timeDeltaInMillis);
         clyde.advance(timeDeltaInMillis);
+
+        if (pacman.collidesWith(blinky) || pacman.collidesWith(pinky) || pacman.collidesWith(inky) || pacman.collidesWith(clyde)) {
+            pacman.die();
+        }
 	}
 }

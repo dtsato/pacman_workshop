@@ -11,12 +11,15 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 public class PacmanPresenter implements Presenter {
+    private static final int MOUTH_CLOSED = 360;
+    private static final int MOUTH_OPENED = 280;
+
     private final Pacman pacman;
     private long lastFrame;
+    private int deadFrame;
 
     public PacmanPresenter(Pacman pacman) {
         this.pacman = pacman;
-        this.lastFrame = 0;
     }
 
     @Override
@@ -27,7 +30,11 @@ public class PacmanPresenter implements Presenter {
     }
 
     public int getArcAngle() {
-        return lastFrame++ % 10 < 5 ? 360 : 280;
+        if (pacman.isDead()) {
+            return deadFrame > MOUTH_CLOSED / 10 ? 0 : MOUTH_CLOSED - deadFrame++ * 10;
+        } else {
+            return lastFrame++ % 10 < 5 ? MOUTH_CLOSED : MOUTH_OPENED;
+        }
     }
 
     public Rectangle getBounds() {

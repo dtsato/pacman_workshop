@@ -14,8 +14,10 @@ public class GamePresenter implements Presenter {
     private final GhostPresenter pinkyPresenter;
     private final GhostPresenter inkyPresenter;
     private final GhostPresenter clydePresenter;
+    private final Game game;
 
     public GamePresenter(Game game) {
+        this.game = game;
         mazePresenter = new MazePresenter(game.getMaze());
         pacmanPresenter = new PacmanPresenter(game.getPacman());
         blinkyPresenter = new GhostPresenter(game.getBlinky(), Color.red);
@@ -31,10 +33,12 @@ public class GamePresenter implements Presenter {
     @Override
     public void draw(Graphics2D graphics) {
         mazePresenter.draw(graphics);
-        blinkyPresenter.draw(graphics);
-        pinkyPresenter.draw(graphics);
-        inkyPresenter.draw(graphics);
-        clydePresenter.draw(graphics);
+        if (!game.getPacman().isDead()) {
+            blinkyPresenter.draw(graphics);
+            pinkyPresenter.draw(graphics);
+            inkyPresenter.draw(graphics);
+            clydePresenter.draw(graphics);
+        }
         pacmanPresenter.draw(graphics);
     }
 }

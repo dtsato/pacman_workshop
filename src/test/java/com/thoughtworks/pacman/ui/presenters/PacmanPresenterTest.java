@@ -31,4 +31,17 @@ public class PacmanPresenterTest {
             assertThat(presenter.getArcAngle(), equalTo(360));
         }
     }
+
+    @Test
+    public void shouldAnimateDying() throws Exception {
+        Pacman pacman = new Pacman(MazeBuilder.buildDefaultMaze());
+        pacman.die();
+        PacmanPresenter presenter = new PacmanPresenter(pacman);
+
+        for (int i = 0; i < 36; i++) {
+            assertThat(presenter.getArcAngle(), equalTo(360 - i * 10));
+        }
+        assertThat(presenter.getArcAngle(), equalTo(0));
+        assertThat(presenter.getArcAngle(), equalTo(0));
+    }
 }

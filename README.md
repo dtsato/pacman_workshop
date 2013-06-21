@@ -29,14 +29,14 @@ Uma explicação completa e detalhada do jogo original pode ser encontrada em in
 * ~~Movimentação do Pacman~~
 * Movimentação dos fantasmas (4)
 * Comer dots / contagem de pontos (2)
-* Detectar colisões (2)
+* ~~Detectar colisões~~
 * ~~Teleporte~~
-* Detectar vitória ou derrota (transição) (1)
+* Detectar vitória ou ~~derrota~~ (transição) (1)
 * Gerenciar vidas (1)
 * Sons
 * "Cornering": escolher a direção antes de chegar no ponto de decisão
 * Modo demo (computador joga sozinho)
-* Animações (~~mastigação~~, olhos dos fantasmas, pacman morrendo)
+* Animações (~~mastigação~~, olhos dos fantasmas, ~~pacman morrendo~~)
 * Gerenciar high-score
 * Energizer dots ("frigthening mode")
 * Inteligência dos fantasmas
