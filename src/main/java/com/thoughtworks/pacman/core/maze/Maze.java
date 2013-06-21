@@ -1,12 +1,13 @@
 package com.thoughtworks.pacman.core.maze;
 
-import java.util.Collection;
-import java.util.Map;
-
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
+import com.thoughtworks.pacman.core.tiles.visitors.ScoreTileVisitor;
+
+import java.util.Collection;
+import java.util.Map;
 
 public class Maze {
     private Map<TileCoordinate, Tile> tiles;
@@ -33,6 +34,15 @@ public class Maze {
 
     public Collection<Tile> getTiles() {
         return tiles.values();
+    }
+
+    public int getScore() {
+        ScoreTileVisitor scoreVisitor = new ScoreTileVisitor();
+        int totalScore = 0;
+        for (Tile tile : tiles.values()) {
+            totalScore += tile.visit(scoreVisitor);
+        }
+        return totalScore;
     }
 
     public Tile tileAt(TileCoordinate tileCoordinate) {
@@ -64,4 +74,5 @@ public class Maze {
 
         return result.toString();
     }
+
 }

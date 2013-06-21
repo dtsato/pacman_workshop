@@ -4,6 +4,7 @@ import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
+import com.thoughtworks.pacman.core.tiles.visitors.PacmanTileVisitor;
 
 public class Game {
     private final Maze maze;
@@ -18,7 +19,7 @@ public class Game {
         this.pinky = new Ghost(maze, new SpacialCoordinate(14 * Tile.SIZE, 17 * Tile.SIZE + Tile.SIZE / 2));
         this.inky = new Ghost(maze, new SpacialCoordinate(12 * Tile.SIZE, 17 * Tile.SIZE + Tile.SIZE / 2));
         this.clyde = new Ghost(maze, new SpacialCoordinate(16 * Tile.SIZE, 17 * Tile.SIZE + Tile.SIZE / 2));
-        this.pacmanTileVisitor = new PacmanTileVisitor(pacman);
+        this.pacmanTileVisitor = new PacmanTileVisitor();
     }
 
     public Maze getMaze() {

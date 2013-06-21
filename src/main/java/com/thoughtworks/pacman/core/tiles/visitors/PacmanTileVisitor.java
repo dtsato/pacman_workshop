@@ -1,23 +1,15 @@
-package com.thoughtworks.pacman.core;
+package com.thoughtworks.pacman.core.tiles.visitors;
 
-import com.thoughtworks.pacman.core.actors.Pacman;
+import com.thoughtworks.pacman.core.TileVisitor;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
 
 public class PacmanTileVisitor implements TileVisitor<Void> {
-    private Pacman pacman;
-
-    public PacmanTileVisitor(Pacman pacman) {
-        this.pacman = pacman;
-    }
 
     @Override
     public Void visit(Dot dot) {
-        if (!dot.isEaten()) {
-            pacman.eat();
-            dot.eat();
-        }
+        dot.eat();
         return null;
     }
 

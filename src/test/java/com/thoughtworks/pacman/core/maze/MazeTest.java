@@ -42,6 +42,20 @@ public class MazeTest {
     }
 
     @Test
+    public void getScore_shouldCalculatePointsPerDotsEaten() throws Exception {
+        String mazeDescription = "++++\n+..+\n++++";
+        Maze maze = MazeBuilder.buildMaze(mazeDescription);
+
+        assertThat(maze.getScore(), equalTo(0));
+        Dot dot = (Dot) maze.tileAt(new TileCoordinate(1, 1));
+        dot.eat();
+        assertThat(maze.getScore(), equalTo(10));
+        dot = (Dot) maze.tileAt(new TileCoordinate(2, 1));
+        dot.eat();
+        assertThat(maze.getScore(), equalTo(20));
+    }
+
+    @Test
     public void teleportedCoordinate_shouldReturnCoordinateAtTop_whenDirectionIsUp() throws Exception {
         String mazeDescription = "+ +\n   \n+ +";
         Maze maze = MazeBuilder.buildMaze(mazeDescription);
