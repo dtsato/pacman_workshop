@@ -36,7 +36,7 @@ Uma explicação completa e detalhada do jogo original pode ser encontrada em in
 * Sons
 * "Cornering": escolher a direção antes de chegar no ponto de decisão
 * Modo demo (computador joga sozinho)
-* Animações (mastigação, olhos dos fantasmas, pacman morrendo)
+* Animações (~~mastigação~~, olhos dos fantasmas, pacman morrendo)
 * Gerenciar high-score
 * Energizer dots ("frigthening mode")
 * Inteligência dos fantasmas
