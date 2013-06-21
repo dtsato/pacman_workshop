@@ -4,7 +4,6 @@ import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
-import com.thoughtworks.pacman.core.tiles.Dot;
 
 public class Game {
     private final Maze maze;

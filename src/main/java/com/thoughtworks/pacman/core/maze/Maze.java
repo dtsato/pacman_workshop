@@ -7,7 +7,6 @@ import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
-import com.thoughtworks.pacman.core.tiles.Wall;
 
 public class Maze {
     private Map<TileCoordinate, Tile> tiles;
