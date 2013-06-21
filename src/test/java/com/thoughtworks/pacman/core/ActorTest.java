@@ -17,7 +17,7 @@ public class ActorTest {
 
         public TestActor(Maze maze, SpacialCoordinate center, Direction direction,
                 Direction nextDirection) {
-            super(maze, center, direction);
+            super(center, direction);
             this.nextDirection = nextDirection;
         }
 

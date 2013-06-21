@@ -1,11 +1,10 @@
 package com.thoughtworks.pacman.core.tiles.visitors;
 
-import com.thoughtworks.pacman.core.tiles.Dot;
-import com.thoughtworks.pacman.core.tiles.visitors.PacmanTileVisitor;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertTrue;
+import com.thoughtworks.pacman.core.tiles.Dot;
 
 public class PacmanTileVisitorTest {
     @Test

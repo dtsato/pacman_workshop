@@ -8,7 +8,7 @@ import com.thoughtworks.pacman.core.maze.Maze;
 
 public class Ghost extends Actor {
     public Ghost(Maze maze, SpacialCoordinate center) {
-        super(maze, center, Direction.DOWN);
+        super(center, Direction.DOWN);
     }
 
     @Override
