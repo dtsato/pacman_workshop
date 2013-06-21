@@ -1,7 +1,7 @@
 package com.thoughtworks.pacman.core;
 
 public enum Direction {
-    UP(0, -1, 130), DOWN(0, 1, 310), LEFT(-1, 0, 220), RIGHT(1, 0, 40);
+    UP(0, -1, 130), DOWN(0, 1, 310), LEFT(-1, 0, 220), RIGHT(1, 0, 40), NONE(0, 0, 0);
 
     private final int x;
     private final int y;
