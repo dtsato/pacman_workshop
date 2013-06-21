@@ -52,5 +52,4 @@ public class Pacman extends Actor {
         TileCoordinate nextTile = tileCoordinate.add(direction.tileDelta());
         return maze.canMove(nextTile);
     }
->>>>>>> Splitting movement logic between Actor and Pacman.
 }
