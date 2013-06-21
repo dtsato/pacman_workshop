@@ -4,11 +4,13 @@ import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
+import com.thoughtworks.pacman.core.tiles.Dot;
 
 public class Game {
     private final Maze maze;
     private final Pacman pacman;
     private final Ghost blinky, pinky, inky, clyde;
+    private final PacmanTileVisitor pacmanTileVisitor;
 
     public Game() throws Exception {
         this.maze = MazeBuilder.buildDefaultMaze();
@@ -17,6 +19,7 @@ public class Game {
         this.pinky = new Ghost(maze, new SpacialCoordinate(14 * Tile.SIZE, 17 * Tile.SIZE + Tile.SIZE / 2));
         this.inky = new Ghost(maze, new SpacialCoordinate(12 * Tile.SIZE, 17 * Tile.SIZE + Tile.SIZE / 2));
         this.clyde = new Ghost(maze, new SpacialCoordinate(16 * Tile.SIZE, 17 * Tile.SIZE + Tile.SIZE / 2));
+        this.pacmanTileVisitor = new PacmanTileVisitor(pacman);
     }
 
     public Maze getMaze() {
@@ -57,5 +60,8 @@ public class Game {
         if (pacman.collidesWith(blinky) || pacman.collidesWith(pinky) || pacman.collidesWith(inky) || pacman.collidesWith(clyde)) {
             pacman.die();
         }
+
+        Tile pacmanTile = maze.tileAt(pacman.getCenter().toTileCoordinate());
+        pacmanTile.visit(pacmanTileVisitor);
 	}
 }

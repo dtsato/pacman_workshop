@@ -5,8 +5,18 @@ import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.TileVisitor;
 
 public class Dot extends Tile {
+    private boolean eaten;
+
     public Dot(TileCoordinate coordinate) {
         super(coordinate);
+    }
+
+    public boolean isEaten() {
+        return eaten;
+    }
+
+    public void eat() {
+        this.eaten = true;
     }
 
     @Override

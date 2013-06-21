@@ -28,7 +28,7 @@ Uma explicação completa e detalhada do jogo original pode ser encontrada em in
 * ~~Desenhar o mapa~~
 * ~~Movimentação do Pacman~~
 * Movimentação dos fantasmas (4)
-* Comer dots / contagem de pontos (2)
+* ~~Comer dots / contagem de pontos~~
 * ~~Detectar colisões~~
 * ~~Teleporte~~
 * Detectar vitória ou ~~derrota~~ (transição) (1)

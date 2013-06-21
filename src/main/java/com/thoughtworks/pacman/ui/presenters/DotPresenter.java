@@ -19,8 +19,10 @@ public class DotPresenter implements Presenter {
 
     @Override
     public void draw(Graphics2D graphics) {
-        graphics.setColor(Color.white);
-        graphics.fill(getBounds());
+        if (!dot.isEaten()) {
+            graphics.setColor(Color.white);
+            graphics.fill(getBounds());
+        }
     }
 
     public Rectangle getBounds() {
