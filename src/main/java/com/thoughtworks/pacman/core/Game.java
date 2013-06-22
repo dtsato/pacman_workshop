@@ -5,6 +5,7 @@ import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
 import com.thoughtworks.pacman.core.tiles.visitors.PacmanTileVisitor;
+import com.thoughtworks.pacman.core.actors.GhostType;
 
 public class Game {
     private final Maze maze;
@@ -15,10 +16,10 @@ public class Game {
     public Game() throws Exception {
         this.maze = MazeBuilder.buildDefaultMaze();
         this.pacman = new Pacman(maze);
-        this.blinky = new Ghost(maze, new SpacialCoordinate(14 * Tile.SIZE, 14 * Tile.SIZE + Tile.SIZE / 2));
-        this.pinky = new Ghost(maze, new SpacialCoordinate(14 * Tile.SIZE, 17 * Tile.SIZE + Tile.SIZE / 2));
-        this.inky = new Ghost(maze, new SpacialCoordinate(12 * Tile.SIZE, 17 * Tile.SIZE + Tile.SIZE / 2));
-        this.clyde = new Ghost(maze, new SpacialCoordinate(16 * Tile.SIZE, 17 * Tile.SIZE + Tile.SIZE / 2));
+        this.blinky = new Ghost(maze, GhostType.BLINKY);
+        this.pinky = new Ghost(maze, GhostType.PINKY);
+        this.inky = new Ghost(maze, GhostType.INKY);
+        this.clyde = new Ghost(maze, GhostType.CLYDE);
         this.pacmanTileVisitor = new PacmanTileVisitor();
     }
 

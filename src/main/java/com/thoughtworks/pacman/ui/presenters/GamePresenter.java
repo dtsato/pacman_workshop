@@ -1,6 +1,5 @@
 package com.thoughtworks.pacman.ui.presenters;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 
@@ -10,20 +9,19 @@ import com.thoughtworks.pacman.ui.Presenter;
 public class GamePresenter implements Presenter {
     private final MazePresenter mazePresenter;
     private final PacmanPresenter pacmanPresenter;
-    private final GhostPresenter blinkyPresenter;
-    private final GhostPresenter pinkyPresenter;
-    private final GhostPresenter inkyPresenter;
-    private final GhostPresenter clydePresenter;
+    private final GhostPresenter[] ghostPresenters;
     private final Game game;
 
     public GamePresenter(Game game) {
         this.game = game;
         mazePresenter = new MazePresenter(game.getMaze());
         pacmanPresenter = new PacmanPresenter(game.getPacman());
-        blinkyPresenter = new GhostPresenter(game.getBlinky(), Color.red);
-        pinkyPresenter = new GhostPresenter(game.getPinky(), Color.magenta);
-        inkyPresenter = new GhostPresenter(game.getInky(), Color.cyan);
-        clydePresenter = new GhostPresenter(game.getClyde(), Color.orange);
+        ghostPresenters = new GhostPresenter[] {
+                new GhostPresenter(game.getBlinky()),
+                new GhostPresenter(game.getPinky()),
+                new GhostPresenter(game.getInky()),
+                new GhostPresenter(game.getClyde())
+        };
     }
 
     public Dimension getDimension() {
@@ -35,10 +33,9 @@ public class GamePresenter implements Presenter {
         mazePresenter.draw(graphics);
         pacmanPresenter.draw(graphics);
         if (!game.getPacman().isDead()) {
-            blinkyPresenter.draw(graphics);
-            pinkyPresenter.draw(graphics);
-            inkyPresenter.draw(graphics);
-            clydePresenter.draw(graphics);
+            for (GhostPresenter ghostPresenter : ghostPresenters) {
+                ghostPresenter.draw(graphics);
+            }
         }
     }
 }
