@@ -32,8 +32,7 @@ public abstract class Actor {
 
         if (currentTileCenter.between(center, nextCenter)) {
             advanceFromCenter(distance, currentTileCenter);
-        }
-        else if (nextTileCenter.between(center, nextCenter)) {
+        } else if (nextTileCenter.between(center, nextCenter)) {
             advanceFromCenter(distance, nextTileCenter);
         } else {
             center = nextCenter;

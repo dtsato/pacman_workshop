@@ -11,6 +11,7 @@ public class Pacman extends Actor {
     private final Maze maze;
     private Direction currentDirection;
     private Direction desiredDirection;
+    private Direction previousDirection;
     private boolean dead = false;
 
     public Pacman(Maze maze) {
@@ -37,11 +38,20 @@ public class Pacman extends Actor {
         this.desiredDirection = direction;
     }
 
+    public Direction getPreviousDirection() {
+        return previousDirection;
+    }
+
+    public boolean isMoving() {
+        return currentDirection != Direction.NONE;
+    }
+
     @Override
     protected Direction getNextDirection(TileCoordinate tileCoordinate) {
         if (allowMove(tileCoordinate, desiredDirection)) {
             currentDirection = desiredDirection;
         } else if (!allowMove(tileCoordinate, currentDirection)) {
+            previousDirection = currentDirection;
             currentDirection = Direction.NONE;
         }
         return currentDirection;

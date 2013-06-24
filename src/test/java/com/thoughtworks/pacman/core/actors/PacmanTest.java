@@ -1,6 +1,7 @@
 package com.thoughtworks.pacman.core.actors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -77,5 +78,24 @@ public class PacmanTest {
         pacman.die();
 
         assertTrue(pacman.isDead());
+    }
+
+    @Test
+    public void shouldRememberPreviousDirectionWhenNotMoving() throws Exception {
+        Pacman pacman = new Pacman(maze);
+        pacman.setNextDirection(Direction.UP);
+        pacman.getNextDirection(new TileCoordinate(9, 14));
+
+        assertThat(pacman.isMoving(), is(false));
+        assertThat(pacman.getPreviousDirection(), equalTo(Direction.LEFT));
+    }
+
+    @Test
+    public void shouldBeMovingIfCurrentDirectionIsSet() throws Exception {
+        Pacman pacman = new Pacman(maze);
+        pacman.getNextDirection(new TileCoordinate(14, 26));
+
+        assertThat(pacman.isMoving(), is(true));
+        assertThat(pacman.getDirection(), equalTo(Direction.LEFT));
     }
 }
