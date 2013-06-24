@@ -6,11 +6,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import com.thoughtworks.pacman.core.actors.GhostType;
 import org.junit.Test;
 
-import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.actors.Ghost;
+import com.thoughtworks.pacman.core.actors.GhostType;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
 

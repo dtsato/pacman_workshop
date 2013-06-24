@@ -5,7 +5,6 @@ import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.ui.Presenter;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.util.ArrayList;

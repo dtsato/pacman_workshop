@@ -1,21 +1,15 @@
 package com.thoughtworks.pacman.ui.presenters;
 
-import com.thoughtworks.pacman.core.SpacialCoordinate;
-import com.thoughtworks.pacman.core.Tile;
-import com.thoughtworks.pacman.core.actors.Ghost;
-import com.thoughtworks.pacman.core.tiles.Dot;
-import com.thoughtworks.pacman.core.tiles.EmptyTile;
-import com.thoughtworks.pacman.core.tiles.Wall;
-import com.thoughtworks.pacman.ui.Presenter;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.util.HashMap;
-import java.util.Map;
+
+import com.thoughtworks.pacman.core.SpacialCoordinate;
+import com.thoughtworks.pacman.core.actors.Ghost;
+import com.thoughtworks.pacman.ui.Presenter;
 
 public class GhostPresenter implements Presenter {
     private static final int DIMENSION = 20;

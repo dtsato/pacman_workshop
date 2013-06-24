@@ -1,7 +1,6 @@
 package com.thoughtworks.pacman.ui;
 
 import com.thoughtworks.pacman.core.Game;
-import com.thoughtworks.pacman.core.Tile;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
