@@ -3,6 +3,7 @@ package com.thoughtworks.pacman.core.tiles;
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.TileVisitor;
+import com.thoughtworks.pacman.core.maze.Maze;
 
 public class Wall extends Tile {
 

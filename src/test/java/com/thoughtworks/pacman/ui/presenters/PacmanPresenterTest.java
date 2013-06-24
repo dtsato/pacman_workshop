@@ -17,7 +17,7 @@ public class PacmanPresenterTest {
     @Test
     public void shouldCalculateBoundInPixels() throws Exception {
         PacmanPresenter presenter = new PacmanPresenter(new Pacman(MazeBuilder.buildDefaultMaze()));
-        assertThat(presenter.getBounds(), equalTo(new Rectangle(216, 416, Tile.SIZE, Tile.SIZE)));
+        assertThat(presenter.getBounds(), equalTo(new Rectangle(214, 414, PacmanPresenter.DIAMETER, PacmanPresenter.DIAMETER)));
     }
 
     @Test

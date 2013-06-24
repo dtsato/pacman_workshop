@@ -40,4 +40,3 @@ Uma explicação completa e detalhada do jogo original pode ser encontrada em in
 * Gerenciar high-score
 * Energizer dots ("frigthening mode")
 * Inteligência dos fantasmas
-

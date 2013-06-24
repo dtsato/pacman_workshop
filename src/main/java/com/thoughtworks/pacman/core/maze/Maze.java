@@ -20,6 +20,9 @@ public class Maze {
         this.width = width;
         this.height = height;
         this.tiles = tiles;
+        for (Tile tile : tiles.values()) {
+            tile.setMaze(this);
+        }
     }
 
     public boolean canMove(TileCoordinate tileCoordinate) {

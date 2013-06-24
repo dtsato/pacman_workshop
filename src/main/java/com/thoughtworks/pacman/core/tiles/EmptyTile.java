@@ -1,5 +1,6 @@
 package com.thoughtworks.pacman.core.tiles;
 
+import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.TileVisitor;

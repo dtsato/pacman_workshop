@@ -19,6 +19,8 @@ public class PacmanPresenter implements Presenter {
     private long lastFrame;
     private int deadFrame;
 
+    static final int DIAMETER = 20;
+
     public PacmanPresenter(Pacman pacman) {
         this.pacman = pacman;
     }
@@ -46,8 +48,8 @@ public class PacmanPresenter implements Presenter {
     }
 
     Rectangle getBounds() {
-        int radius = Tile.SIZE / 2;
+        int radius = DIAMETER / 2;
         SpacialCoordinate upperLeft = pacman.getCenter().add(new SpacialCoordinate(-radius, -radius));
-        return new Rectangle(upperLeft.toPoint(), new Dimension(Tile.SIZE, Tile.SIZE));
+        return new Rectangle(upperLeft.toPoint(), new Dimension(DIAMETER, DIAMETER));
     }
 }

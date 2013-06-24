@@ -53,4 +53,19 @@ public class TileCoordinate {
         result = 31 * result + y;
         return result;
     }
+
+    public TileCoordinate neighbour(Direction direction) {
+        switch(direction) {
+            case UP:
+                return new TileCoordinate(x, y - 1);
+            case DOWN:
+                return new TileCoordinate(x, y + 1);
+            case LEFT:
+                return new TileCoordinate(x - 1, y);
+            case RIGHT:
+                return new TileCoordinate(x + 1, y);
+            default:
+                return null;
+        }
+    }
 }
