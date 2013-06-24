@@ -6,6 +6,7 @@ import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.visitors.ScoreTileVisitor;
 
+import java.awt.Dimension;
 import java.util.Collection;
 import java.util.Map;
 
@@ -30,6 +31,10 @@ public class Maze {
 
     public int getHeight() {
         return height;
+    }
+
+    public Dimension getDimension() {
+        return new Dimension(width * Tile.SIZE, height * Tile.SIZE);
     }
 
     public Collection<Tile> getTiles() {
@@ -74,5 +79,4 @@ public class Maze {
 
         return result.toString();
     }
-
 }

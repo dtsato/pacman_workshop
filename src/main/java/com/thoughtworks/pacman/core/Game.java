@@ -7,6 +7,8 @@ import com.thoughtworks.pacman.core.maze.MazeBuilder;
 import com.thoughtworks.pacman.core.tiles.visitors.PacmanTileVisitor;
 import com.thoughtworks.pacman.core.actors.GhostType;
 
+import java.awt.Dimension;
+
 public class Game {
     private final Maze maze;
     private final Pacman pacman;
@@ -25,6 +27,10 @@ public class Game {
 
     public Maze getMaze() {
         return maze;
+    }
+
+    public Dimension getDimension() {
+        return maze.getDimension();
     }
 
     public Pacman getPacman() {

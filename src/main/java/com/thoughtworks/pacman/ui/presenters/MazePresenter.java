@@ -27,10 +27,6 @@ public class MazePresenter implements Presenter {
         }
     }
 
-    public Dimension getDimension() {
-        return new Dimension(maze.getWidth() * Tile.SIZE, maze.getHeight() * Tile.SIZE);
-    }
-
     @Override
     public void draw(Graphics2D graphics) {
         for (Presenter tilePresenter : mazeTiles) {

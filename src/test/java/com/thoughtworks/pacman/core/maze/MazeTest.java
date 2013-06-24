@@ -7,13 +7,22 @@ import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
 import org.junit.Test;
 
+import java.awt.Dimension;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class MazeTest {
+
+    @Test
+    public void shouldCalculateDimensionInPixels() throws Exception {
+        Maze maze = MazeBuilder.buildDefaultMaze();
+
+        assertThat(maze.getDimension(), equalTo(new Dimension(28 * 16, 36 * 16)));
+    }
 
     @Test
     public void toString_shouldReturnPrintableMaze() throws Exception {

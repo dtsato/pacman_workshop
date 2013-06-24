@@ -1,10 +1,9 @@
 package com.thoughtworks.pacman.ui.presenters;
 
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.Presenter;
+
+import java.awt.Graphics2D;
 
 public class GamePresenter implements Presenter {
     private final MazePresenter mazePresenter;
@@ -22,10 +21,6 @@ public class GamePresenter implements Presenter {
                 new GhostPresenter(game.getInky()),
                 new GhostPresenter(game.getClyde())
         };
-    }
-
-    public Dimension getDimension() {
-        return mazePresenter.getDimension();
     }
 
     @Override

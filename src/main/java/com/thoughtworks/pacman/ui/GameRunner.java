@@ -1,9 +1,11 @@
 package com.thoughtworks.pacman.ui;
 
 import com.thoughtworks.pacman.core.Game;
+import com.thoughtworks.pacman.core.Tile;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -22,13 +24,13 @@ public class GameRunner {
 
     private void initialize() throws Exception {
         game = new Game();
-        canvas = new GameCanvas(game);
-        GameController controller = new GameController(game);
+        Dimension dimension = game.getDimension();
+        canvas = new GameCanvas(dimension, game);
 
         JFrame container = new JFrame("Pacman");
 
         JPanel panel = (JPanel) container.getContentPane();
-        panel.setPreferredSize(canvas.getDimension());
+        panel.setPreferredSize(dimension);
         panel.setLayout(null);
 
         container.pack();
@@ -44,20 +46,11 @@ public class GameRunner {
         });
 
         canvas.initialize(panel);
-        controller.initialize(canvas);
     }
 
     private void run() {
-        long lastFrameAt = System.currentTimeMillis();
-
         while (open) {
-            long currentFrameAt = System.currentTimeMillis();
-            long timeDelta = currentFrameAt - lastFrameAt;
-
-            game.advance(timeDelta);
             canvas.draw();
-
-            lastFrameAt = currentFrameAt;
 
             try {
                 Thread.sleep(FRAME_INTERVAL);
