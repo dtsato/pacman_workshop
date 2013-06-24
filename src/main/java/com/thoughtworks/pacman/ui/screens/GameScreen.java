@@ -13,8 +13,8 @@ public class GameScreen implements Screen {
     private final GamePresenter gamePresenter;
     private long lastFrameAt;
 
-    public GameScreen(Game game) {
-        this.game = game;
+    public GameScreen() throws Exception {
+        this.game = new Game();
         this.gamePresenter = new GamePresenter(game);
         this.lastFrameAt = System.currentTimeMillis();
     }
@@ -32,6 +32,11 @@ public class GameScreen implements Screen {
 
     @Override
     public Screen getNextScreen() {
+        if (game.won()) {
+            return new WinScreen(game);
+        } else if (game.lost()) {
+            return new LostScreen(game);
+        }
         return this;
     }
 

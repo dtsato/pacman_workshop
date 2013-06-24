@@ -11,9 +11,8 @@ import java.awt.Dimension;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 public class MazeTest {
 
@@ -96,13 +95,31 @@ public class MazeTest {
     public void canTeleport_shouldBeTrue_whenTileIsInvalidAndOppositeTileIsMovable() throws Exception {
         String mazeDescription = "+ +\n   \n+ +";
         Maze maze = MazeBuilder.buildMaze(mazeDescription);
-        assertTrue(maze.canTeleport(new TileCoordinate(-1, 1), Direction.LEFT));
+        assertThat(maze.canTeleport(new TileCoordinate(-1, 1), Direction.LEFT), is(true));
     }
 
     @Test
     public void canTeleport_shouldBeFalse_whenTileIsInvalidAndOppositeTileIsNotMovable() throws Exception {
         String mazeDescription = "+ +\n  +\n+ +";
         Maze maze = MazeBuilder.buildMaze(mazeDescription);
-        assertFalse(maze.canTeleport(new TileCoordinate(-1, 1), Direction.LEFT));
+        assertThat(maze.canTeleport(new TileCoordinate(-1, 1), Direction.LEFT), is(false));
+    }
+
+    @Test
+    public void hasDotsLeft_shouldBeTrue_whenDotsAreLeftUneaten() throws Exception {
+        String mazeDescription = "+++\n+.+\n+++";
+        Maze maze = MazeBuilder.buildMaze(mazeDescription);
+        assertThat(maze.hasDotsLeft(), is(true));
+    }
+
+    @Test
+    public void hasDotsLeft_shouldBeFalse_whenAllDotsAreEaten() throws Exception {
+        String mazeDescription = "+++\n+.+\n+++";
+        Maze maze = MazeBuilder.buildMaze(mazeDescription);
+
+        Dot dot = (Dot) maze.tileAt(new TileCoordinate(1, 1));
+        dot.eat();
+
+        assertThat(maze.hasDotsLeft(), is(false));
     }
 }

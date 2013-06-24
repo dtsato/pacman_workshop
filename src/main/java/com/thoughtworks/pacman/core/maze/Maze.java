@@ -4,6 +4,7 @@ import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
+import com.thoughtworks.pacman.core.tiles.visitors.DotsLeftVisitor;
 import com.thoughtworks.pacman.core.tiles.visitors.ScoreTileVisitor;
 
 import java.awt.Dimension;
@@ -48,6 +49,15 @@ public class Maze {
             totalScore += tile.visit(scoreVisitor);
         }
         return totalScore;
+    }
+
+    public boolean hasDotsLeft() {
+        DotsLeftVisitor dotsLeftVisitor = new DotsLeftVisitor();
+        int dotsLeft = 0;
+        for (Tile tile : tiles.values()) {
+            dotsLeft += tile.visit(dotsLeftVisitor);
+        }
+        return dotsLeft > 0;
     }
 
     public Tile tileAt(TileCoordinate tileCoordinate) {

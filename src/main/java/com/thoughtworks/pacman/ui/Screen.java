@@ -6,5 +6,5 @@ import java.awt.event.KeyEvent;
 public interface Screen {
     void draw(Graphics2D graphics);
     void keyPressed(KeyEvent e);
-    Screen getNextScreen();
+    Screen getNextScreen() throws Exception;
 }

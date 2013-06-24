@@ -47,7 +47,7 @@ public class GameRunner {
         canvas.initialize(panel);
     }
 
-    private void run() {
+    private void run() throws Exception {
         while (open) {
             canvas.draw();
 

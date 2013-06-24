@@ -9,27 +9,29 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
-public class IntroScreen implements Screen {
-    private static final Image TITLE_SCREEN_IMAGE = Toolkit.getDefaultToolkit().getImage(Screen.class.getResource("titleScreen.jpg"));
+public class WinScreen implements Screen {
+    private static final Image WIN_SCREEN_IMAGE = Toolkit.getDefaultToolkit().getImage(Screen.class.getResource("winScreen.jpg"));
 
     private final Dimension dimension;
+    private final Game game;
     private boolean startGame;
 
-    public IntroScreen(Game game) {
+    public WinScreen(Game game) {
         this.dimension = game.getDimension();
+        this.game = game;
         this.startGame = false;
     }
 
     @Override
     public void draw(Graphics2D graphics) {
-        int height = TITLE_SCREEN_IMAGE.getHeight(null) * dimension.width / TITLE_SCREEN_IMAGE.getWidth(null);
-        graphics.drawImage(TITLE_SCREEN_IMAGE, 0, 0, dimension.width, height, null);
+        int height = WIN_SCREEN_IMAGE.getHeight(null) * dimension.width / WIN_SCREEN_IMAGE.getWidth(null);
+        graphics.drawImage(WIN_SCREEN_IMAGE, 0, 0, dimension.width, height, null);
     }
 
     @Override
-    public Screen getNextScreen() throws Exception {
+    public Screen getNextScreen() {
         if (startGame) {
-            return new GameScreen();
+            return new IntroScreen(game);
         }
         return this;
     }

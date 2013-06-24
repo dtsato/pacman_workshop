@@ -23,7 +23,7 @@ public class GameCanvas extends Canvas implements KeyListener {
 
     public GameCanvas(Dimension dimension, Game game) {
         this.dimension = dimension;
-        this.currentScreen = new IntroScreen(dimension, game);
+        this.currentScreen = new IntroScreen(game);
     }
 
     public void initialize(JPanel panel) {
@@ -35,7 +35,7 @@ public class GameCanvas extends Canvas implements KeyListener {
         requestFocus();
     }
 
-    public void draw() {
+    public void draw() throws Exception {
         BufferStrategy strategy = getBufferStrategy();
         Graphics2D graphics = (Graphics2D) strategy.getDrawGraphics();
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

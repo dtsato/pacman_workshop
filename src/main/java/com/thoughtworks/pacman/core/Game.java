@@ -71,4 +71,12 @@ public class Game {
         Tile pacmanTile = maze.tileAt(pacman.getCenter().toTileCoordinate());
         pacmanTile.visit(pacmanTileVisitor);
 	}
+
+    public boolean won() {
+        return !maze.hasDotsLeft();
+    }
+
+    public boolean lost() {
+        return pacman.isDead();
+    }
 }

@@ -24,14 +24,14 @@ Uma explicação completa e detalhada do jogo original pode ser encontrada em in
 
 ## Funcionalidades
 
-* Novo Jogo (transição da tela de introdução) (1)
+* ~~Novo Jogo (transição da tela de introdução)~~
 * ~~Desenhar o mapa~~
 * ~~Movimentação do Pacman~~
 * Movimentação dos fantasmas (4)
 * ~~Comer dots / contagem de pontos~~
 * ~~Detectar colisões~~
 * ~~Teleporte~~
-* Detectar vitória ou ~~derrota~~ (transição) (1)
+* ~~Detectar vitória ou derrota (transição)~~
 * Gerenciar vidas (1)
 * Sons
 * "Cornering": escolher a direção antes de chegar no ponto de decisão
