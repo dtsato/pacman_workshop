@@ -2,26 +2,27 @@ package com.thoughtworks.pacman.core.actors;
 
 import com.thoughtworks.pacman.core.Actor;
 import com.thoughtworks.pacman.core.Direction;
-import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.maze.Maze;
-import com.thoughtworks.pacman.core.actors.GhostType;
-import org.w3c.dom.html.HTMLDocument;
 
 public class Ghost extends Actor {
     private GhostType type;
 
     public Ghost(Maze maze, GhostType type) {
-        super(type.getStartCoordinate(), Direction.DOWN);
+        super(maze, type.getStartCoordinate(), Direction.LEFT);
         this.type = type;
-    }
-
-    @Override
-    protected Direction getNextDirection(TileCoordinate tileCoordinate) {
-        return null;
     }
 
     public GhostType getType() {
         return type;
+    }
+
+    @Override
+    protected Direction getNextDirection(TileCoordinate tileCoordinate) {
+        TileCoordinate nextTile = tileCoordinate.add(currentDirection.tileDelta());
+        if (!maze.canMove(nextTile)) {
+            currentDirection = Direction.NONE;
+        }
+        return currentDirection;
     }
 }

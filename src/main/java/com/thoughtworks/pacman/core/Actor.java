@@ -1,13 +1,16 @@
 package com.thoughtworks.pacman.core;
 
+import com.thoughtworks.pacman.core.maze.Maze;
 
 public abstract class Actor {
     private static final int SPEED = 100;
 
-    private SpacialCoordinate center;
-    private Direction currentDirection;
+    protected final Maze maze;
+    protected SpacialCoordinate center;
+    protected Direction currentDirection;
 
-    public Actor(SpacialCoordinate center, Direction direction) {
+    public Actor(Maze maze, SpacialCoordinate center, Direction direction) {
+        this.maze = maze;
         this.center = center;
         this.currentDirection = direction;
     }

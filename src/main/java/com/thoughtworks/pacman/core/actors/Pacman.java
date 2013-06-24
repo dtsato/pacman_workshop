@@ -8,21 +8,16 @@ import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.maze.Maze;
 
 public class Pacman extends Actor {
-    private final Maze maze;
-    private Direction currentDirection;
     private Direction desiredDirection;
     private Direction previousDirection;
     private boolean dead = false;
 
     public Pacman(Maze maze) {
-        this(maze, new SpacialCoordinate(14 * Tile.SIZE, 26 * Tile.SIZE + Tile.SIZE / 2),
-                Direction.LEFT);
+        this(maze, new SpacialCoordinate(14 * Tile.SIZE, 26 * Tile.SIZE + Tile.SIZE / 2), Direction.LEFT);
     }
 
     protected Pacman(Maze maze, SpacialCoordinate center, Direction direction) {
-        super(center, direction);
-        this.maze = maze;
-        this.currentDirection = direction;
+        super(maze, center, direction);
         this.desiredDirection = direction;
     }
 

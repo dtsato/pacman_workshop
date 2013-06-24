@@ -1,9 +1,11 @@
 package com.thoughtworks.pacman.core;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.thoughtworks.pacman.core.maze.Maze;
@@ -16,8 +18,8 @@ public class ActorTest {
         private final Direction nextDirection;
 
         public TestActor(Maze maze, SpacialCoordinate center, Direction direction,
-                Direction nextDirection) {
-            super(center, direction);
+                         Direction nextDirection) {
+            super(maze, center, direction);
             this.nextDirection = nextDirection;
         }
 
@@ -125,40 +127,35 @@ public class ActorTest {
         assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(initialX + 10, initialY)));
     }
 
-    // @Test
-    // public void advance_shouldTeleport_whenPossible() throws Exception {
-    // int initialX = -Tile.SIZE;
-    // int initialY = 17 * Tile.SIZE + Tile.SIZE / 2;
-    // SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-    // Actor actor = new Actor(maze, center, Direction.LEFT);
-    //
-    // actor.advance(100);
-    //
-    // assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(Tile.SIZE *
-    // maze.getWidth() - Tile.SIZE / 2, initialY)));
-    // }
+    @Test
+    @Ignore
+    public void advance_shouldTeleport_whenPossible() throws Exception {
+        int initialX = -Tile.SIZE;
+        int initialY = 17 * Tile.SIZE + Tile.SIZE / 2;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Actor actor = new TestActor(maze, center, Direction.LEFT, Direction.LEFT);
 
-    // @Test
-    // public void collidesWith_shouldBeTrueIfOtherActorIsInSameTile() throws
-    // Exception {
-    // Actor actor1 = new Actor(maze, new SpacialCoordinate(15, 15),
-    // Direction.LEFT);
-    // Actor actor2 = new Actor(maze, new SpacialCoordinate(10, 10),
-    // Direction.RIGHT);
-    //
-    // assertThat(actor1.collidesWith(actor2), is(true));
-    // assertThat(actor2.collidesWith(actor1), is(true));
-    // }
-    //
-    // @Test
-    // public void collidesWith_shouldBeFalseIfOtherActorIsInDifferentTile()
-    // throws Exception {
-    // Actor actor1 = new Actor(maze, new SpacialCoordinate(15, 15),
-    // Direction.LEFT);
-    // Actor actor2 = new Actor(maze, new SpacialCoordinate(17, 17),
-    // Direction.RIGHT);
-    //
-    // assertThat(actor1.collidesWith(actor2), is(false));
-    // assertThat(actor2.collidesWith(actor1), is(false));
-    // }
+        actor.advance(100);
+
+        assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(Tile.SIZE *
+                maze.getWidth() - Tile.SIZE / 2, initialY)));
+    }
+
+    @Test
+    public void collidesWith_shouldBeTrueIfOtherActorIsInSameTile() throws Exception {
+        Actor actor1 = new TestActor(maze, new SpacialCoordinate(15, 15), Direction.LEFT, Direction.LEFT);
+        Actor actor2 = new TestActor(maze, new SpacialCoordinate(10, 10), Direction.RIGHT, Direction.RIGHT);
+
+        assertThat(actor1.collidesWith(actor2), is(true));
+        assertThat(actor2.collidesWith(actor1), is(true));
+    }
+
+    @Test
+    public void collidesWith_shouldBeFalseIfOtherActorIsInDifferentTile() throws Exception {
+        Actor actor1 = new TestActor(maze, new SpacialCoordinate(15, 15), Direction.LEFT, Direction.LEFT);
+        Actor actor2 = new TestActor(maze, new SpacialCoordinate(17, 17), Direction.RIGHT, Direction.RIGHT);
+
+        assertThat(actor1.collidesWith(actor2), is(false));
+        assertThat(actor2.collidesWith(actor1), is(false));
+    }
 }

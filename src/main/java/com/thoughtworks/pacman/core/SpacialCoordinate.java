@@ -27,14 +27,6 @@ public class SpacialCoordinate {
         return (int) Math.sqrt(x * x + y * y);
     }
 
-    public SpacialCoordinate limitOnDirection(SpacialCoordinate limit, Direction direction) {
-        SpacialCoordinate delta = direction.delta();
-        int newX = delta.x * (this.x - limit.x) <= 0 ? this.x : limit.x;
-        int newY = delta.y * (this.y - limit.y) <= 0 ? this.y : limit.y;
-
-        return new SpacialCoordinate(newX, newY);
-    }
-
     public boolean between(SpacialCoordinate c1, SpacialCoordinate c2) {
         return isBetween(x, c1.x, c2.x) && isBetween(y, c1.y, c2.y);
     }
