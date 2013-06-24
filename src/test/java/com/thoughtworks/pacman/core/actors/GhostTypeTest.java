@@ -15,7 +15,7 @@ public class GhostTypeTest {
 
     @Test
     public void blinky_shouldHaveStartCoordinate() {
-        assertThat(GhostType.BLINKY.getStartCoordinate(), equalTo(new SpacialCoordinate(224, 232)));
+        assertThat(GhostType.BLINKY.getStartCoordinate(), equalTo(new SpacialCoordinate(232, 232)));
     }
 
     @Test
@@ -26,7 +26,7 @@ public class GhostTypeTest {
 
     @Test
     public void pinky_shouldHaveStartCoordinate() {
-        assertThat(GhostType.PINKY.getStartCoordinate(), equalTo(new SpacialCoordinate(224, 280)));
+        assertThat(GhostType.PINKY.getStartCoordinate(), equalTo(new SpacialCoordinate(232, 280)));
     }
 
     @Test
@@ -37,7 +37,7 @@ public class GhostTypeTest {
 
     @Test
     public void inky_shouldHaveStartCoordinate() {
-        assertThat(GhostType.INKY.getStartCoordinate(), equalTo(new SpacialCoordinate(192, 280)));
+        assertThat(GhostType.INKY.getStartCoordinate(), equalTo(new SpacialCoordinate(200, 280)));
     }
 
     @Test
@@ -48,6 +48,6 @@ public class GhostTypeTest {
 
     @Test
     public void clyde_shouldHaveStartCoordinate() {
-        assertThat(GhostType.CLYDE.getStartCoordinate(), equalTo(new SpacialCoordinate(256, 280)));
+        assertThat(GhostType.CLYDE.getStartCoordinate(), equalTo(new SpacialCoordinate(264, 280)));
     }
 }
