@@ -4,10 +4,10 @@ import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.Tile;
 
 public enum GhostType {
-    BLINKY("ghost10.jpg", "ghost11.jpg", new SpacialCoordinate(14 * Tile.SIZE, 14 * Tile.SIZE + Tile.SIZE / 2)),
-    PINKY("ghost40.jpg", "ghost41.jpg", new SpacialCoordinate(14 * Tile.SIZE, 17 * Tile.SIZE + Tile.SIZE / 2)),
-    INKY("ghost30.jpg", "ghost31.jpg", new SpacialCoordinate(12 * Tile.SIZE, 17 * Tile.SIZE + Tile.SIZE / 2)),
-    CLYDE("ghost20.jpg", "ghost21.jpg", new SpacialCoordinate(16 * Tile.SIZE, 17 * Tile.SIZE + Tile.SIZE / 2));
+    BLINKY("ghost10.jpg", "ghost11.jpg", new SpacialCoordinate(14 * Tile.SIZE + Tile.SIZE / 2, 14 * Tile.SIZE + Tile.SIZE / 2)),
+    PINKY("ghost40.jpg", "ghost41.jpg", new SpacialCoordinate(14 * Tile.SIZE + Tile.SIZE / 2, 17 * Tile.SIZE + Tile.SIZE / 2)),
+    INKY("ghost30.jpg", "ghost31.jpg", new SpacialCoordinate(12 * Tile.SIZE + Tile.SIZE / 2, 17 * Tile.SIZE + Tile.SIZE / 2)),
+    CLYDE("ghost20.jpg", "ghost21.jpg", new SpacialCoordinate(16 * Tile.SIZE + Tile.SIZE / 2, 17 * Tile.SIZE + Tile.SIZE / 2));
 
     private final SpacialCoordinate startCoordinate;
     private final String image1;
