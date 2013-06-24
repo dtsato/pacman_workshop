@@ -37,7 +37,7 @@ public class ActorTest {
     }
 
     @Test
-    public void advance_shouldNotMoveWhenDirectionIsNone() throws Exception {
+    public void advance_shouldNotMove_whenDirectionIsNone() throws Exception {
         int initialX = 10 * Tile.SIZE;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
@@ -49,7 +49,7 @@ public class ActorTest {
     }
 
     @Test
-    public void advance_shouldUpdateCenterWhenContinuouslyMovingInOneDirection() throws Exception {
+    public void advance_shouldUpdateCenter_whenContinuouslyMovingInOneDirection() throws Exception {
         int initialX = 10 * Tile.SIZE;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
@@ -61,7 +61,7 @@ public class ActorTest {
     }
 
     @Test
-    public void advance_shouldContinueInSameDirectionIfNotPassingThroughTileCenter()
+    public void advance_shouldContinueInSameDirection_whenNotPassingThroughTileCenter()
             throws Exception {
         int initialX = 10 * Tile.SIZE - Tile.SIZE / 4;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
@@ -74,7 +74,7 @@ public class ActorTest {
     }
 
     @Test
-    public void advance_shouldChangeDirectionWhenPassingThroughCurrentTileCenter() throws Exception {
+    public void advance_shouldChangeDirection_whenPassingThroughCurrentTileCenter() throws Exception {
         int initialX = 10 * Tile.SIZE + Tile.SIZE / 4;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
@@ -89,7 +89,7 @@ public class ActorTest {
     }
 
     @Test
-    public void advance_shouldChangeDirectionWhenPassingThroughNextTileCenter() throws Exception {
+    public void advance_shouldChangeDirection_whenPassingThroughNextTileCenter() throws Exception {
         int initialX = 10 * Tile.SIZE - 2;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
@@ -103,7 +103,7 @@ public class ActorTest {
     }
 
     @Test
-    public void advance_shouldStopAtCenterWhenNextDirectionIsNone() throws Exception {
+    public void advance_shouldStopAtCenter_whenNextDirectionIsNone() throws Exception {
         int initialX = 10 * Tile.SIZE + 1;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
@@ -116,7 +116,7 @@ public class ActorTest {
     }
 
     @Test
-    public void advance_shouldStartMovingWhenNextDirectionIsNotNone() throws Exception {
+    public void advance_shouldStartMoving_whenNextDirectionIsNotNone() throws Exception {
         int initialX = 10 * Tile.SIZE + Tile.SIZE / 2;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
@@ -128,7 +128,6 @@ public class ActorTest {
     }
 
     @Test
-    @Ignore
     public void advance_shouldTeleport_whenPossible() throws Exception {
         int initialX = -Tile.SIZE;
         int initialY = 17 * Tile.SIZE + Tile.SIZE / 2;
@@ -142,7 +141,7 @@ public class ActorTest {
     }
 
     @Test
-    public void collidesWith_shouldBeTrueIfOtherActorIsInSameTile() throws Exception {
+    public void collidesWith_shouldBeTrue_whenOtherActorIsInSameTile() throws Exception {
         Actor actor1 = new TestActor(maze, new SpacialCoordinate(15, 15), Direction.LEFT, Direction.LEFT);
         Actor actor2 = new TestActor(maze, new SpacialCoordinate(10, 10), Direction.RIGHT, Direction.RIGHT);
 
@@ -151,7 +150,7 @@ public class ActorTest {
     }
 
     @Test
-    public void collidesWith_shouldBeFalseIfOtherActorIsInDifferentTile() throws Exception {
+    public void collidesWith_shouldBeFalse_whenOtherActorIsInDifferentTile() throws Exception {
         Actor actor1 = new TestActor(maze, new SpacialCoordinate(15, 15), Direction.LEFT, Direction.LEFT);
         Actor actor2 = new TestActor(maze, new SpacialCoordinate(17, 17), Direction.RIGHT, Direction.RIGHT);
 

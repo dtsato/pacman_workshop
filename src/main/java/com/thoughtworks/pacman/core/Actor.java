@@ -29,14 +29,17 @@ public abstract class Actor {
 
     public void advance(long timeDeltaInMillis) {
         int distance = (int) (SPEED * timeDeltaInMillis / 1000);
+        TileCoordinate currentTile = center.toTileCoordinate();
         SpacialCoordinate nextCenter = center.add(currentDirection.delta().times(distance));
-        SpacialCoordinate currentTileCenter = center.toTileCoordinate().toSpacialCoordinate();
+        SpacialCoordinate currentTileCenter = currentTile.toSpacialCoordinate();
         SpacialCoordinate nextTileCenter = nextCenter.toTileCoordinate().toSpacialCoordinate();
 
         if (currentTileCenter.between(center, nextCenter)) {
             advanceFromCenter(distance, currentTileCenter);
         } else if (nextTileCenter.between(center, nextCenter)) {
             advanceFromCenter(distance, nextTileCenter);
+        } else if (maze.canTeleport(currentTile, currentDirection)) {
+            center = maze.teleportedCoordinate(currentTile, currentDirection).toSpacialCoordinate();
         } else {
             center = nextCenter;
         }
