@@ -36,4 +36,36 @@ public class GhostTest {
                 is(anyOf(equalTo(Direction.RIGHT), equalTo(Direction.DOWN))));
     }
 
+    @Test
+    public void nextTile_shouldPickOneAvailableTile() throws Exception {
+        Maze maze = MazeBuilder.buildDefaultMaze();
+        TileCoordinate initialTile = new TileCoordinate(13, 14);
+        SpacialCoordinate center = initialTile.toSpacialCoordinate();
+        Ghost ghost = new Ghost(maze, center, null);
+
+        assertThat(ghost.getNextTile(initialTile),
+                anyOf(equalTo(new TileCoordinate(14, 14)), equalTo(new TileCoordinate(12, 14))));
+    }
+
+    @Test
+    public void nextTile_shouldStayWithSameTileIfCurrentTileIsTheSame() throws Exception {
+        Maze maze = MazeBuilder.buildDefaultMaze();
+        TileCoordinate initialTile = new TileCoordinate(13, 14);
+        Ghost ghost = new Ghost(maze, initialTile.toSpacialCoordinate(), null);
+
+        TileCoordinate nextTile = ghost.getNextTile(initialTile);
+        assertThat(ghost.getNextTile(initialTile), equalTo(nextTile));
+    }
+
+    @Test
+    public void nextTile_shouldExcludePreviousTileFromPossibilities() throws Exception {
+        Maze maze = MazeBuilder.buildDefaultMaze();
+        TileCoordinate initialTile = new TileCoordinate(18, 4);
+        Ghost ghost = new Ghost(maze, initialTile.toSpacialCoordinate(), null);
+
+        TileCoordinate nextTile = ghost.getNextTile(new TileCoordinate(18, 4));
+        TileCoordinate direction = nextTile.subtract(initialTile);
+
+        assertThat(ghost.getNextTile(nextTile), equalTo(nextTile.add(direction)));
+    }
 }

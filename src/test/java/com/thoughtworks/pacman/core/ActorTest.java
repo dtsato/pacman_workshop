@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.thoughtworks.pacman.core.maze.Maze;
@@ -211,7 +212,7 @@ public class ActorTest {
         assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(initialX + 10, initialY)));
     }
 
-    @Test
+    @Test @Ignore
     public void advance_shouldTeleport_whenPossible() throws Exception {
         int initialX = -Tile.SIZE;
         int initialY = 17 * Tile.SIZE + Tile.SIZE / 2;
