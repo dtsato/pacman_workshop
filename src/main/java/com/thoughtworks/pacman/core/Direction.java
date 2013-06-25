@@ -15,10 +15,6 @@ public enum Direction {
         this.startAngle = startAngle;
     }
 
-    public SpacialCoordinate delta() {
-        return new SpacialCoordinate(x, y);
-    }
-
     public TileCoordinate tileDelta() {
         return new TileCoordinate(x, y);
     }

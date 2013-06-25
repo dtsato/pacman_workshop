@@ -20,4 +20,8 @@ public class Door extends Tile {
         return visitor.visit(this);
     }
 
+    @Override
+    public String toString() {
+        return "-";
+    }
 }
