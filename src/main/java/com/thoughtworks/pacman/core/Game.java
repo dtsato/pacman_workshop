@@ -16,7 +16,11 @@ public class Game {
     private final PacmanTileVisitor pacmanTileVisitor;
 
     public Game() throws Exception {
-        this.maze = MazeBuilder.buildDefaultMaze();
+        this(MazeBuilder.buildDefaultMaze());
+    }
+
+    Game(Maze maze) {
+        this.maze = maze;
         this.pacman = new Pacman(maze);
         this.blinky = new Ghost(maze, GhostType.BLINKY);
         this.pinky = new Ghost(maze, GhostType.PINKY);
