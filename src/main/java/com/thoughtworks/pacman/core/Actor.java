@@ -21,6 +21,10 @@ public abstract class Actor {
         return center.toTileCoordinate().equals(other.center.toTileCoordinate());
     }
 
+    protected void jump(SpacialCoordinate jumpTo) {
+        center = jumpTo;
+    }
+
     public void advance(long timeDeltaInMillis) {
         advanceDistance((int) (SPEED * timeDeltaInMillis / 1000));
     }

@@ -57,9 +57,19 @@ public class Game {
         return clyde;
     }
 
-	public void advance(long timeDeltaInMillis) {
+    public void advance(long timeDeltaInMillis) {
         if (pacman.isDead()) {
             return;
+        }
+
+        if (blinky.isTrapped()) {
+            blinky.free();
+        } else if (pinky.isTrapped()) {
+            pinky.free();
+        } else if (inky.isTrapped() && maze.getScore() > 300) {
+            inky.free();
+        } else if (clyde.isTrapped() && maze.getScore() > 600) {
+            clyde.free();
         }
 
         pacman.advance(timeDeltaInMillis);
@@ -68,13 +78,14 @@ public class Game {
         inky.advance(timeDeltaInMillis);
         clyde.advance(timeDeltaInMillis);
 
-        if (pacman.collidesWith(blinky) || pacman.collidesWith(pinky) || pacman.collidesWith(inky) || pacman.collidesWith(clyde)) {
+        if (pacman.collidesWith(blinky) || pacman.collidesWith(pinky) || pacman.collidesWith(inky)
+                || pacman.collidesWith(clyde)) {
             pacman.die();
         }
 
         Tile pacmanTile = maze.tileAt(pacman.getCenter().toTileCoordinate());
         pacmanTile.visit(pacmanTileVisitor);
-	}
+    }
 
     public boolean won() {
         return !maze.hasDotsLeft();

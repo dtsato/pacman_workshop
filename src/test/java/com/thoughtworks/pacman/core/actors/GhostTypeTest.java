@@ -15,7 +15,7 @@ public class GhostTypeTest {
 
     @Test
     public void blinky_shouldHaveStartCoordinate() {
-        assertThat(GhostType.BLINKY.getStartCoordinate(), equalTo(new SpacialCoordinate(232, 232)));
+        assertThat(GhostType.BLINKY.getStartCoordinate(), equalTo(new SpacialCoordinate(224, 232)));
     }
 
     @Test

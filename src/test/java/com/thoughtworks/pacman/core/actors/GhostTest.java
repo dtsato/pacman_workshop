@@ -39,10 +39,39 @@ public class GhostTest {
     }
 
     @Test
+    public void shouldStartTrapped() throws Exception {
+        Ghost ghost = new Ghost(maze, GhostType.CLYDE);
+        assertThat(ghost.isTrapped(), equalTo(true));
+    }
+
+    @Test
+    public void shouldNotBeTrappedAfterFreed() throws Exception {
+        Ghost ghost = new Ghost(maze, GhostType.CLYDE);
+        ghost.free();
+        assertThat(ghost.isTrapped(), equalTo(false));
+    }
+
+    @Test
+    public void free_shouldMoveGhostToOutsideOfDoor() throws Exception {
+        Ghost ghost = new Ghost(maze, GhostType.CLYDE);
+        ghost.free();
+        assertThat(ghost.getCenter(), equalTo(GhostType.BLINKY.getStartCoordinate()));
+    }
+
+    @Test
+    public void nextTile_shouldNotMoveIfNotFree() throws Exception {
+        TileCoordinate initialTile = new TileCoordinate(13, 14);
+        SpacialCoordinate center = initialTile.toSpacialCoordinate();
+        Ghost ghost = new Ghost(maze, center, random, false);
+
+        assertThat(ghost.getNextTile(initialTile), equalTo(initialTile));
+    }
+
+    @Test
     public void nextTile_shouldPickOneAvailableTile() throws Exception {
         TileCoordinate initialTile = new TileCoordinate(13, 14);
         SpacialCoordinate center = initialTile.toSpacialCoordinate();
-        Ghost ghost = new Ghost(maze, center, random);
+        Ghost ghost = new Ghost(maze, center, random, true);
 
         when(random.nextInt(2)).thenReturn(0);
 
@@ -52,7 +81,7 @@ public class GhostTest {
     @Test
     public void nextTile_shouldStayWithSameTileIfCurrentTileIsTheSame() throws Exception {
         TileCoordinate initialTile = new TileCoordinate(13, 14);
-        Ghost ghost = new Ghost(maze, initialTile.toSpacialCoordinate(), random);
+        Ghost ghost = new Ghost(maze, initialTile.toSpacialCoordinate(), random, true);
 
         when(random.nextInt(2)).thenReturn(0);
 
@@ -63,7 +92,7 @@ public class GhostTest {
     @Test
     public void nextTile_shouldExcludePreviousTileFromPossibilities() throws Exception {
         TileCoordinate initialTile = new TileCoordinate(18, 4);
-        Ghost ghost = new Ghost(maze, initialTile.toSpacialCoordinate(), random);
+        Ghost ghost = new Ghost(maze, initialTile.toSpacialCoordinate(), random, true);
 
         when(random.nextInt(2)).thenReturn(1);
 
@@ -76,7 +105,7 @@ public class GhostTest {
     @Test
     public void nextTile_shouldGoToTeleportTileOnTheRight() throws Exception {
         TileCoordinate initialTile = new TileCoordinate(27, 17);
-        Ghost ghost = new Ghost(maze, initialTile.toSpacialCoordinate(), random);
+        Ghost ghost = new Ghost(maze, initialTile.toSpacialCoordinate(), random, true);
 
         when(random.nextInt(2)).thenReturn(1);
 
@@ -86,7 +115,7 @@ public class GhostTest {
     @Test
     public void nextTile_shouldContinueAfterTeleportOnTheRight() throws Exception {
         TileCoordinate initialTile = new TileCoordinate(27, 17);
-        Ghost ghost = new Ghost(maze, initialTile.toSpacialCoordinate(), random);
+        Ghost ghost = new Ghost(maze, initialTile.toSpacialCoordinate(), random, true);
 
         when(random.nextInt(2)).thenReturn(1);
 
@@ -97,7 +126,7 @@ public class GhostTest {
     @Test
     public void nextTile_shouldGoToTeleportTileOnTheLeft() throws Exception {
         TileCoordinate initialTile = new TileCoordinate(0, 17);
-        Ghost ghost = new Ghost(maze, initialTile.toSpacialCoordinate(), random);
+        Ghost ghost = new Ghost(maze, initialTile.toSpacialCoordinate(), random, true);
 
         when(random.nextInt(2)).thenReturn(0);
 
@@ -107,7 +136,7 @@ public class GhostTest {
     @Test
     public void nextTile_shouldContinueAfterTeleportOnTheLeft() throws Exception {
         TileCoordinate initialTile = new TileCoordinate(0, 17);
-        Ghost ghost = new Ghost(maze, initialTile.toSpacialCoordinate(), random);
+        Ghost ghost = new Ghost(maze, initialTile.toSpacialCoordinate(), random, true);
 
         when(random.nextInt(2)).thenReturn(0);
 
