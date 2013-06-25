@@ -7,6 +7,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.Test;
 
 import com.thoughtworks.pacman.core.TileCoordinate;
+import com.thoughtworks.pacman.core.tiles.Door;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
@@ -81,7 +82,7 @@ public class MazeBuilderTest {
         builder.process("-");
         Maze maze = builder.build();
 
-        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(Wall.class));
+        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(Door.class));
     }
 
     @Test

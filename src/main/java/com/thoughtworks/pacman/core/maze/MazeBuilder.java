@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileCoordinate;
+import com.thoughtworks.pacman.core.tiles.Door;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
@@ -17,7 +18,7 @@ public class MazeBuilder {
     private static final Map<Character, Class<? extends Tile>> mazeParser = new HashMap<Character, Class<? extends Tile>>() {
         {
             put('+', Wall.class);
-            put('-', Wall.class);
+            put('-', Door.class);
             put('*', Dot.class);
             put('.', Dot.class);
             put(' ', EmptyTile.class);
