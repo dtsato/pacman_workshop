@@ -25,14 +25,12 @@ public class TileCoordinateTest {
     @Test
     public void toSpacialCoordinate_shouldConvertToSpacialCoordinateOfTileCenterInNegativeSpace() throws Exception {
         TileCoordinate coordinate = new TileCoordinate(-1, -2);
-        System.out.println(coordinate.toSpacialCoordinate());
         assertThat(coordinate.toSpacialCoordinate(), equalTo(new SpacialCoordinate(-8, -24)));
     }
 
     @Test
     public void toSpacialCoordinate_shouldConvertToSpacialCoordinateOfTileCenterWithZero() throws Exception {
         TileCoordinate coordinate = new TileCoordinate(0, 0);
-        System.out.println(coordinate.toSpacialCoordinate());
         assertThat(coordinate.toSpacialCoordinate(), equalTo(new SpacialCoordinate(8, 8)));
     }
 
