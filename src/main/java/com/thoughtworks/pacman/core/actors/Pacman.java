@@ -18,7 +18,7 @@ public class Pacman extends Actor {
     }
 
     protected Pacman(Maze maze, SpacialCoordinate center, Direction direction) {
-        super(maze, center, direction);
+        super(maze, center);
         this.direction = direction;
         this.desiredDirection = direction;
     }
@@ -35,7 +35,6 @@ public class Pacman extends Actor {
         this.desiredDirection = direction;
     }
 
-    @Override
     public Direction getDirection() {
         return direction;
     }

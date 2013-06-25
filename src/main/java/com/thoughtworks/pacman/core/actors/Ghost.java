@@ -22,7 +22,7 @@ public class Ghost extends Actor {
     }
 
     protected Ghost(Maze maze, SpacialCoordinate center, Direction direction) {
-        super(maze, center, direction);
+        super(maze, center);
         this.random = new Random();
         this.previousTile = center.toTileCoordinate();
         this.desiredTile = previousTile;

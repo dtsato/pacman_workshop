@@ -7,20 +7,14 @@ public abstract class Actor {
 
     protected final Maze maze;
     protected SpacialCoordinate center;
-    protected Direction currentDirection;
 
-    public Actor(Maze maze, SpacialCoordinate center, Direction direction) {
+    public Actor(Maze maze, SpacialCoordinate center) {
         this.maze = maze;
         this.center = center;
-        this.currentDirection = direction;
     }
 
     public SpacialCoordinate getCenter() {
         return center;
-    }
-
-    public Direction getDirection() {
-        return currentDirection;
     }
 
     public boolean collidesWith(Actor other) {

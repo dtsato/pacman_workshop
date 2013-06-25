@@ -19,7 +19,7 @@ public class ActorTest {
         private int nextTileIndex;
 
         public TestActor(Maze maze, SpacialCoordinate center, TileCoordinate... nextTiles) {
-            super(maze, center, null);
+            super(maze, center);
             this.nextTiles = nextTiles;
             this.nextTileIndex = 0;
         }
