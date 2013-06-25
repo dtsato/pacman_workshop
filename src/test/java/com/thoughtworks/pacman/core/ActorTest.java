@@ -55,7 +55,7 @@ public class ActorTest {
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         Actor actor = new TestActor(maze, center, new TileCoordinate(10, 5));
 
-        actor.advance2(100);
+        actor.advance(100);
 
         assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(initialX, initialY)));
     }
@@ -67,7 +67,7 @@ public class ActorTest {
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         Actor actor = new TestActor(maze, center, new TileCoordinate(10, 5));
 
-        actor.advance2(70);
+        actor.advance(70);
 
         assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(10 * Tile.SIZE + Tile.SIZE / 2, initialY)));
     }
@@ -80,7 +80,7 @@ public class ActorTest {
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         Actor actor = new TestActor(maze, center, new TileCoordinate(10, 5));
 
-        actor.advance2(90);
+        actor.advance(90);
 
         assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(10 * Tile.SIZE + Tile.SIZE / 2, initialY)));
     }
@@ -93,7 +93,7 @@ public class ActorTest {
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         Actor actor = new TestActor(maze, center, new TileCoordinate(10, 5), new TileCoordinate(10, 6));
 
-        actor.advance2(120);
+        actor.advance(120);
 
         assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(10 * Tile.SIZE + Tile.SIZE / 2, initialY + 3)));
     }
@@ -106,7 +106,7 @@ public class ActorTest {
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         Actor actor = new TestActor(maze, center, new TileCoordinate(10, 6));
 
-        actor.advance2(100);
+        actor.advance(100);
 
         assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(10 * Tile.SIZE + Tile.SIZE / 2, initialY + 3)));
     }
@@ -118,101 +118,13 @@ public class ActorTest {
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         Actor actor = new TestActor(maze, center, new TileCoordinate(11, 5));
 
-        actor.advance2(100);
-
-        assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(initialX + 10, initialY)));
-    }
-
-    @Test
-    public void advance_shouldNotMove_whenDirectionIsNone() throws Exception {
-        int initialX = 10 * Tile.SIZE;
-        int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
-        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        TestActor actor = new TestActor(maze, center, Direction.NONE, Direction.NONE);
-
-        actor.advance(100);
-
-        assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(initialX, initialY)));
-    }
-
-    @Test
-    public void advance_shouldUpdateCenter_whenContinuouslyMovingInOneDirection() throws Exception {
-        int initialX = 10 * Tile.SIZE;
-        int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
-        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        TestActor actor = new TestActor(maze, center, Direction.RIGHT, Direction.RIGHT);
-
         actor.advance(100);
 
         assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(initialX + 10, initialY)));
     }
 
     @Test
-    public void advance_shouldContinueInSameDirection_whenNotPassingThroughTileCenter() throws Exception {
-        int initialX = 10 * Tile.SIZE - Tile.SIZE / 4;
-        int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
-        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        TestActor actor = new TestActor(maze, center, Direction.RIGHT, Direction.UP);
-
-        actor.advance(100);
-
-        assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(initialX + 10, initialY)));
-    }
-
-    @Test
-    public void advance_shouldChangeDirection_whenPassingThroughCurrentTileCenter() throws Exception {
-        int initialX = 10 * Tile.SIZE + Tile.SIZE / 4;
-        int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
-        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        TestActor actor = new TestActor(maze, center, Direction.RIGHT, Direction.UP);
-
-        actor.advance(100);
-
-        int deltaX = Tile.SIZE / 4;
-        int deltaY = 10 - deltaX;
-        assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(initialX + deltaX, initialY - deltaY)));
-    }
-
-    @Test
-    public void advance_shouldChangeDirection_whenPassingThroughNextTileCenter() throws Exception {
-        int initialX = 10 * Tile.SIZE - 2;
-        int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
-        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        TestActor actor = new TestActor(maze, center, Direction.RIGHT, Direction.UP);
-
-        actor.advance(120);
-
-        int newX = 10 * Tile.SIZE + Tile.SIZE / 2;
-        int deltaY = 12 - (newX - initialX);
-        assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(newX, initialY - deltaY)));
-    }
-
-    @Test
-    public void advance_shouldStopAtCenter_whenNextDirectionIsNone() throws Exception {
-        int initialX = 10 * Tile.SIZE + 1;
-        int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
-        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        TestActor actor = new TestActor(maze, center, Direction.RIGHT, Direction.NONE);
-
-        actor.advance(100);
-
-        int newX = 10 * Tile.SIZE + Tile.SIZE / 2;
-        assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(newX, initialY)));
-    }
-
-    @Test
-    public void advance_shouldStartMoving_whenNextDirectionIsNotNone() throws Exception {
-        int initialX = 10 * Tile.SIZE + Tile.SIZE / 2;
-        int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
-        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        TestActor actor = new TestActor(maze, center, Direction.NONE, Direction.RIGHT);
-
-        actor.advance(100);
-
-        assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(initialX + 10, initialY)));
-    }
-
-    @Test @Ignore
+    @Ignore("Must re-implement teleport")
     public void advance_shouldTeleport_whenPossible() throws Exception {
         int initialX = -Tile.SIZE;
         int initialY = 17 * Tile.SIZE + Tile.SIZE / 2;

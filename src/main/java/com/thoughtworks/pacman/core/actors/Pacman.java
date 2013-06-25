@@ -35,12 +35,17 @@ public class Pacman extends Actor {
         this.desiredDirection = direction;
     }
 
+    @Override
+    public Direction getDirection() {
+        return direction;
+    }
+
     public Direction getPreviousDirection() {
         return previousDirection;
     }
 
     public boolean isMoving() {
-        return currentDirection != Direction.NONE;
+        return direction != Direction.NONE;
     }
 
     @Override

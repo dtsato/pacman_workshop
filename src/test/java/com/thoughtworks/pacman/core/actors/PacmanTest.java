@@ -85,6 +85,7 @@ public class PacmanTest {
         Pacman pacman = new Pacman(maze);
         pacman.setNextDirection(Direction.UP);
         pacman.getNextDirection(new TileCoordinate(9, 14));
+        pacman.getNextTile(new TileCoordinate(9, 14));
 
         assertThat(pacman.isMoving(), is(false));
         assertThat(pacman.getPreviousDirection(), equalTo(Direction.LEFT));
