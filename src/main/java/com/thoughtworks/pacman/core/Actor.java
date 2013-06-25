@@ -45,6 +45,42 @@ public abstract class Actor {
         }
     }
 
+    public void advance2(long timeDeltaInMillis) {
+        advanceDistance((int) (SPEED * timeDeltaInMillis / 1000));
+    }
+
+    private void advanceDistance(int distance) {
+        TileCoordinate currentTile = center.toTileCoordinate();
+        TileCoordinate nextTile = getNextTile(currentTile);
+        if (distance == 0)
+            return;
+        SpacialCoordinate nextTileCenter = nextTile.toSpacialCoordinate();
+
+        SpacialCoordinate subtract = nextTileCenter.subtract(center);
+        if (subtract.isDiagonal()) {
+            SpacialCoordinate currentTileCenter = currentTile.toSpacialCoordinate();
+            distance = distance - currentTileCenter.subtract(center).modulo();
+            subtract = nextTileCenter.subtract(currentTileCenter);
+            center = currentTileCenter;
+        }
+
+        if (subtract.modulo() > 0) {
+            if (subtract.modulo() == distance) {
+                center = nextTileCenter;
+            } else if (subtract.modulo() < distance) {
+                center = nextTileCenter;
+                advanceDistance(distance - subtract.modulo());
+            } else {
+                SpacialCoordinate movement = subtract.unit().times(distance);
+                center = center.add(movement);
+            }
+        }
+    }
+
+    protected TileCoordinate getNextTile(TileCoordinate currentTile) {
+        return currentTile;
+    }
+
     private void advanceFromCenter(int distance, SpacialCoordinate currentTileCenter) {
         currentDirection = getNextDirection(currentTileCenter.toTileCoordinate());
         int distanceLeft = distance - currentTileCenter.subtract(center).modulo();

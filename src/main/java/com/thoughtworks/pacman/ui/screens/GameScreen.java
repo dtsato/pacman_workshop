@@ -43,18 +43,18 @@ public class GameScreen implements Screen {
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_LEFT:
-                game.getPacman().setNextDirection(Direction.LEFT);
-                break;
-            case KeyEvent.VK_RIGHT:
-                game.getPacman().setNextDirection(Direction.RIGHT);
-                break;
-            case KeyEvent.VK_UP:
-                game.getPacman().setNextDirection(Direction.UP);
-                break;
-            case KeyEvent.VK_DOWN:
-                game.getPacman().setNextDirection(Direction.DOWN);
-                break;
+        case KeyEvent.VK_LEFT:
+            game.getPacman().setNextDirection(Direction.LEFT);
+            break;
+        case KeyEvent.VK_RIGHT:
+            game.getPacman().setNextDirection(Direction.RIGHT);
+            break;
+        case KeyEvent.VK_UP:
+            game.getPacman().setNextDirection(Direction.UP);
+            break;
+        case KeyEvent.VK_DOWN:
+            game.getPacman().setNextDirection(Direction.DOWN);
+            break;
         }
     }
 }

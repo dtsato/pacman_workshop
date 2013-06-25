@@ -37,6 +37,14 @@ public class SpacialCoordinateTest {
     }
 
     @Test
+    public void unit_shouldReturnUnitVector() throws Exception {
+        assertThat(new SpacialCoordinate(4, 0).unit(), equalTo(new SpacialCoordinate(1, 0)));
+        assertThat(new SpacialCoordinate(0, 4).unit(), equalTo(new SpacialCoordinate(0, 1)));
+        assertThat(new SpacialCoordinate(-4, 0).unit(), equalTo(new SpacialCoordinate(-1, 0)));
+        assertThat(new SpacialCoordinate(0, -4).unit(), equalTo(new SpacialCoordinate(0, -1)));
+    }
+
+    @Test
     public void between_shouldBeTrueWhenXIsBetweenAndYIsSame() {
         SpacialCoordinate c1 = new SpacialCoordinate(0, 1);
         SpacialCoordinate c2 = new SpacialCoordinate(1, 1);

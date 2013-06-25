@@ -71,4 +71,16 @@ public class SpacialCoordinate {
         result = 31 * result + y;
         return result;
     }
+
+    public SpacialCoordinate unit() {
+        return new SpacialCoordinate(unit(x), unit(y));
+    }
+
+    private int unit(int value) {
+        return (int) Math.signum(value);
+    }
+
+    public boolean isDiagonal() {
+        return x != 0 && y != 0;
+    }
 }

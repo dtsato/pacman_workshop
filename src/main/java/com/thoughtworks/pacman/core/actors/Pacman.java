@@ -10,6 +10,7 @@ import com.thoughtworks.pacman.core.maze.Maze;
 public class Pacman extends Actor {
     private Direction desiredDirection;
     private Direction previousDirection;
+    private Direction direction;
     private boolean dead = false;
 
     public Pacman(Maze maze) {
@@ -18,6 +19,7 @@ public class Pacman extends Actor {
 
     protected Pacman(Maze maze, SpacialCoordinate center, Direction direction) {
         super(maze, center, direction);
+        this.direction = direction;
         this.desiredDirection = direction;
     }
 
@@ -39,6 +41,17 @@ public class Pacman extends Actor {
 
     public boolean isMoving() {
         return currentDirection != Direction.NONE;
+    }
+
+    @Override
+    protected TileCoordinate getNextTile(TileCoordinate currentTile) {
+        if (allowMove(currentTile, desiredDirection)) {
+            direction = desiredDirection;
+        } else if (!allowMove(currentTile, direction)) {
+            previousDirection = direction;
+            direction = Direction.NONE;
+        }
+        return currentTile.add(direction.tileDelta());
     }
 
     @Override

@@ -58,11 +58,11 @@ public class Game {
             return;
         }
 
-        pacman.advance(timeDeltaInMillis);
-        blinky.advance(timeDeltaInMillis);
-        pinky.advance(timeDeltaInMillis);
-        inky.advance(timeDeltaInMillis);
-        clyde.advance(timeDeltaInMillis);
+        pacman.advance2(timeDeltaInMillis);
+        blinky.advance2(timeDeltaInMillis);
+        pinky.advance2(timeDeltaInMillis);
+        inky.advance2(timeDeltaInMillis);
+        clyde.advance2(timeDeltaInMillis);
 
         if (pacman.collidesWith(blinky) || pacman.collidesWith(pinky) || pacman.collidesWith(inky) || pacman.collidesWith(clyde)) {
             pacman.die();
