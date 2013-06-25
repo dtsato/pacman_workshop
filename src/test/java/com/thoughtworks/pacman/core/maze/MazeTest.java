@@ -1,18 +1,18 @@
 package com.thoughtworks.pacman.core.maze;
 
-import com.thoughtworks.pacman.core.Direction;
-import com.thoughtworks.pacman.core.TileCoordinate;
-import com.thoughtworks.pacman.core.tiles.Dot;
-import com.thoughtworks.pacman.core.tiles.EmptyTile;
-import com.thoughtworks.pacman.core.tiles.Wall;
-import org.junit.Test;
-
-import java.awt.Dimension;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+
+import java.awt.Dimension;
+
+import org.junit.Test;
+
+import com.thoughtworks.pacman.core.TileCoordinate;
+import com.thoughtworks.pacman.core.tiles.Dot;
+import com.thoughtworks.pacman.core.tiles.EmptyTile;
+import com.thoughtworks.pacman.core.tiles.Wall;
 
 public class MazeTest {
 
@@ -61,48 +61,6 @@ public class MazeTest {
         dot = (Dot) maze.tileAt(new TileCoordinate(2, 1));
         dot.eat();
         assertThat(maze.getScore(), equalTo(20));
-    }
-
-    @Test
-    public void teleportedCoordinate_shouldReturnCoordinateAtTop_whenDirectionIsUp() throws Exception {
-        String mazeDescription = "+ +\n   \n+ +";
-        Maze maze = MazeBuilder.buildMaze(mazeDescription);
-        assertThat(maze.teleportedCoordinate(new TileCoordinate(1, -1), Direction.UP), equalTo(new TileCoordinate(1, 2)));
-    }
-
-    @Test
-    public void teleportedCoordinate_shouldReturnCoordinateAtBottom_whenDirectionIsDown() throws Exception {
-        String mazeDescription = "+ +\n   \n+ +";
-        Maze maze = MazeBuilder.buildMaze(mazeDescription);
-        assertThat(maze.teleportedCoordinate(new TileCoordinate(1, 3), Direction.DOWN), equalTo(new TileCoordinate(1, 0)));
-    }
-
-    @Test
-    public void teleportedCoordinate_shouldReturnCoordinateAtLeft_whenDirectionIsRight() throws Exception {
-        String mazeDescription = "+ +\n   \n+ +";
-        Maze maze = MazeBuilder.buildMaze(mazeDescription);
-        assertThat(maze.teleportedCoordinate(new TileCoordinate(3, 1), Direction.RIGHT), equalTo(new TileCoordinate(0, 1)));
-    }
-
-    @Test
-    public void teleportedCoordinate_shouldReturnCoordinateAtRight_whenDirectionIsLeft() throws Exception {
-        String mazeDescription = "+ +\n   \n+ +";
-        Maze maze = MazeBuilder.buildMaze(mazeDescription);
-        assertThat(maze.teleportedCoordinate(new TileCoordinate(-1, 1), Direction.LEFT), equalTo(new TileCoordinate(2, 1)));
-    }
-
-    @Test
-    public void canTeleport_shouldBeTrue_whenTileIsInvalidAndOppositeTileIsMovable() throws Exception {
-        String mazeDescription = "+ +\n   \n+ +";
-        Maze maze = MazeBuilder.buildMaze(mazeDescription);
-        assertThat(maze.canTeleport(new TileCoordinate(-1, 1), Direction.LEFT), is(true));
-    }
-
-    @Test
-    public void canTeleport_shouldBeFalse_whenTileIsInvalidAndOppositeTileIsNotMovable() throws Exception {
-        String mazeDescription = "+ +\n  +\n+ +";
-        Maze maze = MazeBuilder.buildMaze(mazeDescription);
-        assertThat(maze.canTeleport(new TileCoordinate(-1, 1), Direction.LEFT), is(false));
     }
 
     @Test

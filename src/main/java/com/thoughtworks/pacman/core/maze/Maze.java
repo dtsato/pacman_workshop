@@ -1,15 +1,14 @@
 package com.thoughtworks.pacman.core.maze;
 
-import com.thoughtworks.pacman.core.Direction;
+import java.awt.Dimension;
+import java.util.Collection;
+import java.util.Map;
+
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.visitors.DotsLeftVisitor;
 import com.thoughtworks.pacman.core.tiles.visitors.ScoreTileVisitor;
-
-import java.awt.Dimension;
-import java.util.Collection;
-import java.util.Map;
 
 public class Maze {
     private Map<TileCoordinate, Tile> tiles;
@@ -65,15 +64,6 @@ public class Maze {
             return this.tiles.get(tileCoordinate);
         else
             return new EmptyTile(tileCoordinate);
-    }
-
-    public boolean canTeleport(TileCoordinate tileCoordinate, Direction direction) {
-        return !tiles.containsKey(tileCoordinate) && tileAt(teleportedCoordinate(tileCoordinate, direction)).isMovable();
-    }
-
-    public TileCoordinate teleportedCoordinate(TileCoordinate tileCoordinate, Direction direction) {
-        int oppositeSide = (direction == Direction.UP || direction == Direction.DOWN) ? height : width;
-        return tileCoordinate.subtract(direction.tileDelta().times(oppositeSide));
     }
 
     @Override
