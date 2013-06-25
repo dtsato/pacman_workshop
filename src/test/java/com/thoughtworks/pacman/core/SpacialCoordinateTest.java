@@ -45,51 +45,6 @@ public class SpacialCoordinateTest {
     }
 
     @Test
-    public void between_shouldBeTrueWhenXIsBetweenAndYIsSame() {
-        SpacialCoordinate c1 = new SpacialCoordinate(0, 1);
-        SpacialCoordinate c2 = new SpacialCoordinate(1, 1);
-        SpacialCoordinate c3 = new SpacialCoordinate(2, 1);
-        assertTrue(c2.between(c1, c3));
-        assertTrue(c2.between(c3, c1));
-
-        assertTrue(c2.between(c1, c2));
-        assertTrue(c2.between(c2, c1));
-
-        assertTrue(c2.between(c2, c3));
-        assertTrue(c2.between(c3, c2));
-    }
-
-    @Test
-    public void between_shouldBeTrueWhenYIsBetweenAndXIsSame() {
-        SpacialCoordinate c1 = new SpacialCoordinate(1, 0);
-        SpacialCoordinate c2 = new SpacialCoordinate(1, 1);
-        SpacialCoordinate c3 = new SpacialCoordinate(1, 2);
-        assertTrue(c2.between(c1, c3));
-        assertTrue(c2.between(c3, c1));
-
-        assertTrue(c2.between(c1, c2));
-        assertTrue(c2.between(c2, c1));
-
-        assertTrue(c2.between(c2, c3));
-        assertTrue(c2.between(c3, c2));
-    }
-
-    @Test
-    public void between_shouldBeFalseWhenNotInBetween() {
-        SpacialCoordinate c1 = new SpacialCoordinate(0, 0);
-        SpacialCoordinate c2 = new SpacialCoordinate(1, 1);
-        SpacialCoordinate c3 = new SpacialCoordinate(2, 2);
-        assertFalse(c3.between(c1, c2));
-        assertFalse(c3.between(c2, c1));
-
-        assertTrue(c2.between(c1, c3));
-        assertTrue(c2.between(c3, c1));
-
-        assertFalse(c1.between(c2, c3));
-        assertFalse(c1.between(c3, c2));
-    }
-
-    @Test
     public void toPoint_shouldConvertToPoint() {
         final SpacialCoordinate coordinate = new SpacialCoordinate(2, 4);
         assertThat(coordinate.toPoint(), equalTo(new Point(2, 4)));

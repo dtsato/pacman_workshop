@@ -27,14 +27,6 @@ public class SpacialCoordinate {
         return (int) Math.sqrt(x * x + y * y);
     }
 
-    public boolean between(SpacialCoordinate c1, SpacialCoordinate c2) {
-        return isBetween(x, c1.x, c2.x) && isBetween(y, c1.y, c2.y);
-    }
-
-    private boolean isBetween(int target, int bound1, int bound2) {
-        return (bound1 <= target && target <= bound2) || (bound2 <= target && target <= bound1);
-    }
-
     public Point toPoint() {
         return new Point(x, y);
     }

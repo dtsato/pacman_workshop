@@ -6,7 +6,7 @@ public abstract class Actor {
     private static final int SPEED = 100;
 
     protected final Maze maze;
-    protected SpacialCoordinate center;
+    private SpacialCoordinate center;
 
     public Actor(Maze maze, SpacialCoordinate center) {
         this.maze = maze;
@@ -53,7 +53,5 @@ public abstract class Actor {
         }
     }
 
-    protected TileCoordinate getNextTile(TileCoordinate currentTile) {
-        return currentTile;
-    }
+    protected abstract TileCoordinate getNextTile(TileCoordinate currentTile);
 }
