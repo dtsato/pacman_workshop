@@ -26,8 +26,6 @@ public abstract class Actor {
     }
 
     private void advanceDistance(int distance) {
-        if (distance == 0)
-            return;
         TileCoordinate currentTile = center.toTileCoordinate();
         TileCoordinate nextTile = getNextTile(currentTile);
         SpacialCoordinate nextTileCenter = nextTile.toSpacialCoordinate();
@@ -42,13 +40,13 @@ public abstract class Actor {
 
         if (subtract.modulo() > 0) {
             if (subtract.modulo() == distance) {
-                center = nextTileCenter;
+                center = nextTileCenter.remainder(maze);
             } else if (subtract.modulo() < distance) {
-                center = nextTileCenter;
+                center = nextTileCenter.remainder(maze);
                 advanceDistance(distance - subtract.modulo());
             } else {
                 SpacialCoordinate movement = subtract.unit().times(distance);
-                center = center.add(movement);
+                center = center.add(movement).remainder(maze);
             }
         }
     }

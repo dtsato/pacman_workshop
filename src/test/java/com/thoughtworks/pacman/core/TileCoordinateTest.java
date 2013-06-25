@@ -23,7 +23,7 @@ public class TileCoordinateTest {
     }
 
     @Test
-    public void times_shouldMultipleCoordinates() {
+    public void times_shouldMultiplyCoordinates() {
         final TileCoordinate coordinate = new TileCoordinate(2, 4);
         assertThat(coordinate.times(3), equalTo(new TileCoordinate(6, 12)));
     }
@@ -32,6 +32,20 @@ public class TileCoordinateTest {
     public void toSpacialCoordinate_shouldConvertToSpacialCoordinateOfTileCenter() throws Exception {
         TileCoordinate coordinate = new TileCoordinate(1, 2);
         assertThat(coordinate.toSpacialCoordinate(), equalTo(new SpacialCoordinate(24, 40)));
+    }
+
+    @Test
+    public void toSpacialCoordinate_shouldConvertToSpacialCoordinateOfTileCenterInNegativeSpace() throws Exception {
+        TileCoordinate coordinate = new TileCoordinate(-1, -2);
+        System.out.println(coordinate.toSpacialCoordinate());
+        assertThat(coordinate.toSpacialCoordinate(), equalTo(new SpacialCoordinate(-8, -24)));
+    }
+
+    @Test
+    public void toSpacialCoordinate_shouldConvertToSpacialCoordinateOfTileCenterWithZero() throws Exception {
+        TileCoordinate coordinate = new TileCoordinate(0, 0);
+        System.out.println(coordinate.toSpacialCoordinate());
+        assertThat(coordinate.toSpacialCoordinate(), equalTo(new SpacialCoordinate(8, 8)));
     }
 
     @Test

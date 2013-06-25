@@ -77,6 +77,24 @@ public class PacmanTest {
     }
 
     @Test
+    public void shouldGoToTeleportTileOnTheRight() throws Exception {
+        Pacman pacman = new Pacman(maze);
+        pacman.setNextDirection(Direction.RIGHT);
+        assertThat(pacman.getNextTile(new TileCoordinate(27, 17)), equalTo(new TileCoordinate(28, 17)));
+        assertThat(pacman.isMoving(), is(true));
+        assertThat(pacman.getDirection(), equalTo(Direction.RIGHT));
+    }
+
+    @Test
+    public void shouldGoToTeleportTileOnTheLeft() throws Exception {
+        Pacman pacman = new Pacman(maze);
+        pacman.setNextDirection(Direction.LEFT);
+        assertThat(pacman.getNextTile(new TileCoordinate(0, 17)), equalTo(new TileCoordinate(-1, 17)));
+        assertThat(pacman.isMoving(), is(true));
+        assertThat(pacman.getDirection(), equalTo(Direction.LEFT));
+    }
+
+    @Test
     public void isDead_shouldBeFalseByDefault() throws Exception {
         final Pacman pacman = new Pacman(maze);
         assertFalse(pacman.isDead());

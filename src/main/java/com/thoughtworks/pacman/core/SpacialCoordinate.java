@@ -1,6 +1,9 @@
 package com.thoughtworks.pacman.core;
 
+import java.awt.Dimension;
 import java.awt.Point;
+
+import com.thoughtworks.pacman.core.maze.Maze;
 
 public class SpacialCoordinate {
     private final int x;
@@ -13,6 +16,11 @@ public class SpacialCoordinate {
 
     public SpacialCoordinate add(SpacialCoordinate spacialCoordinate) {
         return new SpacialCoordinate(x + spacialCoordinate.x, y + spacialCoordinate.y);
+    }
+
+    public SpacialCoordinate remainder(Maze maze) {
+        Dimension dimension = maze.getDimension();
+        return new SpacialCoordinate((x + dimension.width) % dimension.width, (y + dimension.height) % dimension.height);
     }
 
     public SpacialCoordinate subtract(SpacialCoordinate spacialCoordinate) {

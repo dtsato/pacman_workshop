@@ -5,7 +5,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.thoughtworks.pacman.core.maze.Maze;
@@ -38,7 +37,7 @@ public class ActorTest {
     }
 
     @Test
-    public void advance2_shouldNotMove_whenCurrentPositionIsCenterOfNextTile() throws Exception {
+    public void advance_shouldNotMove_whenCurrentPositionIsCenterOfNextTile() throws Exception {
         int initialX = 10 * Tile.SIZE + Tile.SIZE / 2;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
@@ -50,7 +49,7 @@ public class ActorTest {
     }
 
     @Test
-    public void advance2_shouldMoveToTileCenter_whenCurrentPositionIsInsideNextTile() throws Exception {
+    public void advance_shouldMoveToTileCenter_whenCurrentPositionIsInsideNextTile() throws Exception {
         int initialX = 10 * Tile.SIZE + 1;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
@@ -62,7 +61,7 @@ public class ActorTest {
     }
 
     @Test
-    public void advance2_shouldMoveToNextTileCenter_whenCurrentPositionIsOutsideButWithinDistanceOfNextTileCenter()
+    public void advance_shouldMoveToNextTileCenter_whenCurrentPositionIsOutsideButWithinDistanceOfNextTileCenter()
             throws Exception {
         int initialX = 10 * Tile.SIZE - 1;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
@@ -75,7 +74,7 @@ public class ActorTest {
     }
 
     @Test
-    public void advance2_shouldMoveToNextTileCenterAndTurn_whenDistanceIsGreaterThanDistanceToNextTileCenter()
+    public void advance_shouldMoveToNextTileCenterAndTurn_whenDistanceIsGreaterThanDistanceToNextTileCenter()
             throws Exception {
         int initialX = 10 * Tile.SIZE - 1;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
@@ -88,7 +87,7 @@ public class ActorTest {
     }
 
     @Test
-    public void advance2_shouldMoveToCurrentTileCenterAndTurn_whenNextTileCenterIsDiagonalToCurrentPosition()
+    public void advance_shouldMoveToCurrentTileCenterAndTurn_whenNextTileCenterIsDiagonalToCurrentPosition()
             throws Exception {
         int initialX = 10 * Tile.SIZE + 1;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
@@ -101,7 +100,7 @@ public class ActorTest {
     }
 
     @Test
-    public void advance2_shouldGetCloserToTileCenter_whenTileCenterIsTooFarFromCurrentPosition() throws Exception {
+    public void advance_shouldGetCloserToTileCenter_whenTileCenterIsTooFarFromCurrentPosition() throws Exception {
         int initialX = 10 * Tile.SIZE + Tile.SIZE / 2;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
@@ -113,17 +112,27 @@ public class ActorTest {
     }
 
     @Test
-    @Ignore("Must re-implement teleport")
-    public void advance_shouldTeleport_whenPossible() throws Exception {
-        int initialX = -Tile.SIZE;
+    public void advance_shouldTeleport_toTheRight() throws Exception {
+        int initialX = 27 * Tile.SIZE + Tile.SIZE / 2;
         int initialY = 17 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        Actor actor = new TestActor(maze, center);
+        Actor actor = new TestActor(maze, center, new TileCoordinate(28, 17));
 
         actor.advance(100);
 
-        assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(Tile.SIZE * maze.getWidth() - Tile.SIZE / 2,
-                initialY)));
+        assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(2, initialY)));
+    }
+
+    @Test
+    public void advance_shouldTeleport_toTheLeft() throws Exception {
+        int initialX = Tile.SIZE / 2;
+        int initialY = 17 * Tile.SIZE + Tile.SIZE / 2;
+        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
+        Actor actor = new TestActor(maze, center, new TileCoordinate(-1, 17));
+
+        actor.advance(100);
+
+        assertThat(actor.getCenter(), equalTo(new SpacialCoordinate(28 * Tile.SIZE - 2, initialY)));
     }
 
     @Test
