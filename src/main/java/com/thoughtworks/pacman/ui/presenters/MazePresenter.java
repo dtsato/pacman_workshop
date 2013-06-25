@@ -37,8 +37,7 @@ public class MazePresenter implements Presenter {
     private void drawScore(Graphics2D graphics) {
         graphics.setColor(Color.white);
         graphics.setFont(FONT);
-        // TODO: WEIRD! This causes the ghosts to "jump out" of the house
-        // graphics.drawString(String.format("%2d", maze.getScore()), Tile.SIZE * 5, Tile.SIZE * 2);
+        graphics.drawString(String.format("%2d", maze.getScore()), Tile.SIZE * 5, Tile.SIZE * 2);
     }
 
 

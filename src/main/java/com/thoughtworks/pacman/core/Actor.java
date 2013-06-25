@@ -26,10 +26,10 @@ public abstract class Actor {
     }
 
     private void advanceDistance(int distance) {
-        TileCoordinate currentTile = center.toTileCoordinate();
-        TileCoordinate nextTile = getNextTile(currentTile);
         if (distance == 0)
             return;
+        TileCoordinate currentTile = center.toTileCoordinate();
+        TileCoordinate nextTile = getNextTile(currentTile);
         SpacialCoordinate nextTileCenter = nextTile.toSpacialCoordinate();
 
         SpacialCoordinate subtract = nextTileCenter.subtract(center);
