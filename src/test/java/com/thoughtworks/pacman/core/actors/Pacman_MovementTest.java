@@ -4,7 +4,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.thoughtworks.pacman.core.Direction;
@@ -100,32 +99,15 @@ public class Pacman_MovementTest {
     }
 
     @Test
-    @Ignore("Can we leave this as a feature?")
-    public void advance_shouldNotTurnAfterTheCenterOfTheTile() throws Exception {
-        int initialX = 16 * Tile.SIZE - 3;
-        int initialY = 32 * Tile.SIZE + Tile.SIZE / 2;
-        SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        Pacman pacman = new Pacman(maze, center, Direction.RIGHT);
-
-        pacman.setNextDirection(Direction.UP);
-        pacman.advance(100);
-
-        assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(initialX + 10, initialY)));
-        assertThat(pacman.getDirection(), equalTo(Direction.RIGHT));
-    }
-
-    @Test
-    @Ignore
     public void advance_shouldTeleport_whenPossible() throws Exception {
-        int initialX = -Tile.SIZE;
+        int initialX = 3;
         int initialY = 17 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         Pacman pacman = new Pacman(maze, center, Direction.LEFT);
 
         pacman.advance(100);
 
-        assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(Tile.SIZE * maze.getWidth() - Tile.SIZE / 2,
-                initialY)));
+        assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(Tile.SIZE * maze.getWidth() - 7, initialY)));
     }
 
 }
