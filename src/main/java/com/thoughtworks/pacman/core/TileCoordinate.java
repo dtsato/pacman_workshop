@@ -1,5 +1,7 @@
 package com.thoughtworks.pacman.core;
 
+import com.thoughtworks.pacman.core.maze.Maze;
+
 public class TileCoordinate {
     private final int x;
     private final int y;
@@ -21,12 +23,8 @@ public class TileCoordinate {
         return new TileCoordinate(x + delta.x, y + delta.y);
     }
 
-    public TileCoordinate subtract(TileCoordinate delta) {
-        return new TileCoordinate(x - delta.x, y - delta.y);
-    }
-
-    public TileCoordinate times(int scale) {
-        return new TileCoordinate(x * scale, y * scale);
+    public TileCoordinate remainder(Maze maze) {
+        return new TileCoordinate((x + maze.getWidth()) % maze.getWidth(), (y + maze.getHeight()) % maze.getHeight());
     }
 
     @Override

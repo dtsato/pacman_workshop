@@ -17,13 +17,13 @@ public class Ghost extends Actor {
     private TileCoordinate desiredTile;
 
     public Ghost(Maze maze, GhostType type) {
-        this(maze, type.getStartCoordinate(), Direction.NONE);
+        this(maze, type.getStartCoordinate(), new Random());
         this.type = type;
     }
 
-    protected Ghost(Maze maze, SpacialCoordinate center, Direction direction) {
+    protected Ghost(Maze maze, SpacialCoordinate center, Random random) {
         super(maze, center);
-        this.random = new Random();
+        this.random = random;
         this.previousTile = center.toTileCoordinate();
         this.desiredTile = previousTile;
     }
@@ -34,11 +34,9 @@ public class Ghost extends Actor {
 
     @Override
     protected TileCoordinate getNextTile(TileCoordinate currentTile) {
-        if (desiredTile.equals(currentTile)) {
+        if (desiredTile.remainder(maze).equals(currentTile)) {
             List<TileCoordinate> availableTiles = new ArrayList<>();
-            Direction[] validMovements = new Direction[] { Direction.UP, Direction.DOWN, Direction.LEFT,
-                    Direction.RIGHT };
-            for (Direction direction : validMovements) {
+            for (Direction direction : Direction.validMovements()) {
                 TileCoordinate nextTile = currentTile.add(direction.tileDelta());
                 if (maze.canMove(nextTile) && !nextTile.equals(previousTile)) {
                     availableTiles.add(nextTile);

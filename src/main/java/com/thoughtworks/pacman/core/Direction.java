@@ -3,36 +3,7 @@ package com.thoughtworks.pacman.core;
 import java.util.EnumSet;
 
 public enum Direction {
-    UP(0, -1, 130) {
-        @Override
-        public EnumSet<Direction> validTurns() {
-            return EnumSet.of(LEFT, RIGHT);
-        }
-    },
-    DOWN(0, 1, 310) {
-        @Override
-        public EnumSet<Direction> validTurns() {
-            return EnumSet.of(LEFT, RIGHT);
-        }
-    },
-    LEFT(-1, 0, 220) {
-        @Override
-        public EnumSet<Direction> validTurns() {
-            return EnumSet.of(UP, DOWN);
-        }
-    },
-    RIGHT(1, 0, 40) {
-        @Override
-        public EnumSet<Direction> validTurns() {
-            return EnumSet.of(UP, DOWN);
-        }
-    },
-    NONE(0, 0, 0) {
-        @Override
-        public EnumSet<Direction> validTurns() {
-            return EnumSet.of(UP, DOWN, LEFT, RIGHT);
-        }
-    };
+    UP(0, -1, 130), DOWN(0, 1, 310), LEFT(-1, 0, 220), RIGHT(1, 0, 40), NONE(0, 0, 0);
 
     private final int x;
     private final int y;
@@ -56,5 +27,7 @@ public enum Direction {
         return startAngle;
     }
 
-    public abstract EnumSet<Direction> validTurns();
+    public static EnumSet<Direction> validMovements() {
+        return EnumSet.of(UP, DOWN, LEFT, RIGHT);
+    }
 }
