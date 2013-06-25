@@ -5,10 +5,10 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 
 import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.actors.Ghost;
+import com.thoughtworks.pacman.ui.ImageLoader;
 import com.thoughtworks.pacman.ui.Presenter;
 
 public class GhostPresenter implements Presenter {
@@ -19,10 +19,8 @@ public class GhostPresenter implements Presenter {
 
     public GhostPresenter(Ghost ghost) {
         this.ghost = ghost;
-        this.images = new Image[] {
-            Toolkit.getDefaultToolkit().getImage(Presenter.class.getResource(ghost.getType().getImageOne())),
-            Toolkit.getDefaultToolkit().getImage(Presenter.class.getResource(ghost.getType().getImageTwo()))
-        };
+        this.images = new Image[] { ImageLoader.loadImage(ghost.getType().getImageOne()),
+                ImageLoader.loadImage(ghost.getType().getImageTwo()) };
     }
 
     @Override
