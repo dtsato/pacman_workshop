@@ -50,26 +50,4 @@ public class Ghost extends Actor {
         }
         return desiredTile;
     }
-
-    @Override
-    protected Direction getNextDirection(TileCoordinate tileCoordinate) {
-        List<Direction> availableDirections = new ArrayList<>();
-        for (Direction direction : currentDirection.validTurns()) {
-            addDirectionIfAllowed(availableDirections, tileCoordinate, direction);
-        }
-
-        if (currentDirection != Direction.NONE) {
-            addDirectionIfAllowed(availableDirections, tileCoordinate, currentDirection);
-        }
-
-        return availableDirections.get(random.nextInt(availableDirections.size()));
-    }
-
-    private void addDirectionIfAllowed(List<Direction> availableDirections, TileCoordinate tileCoordinate,
-            Direction direction) {
-        TileCoordinate nextTile = tileCoordinate.add(direction.tileDelta());
-        if (maze.canMove(nextTile)) {
-            availableDirections.add(direction);
-        }
-    }
 }

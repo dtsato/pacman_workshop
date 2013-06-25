@@ -59,17 +59,6 @@ public class Pacman extends Actor {
         return currentTile.add(direction.tileDelta());
     }
 
-    @Override
-    protected Direction getNextDirection(TileCoordinate tileCoordinate) {
-        if (allowMove(tileCoordinate, desiredDirection)) {
-            currentDirection = desiredDirection;
-        } else if (!allowMove(tileCoordinate, currentDirection)) {
-            previousDirection = currentDirection;
-            currentDirection = Direction.NONE;
-        }
-        return currentDirection;
-    }
-
     private boolean allowMove(TileCoordinate tileCoordinate, Direction direction) {
         TileCoordinate nextTile = tileCoordinate.add(direction.tileDelta());
         return maze.canMove(nextTile);

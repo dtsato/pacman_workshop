@@ -62,6 +62,4 @@ public abstract class Actor {
     protected TileCoordinate getNextTile(TileCoordinate currentTile) {
         return currentTile;
     }
-
-    protected abstract Direction getNextDirection(TileCoordinate tileCoordinate);
 }

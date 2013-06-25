@@ -27,42 +27,53 @@ public class PacmanTest {
     @Test
     public void shouldBeginInStartingPositionFacingLeft() throws Exception {
         final Pacman pacman = new Pacman(maze);
-        assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(14 * Tile.SIZE, 26 * Tile.SIZE
-                + Tile.SIZE / 2)));
+        assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(14 * Tile.SIZE, 26 * Tile.SIZE + Tile.SIZE / 2)));
         assertThat(pacman.getDirection(), equalTo(Direction.LEFT));
     }
 
     @Test
     public void shouldMaintainCurrentDirectionIfNextIsNotSpecified() throws Exception {
         Pacman pacman = new Pacman(maze);
-        assertThat(pacman.getNextDirection(new TileCoordinate(14, 26)), equalTo(Direction.LEFT));
+        assertThat(pacman.getNextTile(new TileCoordinate(14, 26)), equalTo(new TileCoordinate(13, 26)));
+        assertThat(pacman.isMoving(), is(true));
+        assertThat(pacman.getDirection(), equalTo(Direction.LEFT));
     }
 
     @Test
     public void shouldMaintainCurrentDirectionIfTurnToNextIsImpossible() throws Exception {
         Pacman pacman = new Pacman(maze);
         pacman.setNextDirection(Direction.DOWN);
-        assertThat(pacman.getNextDirection(new TileCoordinate(14, 26)), equalTo(Direction.LEFT));
+        assertThat(pacman.getNextTile(new TileCoordinate(14, 26)), equalTo(new TileCoordinate(13, 26)));
+        assertThat(pacman.isMoving(), is(true));
+        assertThat(pacman.getDirection(), equalTo(Direction.LEFT));
     }
 
     @Test
     public void shouldTurnDirectionIfPossible() throws Exception {
         Pacman pacman = new Pacman(maze);
         pacman.setNextDirection(Direction.RIGHT);
-        assertThat(pacman.getNextDirection(new TileCoordinate(14, 26)), equalTo(Direction.RIGHT));
+        assertThat(pacman.isMoving(), is(true));
+        assertThat(pacman.getNextTile(new TileCoordinate(14, 26)), equalTo(new TileCoordinate(15, 26)));
+        assertThat(pacman.getDirection(), equalTo(Direction.RIGHT));
     }
 
     @Test
-    public void shouldStopIfNextInDesiredDirectionTileIsWall() throws Exception {
+    public void shouldStopAndRememberPreviousDirectionIfNextInDesiredDirectionTileIsWall() throws Exception {
         Pacman pacman = new Pacman(maze);
-        assertThat(pacman.getNextDirection(new TileCoordinate(6, 26)), equalTo(Direction.NONE));
+        assertThat(pacman.getNextTile(new TileCoordinate(6, 26)), equalTo(new TileCoordinate(6, 26)));
+        assertThat(pacman.isMoving(), is(false));
+        assertThat(pacman.getDirection(), equalTo(Direction.NONE));
+        assertThat(pacman.getPreviousDirection(), equalTo(Direction.LEFT));
     }
 
     @Test
-    public void shouldStopIfNextInCurrentAndDesiredDirectionTileIsWall() throws Exception {
+    public void shouldStopAndRememberPreviousDirectionIfNextInCurrentAndDesiredDirectionTileIsWall() throws Exception {
         Pacman pacman = new Pacman(maze);
         pacman.setNextDirection(Direction.UP);
-        assertThat(pacman.getNextDirection(new TileCoordinate(9, 14)), equalTo(Direction.NONE));
+        assertThat(pacman.getNextTile(new TileCoordinate(15, 29)), equalTo(new TileCoordinate(15, 29)));
+        assertThat(pacman.isMoving(), is(false));
+        assertThat(pacman.getDirection(), equalTo(Direction.NONE));
+        assertThat(pacman.getPreviousDirection(), equalTo(Direction.LEFT));
     }
 
     @Test
@@ -78,25 +89,5 @@ public class PacmanTest {
         pacman.die();
 
         assertTrue(pacman.isDead());
-    }
-
-    @Test
-    public void shouldRememberPreviousDirectionWhenNotMoving() throws Exception {
-        Pacman pacman = new Pacman(maze);
-        pacman.setNextDirection(Direction.UP);
-        pacman.getNextDirection(new TileCoordinate(9, 14));
-        pacman.getNextTile(new TileCoordinate(9, 14));
-
-        assertThat(pacman.isMoving(), is(false));
-        assertThat(pacman.getPreviousDirection(), equalTo(Direction.LEFT));
-    }
-
-    @Test
-    public void shouldBeMovingIfCurrentDirectionIsSet() throws Exception {
-        Pacman pacman = new Pacman(maze);
-        pacman.getNextDirection(new TileCoordinate(14, 26));
-
-        assertThat(pacman.isMoving(), is(true));
-        assertThat(pacman.getDirection(), equalTo(Direction.LEFT));
     }
 }

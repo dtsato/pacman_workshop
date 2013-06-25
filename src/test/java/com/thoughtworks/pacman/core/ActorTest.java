@@ -15,24 +15,13 @@ public class ActorTest {
 
     public class TestActor extends Actor {
 
-        private Direction nextDirection;
         private TileCoordinate[] nextTiles;
         private int nextTileIndex;
-
-        public TestActor(Maze maze, SpacialCoordinate center, Direction direction, Direction nextDirection) {
-            super(maze, center, direction);
-            this.nextDirection = nextDirection;
-        }
 
         public TestActor(Maze maze, SpacialCoordinate center, TileCoordinate... nextTiles) {
             super(maze, center, null);
             this.nextTiles = nextTiles;
             this.nextTileIndex = 0;
-        }
-
-        @Override
-        protected Direction getNextDirection(TileCoordinate tileCoordinate) {
-            return nextDirection;
         }
 
         @Override
@@ -129,7 +118,7 @@ public class ActorTest {
         int initialX = -Tile.SIZE;
         int initialY = 17 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        Actor actor = new TestActor(maze, center, Direction.LEFT, Direction.LEFT);
+        Actor actor = new TestActor(maze, center);
 
         actor.advance(100);
 
@@ -139,8 +128,8 @@ public class ActorTest {
 
     @Test
     public void collidesWith_shouldBeTrue_whenOtherActorIsInSameTile() throws Exception {
-        Actor actor1 = new TestActor(maze, new SpacialCoordinate(15, 15), Direction.LEFT, Direction.LEFT);
-        Actor actor2 = new TestActor(maze, new SpacialCoordinate(10, 10), Direction.RIGHT, Direction.RIGHT);
+        Actor actor1 = new TestActor(maze, new SpacialCoordinate(15, 15));
+        Actor actor2 = new TestActor(maze, new SpacialCoordinate(10, 10));
 
         assertThat(actor1.collidesWith(actor2), is(true));
         assertThat(actor2.collidesWith(actor1), is(true));
@@ -148,8 +137,8 @@ public class ActorTest {
 
     @Test
     public void collidesWith_shouldBeFalse_whenOtherActorIsInDifferentTile() throws Exception {
-        Actor actor1 = new TestActor(maze, new SpacialCoordinate(15, 15), Direction.LEFT, Direction.LEFT);
-        Actor actor2 = new TestActor(maze, new SpacialCoordinate(17, 17), Direction.RIGHT, Direction.RIGHT);
+        Actor actor1 = new TestActor(maze, new SpacialCoordinate(15, 15));
+        Actor actor2 = new TestActor(maze, new SpacialCoordinate(17, 17));
 
         assertThat(actor1.collidesWith(actor2), is(false));
         assertThat(actor2.collidesWith(actor1), is(false));
