@@ -20,7 +20,7 @@ public class DotPresenter implements Presenter {
     @Override
     public void draw(Graphics2D graphics) {
         if (!dot.isEaten()) {
-            graphics.setColor(Color.white);
+            graphics.setColor(Color.pink);
             graphics.fill(getBounds());
         }
     }

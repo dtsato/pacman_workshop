@@ -39,6 +39,4 @@ public class MazePresenter implements Presenter {
         graphics.setFont(FONT);
         graphics.drawString(String.format("%2d", maze.getScore()), Tile.SIZE * 5, Tile.SIZE * 2);
     }
-
-
 }
