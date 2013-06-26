@@ -6,6 +6,10 @@ import com.thoughtworks.pacman.core.TileVisitor;
 
 public class EmptyTile extends Tile {
 
+    public EmptyTile(TileCoordinate coordinate, String value) {
+        super(coordinate);
+    }
+
     public EmptyTile(TileCoordinate coordinate) {
         super(coordinate);
     }

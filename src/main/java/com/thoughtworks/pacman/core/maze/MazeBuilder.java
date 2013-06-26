@@ -13,10 +13,18 @@ import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
 
 public class MazeBuilder {
+    private static final String WALLED_MAZE_MAP_FILENAME = "walled_maze.map";
     private static final String MAZE_MAP_FILENAME = "maze.map";
     @SuppressWarnings("serial")
     private static final Map<Character, Class<? extends Tile>> mazeParser = new HashMap<Character, Class<? extends Tile>>() {
         {
+            put('1', Wall.class);
+            put('2', Wall.class);
+            put('3', Wall.class);
+            put('4', Wall.class);
+            put('5', Wall.class);
+            put('6', Wall.class);
+            put('7', Door.class);
             put('+', Wall.class);
             put('-', Door.class);
             put('*', Dot.class);
@@ -27,6 +35,13 @@ public class MazeBuilder {
 
     public static Maze buildDefaultMaze() throws Exception {
         InputStream fileInputStream = MazeBuilder.class.getResourceAsStream(MAZE_MAP_FILENAME);
+        Scanner scanner = new Scanner(fileInputStream);
+
+        return buildMaze(scanner);
+    }
+
+    public static Maze buildWalledMaze() throws Exception {
+        InputStream fileInputStream = MazeBuilder.class.getResourceAsStream(WALLED_MAZE_MAP_FILENAME);
         Scanner scanner = new Scanner(fileInputStream);
 
         return buildMaze(scanner);
@@ -63,7 +78,7 @@ public class MazeBuilder {
     }
 
     private Tile createTile(char tileCharacter, TileCoordinate coordinate) throws Exception {
-        return mazeParser.get(tileCharacter).getConstructor(TileCoordinate.class)
-                .newInstance(coordinate);
+        return mazeParser.get(tileCharacter).getConstructor(TileCoordinate.class, String.class)
+                .newInstance(coordinate, String.valueOf(tileCharacter));
     }
 }

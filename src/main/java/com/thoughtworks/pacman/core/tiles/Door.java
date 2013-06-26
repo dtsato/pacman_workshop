@@ -6,7 +6,7 @@ import com.thoughtworks.pacman.core.TileVisitor;
 
 public class Door extends Tile {
 
-    public Door(TileCoordinate coordinate) {
+    public Door(TileCoordinate coordinate, String value) {
         super(coordinate);
     }
 

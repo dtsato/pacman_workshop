@@ -11,18 +11,18 @@ public class DotTest {
 
     @Test
     public void shouldBeMovable() {
-        assertTrue(new Dot(null).isMovable());
+        assertTrue(new Dot(null, null).isMovable());
     }
 
     @Test
     public void isEaten_shouldBeFalseByDefault() {
-        final Dot dot = new Dot(null);
+        final Dot dot = new Dot(null, null);
         assertFalse(dot.isEaten());
     }
 
     @Test
     public void isEaten_shouldBeTrueAfterEat() {
-        final Dot dot = new Dot(null);
+        final Dot dot = new Dot(null, null);
 
         dot.eat();
 
@@ -31,6 +31,6 @@ public class DotTest {
 
     @Test
     public void toString_shouldReturnDot() {
-        assertThat(new Dot(null).toString(), equalTo("."));
+        assertThat(new Dot(null, null).toString(), equalTo("."));
     }
 }

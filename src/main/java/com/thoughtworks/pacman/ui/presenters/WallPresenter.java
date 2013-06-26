@@ -1,10 +1,10 @@
 package com.thoughtworks.pacman.ui.presenters;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Rectangle;
 
 import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.Tile;
@@ -21,7 +21,8 @@ public class WallPresenter implements Presenter {
     @Override
     public void draw(Graphics2D graphics) {
         graphics.setColor(Color.blue);
-        graphics.draw(new Rectangle(getTileCoordinate(), getDimension()));
+        graphics.setStroke(new BasicStroke(2.5f));
+        graphics.draw(wall.getShape());
     }
 
     public Point getTileCoordinate() {

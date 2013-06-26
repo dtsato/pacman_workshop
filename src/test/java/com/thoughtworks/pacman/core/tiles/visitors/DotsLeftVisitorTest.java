@@ -12,7 +12,7 @@ public class DotsLeftVisitorTest {
     @Test
     public void visitingDot_shouldCountOne_whenDotIsNotEaten() {
         DotsLeftVisitor scoreTileVisitor = new DotsLeftVisitor();
-        Dot dot = new Dot(null);
+        Dot dot = new Dot(null, null);
 
         assertThat(scoreTileVisitor.visit(dot), equalTo(1));
     }
@@ -20,7 +20,7 @@ public class DotsLeftVisitorTest {
     @Test
     public void visitingDot_shouldCountZero_whenDotIsEaten() {
         DotsLeftVisitor scoreTileVisitor = new DotsLeftVisitor();
-        Dot dot = new Dot(null);
+        Dot dot = new Dot(null, null);
 
         dot.eat();
 
@@ -30,7 +30,7 @@ public class DotsLeftVisitorTest {
     @Test
     public void visitingEmptyTile_shouldCountZero() {
         DotsLeftVisitor scoreTileVisitor = new DotsLeftVisitor();
-        final EmptyTile emptyTile = new EmptyTile(null);
+        final EmptyTile emptyTile = new EmptyTile(null, null);
 
         assertThat(scoreTileVisitor.visit(emptyTile), equalTo(0));
     }
@@ -38,7 +38,7 @@ public class DotsLeftVisitorTest {
     @Test
     public void visitingWall_shouldCountZero() {
         DotsLeftVisitor scoreTileVisitor = new DotsLeftVisitor();
-        final Wall wall = new Wall(null);
+        final Wall wall = new Wall(null, "1");
 
         assertThat(scoreTileVisitor.visit(wall), equalTo(0));
     }

@@ -16,7 +16,7 @@ public class Game {
     private final PacmanTileVisitor pacmanTileVisitor;
 
     public Game() throws Exception {
-        this(MazeBuilder.buildDefaultMaze());
+        this(MazeBuilder.buildWalledMaze());
     }
 
     Game(Maze maze) {
