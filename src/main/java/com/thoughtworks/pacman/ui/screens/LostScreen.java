@@ -1,16 +1,16 @@
 package com.thoughtworks.pacman.ui.screens;
 
-import com.thoughtworks.pacman.core.Game;
-import com.thoughtworks.pacman.ui.Screen;
-
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
+import com.thoughtworks.pacman.core.Game;
+import com.thoughtworks.pacman.ui.ImageLoader;
+import com.thoughtworks.pacman.ui.Screen;
+
 public class LostScreen implements Screen {
-    static final Image LOST_SCREEN_IMAGE = Toolkit.getDefaultToolkit().getImage(Screen.class.getResource("gameOver.jpg"));
+    static final Image LOST_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "gameOver.png");
 
     private final Dimension dimension;
     private final Game game;

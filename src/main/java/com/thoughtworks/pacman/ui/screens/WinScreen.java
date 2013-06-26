@@ -1,16 +1,16 @@
 package com.thoughtworks.pacman.ui.screens;
 
-import com.thoughtworks.pacman.core.Game;
-import com.thoughtworks.pacman.ui.Screen;
-
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
+import com.thoughtworks.pacman.core.Game;
+import com.thoughtworks.pacman.ui.ImageLoader;
+import com.thoughtworks.pacman.ui.Screen;
+
 public class WinScreen implements Screen {
-    static final Image WIN_SCREEN_IMAGE = Toolkit.getDefaultToolkit().getImage(Screen.class.getResource("winScreen.jpg"));
+    static final Image WIN_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "winScreen.jpg");
 
     private final Dimension dimension;
     private final Game game;
