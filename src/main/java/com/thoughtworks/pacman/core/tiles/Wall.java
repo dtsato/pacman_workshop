@@ -36,6 +36,6 @@ public class Wall extends Tile {
     }
 
     public Shape getShape() {
-        return type.getShape(this);
+        return type.getShape(this.getCenter());
     }
 }

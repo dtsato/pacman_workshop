@@ -13,44 +13,43 @@ import com.thoughtworks.pacman.core.Tile;
 public enum WallType {
     BOTTOM_LEFT {
         @Override
-        Shape getShape(Wall wall) {
-            final SpacialCoordinate circleCenter = wall.getCenter().add(new SpacialCoordinate(0, -Tile.SIZE));
+        public Shape getShape(SpacialCoordinate center) {
+            final SpacialCoordinate circleCenter = center.add(new SpacialCoordinate(0, -Tile.SIZE));
             return new Arc2D.Float(getArcBounds(circleCenter), 180, 90, OPEN);
         }
     },
     BOTTOM_RIGHT {
         @Override
-        Shape getShape(Wall wall) {
-            final SpacialCoordinate circleCenter = wall.getCenter().add(new SpacialCoordinate(-Tile.SIZE, -Tile.SIZE));
+        public Shape getShape(SpacialCoordinate center) {
+            final SpacialCoordinate circleCenter = center.add(new SpacialCoordinate(-Tile.SIZE, -Tile.SIZE));
             return new Arc2D.Float(getArcBounds(circleCenter), 270, 90, OPEN);
         }
     },
     TOP_LEFT {
         @Override
-        Shape getShape(Wall wall) {
-            final SpacialCoordinate circleCenter = wall.getCenter();
-            return new Arc2D.Float(getArcBounds(circleCenter), 90, 90, OPEN);
+        public Shape getShape(SpacialCoordinate center) {
+            return new Arc2D.Float(getArcBounds(center), 90, 90, OPEN);
         }
     },
     TOP_RIGHT {
         @Override
-        Shape getShape(Wall wall) {
-            final SpacialCoordinate circleCenter = wall.getCenter().add(new SpacialCoordinate(-Tile.SIZE, 0));
+        public Shape getShape(SpacialCoordinate center) {
+            final SpacialCoordinate circleCenter = center.add(new SpacialCoordinate(-Tile.SIZE, 0));
             return new Arc2D.Float(getArcBounds(circleCenter), 0, 90, OPEN);
         }
     },
     VERTICAL {
         @Override
-        Shape getShape(Wall wall) {
-            final SpacialCoordinate topMiddle = wall.getCenter().add(new SpacialCoordinate(0, -Tile.SIZE / 2));
+        public Shape getShape(SpacialCoordinate center) {
+            final SpacialCoordinate topMiddle = center.add(new SpacialCoordinate(0, -Tile.SIZE / 2));
             final SpacialCoordinate bottomMiddle = topMiddle.add(new SpacialCoordinate(0, Tile.SIZE));
             return new Line2D.Float(topMiddle.toPoint(), bottomMiddle.toPoint());
         }
     },
     HORIZONTAL {
         @Override
-        Shape getShape(Wall wall) {
-            final SpacialCoordinate centerLeft = wall.getCenter().add(new SpacialCoordinate(-Tile.SIZE / 2, 0));
+        public Shape getShape(SpacialCoordinate center) {
+            final SpacialCoordinate centerLeft = center.add(new SpacialCoordinate(-Tile.SIZE / 2, 0));
             final SpacialCoordinate centerRight = centerLeft.add(new SpacialCoordinate(Tile.SIZE, 0));
             return new Line2D.Float(centerLeft.toPoint(), centerRight.toPoint());
         }
@@ -68,5 +67,5 @@ public enum WallType {
         }
     }
 
-    abstract Shape getShape(Wall wall);
+    public abstract Shape getShape(SpacialCoordinate center);
 }

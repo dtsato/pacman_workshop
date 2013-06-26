@@ -1,14 +1,11 @@
 package com.thoughtworks.pacman.ui.presenters;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
 
-import com.thoughtworks.pacman.core.SpacialCoordinate;
-import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.tiles.Door;
+import com.thoughtworks.pacman.core.tiles.WallType;
 import com.thoughtworks.pacman.ui.Presenter;
 
 public class DoorPresenter implements Presenter {
@@ -21,16 +18,8 @@ public class DoorPresenter implements Presenter {
 
     @Override
     public void draw(Graphics2D graphics) {
-        graphics.setColor(Color.white);
-        graphics.fill(new Rectangle(getTileCoordinate(), getDimension()));
-    }
-
-    public Point getTileCoordinate() {
-        int delta = Tile.SIZE / 2;
-        return door.getCenter().add(new SpacialCoordinate(-delta, -delta)).toPoint();
-    }
-
-    public Dimension getDimension() {
-        return new Dimension(Tile.SIZE, Tile.SIZE);
+        graphics.setColor(Color.pink);
+        graphics.setStroke(new BasicStroke(2.5f));
+        graphics.draw(WallType.HORIZONTAL.getShape(door.getCenter()));
     }
 }
