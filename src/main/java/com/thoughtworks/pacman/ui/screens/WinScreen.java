@@ -10,7 +10,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
 public class WinScreen implements Screen {
-    private static final Image WIN_SCREEN_IMAGE = Toolkit.getDefaultToolkit().getImage(Screen.class.getResource("winScreen.jpg"));
+    static final Image WIN_SCREEN_IMAGE = Toolkit.getDefaultToolkit().getImage(Screen.class.getResource("winScreen.jpg"));
 
     private final Dimension dimension;
     private final Game game;

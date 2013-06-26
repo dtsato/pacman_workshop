@@ -10,7 +10,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
 public class LostScreen implements Screen {
-    private static final Image LOST_SCREEN_IMAGE = Toolkit.getDefaultToolkit().getImage(Screen.class.getResource("gameOver.jpg"));
+    static final Image LOST_SCREEN_IMAGE = Toolkit.getDefaultToolkit().getImage(Screen.class.getResource("gameOver.jpg"));
 
     private final Dimension dimension;
     private final Game game;

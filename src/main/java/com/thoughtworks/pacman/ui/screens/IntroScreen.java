@@ -10,7 +10,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
 public class IntroScreen implements Screen {
-    private static final Image TITLE_SCREEN_IMAGE = Toolkit.getDefaultToolkit().getImage(Screen.class.getResource("titleScreen.jpg"));
+    static final Image TITLE_SCREEN_IMAGE = Toolkit.getDefaultToolkit().getImage(Screen.class.getResource("titleScreen.jpg"));
 
     private final Dimension dimension;
     private boolean startGame;

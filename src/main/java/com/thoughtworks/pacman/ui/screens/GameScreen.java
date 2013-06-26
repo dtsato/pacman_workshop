@@ -14,7 +14,11 @@ public class GameScreen implements Screen {
     private long lastFrameAt;
 
     public GameScreen() throws Exception {
-        this.game = new Game();
+        this(new Game());
+    }
+
+    GameScreen(Game game) {
+        this.game = game;
         this.gamePresenter = new GamePresenter(game);
         this.lastFrameAt = System.currentTimeMillis();
     }
