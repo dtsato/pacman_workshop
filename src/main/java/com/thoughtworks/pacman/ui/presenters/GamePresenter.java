@@ -27,7 +27,7 @@ public class GamePresenter implements Presenter {
     public void draw(Graphics2D graphics) {
         mazePresenter.draw(graphics);
         pacmanPresenter.draw(graphics);
-        if (!game.getPacman().isDead()) {
+        if (!game.getPacman().isDying()) {
             for (GhostPresenter ghostPresenter : ghostPresenters) {
                 ghostPresenter.draw(graphics);
             }

@@ -36,8 +36,8 @@ public class PacmanPresenter implements Presenter {
     }
 
     int getArcAngle() {
-        if (pacman.isDead()) {
-            return deadFrame > MOUTH_CLOSED / 10 ? 0 : MOUTH_CLOSED - deadFrame++ * 10;
+        if (pacman.isDying()) {
+            return deadFrame > MOUTH_CLOSED / 10 ? 0 : MOUTH_CLOSED - deadFrame++ * 36;
         }
         if (!pacman.isMoving()) {
             return MOUTH_OPENED;

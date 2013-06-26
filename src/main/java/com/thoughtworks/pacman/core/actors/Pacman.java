@@ -12,6 +12,7 @@ public class Pacman extends Actor {
     private Direction previousDirection;
     private Direction direction;
     private boolean dead = false;
+    private int dying;
 
     public Pacman(Maze maze) {
         this(maze, new SpacialCoordinate(14 * Tile.SIZE, 26 * Tile.SIZE + Tile.SIZE / 2), Direction.LEFT);
@@ -21,6 +22,7 @@ public class Pacman extends Actor {
         super(maze, center);
         this.direction = direction;
         this.desiredDirection = direction;
+        this.dying = 20;
     }
 
     public void die() {
@@ -28,6 +30,13 @@ public class Pacman extends Actor {
     }
 
     public boolean isDead() {
+        return dead && dying < 0;
+    }
+
+    public boolean isDying() {
+        if (dead) {
+            --dying;
+        }
         return dead;
     }
 
@@ -53,7 +62,11 @@ public class Pacman extends Actor {
 
     @Override
     protected TileCoordinate getNextTile(TileCoordinate currentTile) {
-        if (allowMove(currentTile, desiredDirection)) {
+        if (dead) {
+            previousDirection = direction;
+            direction = Direction.NONE;
+        }
+        else if (allowMove(currentTile, desiredDirection)) {
             direction = desiredDirection;
         } else if (!allowMove(currentTile, direction)) {
             previousDirection = direction;
