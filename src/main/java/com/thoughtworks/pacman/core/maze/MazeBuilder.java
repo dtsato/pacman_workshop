@@ -72,7 +72,7 @@ public class MazeBuilder {
                 tiles1[y][x] = allTiles[y][x];
             }
         }
-        return new Maze(width, height, allTiles);
+        return new Maze(width, height, tiles1);
     }
 
     void process(String row) throws Exception {
