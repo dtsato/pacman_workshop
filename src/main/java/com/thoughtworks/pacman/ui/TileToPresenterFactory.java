@@ -16,22 +16,18 @@ public class TileToPresenterFactory implements TileVisitor<Presenter> {
         return tile.visit(factory);
     }
 
-    @Override
     public Presenter visit(Dot dot) {
         return new DotPresenter(dot);
     }
 
-    @Override
     public Presenter visit(Wall wall) {
         return new WallPresenter(wall);
     }
 
-    @Override
     public Presenter visit(EmptyTile emptyTile) {
         return null;
     }
 
-    @Override
     public Presenter visit(Door door) {
         return new DoorPresenter(door);
     }

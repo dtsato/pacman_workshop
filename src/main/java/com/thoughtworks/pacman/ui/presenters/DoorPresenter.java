@@ -16,7 +16,6 @@ public class DoorPresenter implements Presenter {
         this.door = door;
     }
 
-    @Override
     public void draw(Graphics2D graphics) {
         graphics.setColor(Color.pink);
         graphics.setStroke(new BasicStroke(2.5f));

@@ -8,23 +8,19 @@ import com.thoughtworks.pacman.core.tiles.Wall;
 
 public class PacmanTileVisitor implements TileVisitor<Void> {
 
-    @Override
     public Void visit(Dot dot) {
         dot.eat();
         return null;
     }
 
-    @Override
     public Void visit(Wall wall) {
         return null;
     }
 
-    @Override
     public Void visit(EmptyTile emptyTile) {
         return null;
     }
 
-    @Override
     public Void visit(Door door) {
         return null;
     }

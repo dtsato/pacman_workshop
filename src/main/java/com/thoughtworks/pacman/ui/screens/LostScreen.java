@@ -22,13 +22,11 @@ public class LostScreen implements Screen {
         this.startGame = false;
     }
 
-    @Override
     public void draw(Graphics2D graphics) {
         int height = LOST_SCREEN_IMAGE.getHeight(null) * dimension.width / LOST_SCREEN_IMAGE.getWidth(null);
         graphics.drawImage(LOST_SCREEN_IMAGE, 0, 0, dimension.width, height, null);
     }
 
-    @Override
     public Screen getNextScreen() {
         if (startGame) {
             return new IntroScreen(game);
@@ -36,7 +34,6 @@ public class LostScreen implements Screen {
         return this;
     }
 
-    @Override
     public void keyPressed(KeyEvent e) {
         startGame = true;
     }

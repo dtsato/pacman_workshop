@@ -22,13 +22,11 @@ public class WinScreen implements Screen {
         this.startGame = false;
     }
 
-    @Override
     public void draw(Graphics2D graphics) {
         int height = WIN_SCREEN_IMAGE.getHeight(null) * dimension.width / WIN_SCREEN_IMAGE.getWidth(null);
         graphics.drawImage(WIN_SCREEN_IMAGE, 0, 0, dimension.width, height, null);
     }
 
-    @Override
     public Screen getNextScreen() {
         if (startGame) {
             return new IntroScreen(game);
@@ -36,7 +34,6 @@ public class WinScreen implements Screen {
         return this;
     }
 
-    @Override
     public void keyPressed(KeyEvent e) {
         startGame = true;
     }

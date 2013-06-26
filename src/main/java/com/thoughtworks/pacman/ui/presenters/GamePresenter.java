@@ -21,7 +21,6 @@ public class GamePresenter implements Presenter {
         };
     }
 
-    @Override
     public void draw(Graphics2D graphics) {
         mazePresenter.draw(graphics);
         pacmanPresenter.draw(graphics);

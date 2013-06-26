@@ -23,7 +23,6 @@ public class GhostPresenter implements Presenter {
                 ImageLoader.loadImage(ghost.getType().getImageTwo()) };
     }
 
-    @Override
     public void draw(Graphics2D graphics) {
         Rectangle bounds = getBounds();
         Image image = lastFrame++ % 10 < 5 ? images[0] : images[1];

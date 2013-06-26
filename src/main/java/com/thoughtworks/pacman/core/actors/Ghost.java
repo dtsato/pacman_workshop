@@ -45,7 +45,7 @@ public class Ghost extends Actor {
         }
 
         if (desiredTile.remainder(maze).equals(currentTile)) {
-            List<TileCoordinate> availableTiles = new ArrayList<>();
+            List<TileCoordinate> availableTiles = new ArrayList<TileCoordinate>();
             for (Direction direction : Direction.validMovements()) {
                 TileCoordinate nextTile = currentTile.add(direction.tileDelta());
                 if (maze.canMove(nextTile.x, nextTile.y) && !nextTile.equals(previousTile)) {

@@ -20,7 +20,7 @@ public class MazePresenter implements Presenter {
 
     public MazePresenter(Maze maze) {
         this.maze = maze;
-        this.mazeTiles = new ArrayList<>();
+        this.mazeTiles = new ArrayList<Presenter>();
         for (int y = 0; y < maze.getHeight(); y++) {
             for (int x = 0; x < maze.getWidth(); x++) {
                 Presenter presenter = toPresenter(maze.tileAt(x, y));
@@ -31,7 +31,6 @@ public class MazePresenter implements Presenter {
         }
     }
 
-    @Override
     public void draw(Graphics2D graphics) {
         for (Presenter tilePresenter : mazeTiles) {
             tilePresenter.draw(graphics);

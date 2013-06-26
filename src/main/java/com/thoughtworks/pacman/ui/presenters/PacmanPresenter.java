@@ -27,7 +27,6 @@ public class PacmanPresenter implements Presenter {
         this.pacman = pacman;
     }
 
-    @Override
     public void draw(Graphics2D graphics) {
         graphics.setColor(Color.yellow);
         Rectangle bounds = getBounds();

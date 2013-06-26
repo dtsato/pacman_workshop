@@ -18,7 +18,6 @@ public class WallPresenter implements Presenter {
         this.wall = wall;
     }
 
-    @Override
     public void draw(Graphics2D graphics) {
         graphics.setColor(Color.blue);
         graphics.setStroke(new BasicStroke(2.5f));

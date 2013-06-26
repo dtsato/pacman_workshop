@@ -15,7 +15,7 @@ public class ImageLoader {
     private Map<String, Image> images;
 
     private ImageLoader() {
-        images = new HashMap<>();
+        images = new HashMap<String, Image>();
     }
     
     private Image load(String imageName) {

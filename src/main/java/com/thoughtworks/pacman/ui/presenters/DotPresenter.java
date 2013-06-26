@@ -17,7 +17,6 @@ public class DotPresenter implements Presenter {
         this.dot = dot;
     }
 
-    @Override
     public void draw(Graphics2D graphics) {
         if (!dot.isEaten()) {
             graphics.setColor(Color.pink);

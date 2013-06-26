@@ -27,7 +27,6 @@ public class GameScreen implements Screen {
         this.lastFrameAt = System.currentTimeMillis();
     }
 
-    @Override
     public void draw(Graphics2D graphics) {
         long currentFrameAt = System.currentTimeMillis();
         long timeDelta = currentFrameAt - lastFrameAt;
@@ -38,7 +37,6 @@ public class GameScreen implements Screen {
         lastFrameAt = currentFrameAt;
     }
 
-    @Override
     public Screen getNextScreen() {
         if (game.won()) {
             return new WinScreen(game);
@@ -48,7 +46,6 @@ public class GameScreen implements Screen {
         return this;
     }
 
-    @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
         case KeyEvent.VK_LEFT:
