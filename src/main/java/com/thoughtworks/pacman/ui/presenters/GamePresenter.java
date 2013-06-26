@@ -9,10 +9,8 @@ public class GamePresenter implements Presenter {
     private final MazePresenter mazePresenter;
     private final PacmanPresenter pacmanPresenter;
     private final GhostPresenter[] ghostPresenters;
-    private final Game game;
 
     public GamePresenter(Game game) {
-        this.game = game;
         mazePresenter = new MazePresenter(game.getMaze());
         pacmanPresenter = new PacmanPresenter(game.getPacman());
         ghostPresenters = new GhostPresenter[] {
@@ -27,10 +25,14 @@ public class GamePresenter implements Presenter {
     public void draw(Graphics2D graphics) {
         mazePresenter.draw(graphics);
         pacmanPresenter.draw(graphics);
-        if (!game.getPacman().isDying()) {
+        if (!isDying()) {
             for (GhostPresenter ghostPresenter : ghostPresenters) {
                 ghostPresenter.draw(graphics);
             }
         }
+    }
+
+    public boolean isDying() {
+        return pacmanPresenter.isDying();
     }
 }

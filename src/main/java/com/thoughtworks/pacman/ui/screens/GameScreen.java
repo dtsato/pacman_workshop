@@ -17,9 +17,13 @@ public class GameScreen implements Screen {
         this(new Game());
     }
 
-    GameScreen(Game game) {
+    private GameScreen(Game game) {
+        this(game, new GamePresenter(game));
+    }
+
+    GameScreen(Game game, GamePresenter gamePresenter) {
         this.game = game;
-        this.gamePresenter = new GamePresenter(game);
+        this.gamePresenter = gamePresenter;
         this.lastFrameAt = System.currentTimeMillis();
     }
 
@@ -38,7 +42,7 @@ public class GameScreen implements Screen {
     public Screen getNextScreen() {
         if (game.won()) {
             return new WinScreen(game);
-        } else if (game.lost()) {
+        } else if (game.lost() && !gamePresenter.isDying()) {
             return new LostScreen(game);
         }
         return this;

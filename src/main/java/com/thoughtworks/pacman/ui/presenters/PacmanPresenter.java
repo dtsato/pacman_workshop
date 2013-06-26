@@ -15,6 +15,10 @@ public class PacmanPresenter implements Presenter {
     static final int MOUTH_CLOSED = 360;
     static final int MOUTH_OPENED = 280;
 
+    static final int DEATH_FRAMES = 10;
+    static final int DELAY_AFTER_DEAD = 30;
+    private static final int CHEWING_FRAMES = 10;
+
     private final Pacman pacman;
     private long lastFrame;
     private int deadFrame;
@@ -36,18 +40,23 @@ public class PacmanPresenter implements Presenter {
     }
 
     int getArcAngle() {
-        if (pacman.isDying()) {
-            return deadFrame > MOUTH_CLOSED / 10 ? 0 : MOUTH_CLOSED - deadFrame++ * 36;
+        if (isDying()) {
+            int angle = MOUTH_CLOSED - deadFrame * DEATH_FRAMES;
+            return angle < 0 ? 0 : angle;
         }
         if (!pacman.isMoving()) {
             return MOUTH_OPENED;
         }
-        return lastFrame++ % 10 < 5 ? MOUTH_CLOSED : MOUTH_OPENED;
+        return lastFrame++ % CHEWING_FRAMES < CHEWING_FRAMES / 2 ? MOUTH_CLOSED : MOUTH_OPENED;
     }
 
     Rectangle getBounds() {
         int radius = DIAMETER / 2;
         SpacialCoordinate upperLeft = pacman.getCenter().add(new SpacialCoordinate(-radius, -radius));
         return new Rectangle(upperLeft.toPoint(), new Dimension(DIAMETER, DIAMETER));
+    }
+
+    public boolean isDying() {
+        return pacman.isDead() && deadFrame++ <= (MOUTH_CLOSED / DEATH_FRAMES) + DELAY_AFTER_DEAD;
     }
 }

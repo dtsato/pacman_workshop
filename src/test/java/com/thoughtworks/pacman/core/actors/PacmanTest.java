@@ -107,25 +107,4 @@ public class PacmanTest {
         final Pacman pacman = new Pacman(maze);
         assertThat(pacman.isDead(), is(false));
     }
-
-    @Test
-    public void isDying_shouldBeFalseByDefault() throws Exception {
-        final Pacman pacman = new Pacman(maze);
-        assertThat(pacman.isDying(), is(false));
-    }
-
-    @Test
-    public void die_shouldKillPacmanSlowly() throws Exception {
-        final Pacman pacman = new Pacman(maze);
-
-        pacman.die();
-
-        for (int times = 1; times <= 20; times++) {
-            assertFalse(times + "th time", pacman.isDead());
-            assertTrue(times + "th time", pacman.isDying());
-        }
-
-        assertTrue(pacman.isDying());
-        assertTrue(pacman.isDead());
-    }
 }

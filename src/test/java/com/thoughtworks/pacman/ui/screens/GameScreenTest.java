@@ -4,6 +4,7 @@ import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
+import com.thoughtworks.pacman.ui.presenters.GamePresenter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -24,12 +25,14 @@ public class GameScreenTest {
     private Graphics2D graphics;
     @Mock
     private KeyEvent keyEvent;
+    @Mock
+    private GamePresenter gamePresenter;
 
     @Test
     public void draw_shouldAdvanceGameWithTimeDelta() throws Exception {
         Game game = new Game();
         SpacialCoordinate pacmanCoordinate = game.getPacman().getCenter();
-        GameScreen gameScreen = new GameScreen(game);
+        GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         Thread.sleep(20); // Some time for pacman to move
         gameScreen.draw(graphics);
@@ -40,7 +43,7 @@ public class GameScreenTest {
     @Test
     public void nextScreen_shouldReturnGameScreen_whenGameNotOver() throws Exception {
         Game game = new Game();
-        GameScreen gameScreen = new GameScreen(game);
+        GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         assertThat(gameScreen.getNextScreen(), instanceOf(GameScreen.class));
     }
@@ -48,17 +51,18 @@ public class GameScreenTest {
     @Test
     public void nextScreen_shouldReturnWinScreen_whenGameWon() throws Exception {
         Game game = new Game(MazeBuilder.buildMaze("+ +"));
-        GameScreen gameScreen = new GameScreen(game);
+        GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         assertThat(gameScreen.getNextScreen(), instanceOf(WinScreen.class));
     }
 
     @Test
-    public void nextScreen_shouldReturnLostScreen_whenGameLost() throws Exception {
+    public void nextScreen_shouldReturnLostScreen_whenGameLostAndDyingAnimationFinished() throws Exception {
         Game game = new Game();
-        GameScreen gameScreen = new GameScreen(game);
+        GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         game.getPacman().die();
+        when(gamePresenter.isDying()).thenReturn(false);
 
         assertThat(gameScreen.getNextScreen(), instanceOf(LostScreen.class));
     }
@@ -66,7 +70,7 @@ public class GameScreenTest {
     @Test
     public void keyPressed_shouldMovePacmanLeft() throws Exception {
         Game game = new Game();
-        GameScreen gameScreen = new GameScreen(game);
+        GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_LEFT);
         gameScreen.keyPressed(keyEvent);
@@ -77,7 +81,7 @@ public class GameScreenTest {
     @Test
     public void keyPressed_shouldMovePacmanRight() throws Exception {
         Game game = new Game();
-        GameScreen gameScreen = new GameScreen(game);
+        GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_RIGHT);
         gameScreen.keyPressed(keyEvent);
@@ -88,7 +92,7 @@ public class GameScreenTest {
     @Test
     public void keyPressed_shouldMovePacmanUp() throws Exception {
         Game game = new Game();
-        GameScreen gameScreen = new GameScreen(game);
+        GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_UP);
         gameScreen.keyPressed(keyEvent);
@@ -99,7 +103,7 @@ public class GameScreenTest {
     @Test
     public void keyPressed_shouldMovePacmanDown() throws Exception {
         Game game = new Game();
-        GameScreen gameScreen = new GameScreen(game);
+        GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_DOWN);
         gameScreen.keyPressed(keyEvent);

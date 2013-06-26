@@ -3,6 +3,7 @@ package com.thoughtworks.pacman.ui.presenters;
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.awt.Rectangle;
@@ -51,10 +52,31 @@ public class PacmanPresenterTest {
         pacman.die();
         PacmanPresenter presenter = new PacmanPresenter(pacman);
 
-        for (int i = 0; i < PacmanPresenter.MOUTH_CLOSED / 10; i++) {
-            assertThat(presenter.getArcAngle(), equalTo(PacmanPresenter.MOUTH_CLOSED - i * 10));
+        for (int i = 1; i <= PacmanPresenter.MOUTH_CLOSED / PacmanPresenter.DEATH_FRAMES; i++) {
+            assertThat(presenter.getArcAngle(), equalTo(PacmanPresenter.MOUTH_CLOSED - i * PacmanPresenter.DEATH_FRAMES));
         }
         assertThat(presenter.getArcAngle(), equalTo(0));
         assertThat(presenter.getArcAngle(), equalTo(0));
+    }
+
+    @Test
+    public void isDying_shouldBeFalseByDefault() throws Exception {
+        PacmanPresenter presenter = new PacmanPresenter(new Pacman(MazeBuilder.buildDefaultMaze()));
+        Assert.assertThat(presenter.isDying(), is(false));
+    }
+
+    @Test
+    public void die_shouldKillPacmanSlowly() throws Exception {
+        Pacman pacman = new Pacman(MazeBuilder.buildDefaultMaze());
+        PacmanPresenter presenter = new PacmanPresenter(pacman);
+
+        pacman.die();
+
+        int totalDeathFrames = PacmanPresenter.MOUTH_CLOSED / PacmanPresenter.DEATH_FRAMES + PacmanPresenter.DELAY_AFTER_DEAD;
+        for (int times = 1; times <= totalDeathFrames + 1; times++) {
+            assertThat(times + "th time", presenter.isDying(), is(true));
+        }
+
+        assertThat(presenter.isDying(), is(false));
     }
 }
