@@ -4,11 +4,11 @@ import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
 import com.thoughtworks.pacman.ui.presenters.DotPresenter;
-import com.thoughtworks.pacman.ui.presenters.NullPresenter;
 import com.thoughtworks.pacman.ui.presenters.WallPresenter;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 public class TileToPresenterFactoryTest {
@@ -25,8 +25,8 @@ public class TileToPresenterFactoryTest {
     }
 
     @Test
-    public void toPresenter_shouldReturnNullPresenter_whenTileIsEmptyTile() {
+    public void toPresenter_shouldReturnNull_whenTileIsEmptyTile() {
         Presenter presenter = TileToPresenterFactory.toPresenter(new EmptyTile(null, null));
-        assertThat(presenter, instanceOf(NullPresenter.class));
+        assertThat(presenter, nullValue());
     }
 }

@@ -22,7 +22,10 @@ public class MazePresenter implements Presenter {
         this.maze = maze;
         this.mazeTiles = new ArrayList<>();
         for (Tile tile : maze.getTiles()){
-            mazeTiles.add(toPresenter(tile));
+            Presenter presenter = toPresenter(tile);
+            if (presenter != null) {
+                mazeTiles.add(presenter);
+            }
         }
     }
 

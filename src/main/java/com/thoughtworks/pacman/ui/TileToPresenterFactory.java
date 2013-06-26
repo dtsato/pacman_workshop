@@ -8,7 +8,6 @@ import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
 import com.thoughtworks.pacman.ui.presenters.DoorPresenter;
 import com.thoughtworks.pacman.ui.presenters.DotPresenter;
-import com.thoughtworks.pacman.ui.presenters.NullPresenter;
 import com.thoughtworks.pacman.ui.presenters.WallPresenter;
 
 public class TileToPresenterFactory implements TileVisitor<Presenter> {
@@ -29,7 +28,7 @@ public class TileToPresenterFactory implements TileVisitor<Presenter> {
 
     @Override
     public Presenter visit(EmptyTile emptyTile) {
-        return new NullPresenter();
+        return null;
     }
 
     @Override
