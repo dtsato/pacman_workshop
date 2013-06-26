@@ -4,9 +4,7 @@ bin
 .idea
 .gradle
 .settings
-*.iml
 *.iws
-*.ipr
 *.class
 build
 *~
