@@ -55,7 +55,7 @@ public class PacmanPresenter implements Presenter {
         return new Rectangle(upperLeft.toPoint(), new Dimension(DIAMETER, DIAMETER));
     }
 
-    public boolean isDying() {
+    boolean isDying() {
         return pacman.isDead() && deadFrame++ <= (MOUTH_CLOSED / DEATH_FRAMES) + DELAY_AFTER_DEAD;
     }
 }

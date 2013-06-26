@@ -23,13 +23,4 @@ public class WallPresenter implements Presenter {
         graphics.setStroke(new BasicStroke(2.5f));
         graphics.draw(wall.getShape());
     }
-
-    public Point getTileCoordinate() {
-        int delta = Tile.SIZE / 2;
-        return wall.getCenter().add(new SpacialCoordinate(-delta, -delta)).toPoint();
-    }
-
-    public Dimension getDimension() {
-        return new Dimension(Tile.SIZE, Tile.SIZE);
-    }
 }

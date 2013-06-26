@@ -3,23 +3,26 @@ package com.thoughtworks.pacman.ui.presenters;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.tiles.Wall;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
-import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.Graphics2D;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.verify;
 
+@RunWith(MockitoJUnitRunner.class)
 public class WallPresenterTest {
-    @Test
-    public void shouldCalculatePositionInPixels() throws Exception {
-        WallPresenter presenter = new WallPresenter(new Wall(new TileCoordinate(2, 3)));
-        assertThat(presenter.getTileCoordinate(), equalTo(new Point(2 * 16, 3 * 16)));
-    }
+    @Mock
+    private Graphics2D graphics;
 
     @Test
-    public void shouldCalculateDimensionInPixels() throws Exception {
-        WallPresenter presenter = new WallPresenter(new Wall(new TileCoordinate(1, 1)));
-        assertThat(presenter.getDimension(), equalTo(new Dimension(16, 16)));
+    public void shouldDrawWallTypeShape() throws Exception {
+        Wall wall = new Wall(new TileCoordinate(2, 3));
+        WallPresenter presenter = new WallPresenter(wall);
+
+        presenter.draw(graphics);
+
+        verify(graphics).draw(wall.getShape());
     }
 }

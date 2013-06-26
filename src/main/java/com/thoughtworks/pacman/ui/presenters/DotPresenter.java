@@ -12,15 +12,17 @@ import java.awt.Rectangle;
 public class DotPresenter implements Presenter {
     private static final int SIDE = 4;
     private final Dot dot;
+    private final Rectangle bounds;
 
     public DotPresenter(Dot dot) {
         this.dot = dot;
+        this.bounds = getBounds();
     }
 
     public void draw(Graphics2D graphics) {
         if (!dot.isEaten()) {
             graphics.setColor(Color.pink);
-            graphics.fill(getBounds());
+            graphics.fill(bounds);
         }
     }
 

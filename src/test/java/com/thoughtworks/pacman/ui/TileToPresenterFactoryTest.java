@@ -1,5 +1,6 @@
 package com.thoughtworks.pacman.ui;
 
+import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
@@ -20,7 +21,7 @@ public class TileToPresenterFactoryTest {
 
     @Test
     public void toPresenter_shouldReturnDotPresenter_whenTileIsDot() {
-        Presenter presenter = TileToPresenterFactory.toPresenter(new Dot(null, null));
+        Presenter presenter = TileToPresenterFactory.toPresenter(new Dot(new TileCoordinate(1, 1), null));
         assertThat(presenter, instanceOf(DotPresenter.class));
     }
 
