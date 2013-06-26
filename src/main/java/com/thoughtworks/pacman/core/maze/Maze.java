@@ -35,10 +35,6 @@ public class Maze {
         return new Dimension(width * Tile.SIZE, height * Tile.SIZE);
     }
 
-    public Tile[][] getTiles() {
-        return tiles;
-    }
-
     public int getScore() {
         ScoreTileVisitor scoreVisitor = new ScoreTileVisitor();
         int totalScore = 0;

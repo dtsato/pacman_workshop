@@ -21,10 +21,9 @@ public class MazePresenter implements Presenter {
     public MazePresenter(Maze maze) {
         this.maze = maze;
         this.mazeTiles = new ArrayList<>();
-        Tile[][] tiles = maze.getTiles();
         for (int y = 0; y < maze.getHeight(); y++) {
             for (int x = 0; x < maze.getWidth(); x++) {
-                Presenter presenter = toPresenter(tiles[y][x]);
+                Presenter presenter = toPresenter(maze.tileAt(x, y));
                 if (presenter != null) {
                     mazeTiles.add(presenter);
                 }
