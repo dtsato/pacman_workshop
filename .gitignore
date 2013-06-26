@@ -3,8 +3,6 @@ out
 bin
 .idea
 .gradle
-.project
-.classpath
 .settings
 *.iml
 *.iws
