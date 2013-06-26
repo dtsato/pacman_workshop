@@ -2,12 +2,8 @@ package com.thoughtworks.pacman.ui.presenters;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.Point;
 
-import com.thoughtworks.pacman.core.SpacialCoordinate;
-import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.tiles.Wall;
 import com.thoughtworks.pacman.ui.Presenter;
 
