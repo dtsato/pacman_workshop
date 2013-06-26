@@ -35,6 +35,10 @@ public class Pacman extends Actor {
         this.desiredDirection = direction;
     }
 
+    public Direction getNextDirection() {
+        return this.desiredDirection;
+    }
+
     public Direction getDirection() {
         return direction;
     }

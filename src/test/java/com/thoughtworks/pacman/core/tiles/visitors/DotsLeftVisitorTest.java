@@ -1,5 +1,6 @@
 package com.thoughtworks.pacman.core.tiles.visitors;
 
+import com.thoughtworks.pacman.core.tiles.Door;
 import com.thoughtworks.pacman.core.tiles.Dot;
 import com.thoughtworks.pacman.core.tiles.EmptyTile;
 import com.thoughtworks.pacman.core.tiles.Wall;
@@ -30,7 +31,7 @@ public class DotsLeftVisitorTest {
     @Test
     public void visitingEmptyTile_shouldCountZero() {
         DotsLeftVisitor scoreTileVisitor = new DotsLeftVisitor();
-        final EmptyTile emptyTile = new EmptyTile(null, null);
+        EmptyTile emptyTile = new EmptyTile(null, null);
 
         assertThat(scoreTileVisitor.visit(emptyTile), equalTo(0));
     }
@@ -38,8 +39,16 @@ public class DotsLeftVisitorTest {
     @Test
     public void visitingWall_shouldCountZero() {
         DotsLeftVisitor scoreTileVisitor = new DotsLeftVisitor();
-        final Wall wall = new Wall(null, "1");
+        Wall wall = new Wall(null, "1");
 
         assertThat(scoreTileVisitor.visit(wall), equalTo(0));
+    }
+
+    @Test
+    public void visitingDoor_shouldCountZero() {
+        DotsLeftVisitor scoreTileVisitor = new DotsLeftVisitor();
+        Door door = new Door(null, null);
+
+        assertThat(scoreTileVisitor.visit(door), equalTo(0));
     }
 }

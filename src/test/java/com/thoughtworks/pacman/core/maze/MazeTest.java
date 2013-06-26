@@ -28,6 +28,7 @@ public class MazeTest {
         String mazeDescription = "+++\n" + //
                 "+.+\n" + //
                 "+ +\n" + //
+                "+-+\n" + //
                 "+++\n";
         Maze maze = MazeBuilder.buildMaze(mazeDescription);
         assertThat(maze.toString(), equalTo(mazeDescription));

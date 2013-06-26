@@ -19,7 +19,7 @@ public class Game {
         this(MazeBuilder.buildWalledMaze());
     }
 
-    Game(Maze maze) {
+    public Game(Maze maze) {
         this.maze = maze;
         this.pacman = new Pacman(maze);
         this.blinky = new Ghost(maze, GhostType.BLINKY);
