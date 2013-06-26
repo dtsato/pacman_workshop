@@ -11,7 +11,7 @@ import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.ui.Presenter;
 
 public class PacmanPresenter implements Presenter {
-    private static final int DIAMETER = 20;
+    static final int DIAMETER = 20;
     static final int MOUTH_CLOSED = 360;
     static final int MOUTH_OPENED = 280;
 

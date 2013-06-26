@@ -61,7 +61,11 @@ public enum WallType {
     }
 
     public static WallType fromMazeTile(String value) {
-        return WallType.values()[Integer.parseInt(value) - 1];
+        try {
+            return WallType.values()[Integer.parseInt(value) - 1];
+        } catch (NumberFormatException nfe) {
+            return WallType.HORIZONTAL;
+        }
     }
 
     abstract Shape getShape(Wall wall);
