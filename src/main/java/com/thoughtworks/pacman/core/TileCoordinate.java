@@ -3,8 +3,8 @@ package com.thoughtworks.pacman.core;
 import com.thoughtworks.pacman.core.maze.Maze;
 
 public class TileCoordinate {
-    private final int x;
-    private final int y;
+    public final int x;
+    public final int y;
 
     public TileCoordinate(int x, int y) {
         this.x = x;

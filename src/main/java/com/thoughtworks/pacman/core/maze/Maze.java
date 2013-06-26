@@ -1,8 +1,6 @@
 package com.thoughtworks.pacman.core.maze;
 
 import java.awt.Dimension;
-import java.util.Collection;
-import java.util.Map;
 
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileCoordinate;
@@ -11,18 +9,18 @@ import com.thoughtworks.pacman.core.tiles.visitors.DotsLeftVisitor;
 import com.thoughtworks.pacman.core.tiles.visitors.ScoreTileVisitor;
 
 public class Maze {
-    private Map<TileCoordinate, Tile> tiles;
+    private Tile[][] tiles;
     private final int width;
     private final int height;
 
-    Maze(int width, int height, Map<TileCoordinate, Tile> tiles) {
+    Maze(int width, int height, Tile[][] tiles) {
         this.width = width;
         this.height = height;
         this.tiles = tiles;
     }
 
-    public boolean canMove(TileCoordinate tileCoordinate) {
-        return tileAt(tileCoordinate).isMovable();
+    public boolean canMove(int x, int y) {
+        return tileAt(x, y).isMovable();
     }
 
     public int getWidth() {
@@ -37,15 +35,17 @@ public class Maze {
         return new Dimension(width * Tile.SIZE, height * Tile.SIZE);
     }
 
-    public Collection<Tile> getTiles() {
-        return tiles.values();
+    public Tile[][] getTiles() {
+        return tiles;
     }
 
     public int getScore() {
         ScoreTileVisitor scoreVisitor = new ScoreTileVisitor();
         int totalScore = 0;
-        for (Tile tile : tiles.values()) {
-            totalScore += tile.visit(scoreVisitor);
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                totalScore += tiles[y][x].visit(scoreVisitor);
+            }
         }
         return totalScore;
     }
@@ -53,17 +53,24 @@ public class Maze {
     public boolean hasDotsLeft() {
         DotsLeftVisitor dotsLeftVisitor = new DotsLeftVisitor();
         int dotsLeft = 0;
-        for (Tile tile : tiles.values()) {
-            dotsLeft += tile.visit(dotsLeftVisitor);
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                dotsLeft += tiles[y][x].visit(dotsLeftVisitor);
+            }
         }
         return dotsLeft > 0;
     }
 
-    public Tile tileAt(TileCoordinate tileCoordinate) {
-        if (tiles.containsKey(tileCoordinate))
-            return this.tiles.get(tileCoordinate);
-        else
-            return new EmptyTile(tileCoordinate);
+    public Tile tileAt(int x, int y) {
+        if (isValid(x, y)) {
+            return tiles[y][x];
+        } else {
+            return new EmptyTile(new TileCoordinate(x, y));
+        }
+    }
+
+    private boolean isValid(int x, int y) {
+        return x >= 0 && x < width && y >= 0 && y < height;
     }
 
     @Override
@@ -72,7 +79,7 @@ public class Maze {
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                result.append(tiles.get(new TileCoordinate(x, y)));
+                result.append(tiles[y][x]);
             }
             result.append("\n");
         }

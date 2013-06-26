@@ -38,16 +38,20 @@ public class MazeTest {
     public void tileAt_shouldReturnTileAtGivenCoordinate() throws Exception {
         String mazeDescription = "+. ";
         Maze maze = MazeBuilder.buildMaze(mazeDescription);
-        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(Wall.class));
-        assertThat(maze.tileAt(new TileCoordinate(1, 0)), instanceOf(Dot.class));
-        assertThat(maze.tileAt(new TileCoordinate(2, 0)), instanceOf(EmptyTile.class));
+        TileCoordinate tileCoordinate2 = new TileCoordinate(0, 0);
+        assertThat(maze.tileAt(tileCoordinate2.x, tileCoordinate2.y), instanceOf(Wall.class));
+        TileCoordinate tileCoordinate1 = new TileCoordinate(1, 0);
+        assertThat(maze.tileAt(tileCoordinate1.x, tileCoordinate1.y), instanceOf(Dot.class));
+        TileCoordinate tileCoordinate = new TileCoordinate(2, 0);
+        assertThat(maze.tileAt(tileCoordinate.x, tileCoordinate.y), instanceOf(EmptyTile.class));
     }
 
     @Test
     public void tileAt_shouldReturnEmptyTile_whenTileCoordinateIsInvalidToAllowTeleport() throws Exception {
         String mazeDescription = "+";
         Maze maze = MazeBuilder.buildMaze(mazeDescription);
-        assertThat(maze.tileAt(new TileCoordinate(2, 2)), instanceOf(EmptyTile.class));
+        TileCoordinate tileCoordinate = new TileCoordinate(2, 2);
+        assertThat(maze.tileAt(tileCoordinate.x, tileCoordinate.y), instanceOf(EmptyTile.class));
     }
 
     @Test
@@ -56,10 +60,12 @@ public class MazeTest {
         Maze maze = MazeBuilder.buildMaze(mazeDescription);
 
         assertThat(maze.getScore(), equalTo(0));
-        Dot dot = (Dot) maze.tileAt(new TileCoordinate(1, 1));
+        TileCoordinate tileCoordinate1 = new TileCoordinate(1, 1);
+        Dot dot = (Dot) maze.tileAt(tileCoordinate1.x, tileCoordinate1.y);
         dot.eat();
         assertThat(maze.getScore(), equalTo(10));
-        dot = (Dot) maze.tileAt(new TileCoordinate(2, 1));
+        TileCoordinate tileCoordinate = new TileCoordinate(2, 1);
+        dot = (Dot) maze.tileAt(tileCoordinate.x, tileCoordinate.y);
         dot.eat();
         assertThat(maze.getScore(), equalTo(20));
     }
@@ -76,7 +82,8 @@ public class MazeTest {
         String mazeDescription = "+++\n+.+\n+++";
         Maze maze = MazeBuilder.buildMaze(mazeDescription);
 
-        Dot dot = (Dot) maze.tileAt(new TileCoordinate(1, 1));
+        TileCoordinate tileCoordinate = new TileCoordinate(1, 1);
+        Dot dot = (Dot) maze.tileAt(tileCoordinate.x, tileCoordinate.y);
         dot.eat();
 
         assertThat(maze.hasDotsLeft(), is(false));

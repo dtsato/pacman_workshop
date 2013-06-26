@@ -64,6 +64,6 @@ public class Pacman extends Actor {
 
     private boolean allowMove(TileCoordinate tileCoordinate, Direction direction) {
         TileCoordinate nextTile = tileCoordinate.add(direction.tileDelta());
-        return maze.canMove(nextTile);
+        return maze.canMove(nextTile.x, nextTile.y);
     }
 }

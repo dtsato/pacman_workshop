@@ -83,7 +83,8 @@ public class Game {
             pacman.die();
         }
 
-        Tile pacmanTile = maze.tileAt(pacman.getCenter().toTileCoordinate());
+        TileCoordinate tileCoordinate = pacman.getCenter().toTileCoordinate();
+        Tile pacmanTile = maze.tileAt(tileCoordinate.x, tileCoordinate.y);
         pacmanTile.visit(pacmanTileVisitor);
     }
 

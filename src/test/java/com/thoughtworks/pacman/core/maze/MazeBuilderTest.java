@@ -30,7 +30,8 @@ public class MazeBuilderTest {
 
         assertThat(maze.getWidth(), equalTo(1));
         assertThat(maze.getHeight(), equalTo(1));
-        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(Wall.class));
+        TileCoordinate tileCoordinate = new TileCoordinate(0, 0);
+        assertThat(maze.tileAt(tileCoordinate.x, tileCoordinate.y), instanceOf(Wall.class));
     }
 
     @Test
@@ -41,8 +42,10 @@ public class MazeBuilderTest {
 
         assertThat(maze.getWidth(), equalTo(2));
         assertThat(maze.getHeight(), equalTo(1));
-        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(Wall.class));
-        assertThat(maze.tileAt(new TileCoordinate(1, 0)), instanceOf(Wall.class));
+        TileCoordinate tileCoordinate1 = new TileCoordinate(0, 0);
+        assertThat(maze.tileAt(tileCoordinate1.x, tileCoordinate1.y), instanceOf(Wall.class));
+        TileCoordinate tileCoordinate = new TileCoordinate(1, 0);
+        assertThat(maze.tileAt(tileCoordinate.x, tileCoordinate.y), instanceOf(Wall.class));
     }
 
     @Test
@@ -54,8 +57,10 @@ public class MazeBuilderTest {
 
         assertThat(maze.getWidth(), equalTo(1));
         assertThat(maze.getHeight(), equalTo(2));
-        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(Wall.class));
-        assertThat(maze.tileAt(new TileCoordinate(0, 1)), instanceOf(Wall.class));
+        TileCoordinate tileCoordinate1 = new TileCoordinate(0, 0);
+        assertThat(maze.tileAt(tileCoordinate1.x, tileCoordinate1.y), instanceOf(Wall.class));
+        TileCoordinate tileCoordinate = new TileCoordinate(0, 1);
+        assertThat(maze.tileAt(tileCoordinate.x, tileCoordinate.y), instanceOf(Wall.class));
     }
 
     @Test
@@ -64,7 +69,8 @@ public class MazeBuilderTest {
         builder.process(".");
         Maze maze = builder.build();
 
-        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(Dot.class));
+        TileCoordinate tileCoordinate = new TileCoordinate(0, 0);
+        assertThat(maze.tileAt(tileCoordinate.x, tileCoordinate.y), instanceOf(Dot.class));
     }
 
     @Test
@@ -73,7 +79,8 @@ public class MazeBuilderTest {
         builder.process("*");
         Maze maze = builder.build();
 
-        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(Dot.class));
+        TileCoordinate tileCoordinate = new TileCoordinate(0, 0);
+        assertThat(maze.tileAt(tileCoordinate.x, tileCoordinate.y), instanceOf(Dot.class));
     }
 
     @Test
@@ -82,7 +89,8 @@ public class MazeBuilderTest {
         builder.process("-");
         Maze maze = builder.build();
 
-        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(Door.class));
+        TileCoordinate tileCoordinate = new TileCoordinate(0, 0);
+        assertThat(maze.tileAt(tileCoordinate.x, tileCoordinate.y), instanceOf(Door.class));
     }
 
     @Test
@@ -91,7 +99,8 @@ public class MazeBuilderTest {
         builder.process(" ");
         Maze maze = builder.build();
 
-        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(EmptyTile.class));
+        TileCoordinate tileCoordinate = new TileCoordinate(0, 0);
+        assertThat(maze.tileAt(tileCoordinate.x, tileCoordinate.y), instanceOf(EmptyTile.class));
     }
 
     @Test
@@ -104,9 +113,12 @@ public class MazeBuilderTest {
     @Test
     public void defaultMazeShouldBeLoadedFromFile() throws Exception {
         Maze maze = MazeBuilder.buildDefaultMaze();
-        assertThat(maze.tileAt(new TileCoordinate(0, 3)), instanceOf(Wall.class));
-        assertThat(maze.tileAt(new TileCoordinate(1, 4)), instanceOf(Dot.class));
-        assertThat(maze.tileAt(new TileCoordinate(3, 6)), instanceOf(EmptyTile.class));
+        TileCoordinate tileCoordinate2 = new TileCoordinate(0, 3);
+        assertThat(maze.tileAt(tileCoordinate2.x, tileCoordinate2.y), instanceOf(Wall.class));
+        TileCoordinate tileCoordinate1 = new TileCoordinate(1, 4);
+        assertThat(maze.tileAt(tileCoordinate1.x, tileCoordinate1.y), instanceOf(Dot.class));
+        TileCoordinate tileCoordinate = new TileCoordinate(3, 6);
+        assertThat(maze.tileAt(tileCoordinate.x, tileCoordinate.y), instanceOf(EmptyTile.class));
     }
 
     @Test
