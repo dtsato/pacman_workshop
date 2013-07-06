@@ -13,7 +13,7 @@ refatoração para transformar o código de 1 para 2.
 
 ## Autores
 
-Esse código foi adaptado com base no jogo originalmente escrito por [Drew Schuster](https://github.com/dtschust/javapacman).
+Esse código foi originalmente escrito por:
 
 * Danilo Sato
 * Mariana Bravo
@@ -41,3 +41,6 @@ Uma explicação completa e detalhada do jogo original pode ser encontrada em in
 * Energizer dots ("frigthening mode")
 * Inteligência dos fantasmas
 
+## Créditos
+
+Esta implementação foi escrita por Danilo Sato e Mariana Bravo para fins educacionais. PAC-MAN® & © 1980 NAMCO BANDAI Games Inc.
