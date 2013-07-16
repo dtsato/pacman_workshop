@@ -63,24 +63,15 @@ public class MazeBuilder {
     private int width = 0;
     private int height = 0;
     private Map<TileCoordinate, Tile> tiles = new HashMap<TileCoordinate, Tile>();
-    private Tile[][] allTiles = new Tile[40][40];
 
     Maze build() {
-        Tile[][] tiles1 = new Tile[height][width];
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                tiles1[y][x] = allTiles[y][x];
-            }
-        }
-        return new Maze(width, height, tiles1);
+        return new Maze(width, height, tiles);
     }
 
     void process(String row) throws Exception {
         for (int x = 0; x < row.length(); x++) {
             TileCoordinate coordinate = new TileCoordinate(x, height);
-            final Tile tile = createTile(row.charAt(x), coordinate);
-            tiles.put(coordinate, tile);
-            allTiles[height][x] = tile;
+            tiles.put(coordinate, createTile(row.charAt(x), coordinate));
         }
         width = row.length();
         height += 1;

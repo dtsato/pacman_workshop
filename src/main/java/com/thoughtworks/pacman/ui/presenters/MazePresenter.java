@@ -1,6 +1,7 @@
 package com.thoughtworks.pacman.ui.presenters;
 
 import com.thoughtworks.pacman.core.Tile;
+import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.ui.Presenter;
 
@@ -23,7 +24,7 @@ public class MazePresenter implements Presenter {
         this.mazeTiles = new ArrayList<Presenter>();
         for (int y = 0; y < maze.getHeight(); y++) {
             for (int x = 0; x < maze.getWidth(); x++) {
-                mazeTiles.add(toPresenter(maze.tileAt(x, y)));
+                mazeTiles.add(toPresenter(maze.tileAt(new TileCoordinate(x, y))));
             }
         }
     }
