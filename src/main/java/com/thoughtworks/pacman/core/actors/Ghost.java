@@ -6,11 +6,12 @@ import java.util.Random;
 
 import com.thoughtworks.pacman.core.Actor;
 import com.thoughtworks.pacman.core.Direction;
+import com.thoughtworks.pacman.core.MovementStrategy;
 import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.maze.Maze;
 
-public class Ghost extends Actor {
+public class Ghost extends Actor implements MovementStrategy {
     private GhostType type;
     private Random random;
     private TileCoordinate previousTile;
@@ -39,7 +40,7 @@ public class Ghost extends Actor {
     }
 
     @Override
-    protected TileCoordinate getNextTile(TileCoordinate currentTile) {
+    public TileCoordinate getNextTile(TileCoordinate currentTile) {
         if (isTrapped()) {
             return currentTile;
         }
@@ -67,5 +68,9 @@ public class Ghost extends Actor {
         jump(GhostType.doorExit());
         resetCenter();
         free = true;
+    }
+
+    protected MovementStrategy getMovementStrategy() {
+        return this;
     }
 }

@@ -12,7 +12,7 @@ import com.thoughtworks.pacman.core.maze.MazeBuilder;
 
 public class ActorTest {
 
-    public class TestActor extends Actor {
+    public class TestActor extends Actor implements MovementStrategy {
 
         private TileCoordinate[] nextTiles;
         private int nextTileIndex;
@@ -24,8 +24,12 @@ public class ActorTest {
         }
 
         @Override
-        protected TileCoordinate getNextTile(TileCoordinate currentTile) {
+        public TileCoordinate getNextTile(TileCoordinate currentTile) {
             return nextTiles[nextTileIndex++];
+        }
+
+        protected MovementStrategy getMovementStrategy() {
+            return this;
         }
     }
 

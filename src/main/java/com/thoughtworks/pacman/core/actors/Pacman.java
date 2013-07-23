@@ -2,15 +2,14 @@ package com.thoughtworks.pacman.core.actors;
 
 import com.thoughtworks.pacman.core.Actor;
 import com.thoughtworks.pacman.core.Direction;
+import com.thoughtworks.pacman.core.MovementStrategy;
 import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.maze.Maze;
 
 public class Pacman extends Actor {
-    private Direction desiredDirection;
-    private Direction previousDirection;
-    private Direction direction;
+    private PacmanMovementStrategy movementStrategy;
     private boolean dead = false;
 
     public Pacman(Maze maze) {
@@ -19,8 +18,7 @@ public class Pacman extends Actor {
 
     protected Pacman(Maze maze, SpacialCoordinate center, Direction direction) {
         super(maze, center);
-        this.direction = direction;
-        this.desiredDirection = direction;
+        movementStrategy = new PacmanMovementStrategy(this, direction);
     }
 
     public void die() {
@@ -32,38 +30,27 @@ public class Pacman extends Actor {
     }
 
     public void setNextDirection(Direction direction) {
-        this.desiredDirection = direction;
+        movementStrategy.setNextDirection(direction);
     }
 
     public Direction getNextDirection() {
-        return this.desiredDirection;
+        return movementStrategy.getNextDirection();
     }
 
     public Direction getDirection() {
-        return isMoving() ? direction : previousDirection;
+        return isMoving() ? movementStrategy.getDirection() : movementStrategy.getPreviousDirection();
     }
 
     public boolean isMoving() {
-        return direction != Direction.NONE;
+        return movementStrategy.getDirection() != Direction.NONE;
     }
 
-    @Override
-    protected TileCoordinate getNextTile(TileCoordinate currentTile) {
-        if (dead) {
-            previousDirection = direction;
-            direction = Direction.NONE;
-        }
-        else if (allowMove(currentTile, desiredDirection)) {
-            direction = desiredDirection;
-        } else if (!allowMove(currentTile, direction)) {
-            previousDirection = direction;
-            direction = Direction.NONE;
-        }
-        return currentTile.add(direction.tileDelta());
-    }
-
-    private boolean allowMove(TileCoordinate tileCoordinate, Direction direction) {
+    boolean allowMove(TileCoordinate tileCoordinate, Direction direction) {
         TileCoordinate nextTile = tileCoordinate.add(direction.tileDelta());
         return maze.canMove(nextTile);
+    }
+
+    protected MovementStrategy getMovementStrategy() {
+        return movementStrategy;
     }
 }

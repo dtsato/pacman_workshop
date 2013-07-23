@@ -31,7 +31,7 @@ public abstract class Actor {
 
     private void advanceDistance(int distance) {
         TileCoordinate currentTile = center.toTileCoordinate();
-        TileCoordinate nextTile = getNextTile(currentTile);
+        TileCoordinate nextTile = getMovementStrategy().getNextTile(currentTile);
         SpacialCoordinate nextTileCenter = nextTile.toSpacialCoordinate();
 
         SpacialCoordinate subtract = nextTileCenter.subtract(center);
@@ -55,5 +55,5 @@ public abstract class Actor {
         }
     }
 
-    protected abstract TileCoordinate getNextTile(TileCoordinate currentTile);
+    protected abstract MovementStrategy getMovementStrategy();
 }
