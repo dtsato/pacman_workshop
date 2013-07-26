@@ -3,7 +3,6 @@ package com.thoughtworks.pacman.core.movement;
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.TileCoordinate;
-import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.core.maze.Maze;
 
 import java.util.ArrayList;
@@ -24,12 +23,20 @@ public class RandomMovementStrategy implements MovementStrategy {
     protected RandomMovementStrategy(SpacialCoordinate center, Maze maze, Random random) {
         this.maze = maze;
         this.random = random;
-        resetCenter(center);
+        jump(center.toTileCoordinate());
     }
 
-    public void resetCenter(SpacialCoordinate newCenter) {
-        this.previousTile = newCenter.toTileCoordinate();
+    public void jump(TileCoordinate tileCoordinate) {
+        this.previousTile = tileCoordinate;
         this.desiredTile = previousTile;
+    }
+
+    public Direction getDirection() {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    public boolean isMoving() {
+        return true;
     }
 
     public TileCoordinate getNextTile(TileCoordinate currentTile) {

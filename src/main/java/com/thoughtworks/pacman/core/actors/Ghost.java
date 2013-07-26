@@ -23,7 +23,6 @@ public class Ghost extends Actor {
 
     public void free() {
         jump(GhostType.doorExit());
-        ((RandomMovementStrategy) movementStrategy).resetCenter(getCenter());
         free = true;
     }
 

@@ -5,7 +5,7 @@ import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.maze.Maze;
-import com.thoughtworks.pacman.core.movement.PacmanMovementStrategy;
+import com.thoughtworks.pacman.core.movement.UserControlledMovementStrategy;
 
 public class Pacman extends Actor {
     private boolean dead = false;
@@ -15,7 +15,7 @@ public class Pacman extends Actor {
     }
 
     protected Pacman(Maze maze, SpacialCoordinate center, Direction direction) {
-        super(maze, new PacmanMovementStrategy(maze, direction), center);
+        super(maze, new UserControlledMovementStrategy(maze, direction), center);
     }
 
     public void die() {
@@ -32,18 +32,15 @@ public class Pacman extends Actor {
     }
 
     public void setNextDirection(Direction direction) {
-        getPacmanMovementStrategy().setNextDirection(direction);
+        ((UserControlledMovementStrategy) movementStrategy).setNextDirection(direction);
     }
 
     public Direction getDirection() {
-        return getPacmanMovementStrategy().getDirection();
+        return movementStrategy.getDirection();
     }
 
     public boolean isMoving() {
-        return getPacmanMovementStrategy().isMoving();
+        return movementStrategy.isMoving();
     }
 
-    private PacmanMovementStrategy getPacmanMovementStrategy() {
-        return ((PacmanMovementStrategy)movementStrategy);
-    }
 }

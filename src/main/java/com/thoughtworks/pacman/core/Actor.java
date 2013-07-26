@@ -26,6 +26,7 @@ public abstract class Actor {
 
     protected void jump(SpacialCoordinate jumpTo) {
         center = jumpTo;
+        movementStrategy.jump(center.toTileCoordinate());
     }
 
     public void advance(long timeDeltaInMillis) {

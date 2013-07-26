@@ -5,13 +5,13 @@ import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.Maze;
 
-public class PacmanMovementStrategy implements MovementStrategy {
+public class UserControlledMovementStrategy implements MovementStrategy {
     private final Maze maze;
     private Direction desiredDirection;
     private Direction previousDirection;
     private Direction direction;
 
-    public PacmanMovementStrategy(Maze maze, Direction startDirection) {
+    public UserControlledMovementStrategy(Maze maze, Direction startDirection) {
         this.maze = maze;
         this.direction = startDirection;
         this.desiredDirection = startDirection;
@@ -37,6 +37,10 @@ public class PacmanMovementStrategy implements MovementStrategy {
             direction = Direction.NONE;
         }
         return currentTile.add(direction.tileDelta());
+    }
+
+    public void jump(TileCoordinate tileCoordinate) {
+        throw new UnsupportedOperationException("Pacman can't jump");
     }
 
     private boolean allowMove(TileCoordinate tileCoordinate, Direction direction) {
