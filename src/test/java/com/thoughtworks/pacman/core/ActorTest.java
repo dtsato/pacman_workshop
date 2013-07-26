@@ -23,7 +23,6 @@ public class ActorTest {
             this.nextTileIndex = 0;
         }
 
-        @Override
         public TileCoordinate getNextTile(TileCoordinate currentTile) {
             return nextTiles[nextTileIndex++];
         }

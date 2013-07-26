@@ -39,7 +39,6 @@ public class Ghost extends Actor implements MovementStrategy {
         return type;
     }
 
-    @Override
     public TileCoordinate getNextTile(TileCoordinate currentTile) {
         if (isTrapped()) {
             return currentTile;
