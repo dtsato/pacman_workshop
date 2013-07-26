@@ -32,10 +32,6 @@ public class Pacman extends Actor {
         movementStrategy.setNextDirection(direction);
     }
 
-    public Direction getNextDirection() {
-        return movementStrategy.getNextDirection();
-    }
-
     public Direction getDirection() {
         return movementStrategy.getDirection();
     }

@@ -3,6 +3,7 @@ package com.thoughtworks.pacman.ui.screens;
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.core.SpacialCoordinate;
+import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
 import com.thoughtworks.pacman.ui.presenters.GamePresenter;
 import org.junit.Test;
@@ -17,6 +18,8 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -69,45 +72,53 @@ public class GameScreenTest {
 
     @Test
     public void keyPressed_shouldMovePacmanLeft() throws Exception {
-        Game game = new Game();
+        Pacman pacman = mock(Pacman.class);
+        Game game = mock(Game.class);
+        when(game.getPacman()).thenReturn(pacman);
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_LEFT);
         gameScreen.keyPressed(keyEvent);
 
-        assertThat(game.getPacman().getNextDirection(), equalTo(Direction.LEFT));
+        verify(pacman).setNextDirection(Direction.LEFT);
     }
 
     @Test
     public void keyPressed_shouldMovePacmanRight() throws Exception {
-        Game game = new Game();
+        Pacman pacman = mock(Pacman.class);
+        Game game = mock(Game.class);
+        when(game.getPacman()).thenReturn(pacman);
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_RIGHT);
         gameScreen.keyPressed(keyEvent);
 
-        assertThat(game.getPacman().getNextDirection(), equalTo(Direction.RIGHT));
+        verify(pacman).setNextDirection(Direction.RIGHT);
     }
 
     @Test
     public void keyPressed_shouldMovePacmanUp() throws Exception {
-        Game game = new Game();
+        Pacman pacman = mock(Pacman.class);
+        Game game = mock(Game.class);
+        when(game.getPacman()).thenReturn(pacman);
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_UP);
         gameScreen.keyPressed(keyEvent);
 
-        assertThat(game.getPacman().getNextDirection(), equalTo(Direction.UP));
+        verify(pacman).setNextDirection(Direction.UP);
     }
 
     @Test
     public void keyPressed_shouldMovePacmanDown() throws Exception {
-        Game game = new Game();
+        Pacman pacman = mock(Pacman.class);
+        Game game = mock(Game.class);
+        when(game.getPacman()).thenReturn(pacman);
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_DOWN);
         gameScreen.keyPressed(keyEvent);
 
-        assertThat(game.getPacman().getNextDirection(), equalTo(Direction.DOWN));
+        verify(pacman).setNextDirection(Direction.DOWN);
     }
 }
