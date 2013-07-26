@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import com.thoughtworks.pacman.core.movement.MovementStrategy;
 import org.junit.Before;
 import org.junit.Test;
 

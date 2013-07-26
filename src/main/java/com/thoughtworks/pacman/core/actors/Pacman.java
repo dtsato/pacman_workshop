@@ -2,10 +2,11 @@ package com.thoughtworks.pacman.core.actors;
 
 import com.thoughtworks.pacman.core.Actor;
 import com.thoughtworks.pacman.core.Direction;
-import com.thoughtworks.pacman.core.MovementStrategy;
+import com.thoughtworks.pacman.core.movement.MovementStrategy;
 import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.maze.Maze;
+import com.thoughtworks.pacman.core.movement.PacmanMovementStrategy;
 
 public class Pacman extends Actor {
     private final PacmanMovementStrategy movementStrategy;

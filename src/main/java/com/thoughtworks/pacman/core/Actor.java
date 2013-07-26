@@ -1,6 +1,7 @@
 package com.thoughtworks.pacman.core;
 
 import com.thoughtworks.pacman.core.maze.Maze;
+import com.thoughtworks.pacman.core.movement.MovementStrategy;
 
 public abstract class Actor {
     private static final int SPEED = 100;

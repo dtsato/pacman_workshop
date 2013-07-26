@@ -6,7 +6,7 @@ import java.util.Random;
 
 import com.thoughtworks.pacman.core.Actor;
 import com.thoughtworks.pacman.core.Direction;
-import com.thoughtworks.pacman.core.MovementStrategy;
+import com.thoughtworks.pacman.core.movement.MovementStrategy;
 import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.maze.Maze;

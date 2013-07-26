@@ -1,8 +1,8 @@
-package com.thoughtworks.pacman.core.actors;
+package com.thoughtworks.pacman.core.movement;
 
 import com.thoughtworks.pacman.core.Direction;
-import com.thoughtworks.pacman.core.MovementStrategy;
 import com.thoughtworks.pacman.core.TileCoordinate;
+import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.Maze;
 
 public class PacmanMovementStrategy implements MovementStrategy {
