@@ -1,20 +1,19 @@
 package com.thoughtworks.pacman.core;
 
+import com.thoughtworks.pacman.core.maze.Maze;
+import com.thoughtworks.pacman.core.maze.MazeBuilder;
+import com.thoughtworks.pacman.core.movement.MovementStrategy;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
-
-import com.thoughtworks.pacman.core.movement.MovementStrategy;
-import org.junit.Before;
-import org.junit.Test;
-
-import com.thoughtworks.pacman.core.maze.Maze;
-import com.thoughtworks.pacman.core.maze.MazeBuilder;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ActorTest {
@@ -23,23 +22,18 @@ public class ActorTest {
 
         private boolean halted;
 
-        public TestActor(Maze maze, SpacialCoordinate center) {
-            this(maze, center, false);
+        public TestActor(Maze maze, SpacialCoordinate center, MovementStrategy movementStrategy) {
+            this(maze, center, false, movementStrategy);
         }
 
-        public TestActor(Maze maze, SpacialCoordinate center, boolean halted) {
-            super(maze, center);
+        public TestActor(Maze maze, SpacialCoordinate center, boolean halted, MovementStrategy movementStrategy) {
+            super(maze, movementStrategy, center);
             this.halted = halted;
         }
 
         @Override
         public boolean isHalted() {
             return halted;
-        }
-
-        @Override
-        protected MovementStrategy getMovementStrategy() {
-            return movementStrategy;
         }
     }
 
@@ -56,7 +50,7 @@ public class ActorTest {
     @Test
     public void advance_shouldNotMove_whenHalted() throws Exception {
         SpacialCoordinate center = new SpacialCoordinate(10 * Tile.SIZE + 1, 5 * Tile.SIZE + Tile.SIZE / 2);
-        Actor actor = new TestActor(maze, center, true);
+        Actor actor = new TestActor(maze, center, true, movementStrategy);
 
         actor.advance(70);
 
@@ -69,7 +63,7 @@ public class ActorTest {
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(10, 5));
-        Actor actor = new TestActor(maze, center);
+        Actor actor = new TestActor(maze, center, movementStrategy);
 
         actor.advance(100);
 
@@ -82,7 +76,7 @@ public class ActorTest {
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(10, 5));
-        Actor actor = new TestActor(maze, center);
+        Actor actor = new TestActor(maze, center, movementStrategy);
 
         actor.advance(70);
 
@@ -96,7 +90,7 @@ public class ActorTest {
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(10, 5));
-        Actor actor = new TestActor(maze, center);
+        Actor actor = new TestActor(maze, center, movementStrategy);
 
         actor.advance(90);
 
@@ -110,7 +104,7 @@ public class ActorTest {
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         when(movementStrategy.getNextTile(any(TileCoordinate.class))).thenReturn(new TileCoordinate(10, 5), new TileCoordinate(10, 6));
-        Actor actor = new TestActor(maze, center);
+        Actor actor = new TestActor(maze, center, movementStrategy);
 
         actor.advance(120);
 
@@ -124,7 +118,7 @@ public class ActorTest {
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(10, 6));
-        Actor actor = new TestActor(maze, center);
+        Actor actor = new TestActor(maze, center, movementStrategy);
 
         actor.advance(100);
 
@@ -137,7 +131,7 @@ public class ActorTest {
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(11, 5));
-        Actor actor = new TestActor(maze, center);
+        Actor actor = new TestActor(maze, center, movementStrategy);
 
         actor.advance(100);
 
@@ -150,7 +144,7 @@ public class ActorTest {
         int initialY = 17 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(28, 17));
-        Actor actor = new TestActor(maze, center);
+        Actor actor = new TestActor(maze, center, movementStrategy);
 
         actor.advance(100);
 
@@ -163,7 +157,7 @@ public class ActorTest {
         int initialY = 17 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
         when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(-1, 17));
-        Actor actor = new TestActor(maze, center);
+        Actor actor = new TestActor(maze, center, movementStrategy);
 
         actor.advance(100);
 
@@ -172,8 +166,8 @@ public class ActorTest {
 
     @Test
     public void collidesWith_shouldBeTrue_whenOtherActorIsInSameTile() throws Exception {
-        Actor actor1 = new TestActor(maze, new SpacialCoordinate(15, 15));
-        Actor actor2 = new TestActor(maze, new SpacialCoordinate(10, 10));
+        Actor actor1 = new TestActor(maze, new SpacialCoordinate(15, 15), movementStrategy);
+        Actor actor2 = new TestActor(maze, new SpacialCoordinate(10, 10), movementStrategy);
 
         assertThat(actor1.collidesWith(actor2), is(true));
         assertThat(actor2.collidesWith(actor1), is(true));
@@ -181,8 +175,8 @@ public class ActorTest {
 
     @Test
     public void collidesWith_shouldBeFalse_whenOtherActorIsInDifferentTile() throws Exception {
-        Actor actor1 = new TestActor(maze, new SpacialCoordinate(15, 15));
-        Actor actor2 = new TestActor(maze, new SpacialCoordinate(17, 17));
+        Actor actor1 = new TestActor(maze, new SpacialCoordinate(15, 15), movementStrategy);
+        Actor actor2 = new TestActor(maze, new SpacialCoordinate(17, 17), movementStrategy);
 
         assertThat(actor1.collidesWith(actor2), is(false));
         assertThat(actor2.collidesWith(actor1), is(false));

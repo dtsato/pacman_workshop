@@ -7,10 +7,12 @@ public abstract class Actor {
     private static final int SPEED = 100;
 
     protected final Maze maze;
+    protected MovementStrategy movementStrategy;
     private SpacialCoordinate center;
 
-    public Actor(Maze maze, SpacialCoordinate center) {
+    public Actor(Maze maze, MovementStrategy movementStrategy, SpacialCoordinate center) {
         this.maze = maze;
+        this.movementStrategy = movementStrategy;
         this.center = center;
     }
 
@@ -32,9 +34,11 @@ public abstract class Actor {
         }
     }
 
+    protected abstract boolean isHalted();
+
     private void advanceDistance(int distance) {
         TileCoordinate currentTile = center.toTileCoordinate();
-        TileCoordinate nextTile = getMovementStrategy().getNextTile(currentTile);
+        TileCoordinate nextTile = movementStrategy.getNextTile(currentTile);
         SpacialCoordinate nextTileCenter = nextTile.toSpacialCoordinate();
 
         SpacialCoordinate subtract = nextTileCenter.subtract(center);
@@ -57,7 +61,4 @@ public abstract class Actor {
             }
         }
     }
-
-    protected abstract boolean isHalted();
-    protected abstract MovementStrategy getMovementStrategy();
 }
