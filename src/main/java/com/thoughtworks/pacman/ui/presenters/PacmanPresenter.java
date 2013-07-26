@@ -34,8 +34,7 @@ public class PacmanPresenter implements Presenter {
     }
 
     int getStartAngle() {
-        Direction direction = pacman.isMoving() ? pacman.getDirection() : pacman.getPreviousDirection();
-        return direction.getStartAngle();
+        return pacman.getDirection().getStartAngle();
     }
 
     int getArcAngle() {
