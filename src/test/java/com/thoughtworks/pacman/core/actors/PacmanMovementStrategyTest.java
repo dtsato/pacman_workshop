@@ -34,6 +34,7 @@ public class PacmanMovementStrategyTest {
         PacmanMovementStrategy movementStrategy = new PacmanMovementStrategy(pacman, maze, Direction.LEFT);
         movementStrategy.setNextDirection(Direction.DOWN);
         assertThat(movementStrategy.getNextTile(new TileCoordinate(14, 26)), equalTo(new TileCoordinate(13, 26)));
+        assertThat(movementStrategy.isMoving(), is(true));
         assertThat(movementStrategy.getDirection(), equalTo(Direction.LEFT));
     }
 
@@ -43,6 +44,7 @@ public class PacmanMovementStrategyTest {
         PacmanMovementStrategy movementStrategy = new PacmanMovementStrategy(pacman, maze, Direction.LEFT);
         movementStrategy.setNextDirection(Direction.RIGHT);
         assertThat(movementStrategy.getNextTile(new TileCoordinate(14, 26)), equalTo(new TileCoordinate(15, 26)));
+        assertThat(movementStrategy.isMoving(), is(true));
         assertThat(movementStrategy.getDirection(), equalTo(Direction.RIGHT));
     }
 

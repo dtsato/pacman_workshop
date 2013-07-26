@@ -8,7 +8,7 @@ import com.thoughtworks.pacman.core.Tile;
 import com.thoughtworks.pacman.core.maze.Maze;
 
 public class Pacman extends Actor {
-    PacmanMovementStrategy movementStrategy;
+    private final PacmanMovementStrategy movementStrategy;
     private boolean dead = false;
 
     public Pacman(Maze maze) {

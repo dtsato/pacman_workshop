@@ -30,52 +30,15 @@ public class PacmanTest {
     }
 
     @Test
-    public void shouldMaintainCurrentDirectionIfTurnToNextIsImpossible() throws Exception {
-        Pacman pacman = new Pacman(maze);
-        pacman.setNextDirection(Direction.DOWN);
-        pacman.getMovementStrategy().getNextTile(new TileCoordinate(14, 26));
-
-        assertThat(pacman.isMoving(), is(true));
-    }
-
-    @Test
-    public void shouldTurnDirectionIfPossible() throws Exception {
-        Pacman pacman = new Pacman(maze);
-        pacman.setNextDirection(Direction.RIGHT);
-        pacman.getMovementStrategy().getNextTile(new TileCoordinate(14, 26));
-
-        assertThat(pacman.isMoving(), is(true));
-    }
-
-    @Test
-    public void shouldStopIfNextInDesiredDirectionTileIsWall() throws Exception {
-        Pacman pacman = new Pacman(maze);
-        pacman.getMovementStrategy().getNextTile(new TileCoordinate(6, 26));
-        assertThat(pacman.isMoving(), is(false));
-        assertThat(pacman.getDirection(), equalTo(Direction.LEFT));
-    }
-
-    @Test
-    public void shouldStopIfNextInCurrentAndDesiredDirectionTileIsWall() throws Exception {
-        Pacman pacman = new Pacman(maze);
-        pacman.setNextDirection(Direction.UP);
-        pacman.getMovementStrategy().getNextTile(new TileCoordinate(15, 29));
-
-        assertThat(pacman.isMoving(), is(false));
-    }
-
-    @Test
-    public void shouldStayPutWhileDying() throws Exception {
-        Pacman pacman = new Pacman(maze);
-        pacman.die();
-        pacman.getMovementStrategy().getNextTile(new TileCoordinate(2, 3));
-
-        assertThat(pacman.isMoving(), is(false));
-    }
-
-    @Test
     public void isDead_shouldBeFalseByDefault() throws Exception {
         final Pacman pacman = new Pacman(maze);
         assertThat(pacman.isDead(), is(false));
+    }
+
+    @Test
+    public void isDead_shouldBeTrueAfterDead() throws Exception {
+        final Pacman pacman = new Pacman(maze);
+        pacman.die();
+        assertThat(pacman.isDead(), is(true));
     }
 }
