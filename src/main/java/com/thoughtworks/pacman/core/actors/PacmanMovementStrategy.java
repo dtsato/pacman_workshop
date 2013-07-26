@@ -3,15 +3,18 @@ package com.thoughtworks.pacman.core.actors;
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.MovementStrategy;
 import com.thoughtworks.pacman.core.TileCoordinate;
+import com.thoughtworks.pacman.core.maze.Maze;
 
 public class PacmanMovementStrategy implements MovementStrategy {
     private final Pacman pacman;
+    private final Maze maze;
     private Direction desiredDirection;
     private Direction previousDirection;
     private Direction direction;
 
-    public PacmanMovementStrategy(Pacman pacman, Direction direction) {
+    public PacmanMovementStrategy(Pacman pacman, Maze maze, Direction direction) {
         this.pacman = pacman;
+        this.maze = maze;
         this.direction = direction;
         this.desiredDirection = direction;
     }
@@ -25,25 +28,29 @@ public class PacmanMovementStrategy implements MovementStrategy {
     }
 
     public Direction getDirection() {
-        return direction;
+        return isMoving() ? direction : previousDirection;
     }
 
-    public Direction getPreviousDirection() {
-        return previousDirection;
+    public boolean isMoving() {
+        return direction != Direction.NONE;
     }
 
-    @Override
     public TileCoordinate getNextTile(TileCoordinate currentTile) {
         if (pacman.isDead()) {
             previousDirection = direction;
             direction = Direction.NONE;
         }
-        else if (pacman.allowMove(currentTile, desiredDirection)) {
+        else if (allowMove(currentTile, desiredDirection)) {
             direction = desiredDirection;
-        } else if (!pacman.allowMove(currentTile, direction)) {
+        } else if (!allowMove(currentTile, direction)) {
             previousDirection = direction;
             direction = Direction.NONE;
         }
         return currentTile.add(direction.tileDelta());
+    }
+
+    private boolean allowMove(TileCoordinate tileCoordinate, Direction direction) {
+        TileCoordinate nextTile = tileCoordinate.add(direction.tileDelta());
+        return maze.canMove(nextTile);
     }
 }
