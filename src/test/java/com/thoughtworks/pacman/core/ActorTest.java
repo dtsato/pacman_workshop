@@ -3,6 +3,8 @@ package com.thoughtworks.pacman.core;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
 
 import com.thoughtworks.pacman.core.movement.MovementStrategy;
 import org.junit.Before;
@@ -10,30 +12,41 @@ import org.junit.Test;
 
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ActorTest {
 
-    public class TestActor extends Actor implements MovementStrategy {
+    public class TestActor extends Actor {
 
-        private TileCoordinate[] nextTiles;
-        private int nextTileIndex;
+        private boolean halted;
 
-        public TestActor(Maze maze, SpacialCoordinate center, TileCoordinate... nextTiles) {
+        public TestActor(Maze maze, SpacialCoordinate center) {
+            this(maze, center, false);
+        }
+
+        public TestActor(Maze maze, SpacialCoordinate center, boolean halted) {
             super(maze, center);
-            this.nextTiles = nextTiles;
-            this.nextTileIndex = 0;
+            this.halted = halted;
         }
 
-        public TileCoordinate getNextTile(TileCoordinate currentTile) {
-            return nextTiles[nextTileIndex++];
+        @Override
+        public boolean isHalted() {
+            return halted;
         }
 
+        @Override
         protected MovementStrategy getMovementStrategy() {
-            return this;
+            return movementStrategy;
         }
     }
 
     private Maze maze;
+
+    @Mock
+    private MovementStrategy movementStrategy;
 
     @Before
     public void setUp() throws Exception {
@@ -41,11 +54,22 @@ public class ActorTest {
     }
 
     @Test
+    public void advance_shouldNotMove_whenHalted() throws Exception {
+        SpacialCoordinate center = new SpacialCoordinate(10 * Tile.SIZE + 1, 5 * Tile.SIZE + Tile.SIZE / 2);
+        Actor actor = new TestActor(maze, center, true);
+
+        actor.advance(70);
+
+        assertThat(actor.getCenter(), equalTo(center));
+    }
+
+    @Test
     public void advance_shouldNotMove_whenCurrentPositionIsCenterOfNextTile() throws Exception {
         int initialX = 10 * Tile.SIZE + Tile.SIZE / 2;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        Actor actor = new TestActor(maze, center, new TileCoordinate(10, 5));
+        when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(10, 5));
+        Actor actor = new TestActor(maze, center);
 
         actor.advance(100);
 
@@ -57,7 +81,8 @@ public class ActorTest {
         int initialX = 10 * Tile.SIZE + 1;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        Actor actor = new TestActor(maze, center, new TileCoordinate(10, 5));
+        when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(10, 5));
+        Actor actor = new TestActor(maze, center);
 
         actor.advance(70);
 
@@ -70,7 +95,8 @@ public class ActorTest {
         int initialX = 10 * Tile.SIZE - 1;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        Actor actor = new TestActor(maze, center, new TileCoordinate(10, 5));
+        when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(10, 5));
+        Actor actor = new TestActor(maze, center);
 
         actor.advance(90);
 
@@ -83,7 +109,8 @@ public class ActorTest {
         int initialX = 10 * Tile.SIZE - 1;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        Actor actor = new TestActor(maze, center, new TileCoordinate(10, 5), new TileCoordinate(10, 6));
+        when(movementStrategy.getNextTile(any(TileCoordinate.class))).thenReturn(new TileCoordinate(10, 5), new TileCoordinate(10, 6));
+        Actor actor = new TestActor(maze, center);
 
         actor.advance(120);
 
@@ -96,7 +123,8 @@ public class ActorTest {
         int initialX = 10 * Tile.SIZE + 1;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        Actor actor = new TestActor(maze, center, new TileCoordinate(10, 6));
+        when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(10, 6));
+        Actor actor = new TestActor(maze, center);
 
         actor.advance(100);
 
@@ -108,7 +136,8 @@ public class ActorTest {
         int initialX = 10 * Tile.SIZE + Tile.SIZE / 2;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        Actor actor = new TestActor(maze, center, new TileCoordinate(11, 5));
+        when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(11, 5));
+        Actor actor = new TestActor(maze, center);
 
         actor.advance(100);
 
@@ -120,7 +149,8 @@ public class ActorTest {
         int initialX = 27 * Tile.SIZE + Tile.SIZE / 2;
         int initialY = 17 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        Actor actor = new TestActor(maze, center, new TileCoordinate(28, 17));
+        when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(28, 17));
+        Actor actor = new TestActor(maze, center);
 
         actor.advance(100);
 
@@ -132,7 +162,8 @@ public class ActorTest {
         int initialX = Tile.SIZE / 2;
         int initialY = 17 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        Actor actor = new TestActor(maze, center, new TileCoordinate(-1, 17));
+        when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(-1, 17));
+        Actor actor = new TestActor(maze, center);
 
         actor.advance(100);
 

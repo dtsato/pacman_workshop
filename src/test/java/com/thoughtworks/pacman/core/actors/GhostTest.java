@@ -59,12 +59,16 @@ public class GhostTest {
     }
 
     @Test
-    public void nextTile_shouldNotMoveIfNotFree() throws Exception {
-        TileCoordinate initialTile = new TileCoordinate(13, 14);
-        SpacialCoordinate center = initialTile.toSpacialCoordinate();
-        Ghost ghost = new Ghost(maze, center, random, false);
+    public void isHalted_shouldBeTrueWhenTrapped() throws Exception {
+        Ghost ghost = new Ghost(maze, GhostType.CLYDE);
+        assertThat(ghost.isHalted(), equalTo(true));
+    }
 
-        assertThat(ghost.getNextTile(initialTile), equalTo(initialTile));
+    @Test
+    public void isHalted_shouldBeFalseWhenFreed() throws Exception {
+        Ghost ghost = new Ghost(maze, GhostType.CLYDE);
+        ghost.free();
+        assertThat(ghost.isHalted(), equalTo(false));
     }
 
     @Test

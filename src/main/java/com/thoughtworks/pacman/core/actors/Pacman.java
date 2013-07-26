@@ -18,7 +18,7 @@ public class Pacman extends Actor {
 
     protected Pacman(Maze maze, SpacialCoordinate center, Direction direction) {
         super(maze, center);
-        movementStrategy = new PacmanMovementStrategy(this, maze, direction);
+        movementStrategy = new PacmanMovementStrategy(maze, direction);
     }
 
     public void die() {
@@ -27,6 +27,11 @@ public class Pacman extends Actor {
 
     public boolean isDead() {
         return dead;
+    }
+
+    @Override
+    protected boolean isHalted() {
+        return isDead();
     }
 
     public void setNextDirection(Direction direction) {

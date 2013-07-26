@@ -6,21 +6,15 @@ import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.Maze;
 
 public class PacmanMovementStrategy implements MovementStrategy {
-    private final Pacman pacman;
     private final Maze maze;
     private Direction desiredDirection;
     private Direction previousDirection;
     private Direction direction;
 
-    public PacmanMovementStrategy(Pacman pacman, Maze maze, Direction direction) {
-        this.pacman = pacman;
+    public PacmanMovementStrategy(Maze maze, Direction startDirection) {
         this.maze = maze;
-        this.direction = direction;
-        this.desiredDirection = direction;
-    }
-
-    public Direction getNextDirection() {
-        return desiredDirection;
+        this.direction = startDirection;
+        this.desiredDirection = startDirection;
     }
 
     public void setNextDirection(Direction nextDirection) {
@@ -36,11 +30,7 @@ public class PacmanMovementStrategy implements MovementStrategy {
     }
 
     public TileCoordinate getNextTile(TileCoordinate currentTile) {
-        if (pacman.isDead()) {
-            previousDirection = direction;
-            direction = Direction.NONE;
-        }
-        else if (allowMove(currentTile, desiredDirection)) {
+        if (allowMove(currentTile, desiredDirection)) {
             direction = desiredDirection;
         } else if (!allowMove(currentTile, direction)) {
             previousDirection = direction;

@@ -40,10 +40,6 @@ public class Ghost extends Actor implements MovementStrategy {
     }
 
     public TileCoordinate getNextTile(TileCoordinate currentTile) {
-        if (isTrapped()) {
-            return currentTile;
-        }
-
         if (desiredTile.remainder(maze).equals(currentTile)) {
             List<TileCoordinate> availableTiles = new ArrayList<TileCoordinate>();
             for (Direction direction : Direction.validMovements()) {
@@ -67,6 +63,11 @@ public class Ghost extends Actor implements MovementStrategy {
         jump(GhostType.doorExit());
         resetCenter();
         free = true;
+    }
+
+    @Override
+    protected boolean isHalted() {
+        return isTrapped();
     }
 
     protected MovementStrategy getMovementStrategy() {

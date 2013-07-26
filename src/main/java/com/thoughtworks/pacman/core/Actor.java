@@ -27,7 +27,9 @@ public abstract class Actor {
     }
 
     public void advance(long timeDeltaInMillis) {
-        advanceDistance((int) (SPEED * timeDeltaInMillis / 1000));
+        if (!isHalted()) {
+            advanceDistance((int) (SPEED * timeDeltaInMillis / 1000));
+        }
     }
 
     private void advanceDistance(int distance) {
@@ -56,5 +58,6 @@ public abstract class Actor {
         }
     }
 
+    protected abstract boolean isHalted();
     protected abstract MovementStrategy getMovementStrategy();
 }

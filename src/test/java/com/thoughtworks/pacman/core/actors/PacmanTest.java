@@ -15,30 +15,39 @@ import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
 
 public class PacmanTest {
-    private Maze maze;
+    private Pacman pacman;
 
     @Before
     public void setUp() throws Exception {
-        maze = MazeBuilder.buildDefaultMaze();
+        Maze maze = MazeBuilder.buildDefaultMaze();
+        pacman = new Pacman(maze);
     }
 
     @Test
     public void shouldBeginInStartingPositionFacingLeft() throws Exception {
-        final Pacman pacman = new Pacman(maze);
         assertThat(pacman.getCenter(), equalTo(new SpacialCoordinate(14 * Tile.SIZE, 26 * Tile.SIZE + Tile.SIZE / 2)));
         assertThat(pacman.getDirection(), equalTo(Direction.LEFT));
     }
 
     @Test
     public void isDead_shouldBeFalseByDefault() throws Exception {
-        final Pacman pacman = new Pacman(maze);
         assertThat(pacman.isDead(), is(false));
     }
 
     @Test
     public void isDead_shouldBeTrueAfterDead() throws Exception {
-        final Pacman pacman = new Pacman(maze);
         pacman.die();
         assertThat(pacman.isDead(), is(true));
+    }
+
+    @Test
+    public void isHalted_shouldBeFalseByDefault() throws Exception {
+        assertThat(pacman.isHalted(), is(false));
+    }
+
+    @Test
+    public void isHalted_shouldBeTrueAfterDead() throws Exception {
+        pacman.die();
+        assertThat(pacman.isHalted(), is(true));
     }
 }
