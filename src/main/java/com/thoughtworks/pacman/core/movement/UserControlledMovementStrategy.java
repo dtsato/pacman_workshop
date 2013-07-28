@@ -40,7 +40,7 @@ public class UserControlledMovementStrategy implements MovementStrategy {
     }
 
     public void jump(TileCoordinate tileCoordinate) {
-        throw new UnsupportedOperationException("Pacman can't jump");
+        throw new UnsupportedOperationException("User can't request to jump");
     }
 
     private boolean allowMove(TileCoordinate tileCoordinate, Direction direction) {
