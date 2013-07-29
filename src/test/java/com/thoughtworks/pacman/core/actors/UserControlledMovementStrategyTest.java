@@ -78,4 +78,10 @@ public class UserControlledMovementStrategyTest {
         assertThat(movementStrategy.getNextTile(new TileCoordinate(0, 17)), equalTo(new TileCoordinate(-1, 17)));
         assertThat(movementStrategy.getDirection(), equalTo(Direction.LEFT));
     }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void jump_shouldNotBeSupported() throws Exception {
+        UserControlledMovementStrategy movementStrategy = new UserControlledMovementStrategy(maze, Direction.LEFT);
+        movementStrategy.jump(new TileCoordinate(0, 19));
+    }
 }

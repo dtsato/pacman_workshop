@@ -1,5 +1,6 @@
 package com.thoughtworks.pacman.core.movement;
 
+import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
@@ -12,6 +13,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.Random;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -35,6 +37,7 @@ public class RandomMovementStrategyTest {
         when(random.nextInt(2)).thenReturn(0);
 
         assertThat(randomMovementStrategy.getNextTile(initialTile), equalTo(new TileCoordinate(12, 14)));
+        assertThat(randomMovementStrategy.getDirection(), equalTo(Direction.LEFT));
     }
 
     @Test
@@ -46,6 +49,7 @@ public class RandomMovementStrategyTest {
 
         TileCoordinate nextTile = randomMovementStrategy.getNextTile(initialTile);
         assertThat(randomMovementStrategy.getNextTile(initialTile), equalTo(nextTile));
+        assertThat(randomMovementStrategy.getDirection(), equalTo(Direction.LEFT));
     }
 
     @Test
@@ -55,10 +59,12 @@ public class RandomMovementStrategyTest {
 
         when(random.nextInt(2)).thenReturn(1);
 
-        TileCoordinate nextTile = randomMovementStrategy.getNextTile(new TileCoordinate(18, 4));
+        TileCoordinate nextTile = randomMovementStrategy.getNextTile(initialTile);
         assertThat(nextTile, equalTo(new TileCoordinate(19, 4)));
+        assertThat(randomMovementStrategy.getDirection(), equalTo(Direction.RIGHT));
 
         assertThat(randomMovementStrategy.getNextTile(nextTile), equalTo(new TileCoordinate(20, 4)));
+        assertThat(randomMovementStrategy.getDirection(), equalTo(Direction.RIGHT));
     }
 
     @Test
@@ -69,6 +75,7 @@ public class RandomMovementStrategyTest {
         when(random.nextInt(2)).thenReturn(1);
 
         assertThat(randomMovementStrategy.getNextTile(initialTile), equalTo(new TileCoordinate(28, 17)));
+        assertThat(randomMovementStrategy.getDirection(), equalTo(Direction.RIGHT));
     }
 
     @Test
@@ -80,6 +87,7 @@ public class RandomMovementStrategyTest {
 
         assertThat(randomMovementStrategy.getNextTile(initialTile), equalTo(new TileCoordinate(28, 17)));
         assertThat(randomMovementStrategy.getNextTile(new TileCoordinate(0, 17)), equalTo(new TileCoordinate(1, 17)));
+        assertThat(randomMovementStrategy.getDirection(), equalTo(Direction.RIGHT));
     }
 
     @Test
@@ -90,6 +98,7 @@ public class RandomMovementStrategyTest {
         when(random.nextInt(2)).thenReturn(0);
 
         assertThat(randomMovementStrategy.getNextTile(initialTile), equalTo(new TileCoordinate(-1, 17)));
+        assertThat(randomMovementStrategy.getDirection(), equalTo(Direction.LEFT));
     }
 
     @Test
@@ -101,5 +110,12 @@ public class RandomMovementStrategyTest {
 
         assertThat(randomMovementStrategy.getNextTile(initialTile), equalTo(new TileCoordinate(-1, 17)));
         assertThat(randomMovementStrategy.getNextTile(new TileCoordinate(27, 17)), equalTo(new TileCoordinate(26, 17)));
+        assertThat(randomMovementStrategy.getDirection(), equalTo(Direction.LEFT));
+    }
+
+    @Test
+    public void isMoving_shouldBeTrue() {
+        RandomMovementStrategy randomMovementStrategy = new RandomMovementStrategy(new TileCoordinate(0, 17).toSpacialCoordinate(), maze, random);
+        assertThat(randomMovementStrategy.isMoving(), is(true));
     }
 }

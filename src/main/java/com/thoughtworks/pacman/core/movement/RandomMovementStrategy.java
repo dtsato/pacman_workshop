@@ -15,6 +15,7 @@ public class RandomMovementStrategy implements MovementStrategy {
 
     private TileCoordinate previousTile;
     private TileCoordinate desiredTile;
+    private Direction desiredDirection;
 
     public RandomMovementStrategy(SpacialCoordinate center, Maze maze) {
         this(center, maze, new Random());
@@ -28,11 +29,12 @@ public class RandomMovementStrategy implements MovementStrategy {
 
     public void jump(TileCoordinate tileCoordinate) {
         this.previousTile = tileCoordinate;
-        this.desiredTile = previousTile;
+        this.desiredTile = tileCoordinate;
+        this.desiredDirection = Direction.NONE;
     }
 
     public Direction getDirection() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return desiredDirection;
     }
 
     public boolean isMoving() {
@@ -42,14 +44,18 @@ public class RandomMovementStrategy implements MovementStrategy {
     public TileCoordinate getNextTile(TileCoordinate currentTile) {
         if (desiredTile.remainder(maze).equals(currentTile)) {
             List<TileCoordinate> availableTiles = new ArrayList<TileCoordinate>();
+            List<Direction> availableDirections = new ArrayList<Direction>();
             for (Direction direction : Direction.validMovements()) {
                 TileCoordinate nextTile = currentTile.add(direction.tileDelta());
                 if (maze.canMove(nextTile) && !nextTile.equals(previousTile)) {
+                    availableDirections.add(direction);
                     availableTiles.add(nextTile);
                 }
             }
 
-            desiredTile = availableTiles.get(random.nextInt(availableTiles.size()));
+            int randomIndex = random.nextInt(availableTiles.size());
+            desiredTile = availableTiles.get(randomIndex);
+            desiredDirection = availableDirections.get(randomIndex);
             previousTile = currentTile;
         }
         return desiredTile;
