@@ -1,13 +1,11 @@
 package com.thoughtworks.pacman.core.actors;
 
-import com.thoughtworks.pacman.core.maze.Maze;
-import com.thoughtworks.pacman.core.maze.MazeBuilder;
+import com.thoughtworks.pacman.core.Game;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
 
 public class GhostTest {
 
@@ -16,9 +14,9 @@ public class GhostTest {
 
     @Before
     public void setUp() throws Exception {
-        Maze maze = MazeBuilder.buildDefaultMaze();
-        blinky = new Ghost(maze, GhostType.BLINKY);
-        clyde = new Ghost(maze, GhostType.CLYDE);
+        Game game = new Game();
+        blinky = new Ghost(game, GhostType.BLINKY);
+        clyde = new Ghost(game, GhostType.CLYDE);
     }
 
     @Test

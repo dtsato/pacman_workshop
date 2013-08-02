@@ -22,10 +22,10 @@ public class Game {
     public Game(Maze maze) {
         this.maze = maze;
         this.pacman = new Pacman(maze);
-        this.blinky = new Ghost(maze, GhostType.BLINKY);
-        this.pinky = new Ghost(maze, GhostType.PINKY);
-        this.inky = new Ghost(maze, GhostType.INKY);
-        this.clyde = new Ghost(maze, GhostType.CLYDE);
+        this.blinky = new Ghost(this, GhostType.BLINKY);
+        this.pinky = new Ghost(this, GhostType.PINKY);
+        this.inky = new Ghost(this, GhostType.INKY);
+        this.clyde = new Ghost(this, GhostType.CLYDE);
         this.pacmanTileVisitor = new PacmanTileVisitor();
     }
 
