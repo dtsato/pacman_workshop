@@ -17,17 +17,18 @@ public class TargetChasingMovementStrategyTest {
 
     @Before
     public void setUp() throws Exception {
-        String mazeDescription = "+++++++++++\n" +
-                                 "+         +\n" +
-                                 "+ +++ +++ +\n" +
-                                 "+ + + + + +\n" +
-                                 "+ +++ +++ +\n" +
-                                 "+         +\n" +
-                                 "+ +++ +++ +\n" +
-                                 "+ + + + + +\n" +
-                                 "+ +++ +++ +\n" +
-                                 "+         +\n" +
-                                 "+++++++++++\n";
+        //                     x= 0123456789X      // y
+        String mazeDescription = "+++++++++++\n" + // 0
+                                 "+         +\n" + // 1
+                                 "+ +++ +++ +\n" + // 2
+                                 "+ + + + + +\n" + // 3
+                                 "+ +++ +++ +\n" + // 4
+                                 "+         +\n" + // 5
+                                 "+ +++ +++ +\n" + // 6
+                                 "+ + + + + +\n" + // 7
+                                 "+ +++ +++ +\n" + // 8
+                                 "+         +\n" + // 9
+                                 "+++++++++++\n";  // 10
         Maze maze = MazeBuilder.buildMaze(mazeDescription);
         targetChasingMovementStrategy = new TargetChasingMovementStrategy(maze, targetStrategy);
     }
