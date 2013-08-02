@@ -15,22 +15,11 @@
     <orderEntry type="module-library" scope="TEST">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/hamcrest-all-1.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/junit-4.11.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$MODULE_DIR$/lib/hamcrest-all-1.3-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/mockito-all-1.9.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/lib/mockito-all-1.9.0-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/junit-4.11-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
@@ -48,11 +37,22 @@
     <orderEntry type="module-library" scope="TEST">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/junit-4.11.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/mockito-core-1.9.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$MODULE_DIR$/lib/junit-4.11-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/mockito-core-1.9.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/objenesis-1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/lib/objenesis-1.0-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
