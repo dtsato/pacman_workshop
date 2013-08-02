@@ -1,4 +1,4 @@
-package com.thoughtworks.pacman.core.actors;
+package com.thoughtworks.pacman.core.movement;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
