@@ -2,6 +2,7 @@ package com.thoughtworks.pacman.core;
 
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertFalse;
@@ -14,6 +15,25 @@ public class TileCoordinateTest {
     public void add_shouldSumCoordinates() {
         final TileCoordinate coordinate = new TileCoordinate(1, 1);
         assertThat(coordinate.add(coordinate), equalTo(new TileCoordinate(2, 2)));
+    }
+
+    @Test
+    public void subtract_shouldSubtractCoordinates() {
+        final TileCoordinate coordinate = new TileCoordinate(1, 1);
+        assertThat(coordinate.subtract(coordinate), equalTo(new TileCoordinate(0, 0)));
+    }
+
+    @Test
+    public void modulo_shouldCalculateLengthOfVector() {
+        assertThat(new TileCoordinate(0, 1).modulo(), is(1.0));
+        assertThat(new TileCoordinate(1, 0).modulo(), is(1.0));
+        assertThat(new TileCoordinate(3, 4).modulo(), is(5.0));
+    }
+
+    @Test
+    public void distanceTo_shouldCalculateDistanceToAnotherTileCoordinate() {
+        assertThat(new TileCoordinate(0, 1).distanceTo(new TileCoordinate(3, 5)), is(5.0));
+        assertThat(new TileCoordinate(1, 1).distanceTo(new TileCoordinate(3, 3)), is(Math.sqrt(8)));
     }
 
     @Test

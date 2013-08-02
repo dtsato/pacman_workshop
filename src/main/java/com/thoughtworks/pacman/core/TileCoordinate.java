@@ -23,6 +23,18 @@ public class TileCoordinate {
         return new TileCoordinate(x + delta.x, y + delta.y);
     }
 
+    public TileCoordinate subtract(TileCoordinate delta) {
+        return new TileCoordinate(x - delta.x, y - delta.y);
+    }
+
+    public double modulo() {
+        return Math.sqrt(x * x + y * y);
+    }
+
+    public double distanceTo(TileCoordinate tileCoordinate) {
+        return subtract(tileCoordinate).modulo();
+    }
+
     public TileCoordinate remainder(Maze maze) {
         return new TileCoordinate((x + maze.getWidth()) % maze.getWidth(), (y + maze.getHeight()) % maze.getHeight());
     }
