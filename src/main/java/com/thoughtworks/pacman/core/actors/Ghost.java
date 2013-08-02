@@ -2,8 +2,6 @@ package com.thoughtworks.pacman.core.actors;
 
 import com.thoughtworks.pacman.core.Actor;
 import com.thoughtworks.pacman.core.Game;
-import com.thoughtworks.pacman.core.maze.Maze;
-import com.thoughtworks.pacman.core.movement.RandomMovementStrategy;
 
 public class Ghost extends Actor {
     private final GhostType type;
