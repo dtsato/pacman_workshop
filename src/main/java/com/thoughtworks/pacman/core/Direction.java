@@ -3,7 +3,7 @@ package com.thoughtworks.pacman.core;
 import java.util.EnumSet;
 
 public enum Direction {
-    UP(0, -1, 130), DOWN(0, 1, 310), LEFT(-1, 0, 220), RIGHT(1, 0, 40), NONE(0, 0, 0);
+    UP(0, -1, 130), LEFT(-1, 0, 220), DOWN(0, 1, 310), RIGHT(1, 0, 40), NONE(0, 0, 0);
 
     private final int x;
     private final int y;
@@ -24,6 +24,6 @@ public enum Direction {
     }
 
     public static EnumSet<Direction> validMovements() {
-        return EnumSet.of(UP, DOWN, LEFT, RIGHT);
+        return EnumSet.of(UP, LEFT, DOWN, RIGHT);
     }
 }
