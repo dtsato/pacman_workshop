@@ -9,7 +9,7 @@ public class Ghost extends Actor {
     private boolean free;
 
     public Ghost(Maze maze, GhostType type) {
-        super(maze, new RandomMovementStrategy(type.getStartCoordinate(), maze), type.getStartCoordinate());
+        super(maze, type.getMovementStrategy(maze) , type.getStartCoordinate());
         this.type = type;
     }
 
