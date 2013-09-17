@@ -85,7 +85,8 @@ public class RandomMovementStrategyTest {
         TileCoordinate initialTile = new TileCoordinate(27, 17);
         RandomMovementStrategy randomMovementStrategy = new RandomMovementStrategy(initialTile.toSpacialCoordinate(), maze, random);
 
-        when(random.nextInt(anyInt())).thenReturn(1);
+        when(random.nextInt(2)).thenReturn(1);
+        when(random.nextInt(1)).thenReturn(0);
 
         assertThat(randomMovementStrategy.getNextDirection(initialTile), equalTo(Direction.RIGHT));
         assertThat(randomMovementStrategy.getNextDirection(new TileCoordinate(0, 17)), equalTo(Direction.RIGHT));

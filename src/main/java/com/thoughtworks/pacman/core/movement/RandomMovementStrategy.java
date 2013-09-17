@@ -14,7 +14,6 @@ public class RandomMovementStrategy implements MovementStrategy {
     private final Random random;
 
     private TileCoordinate previousTile;
-    private TileCoordinate desiredTile;
     private Direction desiredDirection;
 
     public RandomMovementStrategy(SpacialCoordinate center, Maze maze) {
@@ -28,8 +27,7 @@ public class RandomMovementStrategy implements MovementStrategy {
     }
 
     public void jump(TileCoordinate tileCoordinate) {
-        this.previousTile = tileCoordinate;
-        this.desiredTile = tileCoordinate;
+        this.previousTile = null;
         this.desiredDirection = Direction.NONE;
     }
 
@@ -42,22 +40,24 @@ public class RandomMovementStrategy implements MovementStrategy {
     }
 
     public Direction getNextDirection(TileCoordinate currentTile) {
-        if (desiredTile.remainder(maze).equals(currentTile)) {
-            List<TileCoordinate> availableTiles = new ArrayList<TileCoordinate>();
-            List<Direction> availableDirections = new ArrayList<Direction>();
-            for (Direction direction : Direction.validMovements()) {
-                TileCoordinate nextTile = currentTile.add(direction.tileDelta());
-                if (maze.canMove(nextTile) && !nextTile.equals(previousTile)) {
-                    availableDirections.add(direction);
-                    availableTiles.add(nextTile);
-                }
-            }
+        if (!currentTile.equals(previousTile)) {
+            List<Direction> availableDirections = getPossibleDirections(currentTile);
 
-            int randomIndex = random.nextInt(availableTiles.size());
-            desiredTile = availableTiles.get(randomIndex);
+            int randomIndex = random.nextInt(availableDirections.size());
             desiredDirection = availableDirections.get(randomIndex);
             previousTile = currentTile;
         }
         return desiredDirection;
+    }
+
+    List<Direction> getPossibleDirections(TileCoordinate currentTile) {
+        List<Direction> availableDirections = new ArrayList<Direction>();
+        for (Direction direction : Direction.validMovements()) {
+            TileCoordinate nextTile = currentTile.add(direction.tileDelta());
+            if (maze.canMove(nextTile) && !nextTile.remainder(maze).equals(previousTile)) {
+                availableDirections.add(direction);
+            }
+        }
+        return availableDirections;
     }
 }
