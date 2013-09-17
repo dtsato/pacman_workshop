@@ -24,7 +24,7 @@ public class UserControlledMovementStrategyTest {
     @Test
     public void shouldMaintainCurrentDirectionIfNextIsNotSpecified() throws Exception {
         UserControlledMovementStrategy movementStrategy = new UserControlledMovementStrategy(maze, Direction.LEFT);
-        assertThat(movementStrategy.getNextTile(new TileCoordinate(14, 26)), equalTo(new TileCoordinate(13, 26)));
+        assertThat(movementStrategy.getNextDirection(new TileCoordinate(14, 26)), equalTo(Direction.LEFT));
         assertThat(movementStrategy.getDirection(), equalTo(Direction.LEFT));
     }
 
@@ -32,7 +32,7 @@ public class UserControlledMovementStrategyTest {
     public void shouldMaintainCurrentDirectionIfTurnToNextIsImpossible() throws Exception {
         UserControlledMovementStrategy movementStrategy = new UserControlledMovementStrategy(maze, Direction.LEFT);
         movementStrategy.setNextDirection(Direction.DOWN);
-        assertThat(movementStrategy.getNextTile(new TileCoordinate(14, 26)), equalTo(new TileCoordinate(13, 26)));
+        assertThat(movementStrategy.getNextDirection(new TileCoordinate(14, 26)), equalTo(Direction.LEFT));
         assertThat(movementStrategy.isMoving(), is(true));
         assertThat(movementStrategy.getDirection(), equalTo(Direction.LEFT));
     }
@@ -41,7 +41,7 @@ public class UserControlledMovementStrategyTest {
     public void shouldTurnDirectionIfPossible() throws Exception {
         UserControlledMovementStrategy movementStrategy = new UserControlledMovementStrategy(maze, Direction.LEFT);
         movementStrategy.setNextDirection(Direction.RIGHT);
-        assertThat(movementStrategy.getNextTile(new TileCoordinate(14, 26)), equalTo(new TileCoordinate(15, 26)));
+        assertThat(movementStrategy.getNextDirection(new TileCoordinate(14, 26)), equalTo(Direction.RIGHT));
         assertThat(movementStrategy.isMoving(), is(true));
         assertThat(movementStrategy.getDirection(), equalTo(Direction.RIGHT));
     }
@@ -49,7 +49,7 @@ public class UserControlledMovementStrategyTest {
     @Test
     public void shouldStopAndRememberPreviousDirectionIfNextInDesiredDirectionTileIsWall() throws Exception {
         UserControlledMovementStrategy movementStrategy = new UserControlledMovementStrategy(maze, Direction.LEFT);
-        assertThat(movementStrategy.getNextTile(new TileCoordinate(6, 26)), equalTo(new TileCoordinate(6, 26)));
+        assertThat(movementStrategy.getNextDirection(new TileCoordinate(6, 26)), equalTo(Direction.NONE));
         assertThat(movementStrategy.isMoving(), is(false));
         assertThat(movementStrategy.getDirection(), equalTo(Direction.LEFT));
     }
@@ -58,24 +58,24 @@ public class UserControlledMovementStrategyTest {
     public void shouldStopAndRememberPreviousDirectionIfNextInCurrentAndDesiredDirectionTileIsWall() throws Exception {
         UserControlledMovementStrategy movementStrategy = new UserControlledMovementStrategy(maze, Direction.LEFT);
         movementStrategy.setNextDirection(Direction.UP);
-        assertThat(movementStrategy.getNextTile(new TileCoordinate(15, 29)), equalTo(new TileCoordinate(15, 29)));
+        assertThat(movementStrategy.getNextDirection(new TileCoordinate(15, 29)), equalTo(Direction.NONE));
         assertThat(movementStrategy.isMoving(), is(false));
         assertThat(movementStrategy.getDirection(), equalTo(Direction.LEFT));
     }
 
     @Test
-    public void shouldGoToTeleportTileOnTheRight() throws Exception {
+    public void shouldMaintainDirectionAtEdgeOfMazeOnTheRight() throws Exception {
         UserControlledMovementStrategy movementStrategy = new UserControlledMovementStrategy(maze, Direction.LEFT);
         movementStrategy.setNextDirection(Direction.RIGHT);
-        assertThat(movementStrategy.getNextTile(new TileCoordinate(27, 17)), equalTo(new TileCoordinate(28, 17)));
+        assertThat(movementStrategy.getNextDirection(new TileCoordinate(27, 17)), equalTo(Direction.RIGHT));
         assertThat(movementStrategy.getDirection(), equalTo(Direction.RIGHT));
     }
 
     @Test
-    public void shouldGoToTeleportTileOnTheLeft() throws Exception {
+    public void shouldMaintainDirectionAtEdgeOfMazeOnTheLeft() throws Exception {
         UserControlledMovementStrategy movementStrategy = new UserControlledMovementStrategy(maze, Direction.LEFT);
         movementStrategy.setNextDirection(Direction.LEFT);
-        assertThat(movementStrategy.getNextTile(new TileCoordinate(0, 17)), equalTo(new TileCoordinate(-1, 17)));
+        assertThat(movementStrategy.getNextDirection(new TileCoordinate(0, 17)), equalTo(Direction.LEFT));
         assertThat(movementStrategy.getDirection(), equalTo(Direction.LEFT));
     }
 

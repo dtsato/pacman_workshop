@@ -39,7 +39,7 @@ public abstract class Actor {
 
     private void advanceDistance(int distance) {
         TileCoordinate currentTile = center.toTileCoordinate();
-        TileCoordinate nextTile = movementStrategy.getNextTile(currentTile);
+        TileCoordinate nextTile = getNextTile(currentTile);
         SpacialCoordinate nextTileCenter = nextTile.toSpacialCoordinate();
 
         SpacialCoordinate subtract = nextTileCenter.subtract(center);
@@ -61,5 +61,10 @@ public abstract class Actor {
                 center = center.add(movement).remainder(maze);
             }
         }
+    }
+
+    private TileCoordinate getNextTile(TileCoordinate currentTile) {
+        Direction nextDirection = movementStrategy.getNextDirection(currentTile);
+        return currentTile.add(nextDirection.tileDelta());
     }
 }

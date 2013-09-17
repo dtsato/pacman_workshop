@@ -41,7 +41,7 @@ public class RandomMovementStrategy implements MovementStrategy {
         return true;
     }
 
-    public TileCoordinate getNextTile(TileCoordinate currentTile) {
+    public Direction getNextDirection(TileCoordinate currentTile) {
         if (desiredTile.remainder(maze).equals(currentTile)) {
             List<TileCoordinate> availableTiles = new ArrayList<TileCoordinate>();
             List<Direction> availableDirections = new ArrayList<Direction>();
@@ -58,6 +58,6 @@ public class RandomMovementStrategy implements MovementStrategy {
             desiredDirection = availableDirections.get(randomIndex);
             previousTile = currentTile;
         }
-        return desiredTile;
+        return desiredDirection;
     }
 }

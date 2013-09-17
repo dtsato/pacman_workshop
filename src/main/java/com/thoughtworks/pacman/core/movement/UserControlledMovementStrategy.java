@@ -28,14 +28,14 @@ public class UserControlledMovementStrategy implements MovementStrategy {
         return direction != Direction.NONE;
     }
 
-    public TileCoordinate getNextTile(TileCoordinate currentTile) {
+    public Direction getNextDirection(TileCoordinate currentTile) {
         if (allowMove(currentTile, desiredDirection)) {
             direction = desiredDirection;
         } else if (!allowMove(currentTile, direction)) {
             previousDirection = direction;
             direction = Direction.NONE;
         }
-        return currentTile.add(direction.tileDelta());
+        return direction;
     }
 
     public void jump(TileCoordinate tileCoordinate) {

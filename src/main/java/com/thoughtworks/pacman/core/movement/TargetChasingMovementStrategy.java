@@ -9,7 +9,7 @@ public class TargetChasingMovementStrategy implements MovementStrategy {
     public TargetChasingMovementStrategy(Maze maze, TargetStrategy targetStrategy) {
     }
 
-    public TileCoordinate getNextTile(TileCoordinate currentTile) {
+    public Direction getNextDirection(TileCoordinate currentTile) {
         return null;
     }
 

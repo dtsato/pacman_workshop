@@ -4,7 +4,7 @@ import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.TileCoordinate;
 
 public interface MovementStrategy {
-    TileCoordinate getNextTile(TileCoordinate currentTile);
+    Direction getNextDirection(TileCoordinate currentTile);
 
     void jump(TileCoordinate tileCoordinate);
 

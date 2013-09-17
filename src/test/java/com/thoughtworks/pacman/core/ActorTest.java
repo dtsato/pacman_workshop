@@ -58,11 +58,11 @@ public class ActorTest {
     }
 
     @Test
-    public void advance_shouldNotMove_whenCurrentPositionIsCenterOfNextTile() throws Exception {
+    public void advance_shouldNotMove_whenCurrentPositionIsCenterOfTileAndDirectionIsNone() throws Exception {
         int initialX = 10 * Tile.SIZE + Tile.SIZE / 2;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(10, 5));
+        when(movementStrategy.getNextDirection(center.toTileCoordinate())).thenReturn(Direction.NONE);
         Actor actor = new TestActor(maze, center, movementStrategy);
 
         actor.advance(100);
@@ -71,11 +71,11 @@ public class ActorTest {
     }
 
     @Test
-    public void advance_shouldMoveToTileCenter_whenCurrentPositionIsInsideNextTile() throws Exception {
+    public void advance_shouldMoveToTileCenter_whenCurrentPositionIsInsideTileAndDirectionIsNone() throws Exception {
         int initialX = 10 * Tile.SIZE + 1;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(10, 5));
+        when(movementStrategy.getNextDirection(center.toTileCoordinate())).thenReturn(Direction.NONE);
         Actor actor = new TestActor(maze, center, movementStrategy);
 
         actor.advance(70);
@@ -89,7 +89,7 @@ public class ActorTest {
         int initialX = 10 * Tile.SIZE - 1;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(10, 5));
+        when(movementStrategy.getNextDirection(center.toTileCoordinate())).thenReturn(Direction.RIGHT);
         Actor actor = new TestActor(maze, center, movementStrategy);
 
         actor.advance(90);
@@ -103,7 +103,7 @@ public class ActorTest {
         int initialX = 10 * Tile.SIZE - 1;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        when(movementStrategy.getNextTile(any(TileCoordinate.class))).thenReturn(new TileCoordinate(10, 5), new TileCoordinate(10, 6));
+        when(movementStrategy.getNextDirection(any(TileCoordinate.class))).thenReturn(Direction.RIGHT, Direction.DOWN);
         Actor actor = new TestActor(maze, center, movementStrategy);
 
         actor.advance(120);
@@ -117,7 +117,7 @@ public class ActorTest {
         int initialX = 10 * Tile.SIZE + 1;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(10, 6));
+        when(movementStrategy.getNextDirection(center.toTileCoordinate())).thenReturn(Direction.DOWN);
         Actor actor = new TestActor(maze, center, movementStrategy);
 
         actor.advance(100);
@@ -130,7 +130,7 @@ public class ActorTest {
         int initialX = 10 * Tile.SIZE + Tile.SIZE / 2;
         int initialY = 5 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(11, 5));
+        when(movementStrategy.getNextDirection(center.toTileCoordinate())).thenReturn(Direction.RIGHT);
         Actor actor = new TestActor(maze, center, movementStrategy);
 
         actor.advance(100);
@@ -143,7 +143,7 @@ public class ActorTest {
         int initialX = 27 * Tile.SIZE + Tile.SIZE / 2;
         int initialY = 17 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(28, 17));
+        when(movementStrategy.getNextDirection(center.toTileCoordinate())).thenReturn(Direction.RIGHT);
         Actor actor = new TestActor(maze, center, movementStrategy);
 
         actor.advance(100);
@@ -156,7 +156,7 @@ public class ActorTest {
         int initialX = Tile.SIZE / 2;
         int initialY = 17 * Tile.SIZE + Tile.SIZE / 2;
         SpacialCoordinate center = new SpacialCoordinate(initialX, initialY);
-        when(movementStrategy.getNextTile(center.toTileCoordinate())).thenReturn(new TileCoordinate(-1, 17));
+        when(movementStrategy.getNextDirection(center.toTileCoordinate())).thenReturn(Direction.LEFT);
         Actor actor = new TestActor(maze, center, movementStrategy);
 
         actor.advance(100);
