@@ -1,5 +1,11 @@
 package com.thoughtworks.pacman.core.movement;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.when;
+
+import com.thoughtworks.pacman.core.Direction;
+import com.thoughtworks.pacman.core.TileCoordinate;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
 import org.junit.Before;
@@ -34,8 +40,8 @@ public class TargetChasingMovementStrategyTest {
     }
 
     @Test
-    public void getNextTile_shouldDoSomething() {
-        // when(targetStrategy.getTarget()).thenReturn(targetTile);
-        // assertThat(targetChasingMovementStrategy.getNextTile(currentTile), equalTo(desiredTile));
+    public void getNextDirection_shouldDoSomething() {
+        //when(targetStrategy.getTarget()).thenReturn(targetTile);
+        //assertThat(targetChasingMovementStrategy.getNextDirection(currentTile), equalTo(desiredDirection));
     }
 }
