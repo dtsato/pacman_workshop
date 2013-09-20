@@ -67,4 +67,13 @@ public class TileCoordinate {
     public TileCoordinate times(int scale) {
         return new TileCoordinate(x * scale, y * scale);
     }
+
+
+    public TileCoordinate unit() {
+        return new TileCoordinate(unit(x), unit(y));
+    }
+
+    private int unit(int value) {
+        return (int) Math.signum(value);
+    }
 }
