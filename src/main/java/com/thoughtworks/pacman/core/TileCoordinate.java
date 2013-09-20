@@ -63,4 +63,8 @@ public class TileCoordinate {
         result = 31 * result + y;
         return result;
     }
+
+    public TileCoordinate times(int scale) {
+        return new TileCoordinate(x * scale, y * scale);
+    }
 }

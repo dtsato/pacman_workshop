@@ -5,9 +5,7 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class TileCoordinateTest {
 
@@ -34,6 +32,12 @@ public class TileCoordinateTest {
     public void distanceTo_shouldCalculateDistanceToAnotherTileCoordinate() {
         assertThat(new TileCoordinate(0, 1).distanceTo(new TileCoordinate(3, 5)), is(5.0));
         assertThat(new TileCoordinate(1, 1).distanceTo(new TileCoordinate(3, 3)), is(Math.sqrt(8)));
+    }
+
+    @Test
+    public void times_shouldMultipleCoordinates() {
+        final TileCoordinate coordinate = new TileCoordinate(2, 4);
+        assertThat(coordinate.times(3), equalTo(new TileCoordinate(6, 12)));
     }
 
     @Test
