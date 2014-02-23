@@ -5,20 +5,23 @@ What's the problem?
 -------------------
 
 `TileCoordinate`'s `public int x, y` are exposed and used throughout the code.
-* Primitive obssession
-* Data clumps
+* Primitive obsession
+* Data clump
 
 Goal
 ----
 
-Finish the refactoring to use a new class `TileCoordinate`:
+Finish the refactoring to use a new `TileCoordinate` class:
 * Focus on `Maze` class
-* Encapsulate `int x, y` in `TileCoordinate`
+* Encapsulate `int x, y` inside the `TileCoordinate` class
 
 Refactoring Strategy
 --------------------
 
-1. `Maze` currently accepts the tiles built by `MazeBuilder` as `Tile[][]`. In `MazeBuilder` we duplicated the building of the tiles into a different structure: `Map<TileCoordinate, Tile>`. We must add the new structure of tiles to `Maze` constructor:
+1. `Maze` currently accepts the tiles built by `MazeBuilder` as `Tile[][]`. In `MazeBuilder` we duplicated the building
+of the tiles into a different structure: `Map<TileCoordinate, Tile>`. We must add the new structure of tiles to the
+`Maze` constructor:
+
   ```java
   // In MazeBuilder
   Maze build() {
@@ -26,7 +29,9 @@ Refactoring Strategy
       return new Maze(width, height, tiles1, tiles);
   }
   ```
+
   And let `Maze` store the new structure:
+
   ```java
   // In Maze
   private final Map<TileCoordinate, Tile> newTiles;
@@ -37,7 +42,8 @@ Refactoring Strategy
   }
   ```
 
-1. Change method `tileAt(int x, int y)` to use new tile structure:
+1. Change method `tileAt(int x, int y)` to use `newTiles` and the `TileCoordinate` class:
+
   ```java
   // In Maze
   public Tile tileAt(int x, int y) {
@@ -50,7 +56,9 @@ Refactoring Strategy
   }
   ```
 
-1. **Extract a method** `tileAt(TileCoordinate tileCoordinate)` from the existing `tileAt` and make it `public`:
+1. **Extract a method** `tileAt(TileCoordinate tileCoordinate)` from the existing `tileAt(int x, int y)` and make it
+`public`:
+
   ```java
   // In Maze
   public Tile tileAt(int x, int y) {
@@ -63,7 +71,7 @@ Refactoring Strategy
   ```
   _Use your IDE: Extract Method is `Alt+Shift+M` in Eclipse, `Alt+Cmd+M` in IntelliJ._
 
-1. **Safe Delete** `isValid` method.
+1. **Safe Delete** `isValid(int x, int y)` method.
 
   _Use your IDE: `Ctrl+1` and "Remove method" in Eclipse, `Cmd+Del` in IntelliJ._
 
@@ -76,7 +84,8 @@ Refactoring Strategy
   ```
   _Use your IDE: Inline Variable is `Alt+Shift+I` in Eclipse, `Alt+Cmd+N` in IntelliJ._
 
-1. **Inline** `tileAt(int x, int y)` method. Tests for `tileAt(int x, int y)` are now testing our new `tileAt(TileCoordinate tileCoordinate)`.
+1. **Inline** `tileAt(int x, int y)` method. Tests for `tileAt(int x, int y)` are now testing our new
+`tileAt(TileCoordinate tileCoordinate)`.
 
   _Use your IDE: Inline Method is `Alt+Shift+I` in Eclipse, `Alt+Cmd+N` in IntelliJ._
 
@@ -102,7 +111,7 @@ Refactoring Strategy
     }
     ```
 
-  1. Inline back `tileCoordinate` variable:
+  1. Inline `tileCoordinate` variable inside `canMove(int x, int y)`:
     ```java
     public boolean canMove(int x, int y) {
       return canMove(new TileCoordinate(x, y));
@@ -111,19 +120,24 @@ Refactoring Strategy
 
   1. Inline `canMove(int x, int y)` method.
 
-1. Refactor `getScore`, `hasDotsLeft` and `toString` to use `newTiles`: `tiles[y][x]` becomes `newTiles.get(new TileCoordinate(x, y))`.
+1. Refactor `getScore`, `hasDotsLeft` and `toString` in `Maze` class to use `newTiles`. References to `tiles[y][x]` will
+become `newTiles.get(new TileCoordinate(x, y))`.
 
-1. Clean up `Maze` class:
+1. Clean `Maze` class:
 
-  1. **Safe Delete** old structure `tiles`.
+  1. **Safe Delete** `tiles` field.
+
   1. Remove unused constructor argument `tiles`.
 
-     _Use your IDE: `Alt+Shift+C` in Eclipse, `Cmd+F6` in IntelliJ to **Change Method Signature**. It will update uses of the constructor for you._
-  1. Rename new structure tiles `newTiles` to `tiles`.
+     _Use your IDE: `Alt+Shift+C` in Eclipse, `Cmd+F6` in IntelliJ to **Change Method Signature**. It will update all
+     uses of the constructor for you._
 
-1. Clean up `MazeBuilder class`:
+  1. Rename `newTiles` field to `tiles`.
+
+1. Clean `MazeBuilder` class:
 
   1. Remove building of `tiles1` in `build()` method:
+
   ```java
   // In MazeBuilder
   Maze build() {
@@ -132,15 +146,18 @@ Refactoring Strategy
   ```
 
   1. Remove `allTiles[height][x] = tile;` line from `process` method.
+
   1. Remove unused `allTiles` variable.
 
 1. Encapsulate `x` and `y` in `TileCoordinate`:
 
-  1. Find occurrences of `x` or `y` outside of `TileCoordinate` and replace them for just `TileCoordinate`:
+  1. Find occurrences of `x` or `y` outside of `TileCoordinate` class and replace them with the `TileCoordinate`
+  instance that's already there:
 
      _Use your IDE: `Ctrl+Shift+G` in Eclipse, `Alt+F7` in IntelliJ to **Find Occurrences**._
 
-    * Game.advance
+    * In `Game.advance`:
+
       ```java
       public void advance(long timeDeltaInMillis) {
         // ... Lots of code
@@ -150,7 +167,7 @@ Refactoring Strategy
       }
       ```
 
-    * Ghost.getNextTile
+    * In `Ghost.getNextTile`:
       ```java
       protected TileCoordinate getNextTile(TileCoordinate currentTile) {
         // ... Lots of code
@@ -162,7 +179,7 @@ Refactoring Strategy
       }
       ```
 
-    * Pacman.allowMove
+    * In `Pacman.allowMove`:
       ```java
       private boolean allowMove(TileCoordinate tileCoordinate, Direction direction) {
         TileCoordinate nextTile = tileCoordinate.add(direction.tileDelta());
