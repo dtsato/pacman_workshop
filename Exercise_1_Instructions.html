@@ -453,18 +453,19 @@ function setDocumentScrollTop(ypos)
 <h2> <a name="whats-the-problem" class="anchor" href="..md.html#whats-the-problem"><span class="octicon octicon-link"></span></a>What's the problem?</h2> 
 <p><code>TileCoordinate</code>'s <code>public int x, y</code> are exposed and used throughout the code.</p> 
 <ul> 
- <li>Primitive obssession</li> 
- <li>Data clumps</li> 
+ <li>Primitive obsession</li> 
+ <li>Data clump</li> 
 </ul>
 <h2> <a name="goal" class="anchor" href="..md.html#goal"><span class="octicon octicon-link"></span></a>Goal</h2> 
-<p>Finish the refactoring to use a new class <code>TileCoordinate</code>:</p> 
+<p>Finish the refactoring to use a new <code>TileCoordinate</code> class:</p> 
 <ul> 
  <li>Focus on <code>Maze</code> class</li> 
- <li>Encapsulate <code>int x, y</code> in <code>TileCoordinate</code> </li> 
+ <li>Encapsulate <code>int x, y</code> inside the <code>TileCoordinate</code> class</li> 
 </ul>
 <h2> <a name="refactoring-strategy" class="anchor" href="..md.html#refactoring-strategy"><span class="octicon octicon-link"></span></a>Refactoring Strategy</h2> 
+<p><em>Tip: for steps <strong>in bold</strong>, there is a recommended shortcut you can use to make it simpler. Refer to the table at the end of this page for IDE specific shortcuts.</em></p> 
 <ol> 
- <li> <p><code>Maze</code> currently accepts the tiles built by <code>MazeBuilder</code> as <code>Tile[][]</code>. In <code>MazeBuilder</code> we duplicated the building of the tiles into a different structure: <code>Map&lt;TileCoordinate, Tile&gt;</code>. We must add the new structure of tiles to <code>Maze</code> constructor:</p> 
+ <li> <p><code>Maze</code> currently accepts the tiles built by <code>MazeBuilder</code> as <code>Tile[][]</code>. In <code>MazeBuilder</code> we duplicated the building of the tiles into a different structure: <code>Map&lt;TileCoordinate, Tile&gt;</code>. We must add the new structure of tiles to the <code>Maze</code> constructor:</p> 
   <div class="highlight highlight-java">
    <pre><span class="c1">// In MazeBuilder</span>
 <span class="n">Maze</span> <span class="nf">build</span><span class="o">()</span> <span class="o">{</span>
@@ -483,7 +484,7 @@ function setDocumentScrollTop(ypos)
 <span class="o">}</span>
 </pre>
   </div> </li> 
- <li> <p>Change method <code>tileAt(int x, int y)</code> to use new tile structure:</p> 
+ <li> <p>Change method <code>tileAt(int x, int y)</code> to use <code>newTiles</code> and the <code>TileCoordinate</code> class:</p> 
   <div class="highlight highlight-java">
    <pre><span class="c1">// In Maze</span>
 <span class="kd">public</span> <span class="n">Tile</span> <span class="nf">tileAt</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
@@ -496,7 +497,7 @@ function setDocumentScrollTop(ypos)
 <span class="o">}</span>
 </pre>
   </div> </li> 
- <li> <p><strong>Extract a method</strong> <code>tileAt(TileCoordinate tileCoordinate)</code> from the existing <code>tileAt</code> and make it <code>public</code>:</p> 
+ <li> <p><strong>Extract method</strong> <code>tileAt(TileCoordinate tileCoordinate)</code> from the existing <code>tileAt(int x, int y)</code> and make it <code>public</code>:</p> 
   <div class="highlight highlight-java">
    <pre><span class="c1">// In Maze</span>
 <span class="kd">public</span> <span class="n">Tile</span> <span class="nf">tileAt</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
@@ -507,20 +508,20 @@ function setDocumentScrollTop(ypos)
   <span class="c1">// Extracted code is here</span>
 <span class="o">}</span>
 </pre>
-  </div> <p><em>Use your IDE: Extract Method is <code>Alt+Shift+M</code> in Eclipse, <code>Alt+Cmd+M</code> in IntelliJ.</em></p> </li> 
- <li> <p><strong>Safe Delete</strong> <code>isValid</code> method.</p> <p><em>Use your IDE: <code>Ctrl+1</code> and &quot;Remove method&quot; in Eclipse, <code>Cmd+Del</code> in IntelliJ.</em></p> </li> 
- <li> <p><strong>Inline</strong> <code>tileCoordinate</code> variable in <code>tileAt(int x, int y)</code> method.</p> 
+  </div> </li> 
+ <li><p><strong>Safe delete</strong> <code>isValid(int x, int y)</code> method.</p></li> 
+ <li> <p><strong>Inline variable</strong> <code>tileCoordinate</code> in <code>tileAt(int x, int y)</code> method.</p> 
   <div class="highlight highlight-java">
    <pre><span class="c1">// In Maze</span>
 <span class="kd">public</span> <span class="n">Tile</span> <span class="nf">tileAt</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
   <span class="k">return</span> <span class="nf">tileAt</span><span class="o">(</span><span class="k">new</span> <span class="n">TileCoordinate</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">));</span>
 <span class="o">}</span>
 </pre>
-  </div> <p><em>Use your IDE: Inline Variable is <code>Alt+Shift+I</code> in Eclipse, <code>Alt+Cmd+N</code> in IntelliJ.</em></p> </li> 
- <li> <p><strong>Inline</strong> <code>tileAt(int x, int y)</code> method. Tests for <code>tileAt(int x, int y)</code> are now testing our new <code>tileAt(TileCoordinate tileCoordinate)</code>.</p> <p><em>Use your IDE: Inline Method is <code>Alt+Shift+I</code> in Eclipse, <code>Alt+Cmd+N</code> in IntelliJ.</em></p> </li> 
+  </div> </li> 
+ <li><p><strong>Inline method</strong> <code>tileAt(int x, int y)</code>. Tests for <code>tileAt(int x, int y)</code> are now testing our new <code>tileAt(TileCoordinate tileCoordinate)</code>.</p></li> 
  <li> <p>Repeat the same approach (steps 2-6) for <code>canMove(int x, int y)</code>:</p> 
   <ol> 
-   <li> <p>Extract <code>tileCoordinate</code> variable:</p> 
+   <li> <p><strong>Extract variable</strong> <code>tileCoordinate</code>:</p> 
     <div class="highlight highlight-java">
      <pre><span class="c1">// In Maze</span>
 <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">canMove</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
@@ -529,7 +530,7 @@ function setDocumentScrollTop(ypos)
 <span class="o">}</span>
 </pre>
     </div> </li> 
-   <li> <p>Extract <code>canMove(TileCoordinate tileCoordinate)</code> method and make it <code>public</code>:</p> 
+   <li> <p><strong>Extract method</strong> <code>canMove(TileCoordinate tileCoordinate)</code> and make it <code>public</code>:</p> 
     <div class="highlight highlight-java">
      <pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">canMove</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
   <span class="n">TileCoordinate</span> <span class="n">tileCoordinate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TileCoordinate</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
@@ -540,23 +541,23 @@ function setDocumentScrollTop(ypos)
 <span class="o">}</span>
 </pre>
     </div> </li> 
-   <li> <p>Inline back <code>tileCoordinate</code> variable:</p> 
+   <li> <p><strong>Inline variable</strong> <code>tileCoordinate</code> inside <code>canMove(int x, int y)</code>:</p> 
     <div class="highlight highlight-java">
      <pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">canMove</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
   <span class="k">return</span> <span class="nf">canMove</span><span class="o">(</span><span class="k">new</span> <span class="n">TileCoordinate</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">));</span>
 <span class="o">}</span>
 </pre>
     </div> </li> 
-   <li><p>Inline <code>canMove(int x, int y)</code> method.</p></li> 
+   <li><p><strong>Inline method</strong> <code>canMove(int x, int y)</code>.</p></li> 
   </ol> </li> 
- <li><p>Refactor <code>getScore</code>, <code>hasDotsLeft</code> and <code>toString</code> to use <code>newTiles</code>: <code>tiles[y][x]</code> becomes <code>newTiles.get(new TileCoordinate(x, y))</code>.</p></li> 
- <li> <p>Clean up <code>Maze</code> class:</p> 
+ <li><p>Refactor <code>getScore</code>, <code>hasDotsLeft</code> and <code>toString</code> in <code>Maze</code> class to use <code>newTiles</code>. References to <code>tiles[y][x]</code> will become <code>newTiles.get(new TileCoordinate(x, y))</code>.</p></li> 
+ <li> <p>Clean <code>Maze</code> class:</p> 
   <ol> 
-   <li> <strong>Safe Delete</strong> old structure <code>tiles</code>.</li> 
-   <li> <p>Remove unused constructor argument <code>tiles</code>.</p> <p><em>Use your IDE: <code>Alt+Shift+C</code> in Eclipse, <code>Cmd+F6</code> in IntelliJ to <strong>Change Method Signature</strong>. It will update uses of the constructor for you.</em></p> </li> 
-   <li>Rename new structure tiles <code>newTiles</code> to <code>tiles</code>.</li> 
+   <li><p><strong>Safe delete</strong> unused <code>tiles</code> field.</p></li> 
+   <li><p><strong>Change method signature</strong> on <code>Maze</code> constructor to remove unused argument <code>tiles</code>.</p></li> 
+   <li><p><strong>Rename</strong> <code>newTiles</code> field to <code>tiles</code>.</p></li> 
   </ol> </li> 
- <li> <p>Clean up <code>MazeBuilder class</code>:</p> 
+ <li> <p>Clean <code>MazeBuilder</code> class:</p> 
   <ol> 
    <li>Remove building of <code>tiles1</code> in <code>build()</code> method:</li> 
   </ol> 
@@ -568,24 +569,23 @@ function setDocumentScrollTop(ypos)
 </pre>
   </div> 
   <ol> 
-   <li>Remove <code>allTiles[height][x] = tile;</code> line from <code>process</code> method.</li> 
-   <li>Remove unused <code>allTiles</code> variable.</li> 
+   <li><p>Remove <code>allTiles[height][x] = tile;</code> line from <code>process</code> method.</p></li> 
+   <li><p><strong>Safe delete</strong> unused <code>allTiles</code> variable.</p></li> 
   </ol> </li> 
  <li> <p>Encapsulate <code>x</code> and <code>y</code> in <code>TileCoordinate</code>:</p> 
   <ol> 
-   <li> <p>Find occurrences of <code>x</code> or <code>y</code> outside of <code>TileCoordinate</code> and replace them for just <code>TileCoordinate</code>:</p> <p><em>Use your IDE: <code>Ctrl+Shift+G</code> in Eclipse, <code>Alt+F7</code> in IntelliJ to <strong>Find Occurrences</strong>.</em></p> 
+   <li> <p><strong>Find occurrences</strong> of <code>x</code> or <code>y</code> outside of <code>TileCoordinate</code> class and replace them with the <code>TileCoordinate</code> instance that's already there:</p> 
     <ul> 
-     <li> <p>Game.advance</p> 
+     <li> <p>In <code>Game.advance</code>:</p> 
       <div class="highlight highlight-java">
        <pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">advance</span><span class="o">(</span><span class="kt">long</span> <span class="n">timeDeltaInMillis</span><span class="o">)</span> <span class="o">{</span>
   <span class="c1">// ... Lots of code</span>
-  <span class="n">Tile</span> <span class="n">pacmanTile</span> <span class="o">=</span> <span class="n">maze</span><span class="o">.</span><span class="na">tileAt</span><span class="o">(</span><span class="n">tileCoordinate</span><span class="o">);</span>
   <span class="n">Tile</span> <span class="n">pacmanTile</span> <span class="o">=</span> <span class="n">maze</span><span class="o">.</span><span class="na">tileAt</span><span class="o">(</span><span class="n">tileCoordinate</span><span class="o">);</span>
   <span class="n">pacmanTile</span><span class="o">.</span><span class="na">visit</span><span class="o">(</span><span class="n">pacmanTileVisitor</span><span class="o">);</span>
 <span class="o">}</span>
 </pre>
       </div> </li> 
-     <li> <p>Ghost.getNextTile</p> 
+     <li> <p>In <code>Ghost.getNextTile</code>:</p> 
       <div class="highlight highlight-java">
        <pre><span class="kd">protected</span> <span class="n">TileCoordinate</span> <span class="nf">getNextTile</span><span class="o">(</span><span class="n">TileCoordinate</span> <span class="n">currentTile</span><span class="o">)</span> <span class="o">{</span>
   <span class="c1">// ... Lots of code</span>
@@ -597,7 +597,7 @@ function setDocumentScrollTop(ypos)
 <span class="o">}</span>
 </pre>
       </div> </li> 
-     <li> <p>Pacman.allowMove</p> 
+     <li> <p>In <code>Pacman.allowMove</code>:</p> 
       <div class="highlight highlight-java">
        <pre><span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">allowMove</span><span class="o">(</span><span class="n">TileCoordinate</span> <span class="n">tileCoordinate</span><span class="o">,</span> <span class="n">Direction</span> <span class="n">direction</span><span class="o">)</span> <span class="o">{</span>
   <span class="n">TileCoordinate</span> <span class="n">nextTile</span> <span class="o">=</span> <span class="n">tileCoordinate</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">direction</span><span class="o">.</span><span class="na">tileDelta</span><span class="o">());</span>
@@ -608,8 +608,79 @@ function setDocumentScrollTop(ypos)
     </ul> </li> 
   </ol> 
   <ol> 
-   <li>Make <code>x</code> and <code>y</code> private: <code>java public class TileCoordinate { private final int x; private final int y; // Code } </code> </li> 
+   <li> <p>Make <code>x</code> and <code>y</code> private:</p> 
+    <div class="highlight highlight-java">
+     <pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TileCoordinate</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
+    <span class="c1">// Code</span>
+<span class="o">}</span>
+</pre>
+    </div> </li> 
   </ol> </li> 
 </ol>
+<h2> <a name="shortcut-cheatsheet" class="anchor" href="..md.html#shortcut-cheatsheet"><span class="octicon octicon-link"></span></a>Shortcut Cheatsheet</h2> 
+<table> 
+ <thead>
+  <tr> 
+   <th>Refactoring</th> 
+   <th>Eclipse on Windows/Linux</th> 
+   <th>Eclipse on Mac</th> 
+   <th>IntelliJ on Windows/Linux</th> 
+   <th>IntelliJ on Mac</th> 
+  </tr>
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Change Method Signature</td> 
+   <td><code>Alt+Shift+M</code></td> 
+   <td>No shortcut. Use menu.</td> 
+   <td><code>Ctrl+F6</code></td> 
+   <td><code>Cmd+F6</code></td> 
+  </tr> 
+  <tr> 
+   <td>Extract Method</td> 
+   <td><code>Alt+Shift+M</code></td> 
+   <td><code>Cmd+Alt+M</code></td> 
+   <td><code>Ctrl+Alt+M</code></td> 
+   <td><code>Cmd+Alt+M</code></td> 
+  </tr> 
+  <tr> 
+   <td>Extract Variable</td> 
+   <td><code>Alt+Shift+L</code></td> 
+   <td><code>Cmd+Alt+L</code></td> 
+   <td><code>Ctrl+Alt+V</code></td> 
+   <td><code>Cmd+Alt+V</code></td> 
+  </tr> 
+  <tr> 
+   <td>Find Occurrences</td> 
+   <td><code>Ctrl+Shift+G</code></td> 
+   <td><code>Cmd+Shift+G</code></td> 
+   <td><code>Alt+F7</code></td> 
+   <td><code>Alt+F7</code></td> 
+  </tr> 
+  <tr> 
+   <td>Inline Variable/Method</td> 
+   <td><code>Alt+Shift+I</code></td> 
+   <td><code>Cmd+Alt+I</code></td> 
+   <td><code>Ctrl+Alt+N</code></td> 
+   <td><code>Cmd+Alt+N</code></td> 
+  </tr> 
+  <tr> 
+   <td>Rename</td> 
+   <td><code>Alt+Shift+R</code></td> 
+   <td><code>Cmd+Alt+R</code></td> 
+   <td><code>Shift+F6</code></td> 
+   <td><code>Shift+F6</code></td> 
+  </tr> 
+  <tr> 
+   <td>Safe Delete</td> 
+   <td> <code>Ctrl+1</code> and &quot;Remove&quot;</td> 
+   <td> <code>Cmd+1</code> and &quot;Remove&quot;</td> 
+   <td><code>Ctrl+Del</code></td> 
+   <td><code>Cmd+Del</code></td> 
+  </tr> 
+ </tbody> 
+</table>
 </body>
 </html>
