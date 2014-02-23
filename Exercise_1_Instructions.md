@@ -18,6 +18,8 @@ Finish the refactoring to use a new `TileCoordinate` class:
 Refactoring Strategy
 --------------------
 
+_Tip: for steps **in bold**, there is a recommended shortcut you can use to make it simpler. Refer to the table at the end of this page for IDE specific shortcuts._
+
 1. `Maze` currently accepts the tiles built by `MazeBuilder` as `Tile[][]`. In `MazeBuilder` we duplicated the building
 of the tiles into a different structure: `Map<TileCoordinate, Tile>`. We must add the new structure of tiles to the
 `Maze` constructor:
@@ -56,7 +58,7 @@ of the tiles into a different structure: `Map<TileCoordinate, Tile>`. We must ad
   }
   ```
 
-1. **Extract a method** `tileAt(TileCoordinate tileCoordinate)` from the existing `tileAt(int x, int y)` and make it
+1. **Extract method** `tileAt(TileCoordinate tileCoordinate)` from the existing `tileAt(int x, int y)` and make it
 `public`:
 
   ```java
@@ -69,29 +71,25 @@ of the tiles into a different structure: `Map<TileCoordinate, Tile>`. We must ad
     // Extracted code is here
   }
   ```
-  _Use your IDE: Extract Method is `Alt+Shift+M` in Eclipse, `Alt+Cmd+M` in IntelliJ._
 
-1. **Safe Delete** `isValid(int x, int y)` method.
+1. **Safe delete** `isValid(int x, int y)` method.
 
-  _Use your IDE: `Ctrl+1` and "Remove method" in Eclipse, `Cmd+Del` in IntelliJ._
+1. **Inline variable** `tileCoordinate` in `tileAt(int x, int y)` method.
 
-1. **Inline** `tileCoordinate` variable in `tileAt(int x, int y)` method.
   ```java
   // In Maze
   public Tile tileAt(int x, int y) {
     return tileAt(new TileCoordinate(x, y));
   }
   ```
-  _Use your IDE: Inline Variable is `Alt+Shift+I` in Eclipse, `Alt+Cmd+N` in IntelliJ._
 
-1. **Inline** `tileAt(int x, int y)` method. Tests for `tileAt(int x, int y)` are now testing our new
+1. **Inline method** `tileAt(int x, int y)`. Tests for `tileAt(int x, int y)` are now testing our new
 `tileAt(TileCoordinate tileCoordinate)`.
-
-  _Use your IDE: Inline Method is `Alt+Shift+I` in Eclipse, `Alt+Cmd+N` in IntelliJ._
 
 1. Repeat the same approach (steps 2-6) for `canMove(int x, int y)`:
 
-  1. Extract `tileCoordinate` variable:
+  1. **Extract variable** `tileCoordinate`:
+
     ```java
     // In Maze
     public boolean canMove(int x, int y) {
@@ -100,7 +98,8 @@ of the tiles into a different structure: `Map<TileCoordinate, Tile>`. We must ad
     }
     ```
 
-  1. Extract `canMove(TileCoordinate tileCoordinate)` method and make it `public`:
+  1. **Extract method** `canMove(TileCoordinate tileCoordinate)` and make it `public`:
+
     ```java
     public boolean canMove(int x, int y) {
       TileCoordinate tileCoordinate = new TileCoordinate(x, y);
@@ -111,28 +110,26 @@ of the tiles into a different structure: `Map<TileCoordinate, Tile>`. We must ad
     }
     ```
 
-  1. Inline `tileCoordinate` variable inside `canMove(int x, int y)`:
+  1. **Inline variable** `tileCoordinate` inside `canMove(int x, int y)`:
+
     ```java
     public boolean canMove(int x, int y) {
       return canMove(new TileCoordinate(x, y));
     }
     ```
 
-  1. Inline `canMove(int x, int y)` method.
+  1. **Inline method** `canMove(int x, int y)`.
 
 1. Refactor `getScore`, `hasDotsLeft` and `toString` in `Maze` class to use `newTiles`. References to `tiles[y][x]` will
 become `newTiles.get(new TileCoordinate(x, y))`.
 
 1. Clean `Maze` class:
 
-  1. **Safe Delete** `tiles` field.
+  1. **Safe delete** unused `tiles` field.
 
-  1. Remove unused constructor argument `tiles`.
+  1. **Change method signature** on `Maze` constructor to remove unused argument `tiles`.
 
-     _Use your IDE: `Alt+Shift+C` in Eclipse, `Cmd+F6` in IntelliJ to **Change Method Signature**. It will update all
-     uses of the constructor for you._
-
-  1. Rename `newTiles` field to `tiles`.
+  1. **Rename** `newTiles` field to `tiles`.
 
 1. Clean `MazeBuilder` class:
 
@@ -147,14 +144,12 @@ become `newTiles.get(new TileCoordinate(x, y))`.
 
   1. Remove `allTiles[height][x] = tile;` line from `process` method.
 
-  1. Remove unused `allTiles` variable.
+  1. **Safe delete** unused `allTiles` variable.
 
 1. Encapsulate `x` and `y` in `TileCoordinate`:
 
-  1. Find occurrences of `x` or `y` outside of `TileCoordinate` class and replace them with the `TileCoordinate`
+  1. **Find occurrences** of `x` or `y` outside of `TileCoordinate` class and replace them with the `TileCoordinate`
   instance that's already there:
-
-     _Use your IDE: `Ctrl+Shift+G` in Eclipse, `Alt+F7` in IntelliJ to **Find Occurrences**._
 
     * In `Game.advance`:
 
@@ -162,12 +157,12 @@ become `newTiles.get(new TileCoordinate(x, y))`.
       public void advance(long timeDeltaInMillis) {
         // ... Lots of code
         Tile pacmanTile = maze.tileAt(tileCoordinate);
-        Tile pacmanTile = maze.tileAt(tileCoordinate);
         pacmanTile.visit(pacmanTileVisitor);
       }
       ```
 
     * In `Ghost.getNextTile`:
+
       ```java
       protected TileCoordinate getNextTile(TileCoordinate currentTile) {
         // ... Lots of code
@@ -180,6 +175,7 @@ become `newTiles.get(new TileCoordinate(x, y))`.
       ```
 
     * In `Pacman.allowMove`:
+
       ```java
       private boolean allowMove(TileCoordinate tileCoordinate, Direction direction) {
         TileCoordinate nextTile = tileCoordinate.add(direction.tileDelta());
@@ -188,6 +184,7 @@ become `newTiles.get(new TileCoordinate(x, y))`.
       ```
 
   1. Make `x` and `y` private:
+
     ```java
     public class TileCoordinate {
         private final int x;
@@ -195,3 +192,17 @@ become `newTiles.get(new TileCoordinate(x, y))`.
         // Code
     }
     ```
+
+Shortcut Cheatsheet
+-------------------
+
+| Refactoring | Eclipse on Windows/Linux | Eclipse on Mac | IntelliJ on Windows/Linux | IntelliJ on Mac |
+|-------------|--------------------------|----------------|---------------------------|-----------------|
+|Change Method Signature|`Alt+Shift+M`|No shortcut. Use menu.|`Ctrl+F6`               |`Cmd+F6`         |
+|Extract Method|`Alt+Shift+M`            |`Cmd+Alt+M`     |`Ctrl+Alt+M`               |`Cmd+Alt+M`      |
+|Extract Variable|`Alt+Shift+L`          |`Cmd+Alt+L`     |`Ctrl+Alt+V`               |`Cmd+Alt+V`      |
+|Find Occurrences|`Ctrl+Shift+G`         |`Cmd+Shift+G`   |`Alt+F7`                   |`Alt+F7`         |
+|Inline Variable/Method|`Alt+Shift+I`    |`Cmd+Alt+I`     |`Ctrl+Alt+N`               |`Cmd+Alt+N`      |
+|Rename       |`Alt+Shift+R`             |`Cmd+Alt+R`     |`Shift+F6`                 |`Shift+F6`       |
+|Safe Delete  |`Ctrl+1` and "Remove"|`Cmd+1` and "Remove" |`Ctrl+Del`                 |`Cmd+Del`        |
+
