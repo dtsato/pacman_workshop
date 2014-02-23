@@ -62,7 +62,6 @@ public class MazeBuilder {
 
     private int width = 0;
     private int height = 0;
-    private Map<TileCoordinate, Tile> tiles = new HashMap<TileCoordinate, Tile>();
     private Tile[][] allTiles = new Tile[40][40];
 
     Maze build() {
@@ -79,7 +78,6 @@ public class MazeBuilder {
         for (int x = 0; x < row.length(); x++) {
             TileCoordinate coordinate = new TileCoordinate(x, height);
             final Tile tile = createTile(row.charAt(x), coordinate);
-            tiles.put(coordinate, tile);
             allTiles[height][x] = tile;
         }
         width = row.length();
