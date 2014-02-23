@@ -77,7 +77,7 @@ public class MazeBuilder {
     void process(String row) throws Exception {
         for (int x = 0; x < row.length(); x++) {
             TileCoordinate coordinate = new TileCoordinate(x, height);
-            final Tile tile = createTile(row.charAt(x), coordinate);
+            Tile tile = createTile(row.charAt(x), coordinate);
             allTiles[height][x] = tile;
         }
         width = row.length();

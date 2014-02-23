@@ -20,73 +20,96 @@ Refactoring Strategy
 
 _Tip: for steps **in bold**, there is a recommended shortcut you can use to make it simpler. Refer to the table at the end of this page for IDE specific shortcuts._
 
-1. `Maze` currently accepts the tiles built by `MazeBuilder` as `Tile[][]`. In `MazeBuilder` we duplicated the building
-of the tiles into a different structure: `Map<TileCoordinate, Tile>`. We must add the new structure of tiles to the
-`Maze` constructor:
+1. In order for `Maze` to understand `TileCoordinate` instead of `x` and `y`, we must change how it stores the tiles from
+`Tile[][]` to `Map<TileCoordinate, Tile>`. To achieve that, we must first duplicate the data structure in `Maze` and `MazeBuilder`:
 
-  ```java
-  // In MazeBuilder
-  Maze build() {
-      // .. Code that builds up tiles1
-      return new Maze(width, height, tiles1, tiles);
-  }
-  ```
+  1. Add the new tiles format to `MazeBuilder`:
 
-  And let `Maze` store the new structure:
+    ```java
+    // In MazeBuilder
+    private Tile[][] allTiles = new Tile[40][40];
+    private Map<TileCoordinate, Tile> newTiles = new HashMap<>();
+    ```
 
-  ```java
-  // In Maze
-  private final Map<TileCoordinate, Tile> newTiles;
+  1. In `MazeBuilder.process`, add processed tiles to `newTiles` as well:
 
-  Maze(int width, int height, Tile[][] tiles, Map<TileCoordinate, Tile> newTiles) {
-    // ... Assign width, height and tiles
-    this.newTiles = newTiles;
-  }
-  ```
-
-1. Change method `tileAt(int x, int y)` to use `newTiles` and the `TileCoordinate` class:
-
-  ```java
-  // In Maze
-  public Tile tileAt(int x, int y) {
-    TileCoordinate tileCoordinate = new TileCoordinate(x, y);
-    if (newTiles.containsKey(tileCoordinate)) {
-      return newTiles.get(tileCoordinate);
-    } else {
-      return new EmptyTile(tileCoordinate);
+    ```java
+    // In MazeBuilder
+    void process(String row) throws Exception {
+      // .. Code that creates tile and coordinate
+        allTiles[height][x] = tile;
+        newTiles.put(coordinate, tile);
+      // .. More code
     }
-  }
-  ```
+    ```
 
-1. **Extract method** `tileAt(TileCoordinate tileCoordinate)` from the existing `tileAt(int x, int y)` and make it
-`public`:
+  1. Add `newTiles` as an argument to the `Maze` constructor:
 
-  ```java
-  // In Maze
-  public Tile tileAt(int x, int y) {
-    TileCoordinate tileCoordinate = new TileCoordinate(x, y);
-    return tileAt(tileCoordinate);
-  }
-  public Tile tileAt(TileCoordinate tileCoordinate) {
-    // Extracted code is here
-  }
-  ```
+    ```java
+    // In MazeBuilder
+    Maze build() {
+        // .. Code that builds up tiles1
+        return new Maze(width, height, tiles1, tiles);
+    }
+    ```
 
-1. **Safe delete** `isValid(int x, int y)` method.
+  1. And let `Maze` store the new structure:
 
-1. **Inline variable** `tileCoordinate` in `tileAt(int x, int y)` method.
+    ```java
+    // In Maze
+    private final Map<TileCoordinate, Tile> newTiles;
 
-  ```java
-  // In Maze
-  public Tile tileAt(int x, int y) {
-    return tileAt(new TileCoordinate(x, y));
-  }
-  ```
+    Maze(int width, int height, Tile[][] tiles, Map<TileCoordinate, Tile> newTiles) {
+      // ... Assign width, height and tiles
+      this.newTiles = newTiles;
+    }
+    ```
 
-1. **Inline method** `tileAt(int x, int y)`. Tests for `tileAt(int x, int y)` are now testing our new
-`tileAt(TileCoordinate tileCoordinate)`.
+1. Now we will transform `tileAt(int x, int y)` to take a `TileCoordinate` instead:
 
-1. Repeat the same approach (steps 2-6) for `canMove(int x, int y)`:
+  1. Change method `tileAt(int x, int y)` to use `newTiles` and the `TileCoordinate` class:
+
+    ```java
+    // In Maze
+    public Tile tileAt(int x, int y) {
+      TileCoordinate tileCoordinate = new TileCoordinate(x, y);
+      if (newTiles.containsKey(tileCoordinate)) {
+        return newTiles.get(tileCoordinate);
+      } else {
+        return new EmptyTile(tileCoordinate);
+      }
+    }
+    ```
+
+  1. **Extract method** `tileAt(TileCoordinate tileCoordinate)` from the existing `tileAt(int x, int y)` and make it
+  `public`:
+
+    ```java
+    // In Maze
+    public Tile tileAt(int x, int y) {
+      TileCoordinate tileCoordinate = new TileCoordinate(x, y);
+      return tileAt(tileCoordinate);
+    }
+    public Tile tileAt(TileCoordinate tileCoordinate) {
+      // Extracted code is here
+    }
+    ```
+
+  1. **Safe delete** `isValid(int x, int y)` method.
+
+  1. **Inline variable** `tileCoordinate` in `tileAt(int x, int y)` method.
+
+    ```java
+    // In Maze
+    public Tile tileAt(int x, int y) {
+      return tileAt(new TileCoordinate(x, y));
+    }
+    ```
+
+  1. **Inline method** `tileAt(int x, int y)`. Tests for `tileAt(int x, int y)` are now testing our new
+  `tileAt(TileCoordinate tileCoordinate)`.
+
+1. Repeat the same approach for `canMove(int x, int y)`:
 
   1. **Extract variable** `tileCoordinate`:
 
@@ -142,9 +165,9 @@ become `newTiles.get(new TileCoordinate(x, y))`.
   }
   ```
 
-  1. Remove `allTiles[height][x] = tile;` line from `process` method.
+  1. Remove `allTiles[height][x] = tile;` line from `MazeBuilder.process` method.
 
-  1. **Safe delete** unused `allTiles` variable.
+  1. **Safe delete** unused `allTiles` variable from `MazeBuilder`.
 
 1. Encapsulate `x` and `y` in `TileCoordinate`:
 

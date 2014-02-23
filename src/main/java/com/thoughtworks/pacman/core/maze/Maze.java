@@ -9,7 +9,7 @@ import com.thoughtworks.pacman.core.tiles.visitors.DotsLeftVisitor;
 import com.thoughtworks.pacman.core.tiles.visitors.ScoreTileVisitor;
 
 public class Maze {
-    private Tile[][] tiles;
+    private final Tile[][] tiles;
     private final int width;
     private final int height;
 
