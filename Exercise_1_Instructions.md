@@ -18,6 +18,8 @@ Finish the refactoring to use a new `TileCoordinate` class:
 Refactoring Strategy
 --------------------
 
+![Run tests!](run_tests.jpg) _When you see this, remember to run the tests!_
+
 _Tip: for steps **in bold**, there is a recommended shortcut you can use to make it simpler. Refer to the table at the end of this page for IDE specific shortcuts._
 
 1. In order for `Maze` to understand `TileCoordinate` instead of `x` and `y`, we must change how it stores the tiles from
@@ -30,6 +32,7 @@ _Tip: for steps **in bold**, there is a recommended shortcut you can use to make
     private Tile[][] allTiles = new Tile[40][40];
     private Map<TileCoordinate, Tile> newTiles = new HashMap<>();
     ```
+   ![Run tests!](run_tests.jpg)
 
   1. In `MazeBuilder.process`, add processed tiles to `newTiles` as well:
 
@@ -42,6 +45,7 @@ _Tip: for steps **in bold**, there is a recommended shortcut you can use to make
       // .. More code
     }
     ```
+   ![Run tests!](run_tests.jpg)
 
   1. Add `newTiles` as an argument to the `Maze` constructor:
 
@@ -53,7 +57,7 @@ _Tip: for steps **in bold**, there is a recommended shortcut you can use to make
     }
     ```
 
-  1. And let `Maze` store the new structure:
+    And let `Maze` store the new structure:
 
     ```java
     // In Maze
@@ -64,6 +68,7 @@ _Tip: for steps **in bold**, there is a recommended shortcut you can use to make
       this.newTiles = newTiles;
     }
     ```
+   ![Run tests!](run_tests.jpg)
 
 1. Now we will transform `tileAt(int x, int y)` to take a `TileCoordinate` instead:
 
@@ -80,6 +85,7 @@ _Tip: for steps **in bold**, there is a recommended shortcut you can use to make
       }
     }
     ```
+   ![Run tests!](run_tests.jpg)
 
   1. **Extract method** `tileAt(TileCoordinate tileCoordinate)` from the existing `tileAt(int x, int y)` and make it
   `public`:
@@ -95,7 +101,11 @@ _Tip: for steps **in bold**, there is a recommended shortcut you can use to make
     }
     ```
 
+    ![Run tests!](run_tests.jpg)
+
   1. **Safe delete** `isValid(int x, int y)` method.
+
+    ![Run tests!](run_tests.jpg)
 
   1. **Inline variable** `tileCoordinate` in `tileAt(int x, int y)` method.
 
@@ -105,9 +115,12 @@ _Tip: for steps **in bold**, there is a recommended shortcut you can use to make
       return tileAt(new TileCoordinate(x, y));
     }
     ```
+    ![Run tests!](run_tests.jpg)
 
   1. **Inline method** `tileAt(int x, int y)`. Tests for `tileAt(int x, int y)` are now testing our new
   `tileAt(TileCoordinate tileCoordinate)`.
+
+    ![Run tests!](run_tests.jpg)
 
 1. Repeat the same approach for `canMove(int x, int y)`:
 
@@ -121,6 +134,8 @@ _Tip: for steps **in bold**, there is a recommended shortcut you can use to make
     }
     ```
 
+    ![Run tests!](run_tests.jpg)
+
   1. **Extract method** `canMove(TileCoordinate tileCoordinate)` and make it `public`:
 
     ```java
@@ -133,6 +148,8 @@ _Tip: for steps **in bold**, there is a recommended shortcut you can use to make
     }
     ```
 
+    ![Run tests!](run_tests.jpg)
+
   1. **Inline variable** `tileCoordinate` inside `canMove(int x, int y)`:
 
     ```java
@@ -141,33 +158,51 @@ _Tip: for steps **in bold**, there is a recommended shortcut you can use to make
     }
     ```
 
+    ![Run tests!](run_tests.jpg)
+
   1. **Inline method** `canMove(int x, int y)`.
+
+    ![Run tests!](run_tests.jpg)
 
 1. Refactor `getScore`, `hasDotsLeft` and `toString` in `Maze` class to use `newTiles`. References to `tiles[y][x]` will
 become `newTiles.get(new TileCoordinate(x, y))`.
+
+    ![Run tests!](run_tests.jpg)
 
 1. Clean `Maze` class:
 
   1. **Safe delete** unused `tiles` field.
 
+    ![Run tests!](run_tests.jpg)
+
   1. **Change method signature** on `Maze` constructor to remove unused argument `tiles`.
 
+    ![Run tests!](run_tests.jpg)
+
   1. **Rename** `newTiles` field to `tiles`.
+
+    ![Run tests!](run_tests.jpg)
 
 1. Clean `MazeBuilder` class:
 
   1. Remove building of `tiles1` in `build()` method:
 
-  ```java
-  // In MazeBuilder
-  Maze build() {
-    return new Maze(width, height, tiles);
-  }
-  ```
+    ```java
+    // In MazeBuilder
+    Maze build() {
+      return new Maze(width, height, tiles);
+    }
+    ```
+
+    ![Run tests!](run_tests.jpg)
 
   1. Remove `allTiles[height][x] = tile;` line from `MazeBuilder.process` method.
 
+    ![Run tests!](run_tests.jpg)
+
   1. **Safe delete** unused `allTiles` variable from `MazeBuilder`.
+
+    ![Run tests!](run_tests.jpg)
 
 1. Encapsulate `x` and `y` in `TileCoordinate`:
 
@@ -184,6 +219,8 @@ become `newTiles.get(new TileCoordinate(x, y))`.
       }
       ```
 
+      ![Run tests!](run_tests.jpg)
+
     * In `Ghost.getNextTile`:
 
       ```java
@@ -197,6 +234,8 @@ become `newTiles.get(new TileCoordinate(x, y))`.
       }
       ```
 
+      ![Run tests!](run_tests.jpg)
+
     * In `Pacman.allowMove`:
 
       ```java
@@ -205,6 +244,8 @@ become `newTiles.get(new TileCoordinate(x, y))`.
         return maze.canMove(nextTile);
       }
       ```
+
+      ![Run tests!](run_tests.jpg)
 
   1. Make `x` and `y` private:
 
@@ -215,6 +256,8 @@ become `newTiles.get(new TileCoordinate(x, y))`.
         // Code
     }
     ```
+
+    ![Run tests!](run_tests.jpg)
 
 Shortcut Cheatsheet
 -------------------
