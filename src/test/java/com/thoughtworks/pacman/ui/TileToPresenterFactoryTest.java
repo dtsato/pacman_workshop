@@ -10,7 +10,6 @@ import com.thoughtworks.pacman.ui.presenters.WallPresenter;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 public class TileToPresenterFactoryTest {
