@@ -16,7 +16,7 @@ public class GamePresenter implements Presenter {
     public GamePresenter(Game game) {
         mazePresenter = new MazePresenter(game.getMaze());
         pacmanPresenter = new PacmanPresenter(game.getPacman());
-        ghostPresenters = new LinkedList<>();
+        ghostPresenters = new LinkedList<GhostPresenter>();
         for (Ghost ghost : game.getGhosts()) {
             ghostPresenters.add(new GhostPresenter(ghost));
         }
