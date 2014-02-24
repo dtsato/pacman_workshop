@@ -1,11 +1,17 @@
 package com.thoughtworks.pacman.core;
 
-import com.thoughtworks.pacman.core.maze.Maze;
-import com.thoughtworks.pacman.core.maze.MazeBuilder;
-import org.junit.Test;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+
+import org.junit.Test;
+
+import com.thoughtworks.pacman.core.actors.Pacman;
+import com.thoughtworks.pacman.core.maze.Maze;
+import com.thoughtworks.pacman.core.maze.MazeBuilder;
 
 public class GameTest {
     @Test
@@ -38,5 +44,48 @@ public class GameTest {
         Game game = new Game();
 
         assertThat(game.lost(), is(false));
+    }
+
+    @Test
+    public void advance_shouldDoNothing_whenPacmanIsDead() throws Exception {
+        Maze maze = MazeBuilder.buildDefaultMaze();
+        Pacman pacman = spy(new Pacman(maze));
+        Ghosts ghosts = spy(new Ghosts(maze));
+        Game game = new Game(maze, pacman, ghosts);
+        when(pacman.isDead()).thenReturn(true);
+
+        game.advance(10);
+
+        verify(pacman).isDead();
+        verifyNoMoreInteractions(pacman, ghosts);
+    }
+
+    @Test
+    public void advance_shouldFreeGhostsAndAdvanceActors_whenPacmanIsNotDead() throws Exception {
+        Maze maze = MazeBuilder.buildDefaultMaze();
+        Pacman pacman = spy(new Pacman(maze));
+        Ghosts ghosts = spy(new Ghosts(maze));
+        Game game = new Game(maze, pacman, ghosts);
+        when(pacman.isDead()).thenReturn(false);
+
+        game.advance(10);
+
+        verify(ghosts).freeGhostsBasedOnScore(0);
+        verify(pacman).advance(10);
+        verify(ghosts).advance(10);
+    }
+
+    @Test
+    public void advance_shouldTellPacmanToDie_whenGhostsKillPacman() throws Exception {
+        Maze maze = MazeBuilder.buildDefaultMaze();
+        Pacman pacman = spy(new Pacman(maze));
+        Ghosts ghosts = spy(new Ghosts(maze));
+        Game game = new Game(maze, pacman, ghosts);
+        when(pacman.isDead()).thenReturn(false);
+        when(ghosts.killed(pacman)).thenReturn(true);
+
+        game.advance(10);
+
+        verify(pacman).die();
     }
 }
