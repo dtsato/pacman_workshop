@@ -2,10 +2,16 @@ package com.thoughtworks.pacman.core;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.thoughtworks.pacman.core.actors.Ghost;
+import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
 
@@ -77,5 +83,65 @@ public class GhostsTest {
         ghosts.freeGhostsBasedOnScore(601);
 
         assertThat(ghosts.getClyde().isTrapped(), is(false));
+    }
+
+    @Test
+    public void advance_shouldAdvanceAllGhosts() throws Exception {
+        Ghost g1 = mock(Ghost.class);
+        Ghost g2 = mock(Ghost.class);
+        Ghost g3 = mock(Ghost.class);
+        Ghost g4 = mock(Ghost.class);
+        Ghosts ghosts = new Ghosts(g1, g2, g3, g4);
+
+        ghosts.advance(20);
+
+        verify(g1).advance(20);
+        verify(g2).advance(20);
+        verify(g3).advance(20);
+        verify(g4).advance(20);
+    }
+
+    @Test
+    public void killed_shuldBeTrueWhenBlinkyCollidesWithPacman() throws Exception {
+        Pacman pacman = mock(Pacman.class);
+        when(pacman.collidesWith(any(Ghost.class))).thenReturn(false);
+        when(pacman.collidesWith(ghosts.getBlinky())).thenReturn(true);
+
+        assertThat(ghosts.killed(pacman), is(true));
+    }
+
+    @Test
+    public void killed_shuldBeTrueWhenPinkyCollidesWithPacman() throws Exception {
+        Pacman pacman = mock(Pacman.class);
+        when(pacman.collidesWith(any(Ghost.class))).thenReturn(false);
+        when(pacman.collidesWith(ghosts.getPinky())).thenReturn(true);
+
+        assertThat(ghosts.killed(pacman), is(true));
+    }
+
+    @Test
+    public void killed_shuldBeTrueWhenInkyCollidesWithPacman() throws Exception {
+        Pacman pacman = mock(Pacman.class);
+        when(pacman.collidesWith(any(Ghost.class))).thenReturn(false);
+        when(pacman.collidesWith(ghosts.getInky())).thenReturn(true);
+
+        assertThat(ghosts.killed(pacman), is(true));
+    }
+
+    @Test
+    public void killed_shuldBeTrueWhenClydeCollidesWithPacman() throws Exception {
+        Pacman pacman = mock(Pacman.class);
+        when(pacman.collidesWith(any(Ghost.class))).thenReturn(false);
+        when(pacman.collidesWith(ghosts.getClyde())).thenReturn(true);
+
+        assertThat(ghosts.killed(pacman), is(true));
+    }
+
+    @Test
+    public void killed_shuldBeFalseWhenNoGhostCollidesWithPacman() throws Exception {
+        Pacman pacman = mock(Pacman.class);
+        when(pacman.collidesWith(any(Ghost.class))).thenReturn(false);
+
+        assertThat(ghosts.killed(pacman), is(false));
     }
 }
