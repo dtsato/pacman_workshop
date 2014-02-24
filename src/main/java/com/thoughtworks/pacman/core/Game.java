@@ -65,13 +65,9 @@ public class Game {
         ghosts.freeGhostsBasedOnScore(maze.getScore());
 
         pacman.advance(timeDeltaInMillis);
-        ghosts.getBlinky().advance(timeDeltaInMillis);
-        ghosts.getPinky().advance(timeDeltaInMillis);
-        ghosts.getInky().advance(timeDeltaInMillis);
-        ghosts.getClyde().advance(timeDeltaInMillis);
+        ghosts.advance(timeDeltaInMillis);
 
-        if (pacman.collidesWith(ghosts.getBlinky()) || pacman.collidesWith(ghosts.getPinky()) || pacman.collidesWith(ghosts.getInky())
-                || pacman.collidesWith(ghosts.getClyde())) {
+        if (ghosts.killed(pacman)) {
             pacman.die();
         }
 

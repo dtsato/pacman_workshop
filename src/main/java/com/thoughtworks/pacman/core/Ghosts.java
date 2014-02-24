@@ -2,6 +2,7 @@ package com.thoughtworks.pacman.core;
 
 import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.core.actors.GhostType;
+import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.Maze;
 
 public class Ghosts {
@@ -48,5 +49,17 @@ public class Ghosts {
         } else if (clyde.isTrapped() && score > 600) {
             clyde.free();
         }        
+    }
+
+    public void advance(long timeDeltaInMillis) {
+        blinky.advance(timeDeltaInMillis);
+        pinky.advance(timeDeltaInMillis);
+        inky.advance(timeDeltaInMillis);
+        clyde.advance(timeDeltaInMillis);
+    }
+
+    public boolean killed(Pacman pacman) {
+        return pacman.collidesWith(blinky) || pacman.collidesWith(pinky) || pacman.collidesWith(inky)
+                || pacman.collidesWith(clyde);
     }
 }
