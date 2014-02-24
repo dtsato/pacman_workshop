@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.SpacialCoordinate;
 import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.ui.Presenter;
@@ -34,8 +33,7 @@ public class PacmanPresenter implements Presenter {
     }
 
     int getStartAngle() {
-        Direction direction = pacman.isMoving() ? pacman.getDirection() : pacman.getPreviousDirection();
-        return direction.getStartAngle();
+        return pacman.getDirection().getStartAngle();
     }
 
     int getArcAngle() {

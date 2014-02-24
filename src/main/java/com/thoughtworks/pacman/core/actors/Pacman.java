@@ -40,11 +40,7 @@ public class Pacman extends Actor {
     }
 
     public Direction getDirection() {
-        return direction;
-    }
-
-    public Direction getPreviousDirection() {
-        return previousDirection;
+        return isMoving() ? direction : previousDirection;
     }
 
     public boolean isMoving() {
