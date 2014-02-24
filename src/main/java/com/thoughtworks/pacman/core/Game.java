@@ -19,13 +19,17 @@ public class Game {
     }
 
     public Game(Maze maze) {
-        this(maze, new Pacman(maze));
+        this(maze, new Pacman(maze), null);
     }
 
-    public Game(Maze maze, Pacman pacman) {
+    public Game(Maze maze, Pacman pacman, Ghosts ghosts) {
         this.maze = maze;
         this.pacman = pacman;
-        this.ghosts = new Ghosts(this);
+        if (ghosts == null) {
+            this.ghosts = new Ghosts(this);
+        } else {
+            this.ghosts = ghosts;
+        }
         this.pacmanTileVisitor = new PacmanTileVisitor();
     }
 

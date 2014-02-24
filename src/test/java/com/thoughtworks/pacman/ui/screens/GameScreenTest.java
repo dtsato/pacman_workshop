@@ -18,6 +18,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Game;
+import com.thoughtworks.pacman.core.Ghosts;
 import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
@@ -33,12 +34,14 @@ public class GameScreenTest {
     private GamePresenter gamePresenter;
     @Mock
     private Maze maze;
+    @Mock
+    private Ghosts ghosts;
 
     @Test
     public void draw_shouldAdvanceGameWithTimeDelta() throws Exception {
         Maze maze = MazeBuilder.buildDefaultMaze();
         Pacman pacman = spy(new Pacman(maze));
-        Game game = new Game(maze, pacman);
+        Game game = new Game(maze, pacman, ghosts);
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         Thread.sleep(1); // Some time for pacman to move
@@ -77,7 +80,7 @@ public class GameScreenTest {
     @Test
     public void keyPressed_shouldMovePacmanLeft() throws Exception {
         Pacman pacman = spy(new Pacman(maze));
-        Game game = new Game(maze, pacman);
+        Game game = new Game(maze, pacman, ghosts);
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_LEFT);
@@ -89,7 +92,7 @@ public class GameScreenTest {
     @Test
     public void keyPressed_shouldMovePacmanRight() throws Exception {
         Pacman pacman = spy(new Pacman(maze));
-        Game game = new Game(maze, pacman);
+        Game game = new Game(maze, pacman, ghosts);
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_RIGHT);
@@ -101,7 +104,7 @@ public class GameScreenTest {
     @Test
     public void keyPressed_shouldMovePacmanUp() throws Exception {
         Pacman pacman = spy(new Pacman(maze));
-        Game game = new Game(maze, pacman);
+        Game game = new Game(maze, pacman, ghosts);
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_UP);
@@ -113,7 +116,7 @@ public class GameScreenTest {
     @Test
     public void keyPressed_shouldMovePacmanDown() throws Exception {
         Pacman pacman = spy(new Pacman(maze));
-        Game game = new Game(maze, pacman);
+        Game game = new Game(maze, pacman, ghosts);
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_DOWN);
