@@ -1,18 +1,17 @@
 package com.thoughtworks.pacman.core;
 
+import java.awt.Dimension;
+
 import com.thoughtworks.pacman.core.actors.Ghost;
 import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
 import com.thoughtworks.pacman.core.tiles.visitors.PacmanTileVisitor;
-import com.thoughtworks.pacman.core.actors.GhostType;
-
-import java.awt.Dimension;
 
 public class Game {
     private final Maze maze;
     private final Pacman pacman;
-    private final Ghost blinky, pinky, inky, clyde;
+    private final Ghosts ghosts;
     private final PacmanTileVisitor pacmanTileVisitor;
 
     public Game() throws Exception {
@@ -26,10 +25,7 @@ public class Game {
     public Game(Maze maze, Pacman pacman) {
         this.maze = maze;
         this.pacman = pacman;
-        this.blinky = new Ghost(this, GhostType.BLINKY);
-        this.pinky = new Ghost(this, GhostType.PINKY);
-        this.inky = new Ghost(this, GhostType.INKY);
-        this.clyde = new Ghost(this, GhostType.CLYDE);
+        this.ghosts = new Ghosts(this);
         this.pacmanTileVisitor = new PacmanTileVisitor();
     }
 
@@ -46,19 +42,19 @@ public class Game {
     }
 
     public Ghost getBlinky() {
-        return blinky;
+        return ghosts.getBlinky();
     }
 
     public Ghost getPinky() {
-        return pinky;
+        return ghosts.getPinky();
     }
 
     public Ghost getInky() {
-        return inky;
+        return ghosts.getInky();
     }
 
     public Ghost getClyde() {
-        return clyde;
+        return ghosts.getClyde();
     }
 
     public void advance(long timeDeltaInMillis) {
@@ -66,24 +62,16 @@ public class Game {
             return;
         }
 
-        if (blinky.isTrapped()) {
-            blinky.free();
-        } else if (pinky.isTrapped()) {
-            pinky.free();
-        } else if (inky.isTrapped() && maze.getScore() > 300) {
-            inky.free();
-        } else if (clyde.isTrapped() && maze.getScore() > 600) {
-            clyde.free();
-        }
+        ghosts.freeGhostsBasedOnScore(maze.getScore());
 
         pacman.advance(timeDeltaInMillis);
-        blinky.advance(timeDeltaInMillis);
-        pinky.advance(timeDeltaInMillis);
-        inky.advance(timeDeltaInMillis);
-        clyde.advance(timeDeltaInMillis);
+        ghosts.getBlinky().advance(timeDeltaInMillis);
+        ghosts.getPinky().advance(timeDeltaInMillis);
+        ghosts.getInky().advance(timeDeltaInMillis);
+        ghosts.getClyde().advance(timeDeltaInMillis);
 
-        if (pacman.collidesWith(blinky) || pacman.collidesWith(pinky) || pacman.collidesWith(inky)
-                || pacman.collidesWith(clyde)) {
+        if (pacman.collidesWith(ghosts.getBlinky()) || pacman.collidesWith(ghosts.getPinky()) || pacman.collidesWith(ghosts.getInky())
+                || pacman.collidesWith(ghosts.getClyde())) {
             pacman.die();
         }
 
