@@ -53,7 +53,7 @@ _Tip: for steps **in bold**, there is a recommended shortcut you can use to make
     // In MazeBuilder
     Maze build() {
         // .. Code that builds up tiles1
-        return new Maze(width, height, tiles1, tiles);
+        return new Maze(width, height, tiles1, newTiles);
     }
     ```
 
