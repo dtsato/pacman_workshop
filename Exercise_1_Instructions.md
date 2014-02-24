@@ -209,7 +209,7 @@ become `newTiles.get(new TileCoordinate(x, y))`.
   1. **Find occurrences** of `x` or `y` outside of `TileCoordinate` class and replace them with the `TileCoordinate`
   instance that's already there:
 
-    * In `Game.advance`:
+    1. In `Game.advance`:
 
       ```java
       public void advance(long timeDeltaInMillis) {
@@ -221,7 +221,7 @@ become `newTiles.get(new TileCoordinate(x, y))`.
 
       ![Run tests!](run_tests.jpg)
 
-    * In `Ghost.getNextTile`:
+    1. In `Ghost.getNextTile`:
 
       ```java
       protected TileCoordinate getNextTile(TileCoordinate currentTile) {
@@ -236,7 +236,7 @@ become `newTiles.get(new TileCoordinate(x, y))`.
 
       ![Run tests!](run_tests.jpg)
 
-    * In `Pacman.allowMove`:
+    1. In `Pacman.allowMove`:
 
       ```java
       private boolean allowMove(TileCoordinate tileCoordinate, Direction direction) {
