@@ -20,8 +20,12 @@ public class Game {
     }
 
     public Game(Maze maze) {
+        this(maze, new Pacman(maze));
+    }
+
+    public Game(Maze maze, Pacman pacman) {
         this.maze = maze;
-        this.pacman = new Pacman(maze);
+        this.pacman = pacman;
         this.blinky = new Ghost(maze, GhostType.BLINKY);
         this.pinky = new Ghost(maze, GhostType.PINKY);
         this.inky = new Ghost(maze, GhostType.INKY);
