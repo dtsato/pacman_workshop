@@ -45,20 +45,8 @@ public class Game {
         return pacman;
     }
 
-    public Ghost getBlinky() {
-        return ghosts.getBlinky();
-    }
-
-    public Ghost getPinky() {
-        return ghosts.getPinky();
-    }
-
-    public Ghost getInky() {
-        return ghosts.getInky();
-    }
-
-    public Ghost getClyde() {
-        return ghosts.getClyde();
+    public Ghost[] getGhosts() {
+        return new Ghost[] {ghosts.getBlinky(), ghosts.getPinky(), ghosts.getInky(), ghosts.getClyde()};
     }
 
     public void advance(long timeDeltaInMillis) {
