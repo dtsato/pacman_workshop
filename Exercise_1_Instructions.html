@@ -598,7 +598,7 @@ function setDocumentScrollTop(ypos)
  <li> <p>Encapsulate <code>x</code> and <code>y</code> in <code>TileCoordinate</code>:</p> 
   <ol> 
    <li> <p><strong>Find occurrences</strong> of <code>x</code> or <code>y</code> outside of <code>TileCoordinate</code> class and replace them with the <code>TileCoordinate</code> instance that's already there:</p> 
-    <ul> 
+    <ol> 
      <li> <p>In <code>Game.advance</code>:</p> 
       <div class="highlight highlight-java">
        <pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">advance</span><span class="o">(</span><span class="kt">long</span> <span class="n">timeDeltaInMillis</span><span class="o">)</span> <span class="o">{</span>
@@ -628,9 +628,7 @@ function setDocumentScrollTop(ypos)
 <span class="o">}</span>
 </pre>
       </div> <p><a href="run_tests.jpg" target="_blank"><img src="run_tests.jpg" alt="Run tests!" style="max-width:100%;" /></a></p> </li> 
-    </ul> </li> 
-  </ol> 
-  <ol> 
+    </ol> </li> 
    <li> <p>Make <code>x</code> and <code>y</code> private:</p> 
     <div class="highlight highlight-java">
      <pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TileCoordinate</span> <span class="o">{</span>
