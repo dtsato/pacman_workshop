@@ -18,18 +18,21 @@ public class Game {
         this(MazeBuilder.buildWalledMaze());
     }
 
-    public Game(Maze maze) {
-        this(maze, new Pacman(maze), null);
+    private Game(Maze maze) {
+        this(maze, new Pacman(maze));
+    }
+
+    private Game(Maze maze, Pacman pacman) {
+        this.maze = maze;
+        this.pacman = pacman;
+        this.ghosts = new Ghosts(this);
+        this.pacmanTileVisitor = new PacmanTileVisitor();
     }
 
     public Game(Maze maze, Pacman pacman, Ghosts ghosts) {
         this.maze = maze;
         this.pacman = pacman;
-        if (ghosts == null) {
-            this.ghosts = new Ghosts(this);
-        } else {
-            this.ghosts = ghosts;
-        }
+        this.ghosts = ghosts;
         this.pacmanTileVisitor = new PacmanTileVisitor();
     }
 

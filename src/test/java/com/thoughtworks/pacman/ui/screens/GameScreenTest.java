@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
 import static org.mockito.AdditionalMatchers.gt;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -60,7 +61,7 @@ public class GameScreenTest {
 
     @Test
     public void nextScreen_shouldReturnWinScreen_whenGameWon() throws Exception {
-        Game game = new Game(MazeBuilder.buildMaze("+ +"));
+        Game game = new Game(MazeBuilder.buildMaze("+ +"), mock(Pacman.class), mock(Ghosts.class));
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
         assertThat(gameScreen.getNextScreen(), instanceOf(WinScreen.class));

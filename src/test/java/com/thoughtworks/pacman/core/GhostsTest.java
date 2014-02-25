@@ -21,8 +21,7 @@ public class GhostsTest {
 
     @Before
     public void setUp() throws Exception {
-        Maze maze = MazeBuilder.buildDefaultMaze();
-        Game game = new Game(maze);
+        Game game = new Game();
         ghosts = new Ghosts(game);
     }
 

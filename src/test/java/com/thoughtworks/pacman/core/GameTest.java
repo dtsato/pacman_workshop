@@ -7,6 +7,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.thoughtworks.pacman.core.actors.Pacman;
@@ -14,17 +15,26 @@ import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameTest {
     @Mock
     private Ghosts ghosts;
+    private Pacman pacman;
+    private Maze maze;
+
+    @Before
+    public void setUp() throws Exception {
+        this.maze = MazeBuilder.buildDefaultMaze();
+        this.pacman = spy(new Pacman(maze));
+    }
 
     @Test
     public void won_shouldBeTrue_whenNoDotsLeftInMaze() throws Exception {
         Maze maze = MazeBuilder.buildMaze("+ +");
-        Game game = new Game(maze);
+        Game game = new Game(maze, pacman, ghosts);
 
         assertThat(game.won(), is(true));
     }
@@ -32,7 +42,7 @@ public class GameTest {
     @Test
     public void won_shouldBeFalse_whenDotsLeftInMaze() throws Exception {
         Maze maze = MazeBuilder.buildMaze("+.+");
-        Game game = new Game(maze);
+        Game game = new Game(maze, pacman, ghosts);
 
         assertThat(game.won(), is(false));
     }
@@ -55,8 +65,6 @@ public class GameTest {
 
     @Test
     public void advance_shouldDoNothing_whenPacmanIsDead() throws Exception {
-        Maze maze = MazeBuilder.buildDefaultMaze();
-        Pacman pacman = spy(new Pacman(maze));
         Game game = new Game(maze, pacman, ghosts);
         when(pacman.isDead()).thenReturn(true);
 
@@ -68,8 +76,6 @@ public class GameTest {
 
     @Test
     public void advance_shouldFreeGhostsAndAdvanceActors_whenPacmanIsNotDead() throws Exception {
-        Maze maze = MazeBuilder.buildDefaultMaze();
-        Pacman pacman = spy(new Pacman(maze));
         Game game = new Game(maze, pacman, ghosts);
         when(pacman.isDead()).thenReturn(false);
 
@@ -82,8 +88,6 @@ public class GameTest {
 
     @Test
     public void advance_shouldTellPacmanToDie_whenGhostsKillPacman() throws Exception {
-        Maze maze = MazeBuilder.buildDefaultMaze();
-        Pacman pacman = spy(new Pacman(maze));
         Game game = new Game(maze, pacman, ghosts);
         when(pacman.isDead()).thenReturn(false);
         when(ghosts.killed(pacman)).thenReturn(true);
