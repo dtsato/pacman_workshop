@@ -30,7 +30,7 @@ _Tip: for steps **in bold**, there is a recommended shortcut you can use to make
     ```java
     // In MazeBuilder
     private Tile[][] allTiles = new Tile[40][40];
-    private Map<TileCoordinate, Tile> newTiles = new HashMap<>();
+    private Map<TileCoordinate, Tile> newTiles = new HashMap<TileCoordinate, Tile>();
     ```
    ![Run tests!](run_tests.jpg)
 
