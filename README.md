@@ -1,46 +1,48 @@
-# Estratégias de refatoração: além do be-a-bá
+# Refactoring Strategies: Beyond the Basics
 
-Repositório com o código usado no workshop da AgileBrazil "Estratégias de refatoração: além do be-a-bá".
+Code repository used for the "Refactoring Strategies: Beyong the Basics" workshop.
+Presented at: Agile Brazil 2013, DevNexus 2014, Chicago Coder Conference 2016, and many ThoughtWorks offices.
 
-## Resumo
+## Abstract
 
-Refatoração é uma das técnicas fundamentais do desenvolvedor ágil. Cada refatoração é uma transformação
-pequena e isolada, porém o grande valor vem quando uma série de refatorações são usadas em conjunto. Este
-workshop irá guiar os participantes através de exercícios práticos com o objetivo de ensinar as 3 habilidades
-necessárias para se tornar um bom refatorador: 1. como identificar código que precisa ser refatorado; 2. como
-decidir quais melhorias são necessárias e quais opções de design estão disponíveis; 3. como traçar uma estratégia de
-refatoração para transformar o código de 1 para 2.
+Refactoring is a fundamental practice for an agile developer. Each refactoring is a small and isolated activity, but the value comes when you perform a sequence of refactorings to effect larger changes. This workshop will guide participants through hands-on exercises designed to teach three essential skills to become good at refactoring: 1) Identifying what needs refactoring: what makes code smell, confusing, or complex? 2) Identifying the end goal: what are the design options and which one will yield the best results? 3) Tracing a strategy to get the code from 1 to 2.
 
-## Autores
+For the workshop, developers should bring their laptop with a basic working Java environment (JDK 1.6+, Eclipse or IntelliJ), have some knowledge about automated testing (JUnit) and refactorings, and optionally spend some time getting familiar with the code base.
 
-Esse código foi originalmente escrito por:
+## Authors
 
-* Danilo Sato
-* Mariana Bravo
+The code in this repository was originally written by:
 
-## Referências
+* Danilo Sato (@dtsato)
+* Mariana Bravo (@marivb)
 
-Uma explicação completa e detalhada do jogo original pode ser encontrada em inglês no [Pacman Dossier](http://home.comcast.net/~jpittman2/pacman/pacmandossier.html#LvlSpecs).
+## References
 
-## Funcionalidades
+A complete and detailed explanation of the original game can be found in the
+[Pacman Dossier](http://home.comcast.net/~jpittman2/pacman/pacmandossier.html#LvlSpecs).
 
-* ~~Novo Jogo (transição da tela de introdução)~~
-* ~~Desenhar o mapa~~
-* ~~Movimentação do Pacman~~
-* ~~Movimentação dos fantasmas~~
-* ~~Comer dots / contagem de pontos~~
-* ~~Detectar colisões~~
-* ~~Teleporte~~
-* ~~Detectar vitória ou derrota (transição)~~
-* Gerenciar vidas (1)
-* Sons
-* "Cornering": escolher a direção antes de chegar no ponto de decisão
-* Modo demo (computador joga sozinho)
-* ~~Animações (mastigação, olhos dos fantasmas, pacman morrendo)~~
-* Gerenciar high-score
+## Features
+
+Done:
+* ~~New game (splash screen)~~
+* ~~Draw the maze~~
+* ~~Pacman movement~~
+* ~~Ghost movement (random)~~
+* ~~Eating dots / counting points~~
+* ~~Colision detection~~
+* ~~Teleport~~
+* ~~Detect win or lose (transition screens)~~
+* ~~Animations (chewing, ghost eyes, pacman dying)~~
+
+To do:
+* Managing lives (1)
+* Sounds
+* "Cornering": choosing direction before reaching the decision point
+* Demo mode
+* Manage high-score
 * Energizer dots ("frigthening mode")
-* Inteligência dos fantasmas
+* Ghost AI (chasing strategies)
 
-## Créditos
+## Credits
 
-Esta implementação foi escrita por Danilo Sato e Mariana Bravo para fins educacionais. PAC-MAN® & © 1980 NAMCO BANDAI Games Inc.
+This implementation was written by Danilo Sato and Mariana Bravo for educational purposes. PAC-MAN® & © 1980 NAMCO BANDAI Games Inc.
