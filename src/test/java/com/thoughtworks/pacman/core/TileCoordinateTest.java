@@ -22,10 +22,10 @@ public class TileCoordinateTest {
     }
 
     @Test
-    public void modulo_shouldCalculateLengthOfVector() {
-        assertThat(new TileCoordinate(0, 1).modulo(), is(1.0));
-        assertThat(new TileCoordinate(1, 0).modulo(), is(1.0));
-        assertThat(new TileCoordinate(3, 4).modulo(), is(5.0));
+    public void magnitude_shouldCalculateLengthOfVector() {
+        assertThat(new TileCoordinate(0, 1).magnitude(), is(1.0));
+        assertThat(new TileCoordinate(1, 0).magnitude(), is(1.0));
+        assertThat(new TileCoordinate(3, 4).magnitude(), is(5.0));
     }
 
     @Test

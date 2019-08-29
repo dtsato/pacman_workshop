@@ -30,10 +30,10 @@ public class SpacialCoordinateTest {
     }
 
     @Test
-    public void modulo_shouldCalculateLengthOfVector() {
-        assertThat(new SpacialCoordinate(0, 1).modulo(), equalTo(1));
-        assertThat(new SpacialCoordinate(1, 0).modulo(), equalTo(1));
-        assertThat(new SpacialCoordinate(3, 4).modulo(), equalTo(5));
+    public void magnitude_shouldCalculateLengthOfVector() {
+        assertThat(new SpacialCoordinate(0, 1).magnitude(), equalTo(1));
+        assertThat(new SpacialCoordinate(1, 0).magnitude(), equalTo(1));
+        assertThat(new SpacialCoordinate(3, 4).magnitude(), equalTo(5));
     }
 
     @Test
