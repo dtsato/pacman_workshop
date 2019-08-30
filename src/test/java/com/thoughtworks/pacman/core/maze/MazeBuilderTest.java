@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import com.thoughtworks.pacman.core.TileCoordinate;
 import org.junit.Test;
 
 import com.thoughtworks.pacman.core.tiles.Door;
@@ -29,7 +30,7 @@ public class MazeBuilderTest {
 
         assertThat(maze.getWidth(), equalTo(1));
         assertThat(maze.getHeight(), equalTo(1));
-        assertThat(maze.tileAt(0, 0), instanceOf(Wall.class));
+        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(Wall.class));
     }
 
     @Test
@@ -40,8 +41,8 @@ public class MazeBuilderTest {
 
         assertThat(maze.getWidth(), equalTo(2));
         assertThat(maze.getHeight(), equalTo(1));
-        assertThat(maze.tileAt(0, 0), instanceOf(Wall.class));
-        assertThat(maze.tileAt(1, 0), instanceOf(Wall.class));
+        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(Wall.class));
+        assertThat(maze.tileAt(new TileCoordinate(1, 0)), instanceOf(Wall.class));
     }
 
     @Test
@@ -53,8 +54,8 @@ public class MazeBuilderTest {
 
         assertThat(maze.getWidth(), equalTo(1));
         assertThat(maze.getHeight(), equalTo(2));
-        assertThat(maze.tileAt(0, 0), instanceOf(Wall.class));
-        assertThat(maze.tileAt(0, 1), instanceOf(Wall.class));
+        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(Wall.class));
+        assertThat(maze.tileAt(new TileCoordinate(0, 1)), instanceOf(Wall.class));
     }
 
     @Test
@@ -63,7 +64,7 @@ public class MazeBuilderTest {
         builder.process(".");
         Maze maze = builder.build();
 
-        assertThat(maze.tileAt(0, 0), instanceOf(Dot.class));
+        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(Dot.class));
     }
 
     @Test
@@ -72,7 +73,7 @@ public class MazeBuilderTest {
         builder.process("*");
         Maze maze = builder.build();
 
-        assertThat(maze.tileAt(0, 0), instanceOf(Dot.class));
+        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(Dot.class));
     }
 
     @Test
@@ -81,7 +82,7 @@ public class MazeBuilderTest {
         builder.process("-");
         Maze maze = builder.build();
 
-        assertThat(maze.tileAt(0, 0), instanceOf(Door.class));
+        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(Door.class));
     }
 
     @Test
@@ -90,7 +91,7 @@ public class MazeBuilderTest {
         builder.process(" ");
         Maze maze = builder.build();
 
-        assertThat(maze.tileAt(0, 0), instanceOf(EmptyTile.class));
+        assertThat(maze.tileAt(new TileCoordinate(0, 0)), instanceOf(EmptyTile.class));
     }
 
     @Test
@@ -103,9 +104,9 @@ public class MazeBuilderTest {
     @Test
     public void defaultMazeShouldBeLoadedFromFile() throws Exception {
         Maze maze = MazeBuilder.buildDefaultMaze();
-        assertThat(maze.tileAt(0, 3), instanceOf(Wall.class));
-        assertThat(maze.tileAt(1, 4), instanceOf(Dot.class));
-        assertThat(maze.tileAt(3, 6), instanceOf(EmptyTile.class));
+        assertThat(maze.tileAt(new TileCoordinate(0, 3)), instanceOf(Wall.class));
+        assertThat(maze.tileAt(new TileCoordinate(1, 4)), instanceOf(Dot.class));
+        assertThat(maze.tileAt(new TileCoordinate(3, 6)), instanceOf(EmptyTile.class));
     }
 
     @Test
