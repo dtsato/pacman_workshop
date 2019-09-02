@@ -45,17 +45,17 @@ public abstract class Actor {
         SpacialCoordinate subtract = nextTileCenter.subtract(center);
         if (subtract.isDiagonal()) {
             SpacialCoordinate currentTileCenter = currentTile.toSpacialCoordinate();
-            distance = distance - currentTileCenter.subtract(center).modulo();
+            distance = distance - currentTileCenter.subtract(center).magnitude();
             subtract = nextTileCenter.subtract(currentTileCenter);
             center = currentTileCenter;
         }
 
-        if (subtract.modulo() > 0) {
-            if (subtract.modulo() == distance) {
+        if (subtract.magnitude() > 0) {
+            if (subtract.magnitude() == distance) {
                 center = nextTileCenter.remainder(maze);
-            } else if (subtract.modulo() < distance) {
+            } else if (subtract.magnitude() < distance) {
                 center = nextTileCenter.remainder(maze);
-                advanceDistance(distance - subtract.modulo());
+                advanceDistance(distance - subtract.magnitude());
             } else {
                 SpacialCoordinate movement = subtract.unit().times(distance);
                 center = center.add(movement).remainder(maze);

@@ -31,7 +31,7 @@ public class SpacialCoordinate {
         return new SpacialCoordinate(x * scale, y * scale);
     }
 
-    public int modulo() {
+    public int magnitude() {
         return (int) Math.sqrt(x * x + y * y);
     }
 

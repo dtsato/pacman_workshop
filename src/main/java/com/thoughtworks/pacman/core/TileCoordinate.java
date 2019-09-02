@@ -27,12 +27,12 @@ public class TileCoordinate {
         return new TileCoordinate(x - delta.x, y - delta.y);
     }
 
-    public double modulo() {
+    public double magnitude() {
         return Math.sqrt(x * x + y * y);
     }
 
     public double distanceTo(TileCoordinate tileCoordinate) {
-        return subtract(tileCoordinate).modulo();
+        return subtract(tileCoordinate).magnitude();
     }
 
     public TileCoordinate remainder(Maze maze) {
