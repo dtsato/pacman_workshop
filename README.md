@@ -19,7 +19,7 @@ The code in this repository was originally written by:
 ## References
 
 A complete and detailed explanation of the original game can be found in the
-[Pacman Dossier](http://home.comcast.net/~jpittman2/pacman/pacmandossier.html#LvlSpecs).
+[Pacman Dossier](https://www.gamasutra.com/view/feature/3938/the_pacman_dossier.php?print=1).
 
 ## Features
 
