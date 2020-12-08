@@ -39,8 +39,10 @@ public class GameScreen implements Screen {
 
     public Screen getNextScreen() {
         if (game.won()) {
+            System.out.println("pacman KAZANDI");
             return new WinScreen(game);
         } else if (game.lost() && !gamePresenter.isDying()) {
+            System.out.println("pacman KAYBETTI");
             return new LostScreen(game);
         }
         return this;
