@@ -7,4 +7,5 @@ public interface Screen {
     void draw(Graphics2D graphics);
     void keyPressed(KeyEvent e);
     Screen getNextScreen() throws Exception;
+    void play();
 }

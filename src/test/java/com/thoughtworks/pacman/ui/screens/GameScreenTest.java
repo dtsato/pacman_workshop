@@ -2,6 +2,7 @@ package com.thoughtworks.pacman.ui.screens;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.AdditionalMatchers.gt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -24,6 +25,8 @@ import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
 import com.thoughtworks.pacman.ui.presenters.GamePresenter;
+import com.thoughtworks.pacman.ui.BackgroundSoundLoader;
+import com.thoughtworks.pacman.ui.Screen;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameScreenTest {
@@ -37,6 +40,8 @@ public class GameScreenTest {
     private Maze maze;
     @Mock
     private Ghosts ghosts;
+    @Mock
+    private BackgroundSoundLoader BackgroundSoundLoader;
 
     @Test
     public void draw_shouldAdvanceGameWithTimeDelta() throws Exception {
@@ -63,8 +68,10 @@ public class GameScreenTest {
     public void nextScreen_shouldReturnWinScreen_whenGameWon() throws Exception {
         Game game = new Game(MazeBuilder.buildMaze("+ +"), mock(Pacman.class), mock(Ghosts.class));
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
-
-        assertThat(gameScreen.getNextScreen(), instanceOf(WinScreen.class));
+        System.out.println(BackgroundSoundLoader.setStop());
+        assertTrue((BackgroundSoundLoader.setStop()== true));
+        Screen ws = gameScreen.getNextScreen(); 
+        assertThat(ws, instanceOf(WinScreen.class));
     }
 
     @Test

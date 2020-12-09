@@ -1,8 +1,6 @@
 package com.thoughtworks.pacman.ui;
 
 import com.thoughtworks.pacman.core.Game;
-import com.thoughtworks.pacman.ui.SoundLoader;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Dimension;
@@ -13,20 +11,18 @@ public class GameRunner {
     private static final int FRAME_INTERVAL = 30;
 
     public static void main(String[] args) throws Exception {
-        System.out.println("basliyoruz");
         GameRunner runner = new GameRunner();
         runner.initialize();
         runner.run();
+
     }
 
     private boolean open;
     private GameCanvas canvas;
     private Game game;
-    private SoundLoader sl ;
+
     private void initialize() throws Exception {
         game = new Game();
-        sl = new SoundLoader();
-        sl.play();
         Dimension dimension = game.getDimension();
         canvas = new GameCanvas(dimension, game);
 
@@ -50,11 +46,11 @@ public class GameRunner {
 
         canvas.initialize(panel);
     }
-
+   
     private void run() throws Exception {
         while (open) {
             canvas.draw();
-
+            canvas.play();
             try {
                 Thread.sleep(FRAME_INTERVAL);
             } catch (InterruptedException e) {

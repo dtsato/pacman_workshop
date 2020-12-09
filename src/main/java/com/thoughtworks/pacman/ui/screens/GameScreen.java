@@ -3,15 +3,21 @@ package com.thoughtworks.pacman.ui.screens;
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.Screen;
+import com.thoughtworks.pacman.ui.BackgroundSoundLoader;
 import com.thoughtworks.pacman.ui.presenters.GamePresenter;
-
+import java.util.concurrent.locks.ReentrantLock;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.util.concurrent.locks.Lock;
 
 public class GameScreen implements Screen {
+    private  ReentrantLock lock = new ReentrantLock();
     private final Game game;
     private final GamePresenter gamePresenter;
     private long lastFrameAt;
+    private BackgroundSoundLoader BackgroundSoundLoader = new BackgroundSoundLoader();
+    private Thread threadSounds = new Thread(BackgroundSoundLoader, "BackgroundSoundLoader");
+
 
     public GameScreen() throws Exception {
         this(new Game());
@@ -39,15 +45,24 @@ public class GameScreen implements Screen {
 
     public Screen getNextScreen() {
         if (game.won()) {
-            System.out.println("pacman KAZANDI");
+            BackgroundSoundLoader.setStop();
             return new WinScreen(game);
         } else if (game.lost() && !gamePresenter.isDying()) {
-            System.out.println("pacman KAYBETTI");
+            BackgroundSoundLoader.setStop();
             return new LostScreen(game);
         }
         return this;
     }
+    public void play (){
+    try{   
+            lock.lock();
+            threadSounds.start();
+            lock.unlock();
+     }catch (Exception e) {
+        }
 
+    }
+    
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
         case KeyEvent.VK_LEFT:

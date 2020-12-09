@@ -21,7 +21,6 @@ public class LostScreenTest {
     public void draw_shouldDrawSplashImageAcrossWidth() throws Exception {
         Game game = new Game();
         LostScreen lostScreen = new LostScreen(game);
-
         lostScreen.draw(graphics);
 
         verify(graphics).drawImage(LostScreen.LOST_SCREEN_IMAGE, 0, 0, 448, 448, null);

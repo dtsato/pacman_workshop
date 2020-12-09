@@ -45,18 +45,15 @@ public class Game {
     }
 
     public Pacman getPacman() {
-        System.out.println("pacman yaratıldı");
         return pacman;
     }
 
     public Ghost[] getGhosts() {
-        System.out.println("ghostlar yaratıldı");
         return new Ghost[] {ghosts.getBlinky(), ghosts.getPinky(), ghosts.getInky(), ghosts.getClyde()};
     }
 
     public void advance(long timeDeltaInMillis) {
         if (pacman.isDead()) {
-            System.out.println("pacman oldu");
             return;
         }
 
@@ -67,7 +64,6 @@ public class Game {
 
         if (ghosts.killed(pacman)) {
             pacman.die();
-            System.out.println("pacman olduruldu");
         }
 
 
@@ -76,7 +72,7 @@ public class Game {
     }
 
     public boolean won() {
-        System.out.println("pacman kazandı");
+
         return !maze.hasDotsLeft();
     }
 

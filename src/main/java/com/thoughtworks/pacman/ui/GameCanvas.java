@@ -2,6 +2,7 @@ package com.thoughtworks.pacman.ui;
 
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.screens.IntroScreen;
+import com.thoughtworks.pacman.ui.screens.LostScreen;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -20,7 +21,7 @@ public class GameCanvas extends Canvas implements KeyListener {
 
     private final Dimension dimension;
     private Screen currentScreen;
-
+    
     public GameCanvas(Dimension dimension, Game game) {
         this.dimension = dimension;
         this.currentScreen = new IntroScreen(game);
@@ -51,10 +52,15 @@ public class GameCanvas extends Canvas implements KeyListener {
         strategy.show();
     }
 
+    public void play (){
+        currentScreen.play();
+    }
+
     public void keyTyped(KeyEvent e) { }
 
     public void keyPressed(KeyEvent e) {
         currentScreen.keyPressed(e);
+
     }
 
     public void keyReleased(KeyEvent e) { }
