@@ -28,7 +28,9 @@ public void setStop(){
 }
 
     public void playWon(){
-        File musicPath = new File("src/main/resources/com/thoughtworks/pacman/ui/The Final Countdown .wav");
+     File p = new File("pacman_workshop");
+     String a = (p.getAbsolutePath().substring(0, p.getAbsolutePath().indexOf("pacman_workshop")))+ "pacman_workshop/";// to add to relative path
+     File musicPath = new File(a+"src/main/resources/com/thoughtworks/pacman/ui/The Final Countdown .wav");
              try {
                 if (musicPath.exists()){
                     

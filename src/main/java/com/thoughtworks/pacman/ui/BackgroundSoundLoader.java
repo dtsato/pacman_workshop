@@ -30,7 +30,10 @@ public boolean setStop(){
 
     public void playBackground(){
 
-        File musicPath = new File("src/main/resources/com/thoughtworks/pacman/ui/Pac-man-theme-remix-By-Arsenic1987.wav");
+       File p = new File("pacman_workshop");
+       String a = (p.getAbsolutePath().substring(0, p.getAbsolutePath().indexOf("pacman_workshop")))+ "pacman_workshop/";// to add to relative path
+       File musicPath = new File(a+"src/main/resources/com/thoughtworks/pacman/ui/Pac-man-theme-remix-By-Arsenic1987.wav");
+       
              try {
                 if (musicPath.exists()){
                     

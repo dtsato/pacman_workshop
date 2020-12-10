@@ -26,8 +26,9 @@ public void setStop(){
 } 
 
     public void playFinalCountdown(){
-
-        File musicPath = new File("/home/irem/pacman_workshop/src/main/resources/com/thoughtworks/pacman/ui/pacman_death.wav");
+      File p = new File("pacman_workshop");
+      String a = (p.getAbsolutePath().substring(0, p.getAbsolutePath().indexOf("pacman_workshop")))+ "pacman_workshop/";// to add to relative path
+      File musicPath = new File(a+"src/main/resources/com/thoughtworks/pacman/ui/pacman_death.wav");
              try {
                 if (musicPath.exists()){
                      AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musicPath);

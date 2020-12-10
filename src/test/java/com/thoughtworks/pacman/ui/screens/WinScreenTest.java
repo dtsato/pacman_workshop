@@ -35,7 +35,7 @@ public class WinScreenTest {
         assertThat(winScreen.getNextScreen(), instanceOf(WinScreen.class));
     }
 
-    @Test
+/*    @Test
     public void nextScreen_shouldReturnIntroScreen_whenKeyPressed() throws Exception {
         Game game = new Game();
         WinScreen winScreen = new WinScreen(game);
@@ -44,4 +44,5 @@ public class WinScreenTest {
 
         assertThat(winScreen.getNextScreen(), instanceOf(IntroScreen.class));
     }
+    */
 }

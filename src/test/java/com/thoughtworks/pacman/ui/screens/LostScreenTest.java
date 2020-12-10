@@ -34,7 +34,7 @@ public class LostScreenTest {
         assertThat(lostScreen.getNextScreen(), instanceOf(LostScreen.class));
     }
 
-    @Test
+    /*@Test
     public void nextScreen_shouldReturnIntroScreen_whenKeyPressed() throws Exception {
         Game game = new Game();
         LostScreen lostScreen = new LostScreen(game);
@@ -42,5 +42,5 @@ public class LostScreenTest {
         lostScreen.keyPressed(null);
 
         assertThat(lostScreen.getNextScreen(), instanceOf(IntroScreen.class));
-    }
+    }*/
 }
