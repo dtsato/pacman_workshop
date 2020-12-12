@@ -17,7 +17,7 @@ public class GameScreen implements Screen {
     private long lastFrameAt;
     private BackgroundSoundLoader BackgroundSoundLoader = new BackgroundSoundLoader();
     private Thread threadSounds = new Thread(BackgroundSoundLoader, "BackgroundSoundLoader");
-
+    private boolean check = true ;
 
     public GameScreen() throws Exception {
         this(new Game());
@@ -45,13 +45,21 @@ public class GameScreen implements Screen {
 
     public Screen getNextScreen() {
         if (game.won()) {
-            BackgroundSoundLoader.setStop();
             return new WinScreen(game);
         } else if (game.lost() && !gamePresenter.isDying()) {
-            BackgroundSoundLoader.setStop();
             return new LostScreen(game);
         }
         return this;
+    }
+
+    public void check(){
+        if (game.won() && check) {
+            check = false ;
+            BackgroundSoundLoader.setStop();
+        } else if ( check && game.lost() && !gamePresenter.isDying()) {
+            check = false ;
+            BackgroundSoundLoader.setStop();
+        }
     }
     public void play (){
     try{   

@@ -18,6 +18,7 @@ public class LostScreen implements Screen {
     private boolean startGame;
     private FinalSoundLoader FinalsoundLoader = new FinalSoundLoader();
     private Thread threadSounds = new Thread(FinalsoundLoader, "soundLoader");
+    private boolean check = true ;
 
     public LostScreen(Game game) {
         this.dimension = game.getDimension();
@@ -44,10 +45,16 @@ public class LostScreen implements Screen {
 
     public Screen getNextScreen() {
         if (startGame) {
-            FinalsoundLoader.setStop();
             return new IntroScreen(game);
         }
         return this;
+    }
+
+    public void check(){
+        if ( startGame &&check) {
+        FinalsoundLoader.setStop();
+        check = false ;
+        }
     }
 
     public void keyPressed(KeyEvent e) {

@@ -17,6 +17,7 @@ public class IntroScreen implements Screen {
     private boolean startGame;
     private IntroSoundLoader IntroSoundLoader = new IntroSoundLoader();
     private Thread threadSounds = new Thread(IntroSoundLoader, "IntroSoundLoader");
+    private boolean check = true;
 
     public IntroScreen(Game game) {
         this.dimension = game.getDimension();
@@ -30,12 +31,19 @@ public class IntroScreen implements Screen {
 
     public Screen getNextScreen() throws Exception {
         if (startGame) {
-            IntroSoundLoader.setStop();
+            check = true ;
             return new GameScreen();
         }
         return this;
     }
     
+    public void check(){
+        if (startGame &&check) {
+        IntroSoundLoader.setStop();
+        check = false ;   
+     }
+    }
+
     public void play (){
         try {
             if(!startGame){

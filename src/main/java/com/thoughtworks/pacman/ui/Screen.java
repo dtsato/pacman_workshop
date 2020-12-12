@@ -8,4 +8,5 @@ public interface Screen {
     void keyPressed(KeyEvent e);
     Screen getNextScreen() throws Exception;
     void play();
+    void check();
 }

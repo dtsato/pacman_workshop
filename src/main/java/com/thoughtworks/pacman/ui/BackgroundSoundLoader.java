@@ -7,12 +7,11 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 public class BackgroundSoundLoader implements Runnable {
-private Boolean stop = false;
-Clip clip ;
-    public void run(){
+private Clip clip ;
+    
+public void run(){
     playBackground();  
-
-       try {
+      try {
          Thread.currentThread().stop();    
        } catch (Exception e) {
             
@@ -20,13 +19,10 @@ Clip clip ;
        
      }
 
-         
-
-public boolean setStop(){
-    this.stop = true;
-    clip.stop();
-    return true;
-} 
+    public boolean setStop(){
+        clip.stop();
+        return true;
+      } 
 
     public void playBackground(){
 

@@ -3,6 +3,7 @@ package com.thoughtworks.pacman.ui.screens;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.AdditionalMatchers.gt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -12,6 +13,8 @@ import static org.mockito.Mockito.when;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+
+import javax.sound.sampled.Clip;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +44,7 @@ public class GameScreenTest {
     @Mock
     private Ghosts ghosts;
     @Mock
-    private BackgroundSoundLoader BackgroundSoundLoader;
+    private Clip clip;
 
     @Test
     public void draw_shouldAdvanceGameWithTimeDelta() throws Exception {
@@ -64,17 +67,15 @@ public class GameScreenTest {
         assertThat(gameScreen.getNextScreen(), instanceOf(GameScreen.class));
     }
 
-    /*@Test
+    @Test
     public void nextScreen_shouldReturnWinScreen_whenGameWon() throws Exception {
         Game game = new Game(MazeBuilder.buildMaze("+ +"), mock(Pacman.class), mock(Ghosts.class));
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
-        System.out.println(BackgroundSoundLoader.setStop());
-        assertTrue((BackgroundSoundLoader.setStop()== true));
-        Screen ws = gameScreen.getNextScreen(); 
-        assertThat(ws, instanceOf(WinScreen.class));
-    }*/
+        
+        assertThat(gameScreen.getNextScreen(), instanceOf(WinScreen.class));
+    }
 
-    /*@Test
+    @Test
     public void nextScreen_shouldReturnLostScreen_whenGameLostAndDyingAnimationFinished() throws Exception {
         Game game = new Game();
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
@@ -83,7 +84,7 @@ public class GameScreenTest {
         when(gamePresenter.isDying()).thenReturn(false);
 
         assertThat(gameScreen.getNextScreen(), instanceOf(LostScreen.class));
-    }*/
+    }
 
     @Test
     public void keyPressed_shouldMovePacmanLeft() throws Exception {

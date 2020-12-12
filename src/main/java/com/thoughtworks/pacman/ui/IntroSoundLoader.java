@@ -10,7 +10,6 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 public class IntroSoundLoader implements Runnable {
-private Boolean stop = false;
 Clip clip ;
 
 public void run(){
@@ -24,10 +23,7 @@ public void run(){
 
          
 public void setStop(){
-    this.stop = true;
-    
     clip.stop();
-
 } 
     public void playIntro(){
        File p = new File("pacman_workshop");

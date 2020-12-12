@@ -49,8 +49,10 @@ public class GameRunner {
    
     private void run() throws Exception {
         while (open) {
+            canvas.check();
             canvas.draw();
             canvas.play();
+            
             try {
                 Thread.sleep(FRAME_INTERVAL);
             } catch (InterruptedException e) {
