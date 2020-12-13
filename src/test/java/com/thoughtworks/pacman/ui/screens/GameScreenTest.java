@@ -2,8 +2,6 @@ package com.thoughtworks.pacman.ui.screens;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
 import static org.mockito.AdditionalMatchers.gt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -14,7 +12,6 @@ import static org.mockito.Mockito.when;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
-import javax.sound.sampled.Clip;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,8 +25,6 @@ import com.thoughtworks.pacman.core.actors.Pacman;
 import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.maze.MazeBuilder;
 import com.thoughtworks.pacman.ui.presenters.GamePresenter;
-import com.thoughtworks.pacman.ui.BackgroundSoundLoader;
-import com.thoughtworks.pacman.ui.Screen;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameScreenTest {
@@ -43,8 +38,6 @@ public class GameScreenTest {
     private Maze maze;
     @Mock
     private Ghosts ghosts;
-    @Mock
-    private Clip clip;
 
     @Test
     public void draw_shouldAdvanceGameWithTimeDelta() throws Exception {

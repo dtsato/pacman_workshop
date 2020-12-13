@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+
 import com.thoughtworks.pacman.ui.FinalSoundLoader;
 import java.util.concurrent.locks.ReentrantLock;
 import com.thoughtworks.pacman.core.Game;
@@ -12,6 +13,7 @@ import com.thoughtworks.pacman.ui.Screen;
 
 public class LostScreen implements Screen {
     static final Image LOST_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "gameOver.png");
+    
     private  ReentrantLock lock = new ReentrantLock();
     private final Dimension dimension;
     private final Game game;

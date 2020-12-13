@@ -12,6 +12,7 @@ import com.thoughtworks.pacman.ui.IntroSoundLoader;
 
 public class IntroScreen implements Screen {
     static final Image TITLE_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "titleScreen.jpg");
+    
     private  ReentrantLock lock = new ReentrantLock();
     private final Dimension dimension;
     private boolean startGame;

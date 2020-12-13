@@ -2,7 +2,6 @@ package com.thoughtworks.pacman.ui;
 
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.screens.IntroScreen;
-import com.thoughtworks.pacman.ui.screens.LostScreen;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -65,7 +64,6 @@ public class GameCanvas extends Canvas implements KeyListener {
 
     public void keyPressed(KeyEvent e) {
         currentScreen.keyPressed(e);
-
     }
 
     public void keyReleased(KeyEvent e) { }

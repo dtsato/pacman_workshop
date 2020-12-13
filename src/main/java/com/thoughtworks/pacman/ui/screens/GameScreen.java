@@ -5,6 +5,7 @@ import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.Screen;
 import com.thoughtworks.pacman.ui.BackgroundSoundLoader;
 import com.thoughtworks.pacman.ui.presenters.GamePresenter;
+
 import java.util.concurrent.locks.ReentrantLock;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;

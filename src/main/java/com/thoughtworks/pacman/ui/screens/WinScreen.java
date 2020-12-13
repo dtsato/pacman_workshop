@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+
 import java.util.concurrent.locks.ReentrantLock;
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.ImageLoader;
@@ -12,6 +13,7 @@ import com.thoughtworks.pacman.ui.WinnerSoundLoader;
 
 public class WinScreen implements Screen {
     static final Image WIN_SCREEN_IMAGE = ImageLoader.loadImage(Screen.class, "winScreen.jpg");
+    
     private  ReentrantLock lock = new ReentrantLock();
     private final Dimension dimension;
     private final Game game;

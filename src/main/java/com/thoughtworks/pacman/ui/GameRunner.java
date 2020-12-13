@@ -1,6 +1,7 @@
 package com.thoughtworks.pacman.ui;
 
 import com.thoughtworks.pacman.core.Game;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Dimension;
@@ -14,7 +15,6 @@ public class GameRunner {
         GameRunner runner = new GameRunner();
         runner.initialize();
         runner.run();
-
     }
 
     private boolean open;
