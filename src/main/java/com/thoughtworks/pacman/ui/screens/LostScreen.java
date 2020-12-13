@@ -19,7 +19,7 @@ public class LostScreen implements Screen {
     private final Game game;
     private boolean startGame;
     private FinalSoundLoader FinalsoundLoader = new FinalSoundLoader();
-    private Thread threadSounds = new Thread(FinalsoundLoader, "FinasoundLoader");
+    private Thread threadSounds = new Thread(FinalsoundLoader, "FinaSoundLoader");
     private boolean check = true ;
 
     public LostScreen(Game game) {
