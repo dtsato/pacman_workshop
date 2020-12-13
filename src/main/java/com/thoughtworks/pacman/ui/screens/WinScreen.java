@@ -37,21 +37,18 @@ public class WinScreen implements Screen {
         return this;
     }
 
+    public void play (){
+        try {
+            lock.lock();
+            threadSounds.start();
+            lock.unlock();
+        }catch (Exception e) {}
+    }
+
     public void check(){
         if (startGame) 
         WinnerSoundLoader.setStop();
     }
-    
-    public void play (){
-        try {
-           if(!startGame){
-            lock.lock();
-            threadSounds.start();
-            lock.unlock();
-        }
-    }catch (Exception e) {}
-    }
-
     
     public void keyPressed(KeyEvent e) {
         startGame = true;

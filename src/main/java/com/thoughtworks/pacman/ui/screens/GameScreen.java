@@ -52,6 +52,14 @@ public class GameScreen implements Screen {
         return this;
     }
 
+    public void play (){
+        try{   
+            lock.lock();
+            threadSounds.start();
+            lock.unlock();
+        }catch (Exception e) {}
+    }
+
     public void check(){
         if (game.won() && check) {
             check = false ;
@@ -60,15 +68,6 @@ public class GameScreen implements Screen {
             check = false ;
             BackgroundSoundLoader.setStop();
         }
-    }
-    public void play (){
-    try{   
-            lock.lock();
-            threadSounds.start();
-            lock.unlock();
-     }catch (Exception e) {
-        }
-
     }
     
     public void keyPressed(KeyEvent e) {

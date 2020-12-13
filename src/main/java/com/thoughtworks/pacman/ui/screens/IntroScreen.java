@@ -37,24 +37,21 @@ public class IntroScreen implements Screen {
         return this;
     }
     
-    public void check(){
-        if (startGame &&check) {
-        IntroSoundLoader.setStop();
-        check = false ;   
-     }
-    }
-
     public void play (){
         try {
-            if(!startGame){
-                lock.lock();
-                threadSounds.start();
-                lock.unlock();
-
-            }
-         } catch (Exception e) {
-            }
+            lock.lock();
+            threadSounds.start();
+            lock.unlock();
+        }catch (Exception e) {}
     }
+
+    public void check(){
+        if (startGame &&check) {
+           check = false ;   
+           IntroSoundLoader.setStop();
+        }
+    }
+
     public void keyPressed(KeyEvent e) {
         startGame = true;
     }

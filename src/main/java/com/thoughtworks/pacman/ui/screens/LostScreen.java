@@ -17,7 +17,7 @@ public class LostScreen implements Screen {
     private final Game game;
     private boolean startGame;
     private FinalSoundLoader FinalsoundLoader = new FinalSoundLoader();
-    private Thread threadSounds = new Thread(FinalsoundLoader, "soundLoader");
+    private Thread threadSounds = new Thread(FinalsoundLoader, "FinasoundLoader");
     private boolean check = true ;
 
     public LostScreen(Game game) {
@@ -31,18 +31,6 @@ public class LostScreen implements Screen {
         graphics.drawImage(LOST_SCREEN_IMAGE, 0, 0, dimension.width, height, null);
     }
 
-    public void play(){
-    try {
-        if(!startGame){
-            lock.lock();
-            threadSounds.start();
-            lock.unlock();
-        }
-     } catch (Exception e) {
-        }
-    
-       }
-
     public Screen getNextScreen() {
         if (startGame) {
             return new IntroScreen(game);
@@ -50,10 +38,18 @@ public class LostScreen implements Screen {
         return this;
     }
 
+    public void play(){
+        try {
+            lock.lock();
+            threadSounds.start();
+            lock.unlock();
+        } catch (Exception e) {}
+    }
+
     public void check(){
         if ( startGame &&check) {
-        FinalsoundLoader.setStop();
-        check = false ;
+            check = false ;
+            FinalsoundLoader.setStop();
         }
     }
 

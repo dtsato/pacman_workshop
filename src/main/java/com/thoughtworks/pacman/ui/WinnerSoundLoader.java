@@ -1,20 +1,18 @@
 
 package com.thoughtworks.pacman.ui;
 import java.io.File;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 public class WinnerSoundLoader implements Runnable {
-Clip clip ;
+private Clip clip ;
     
      public void run(){
-          try {
-            playWon();
-            Thread.currentThread().stop();    
-           } catch (Exception e) {
-          }
+        try {
+          playWon();
+          Thread.currentThread().stop();    
+          } catch (Exception e) {}
      }
 
      public void setStop(){
@@ -27,7 +25,6 @@ Clip clip ;
           File musicPath = new File(a+"src/main/resources/com/thoughtworks/pacman/ui/The Final Countdown .wav");
                try {
                     if (musicPath.exists()){
-                     
                          AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musicPath);
                          clip = AudioSystem.getClip();
                          clip.open(audioInputStream);
@@ -36,9 +33,8 @@ Clip clip ;
                     }else {
                          System.out.println("sorry");
                     }
-               } catch (Exception e) {
-                    System.out.println("exception play won");
-               }
+               } catch (Exception e) {}
      }
+
 }
 
