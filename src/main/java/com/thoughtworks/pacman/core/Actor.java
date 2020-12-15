@@ -4,7 +4,7 @@ import com.thoughtworks.pacman.core.maze.Maze;
 import com.thoughtworks.pacman.core.movement.MovementStrategy;
 
 public abstract class Actor {
-    private static final int SPEED = 100;
+    private int SPEED = 100;
 
     protected final Maze maze;
     protected MovementStrategy movementStrategy;
@@ -14,6 +14,14 @@ public abstract class Actor {
         this.maze = maze;
         this.movementStrategy = movementStrategy;
         this.center = center;
+    }
+
+    public void setSpeed(int SPEED){
+        this.SPEED=SPEED;
+    }
+
+    public int getSpeed() {
+        return SPEED;
     }
 
     public SpacialCoordinate getCenter() {

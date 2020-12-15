@@ -3,6 +3,7 @@ out
 bin
 .idea
 .gradle
+.vscode
 .settings
 *.iws
 *.class

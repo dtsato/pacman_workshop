@@ -45,9 +45,9 @@ public class GameScreenTest {
         Game game = new Game(maze, pacman, ghosts);
         GameScreen gameScreen = new GameScreen(game, gamePresenter);
 
-        Thread.sleep(1); // Some time for pacman to move
+        Thread.sleep(10); // Some time for pacman to move
         gameScreen.draw(graphics);
-
+        
         verify(pacman).advance(gt(0L));
     }
 

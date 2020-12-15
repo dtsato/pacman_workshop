@@ -31,6 +31,23 @@ public class GameTest {
         this.pacman = spy(new Pacman(maze));
     }
 
+    @Test 
+    public void shouldDropFreezingBomb_whenHasEnoughItem() throws Exception {
+        Game game = new Game(maze, pacman, ghosts);
+        maze.setFreezingItemCount(1);
+        game.dropBomb();
+
+        assertThat(game.getMaze().getAliveFreezingItemBombs().size()>0, is(true));
+    }
+
+    @Test 
+    public void shouldNotDropFreezingBomb_whenHasNotEnoughItem() throws Exception {
+        Game game = new Game(maze, pacman, ghosts);
+        game.dropBomb();
+
+        assertThat(game.getMaze().getAliveFreezingItemBombs().size()==0, is(true));
+    }
+
     @Test
     public void won_shouldBeTrue_whenNoDotsLeftInMaze() throws Exception {
         Maze maze = MazeBuilder.buildMaze("+ +");
