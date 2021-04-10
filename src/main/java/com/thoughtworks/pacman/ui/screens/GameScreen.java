@@ -1,23 +1,26 @@
 package com.thoughtworks.pacman.ui.screens;
 
+import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+
+
 import com.thoughtworks.pacman.core.Direction;
 import com.thoughtworks.pacman.core.Game;
 import com.thoughtworks.pacman.ui.Screen;
 import com.thoughtworks.pacman.ui.presenters.GamePresenter;
 
-import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
-
 public class GameScreen implements Screen {
     private final Game game;
     private final GamePresenter gamePresenter;
     private long lastFrameAt;
+    
+    public boolean menuCheck=false;
 
     public GameScreen() throws Exception {
         this(new Game());
     }
 
-    private GameScreen(Game game) {
+    GameScreen(Game game) {
         this(game, new GamePresenter(game));
     }
 
@@ -43,6 +46,10 @@ public class GameScreen implements Screen {
         } else if (game.lost() && !gamePresenter.isDying()) {
             return new LostScreen(game);
         }
+        if(menuCheck){
+            return new UIScreen(game,gamePresenter);
+
+        }
         return this;
     }
 
@@ -60,6 +67,18 @@ public class GameScreen implements Screen {
         case KeyEvent.VK_DOWN:
             game.getPacman().setNextDirection(Direction.DOWN);
             break;
+        case KeyEvent.VK_ESCAPE:
+            //ESCye basilinca oyun duruyor ve menu aciliyor
+            
+            menuCheck=true;
+            break;
+            
         }
+
     }
+
+   
+    
+
+
 }

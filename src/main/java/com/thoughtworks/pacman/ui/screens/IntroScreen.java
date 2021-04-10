@@ -25,12 +25,17 @@ public class IntroScreen implements Screen {
         graphics.drawImage(TITLE_SCREEN_IMAGE, 0, 0, dimension.width, height, null);
     }
 
+  
     public Screen getNextScreen() throws Exception {
         if (startGame) {
-            return new GameScreen();
+            //return new GameScreen();
+            //oyundan once menu gelmeli!
+            return new UIScreen();
         }
+       
         return this;
     }
+
 
     public void keyPressed(KeyEvent e) {
         startGame = true;
