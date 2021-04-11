@@ -79,7 +79,7 @@ public class TwoPlayerGameScreenTest {
         GamePresenter gamePresenter2 = new GamePresenter(game2);
         TwoPlayerGameScreen twoPlayerGameScreen = new TwoPlayerGameScreen(game1, game2, gamePresenter1, gamePresenter2);
 
-        assertThat(twoPlayerGameScreen.getNextScreen(), instanceOf(TwoPlayerGameScreen.class));
+        assertThat(twoPlayerGameScreen.getNextScreen(), instanceOf(TwoPlayerEndScreen.class));
     }
 
     @Test
@@ -95,7 +95,7 @@ public class TwoPlayerGameScreenTest {
         when(gamePresenter1.isDying()).thenReturn(false);
         when(gamePresenter2.isDying()).thenReturn(false);
 
-        assertThat(twoPlayerGameScreen.getNextScreen(), instanceOf(TwoPlayerGameScreen.class));
+        assertThat(twoPlayerGameScreen.getNextScreen(), instanceOf(TwoPlayerEndScreen.class));
     }
 
     @Test
