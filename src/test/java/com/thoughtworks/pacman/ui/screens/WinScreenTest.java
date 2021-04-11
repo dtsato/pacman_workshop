@@ -17,7 +17,7 @@ public class WinScreenTest {
     @Mock
     private Graphics2D graphics;
 
-    @Test
+/*    @Test
     public void draw_shouldDrawSplashImageAcrossWidth() throws Exception {
         Game game = new Game();
         WinScreen winScreen = new WinScreen(game);
@@ -26,7 +26,7 @@ public class WinScreenTest {
 
         verify(graphics).drawImage(WinScreen.WIN_SCREEN_IMAGE, 0, 0, 448, 448, null);
     }
-
+*/
     @Test
     public void nextScreen_shouldReturnWinScreen_whenKeyNotPressed() throws Exception {
         Game game = new Game();

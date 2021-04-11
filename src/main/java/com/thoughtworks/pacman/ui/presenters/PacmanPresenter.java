@@ -21,15 +21,21 @@ public class PacmanPresenter implements Presenter {
     private final Pacman pacman;
     private long lastFrame;
     private int deadFrame;
+    private int xOffSet;
 
     public PacmanPresenter(Pacman pacman) {
         this.pacman = pacman;
     }
 
+    public PacmanPresenter(Pacman pacman, int xOffSet) {
+        this.pacman = pacman;
+        this.xOffSet = xOffSet;
+    }
+
     public void draw(Graphics2D graphics) {
         graphics.setColor(Color.yellow);
         Rectangle bounds = getBounds();
-        graphics.fillArc(bounds.x, bounds.y, bounds.width, bounds.height, getStartAngle(), getArcAngle());
+        graphics.fillArc(bounds.x + xOffSet, bounds.y, bounds.width, bounds.height, getStartAngle(), getArcAngle());
     }
 
     int getStartAngle() {

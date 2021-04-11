@@ -11,7 +11,15 @@ public class DotsLeftVisitor implements TileVisitor<Integer> {
         return dot.isEaten() ? 0 : 1;
     }
 
+    public Integer visit(Dot dot, int xOffSet) {
+        return dot.isEaten() ? 0 : 1;
+    }
+
     public Integer visit(Wall wall) {
+        return 0;
+    }
+
+    public Integer visit(Wall wall, int xOffSet) {
         return 0;
     }
 
@@ -19,7 +27,15 @@ public class DotsLeftVisitor implements TileVisitor<Integer> {
         return 0;
     }
 
+    public Integer visit(EmptyTile emptyTile, int xOffSet) {
+        return 0;
+    }
+
     public Integer visit(Door door) {
+        return 0;
+    }
+
+    public Integer visit(Door door, int xOffSet) {
         return 0;
     }
 }

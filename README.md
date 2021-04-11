@@ -46,3 +46,13 @@ To do:
 ## Credits
 
 This implementation was written by Danilo Sato and Mariana Bravo for educational purposes. PAC-MAN® & © 1980 NAMCO BANDAI Games Inc.
+
+
+## How To Run
+```gradle clean```
+
+```gradle build```
+
+```cd build\libs```
+
+```java -jar pacman_workshop.jar```

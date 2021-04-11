@@ -16,6 +16,7 @@ public class GhostPresenter implements Presenter {
     private final Ghost ghost;
     private final Image[] images;
     private long lastFrame;
+    private int xOffSet;
 
     public GhostPresenter(Ghost ghost) {
         this.ghost = ghost;
@@ -23,10 +24,17 @@ public class GhostPresenter implements Presenter {
                 ImageLoader.loadImage(Presenter.class, ghost.getType().getImageTwo()) };
     }
 
+    public GhostPresenter(Ghost ghost, int xOffSet){
+        this.ghost = ghost;
+        this.xOffSet = xOffSet;
+        this.images = new Image[] { ImageLoader.loadImage(Presenter.class, ghost.getType().getImageOne()),
+                ImageLoader.loadImage(Presenter.class, ghost.getType().getImageTwo()) };     
+    }
+
     public void draw(Graphics2D graphics) {
         Rectangle bounds = getBounds();
         Image image = lastFrame++ % 10 < 5 ? images[0] : images[1];
-        graphics.drawImage(image, bounds.x, bounds.y, bounds.width, bounds.height, Color.black, null);
+        graphics.drawImage(image, bounds.x + xOffSet, bounds.y, bounds.width, bounds.height, Color.black, null);
     }
 
     public Rectangle getBounds() {
