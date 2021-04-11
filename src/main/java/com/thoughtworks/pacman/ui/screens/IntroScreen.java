@@ -14,10 +14,12 @@ public class IntroScreen implements Screen {
 
     private final Dimension dimension;
     private boolean startGame;
+    private boolean isTwoPlayerMode;
 
     public IntroScreen(Game game) {
         this.dimension = game.getDimension();
         this.startGame = false;
+        this.isTwoPlayerMode = false;
     }
 
     public void draw(Graphics2D graphics) {
@@ -27,12 +29,21 @@ public class IntroScreen implements Screen {
 
     public Screen getNextScreen() throws Exception {
         if (startGame) {
-            return new GameScreen();
+            if(isTwoPlayerMode){
+                return (Screen) new TwoPlayerGameScreen();
+            }
+            else {
+                return new GameScreen();
+            }
         }
         return this;
     }
 
     public void keyPressed(KeyEvent e) {
         startGame = true;
+    }
+
+    public void setMode(boolean mode) {
+        isTwoPlayerMode = mode;
     }
 }

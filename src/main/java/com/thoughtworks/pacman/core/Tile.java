@@ -16,4 +16,11 @@ public abstract class Tile {
     public abstract boolean isMovable();
 
     public abstract <T> T visit(TileVisitor<T> visitor);
+
+    public abstract <T> T visit(TileVisitor<T> visitor, int xOffSet);
+
+    public TileCoordinate getCoordinate() {
+        return coordinate;
+    }
+    
 }

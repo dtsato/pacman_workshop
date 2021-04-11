@@ -33,6 +33,19 @@ public class MazePresenterTest {
     }
 
     @Test
+    public void shouldDrawEachTileWithOffset() throws Exception {
+        String mazeDescription = "+. +";
+        Maze maze = MazeBuilder.buildMaze(mazeDescription);
+
+        MazePresenter presenter = new MazePresenter(maze,100);
+
+        presenter.draw(graphics);
+
+        verify(graphics).setColor(Color.pink); // For dot
+        verify(graphics, times(2)).setColor(Color.blue); // For each wall
+    }
+
+    @Test
     public void shouldDrawScore() throws Exception {
         String mazeDescription = "+. +";
         Maze maze = MazeBuilder.buildMaze(mazeDescription);

@@ -15,7 +15,7 @@ import static org.junit.Assert.assertThat;
 public class TileToPresenterFactoryTest {
     @Test
     public void toPresenter_shouldReturnWallPresenter_whenTileIsWall() {
-        Presenter presenter = TileToPresenterFactory.toPresenter(new Wall(null, null));
+        Presenter presenter = TileToPresenterFactory.toPresenter(new Wall((TileCoordinate)null, (String)null));
         assertThat(presenter, instanceOf(WallPresenter.class));
     }
 

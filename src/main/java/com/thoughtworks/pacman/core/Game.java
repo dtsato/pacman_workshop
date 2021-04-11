@@ -22,7 +22,7 @@ public class Game {
         this(maze, new Pacman(maze));
     }
 
-    private Game(Maze maze, Pacman pacman) {
+    public Game(Maze maze, Pacman pacman) {
         this.maze = maze;
         this.pacman = pacman;
         this.ghosts = new Ghosts(this);

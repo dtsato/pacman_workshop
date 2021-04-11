@@ -25,4 +25,14 @@ public class WallPresenterTest {
 
         verify(graphics).draw(wall.getShape());
     }
+
+    @Test
+    public void shouldDrawWallTypeShapeWithOffset() throws Exception {
+        Wall wall = new Wall(new TileCoordinate(2, 3));
+        WallPresenter presenter = new WallPresenter(wall, 100);
+
+        presenter.draw(graphics);
+
+        verify(graphics).draw(presenter.getWall().getShape());
+    }
 }

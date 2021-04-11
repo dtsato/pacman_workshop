@@ -34,6 +34,11 @@ public class Dot extends Tile {
     }
 
     @Override
+    public <T> T visit(TileVisitor<T> visitor, int xOffSet) {
+        return visitor.visit(this, xOffSet);
+    }
+
+    @Override
     public String toString() {
         return ".";
     }
