@@ -59,7 +59,7 @@ public class UIScreen extends JFrame  implements Screen,ActionListener{
         setSize(WIDTH, HEIGHT);
         
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setContentPane(new JLabel(new ImageIcon("src\\main\\resources\\com\\thoughtworks\\pacman\\ui\\Background.png") ) );
+        this.setContentPane(new JLabel(new ImageIcon("pacman_workshop\\src\\main\\resources\\com\\thoughtworks\\pacman\\ui\\Background.png") ) );
         placeButtons();
         this.add(startButton);
         this.add(resumeButton);
@@ -83,7 +83,7 @@ public class UIScreen extends JFrame  implements Screen,ActionListener{
         resumeGame=false;
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setContentPane(new JLabel(new ImageIcon("src\\main\\resources\\com\\thoughtworks\\pacman\\ui\\Background.png") ) );
+        this.setContentPane(new JLabel(new ImageIcon("pacman_workshop\\src\\main\\resources\\com\\thoughtworks\\pacman\\ui\\Background.png") ) );
         placeButtons();
         this.add(scoreLabel);
         this.add(startButton);
@@ -141,22 +141,22 @@ public class UIScreen extends JFrame  implements Screen,ActionListener{
    
     private void placeButtons() {
        
-        startButton.setIcon(new ImageIcon("src\\main\\resources\\com\\thoughtworks\\pacman\\ui\\StartButton.png"));
+        startButton.setIcon(new ImageIcon("pacman_workshop\\src\\main\\resources\\com\\thoughtworks\\pacman\\ui\\StartButton.png"));
         startButton.setBorder(BorderFactory.createEmptyBorder());
         startButton.setContentAreaFilled(false);
         startButton.setFocusable(false);
 
-        resumeButton.setIcon(new ImageIcon("src\\main\\resources\\com\\thoughtworks\\pacman\\ui\\ResumeButton.png"));
+        resumeButton.setIcon(new ImageIcon("pacman_workshop\\src\\main\\resources\\com\\thoughtworks\\pacman\\ui\\ResumeButton.png"));
         resumeButton.setBorder(BorderFactory.createEmptyBorder());
         resumeButton.setContentAreaFilled(false);
         resumeButton.setFocusable(false);
 
-        settingsButton.setIcon(new ImageIcon("src\\main\\resources\\com\\thoughtworks\\pacman\\ui\\Settings.png"));
+        settingsButton.setIcon(new ImageIcon("pacman_workshop\\src\\main\\resources\\com\\thoughtworks\\pacman\\ui\\Settings.png"));
         settingsButton.setBorder(BorderFactory.createEmptyBorder());
         settingsButton.setContentAreaFilled(false);
         settingsButton.setFocusable(false);
 
-        exitButton.setIcon(new ImageIcon("src\\main\\resources\\com\\thoughtworks\\pacman\\ui\\ExitButton.png"));
+        exitButton.setIcon(new ImageIcon("pacman_workshop\\src\\main\\resources\\com\\thoughtworks\\pacman\\ui\\ExitButton.png"));
         exitButton.setBorder(BorderFactory.createEmptyBorder());
         exitButton.setContentAreaFilled(false);
         exitButton.setFocusable(false);

@@ -39,7 +39,7 @@ public class UIScreenTest {
     @Mock
     private Ghosts ghosts;
     
-    /*
+    
     @Test
     public void draw_shouldAdvanceGameWithTimeDelta() throws Exception {
         Maze maze = MazeBuilder.buildDefaultMaze();
@@ -52,7 +52,7 @@ public class UIScreenTest {
         verify(pacman).advance(gt(0L));
 
     }
-    */
+    
     
     @Test
     public void nextScreen_shouldReturnUIScreen_whenResumeAndStartFalse() throws Exception {

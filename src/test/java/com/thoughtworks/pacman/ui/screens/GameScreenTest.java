@@ -125,4 +125,5 @@ public class GameScreenTest {
 
         verify(pacman).setNextDirection(eq(Direction.DOWN));
     }
+  
 }
